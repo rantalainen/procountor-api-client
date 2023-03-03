@@ -1,0 +1,38 @@
+{
+  "name": "@rantalainen/procountor-api-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "test": "nodemon test.js",
+    "build": "tsc",
+    "openapi": "npx swagger-typescript-api -p https://api-test.procountor.com/api/openapi.json -o ./src -n api.ts -r --axios"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rantalainen/procountor-api-client.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "bugs": {
+    "url": "https://github.com/rantalainen/procountor-api-client/issues"
+  },
+  "homepage": "https://github.com/rantalainen/procountor-api-client#readme",
+  "dependencies": {
+    "agentkeepalive": "^4.2.1",
+    "axios": "^1.1.3",
+    "cacheable-lookup": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "swagger-typescript-api": "^12.0.2",
+    "typescript": "^4.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
