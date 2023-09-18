@@ -96,15 +96,18 @@ export class ProcountorApiClient {
 
     // Check if access token is expired
     if (!accessToken) {
-      const response = await axios.post(`${procountor.config.baseURL}/oauth/token`, null, {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        params: {
+      const response = await axios.post(
+        `${procountor.config.baseURL}/oauth/token`,
+        {
           grant_type: 'client_credentials',
           client_id: procountor.options.clientId,
           client_secret: procountor.options.clientSecret,
           api_key: procountor.options.apiKey
+        },
+        {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         }
-      });
+      );
       accessToken = {
         ...response.data,
         // Reset access token when it expires

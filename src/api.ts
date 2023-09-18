@@ -9,6 +9,29 @@
  * ---------------------------------------------------------------
  */
 
+/** Data model for which constraint violations occurred. */
+export type DataModel = object;
+
+/** List of error messages. */
+export interface ErrorMessage {
+  /**
+   * HTTP response status.
+   * @format int32
+   */
+  status?: number;
+  /** Field path of violation. */
+  field?: string;
+  /** Validation error code or description.  */
+  message?: string;
+  /** Data model for which constraint violations occurred. */
+  model?: DataModel;
+}
+
+export interface ErrorMessages {
+  /** List of error messages. */
+  errors?: ErrorMessage[];
+}
+
 /** A list of attachments added to the reference payment. */
 export interface Attachment {
   /**
@@ -47,29 +70,6 @@ export interface Attachment {
   mimeType?: string;
   /** Indicator if attachment has to be send with the invoice. 'sendWithInvoice' can be set only for receipt types: SALES_INVOICE, SALES_ORDER, PURCHASE_ORDER */
   sendWithInvoice: boolean;
-}
-
-/** Data model for which constraint violations occurred. */
-export type DataModel = object;
-
-/** List of error messages. */
-export interface ErrorMessage {
-  /**
-   * HTTP response status.
-   * @format int32
-   */
-  status?: number;
-  /** Field path of violation. */
-  field?: string;
-  /** Validation error code.  */
-  message?: string;
-  /** Data model for which constraint violations occurred. */
-  model?: DataModel;
-}
-
-export interface ErrorMessages {
-  /** List of error messages. */
-  errors?: ErrorMessage[];
 }
 
 export interface AttachmentSearchResult {
@@ -1092,6 +1092,20 @@ export interface LedgerAccountTranslation {
   translation?: string;
 }
 
+export interface BusinessPartnerGroup {
+  /**
+   * Id of the partner group.
+   * @format int32
+   */
+  id?: number;
+  /** Name of the partner group. */
+  name?: string;
+  /** Type of the partner group. */
+  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  /** Is partner group active. */
+  active?: boolean;
+}
+
 /** Intermediary bank name and address. */
 export interface Address {
   /**
@@ -1412,7 +1426,7 @@ export interface BusinessPartner {
   /** Additional info of the partner. */
   additionalInfo?: BusinessPartnerAdditionalInfo;
   /** Payment info of the partner. */
-  paymentInfo?: BusinessPartnerPaymentInfo;
+  paymentInfo: BusinessPartnerPaymentInfo;
   /** Registry info data of the partner. */
   registryInfo?: RegistryInfo;
   /**
@@ -1545,20 +1559,6 @@ export interface BusinessPartnerContactPerson {
   phone?: string;
 }
 
-export interface BusinessPartnerGroup {
-  /**
-   * Id of the partner group.
-   * @format int32
-   */
-  id?: number;
-  /** Name of the partner group. */
-  name?: string;
-  /** Type of the partner group. */
-  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
-  /** Is partner group active. */
-  active?: boolean;
-}
-
 /** Payment info of the partner. */
 export interface BusinessPartnerPaymentInfo {
   /**
@@ -1593,7 +1593,10 @@ export interface BusinessPartnerPaymentInfo {
   discountPercentage?: number;
   /** Cash discount days of the partner. */
   cashDiscountDays?: string;
-  /** Cash discount percentage of the partner. */
+  /**
+   * Cash discount percentage of the partner.
+   * @max 99.99
+   */
   cashDiscountPercentage?: number;
   /** Currency of the partner. */
   currency?:
@@ -1882,77 +1885,102 @@ export interface RegistryInfo {
   partnerGroups?: BusinessPartnerGroup[];
 }
 
-/** Payment bank account. Not required if payment method is cash. Deprecated in counterParty section for invoices endpoints - used only with DIRECT_DEBIT payment method, which is deprecated as well. */
-export interface BankAccount {
-  /** Bank account IBAN. If using a financing agreement, the account number must match the account of the specified financing agreement. The account number must be valid for the specified country, include country code and exclude any spaces. */
-  accountNumber?: string;
-  /** Bank account BIC/SWIFT. Not supported for SALES_INVOICE and SALES_ORDER. */
-  bic?: string;
+/** Default account of the given type. */
+export interface BusinessPartnerAccount {
+  /** Code of the account. */
+  code?: string;
+  /** Name of the account. */
+  name?: string;
 }
 
-export interface PersonalDetails {
+/** Default accounts for the given invoice type. */
+export interface BusinessPartnerAccountsInfo {
+  /** Default account of the given type. */
+  debitAccount?: BusinessPartnerAccount;
+  /** Default account of the given type. */
+  creditAccount?: BusinessPartnerAccount;
+  /** Default account of the given type. */
+  reconciliationAccount?: BusinessPartnerAccount;
+}
+
+export interface BusinessPartnerDefaultAccounts {
+  /** Default VAT %. */
+  vatPercent?: number;
+  /** Default VAT deduction %. */
+  vatDeduction?: number;
   /**
-   * Partner register ID.
+   * VAT status.
    * @format int32
    */
-  partnerId?: number;
-  /** First name of the person. */
-  firstName?: string;
-  /** Last name of the person. */
-  lastName?: string;
-  /** Language of the person. */
-  language?: "ENGLISH" | "FINNISH" | "SWEDISH" | "ESTONIAN" | "NORWEGIAN" | "DANISH";
-  /** Intermediary bank name and address. */
-  address?: Address;
-  /** Payment info of the partner. */
-  paymentInfo?: BusinessPartnerPaymentInfo;
+  vatStatus?: number;
+  /** VAT processing. */
+  vatProcessing?: string;
+  /** Incoming invoice parsing. If true always combine the invoice rows of an incoming invoice into one summary row using product 'Invoicing according to attachment'. */
+  combineInvoiceRows?: boolean;
+  /** Default accounts for the given invoice type. */
+  salesInvoiceAccounts?: BusinessPartnerAccountsInfo;
+  /** Default accounts for the given invoice type. */
+  purchaseInvoiceAccounts?: BusinessPartnerAccountsInfo;
+  /** Default accounts for the given invoice type. */
+  travelInvoiceAccounts?: BusinessPartnerAccountsInfo;
+  /** Default accounts for the given invoice type. */
+  expenseClaimAccounts?: BusinessPartnerAccountsInfo;
+  /** Default accounts for the given invoice type. */
+  journalAccounts?: BusinessPartnerAccountsInfo;
 }
 
-/** Invoicing info data of the partner. */
-export interface BasicInvoicingInfo {
-  /** Customer number of the partner. */
-  customerNumber?: string;
-  /** Business identifier of the partner. */
-  identifier?: string;
-  /** Business identifier type of the partner. */
-  identifierType?: string;
-}
-
-/** Registry info data of the partner. */
-export interface BasicRegistryInfo {
-  /** Status of the partner. */
-  active?: boolean;
-}
-
-/** Search results. */
-export interface BusinessPartnerBasicInfo {
+export interface BusinessPartnerDefaultDimension {
   /**
-   * Unique identifier for the partner.
+   * Unique identifier for the dimension.
    * @format int32
    */
   id?: number;
-  /** Name of the partner */
+  /** Name of the dimension. */
   name?: string;
-  /** Intermediary bank name and address. */
-  billingAddress?: Address;
-  /** Invoicing info data of the partner. */
-  invoicingInfo?: BasicInvoicingInfo;
-  /** Registry info data of the partner. */
-  registryInfo?: BasicRegistryInfo;
-  /** Type of the partner. */
-  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
-  /**
-   * Business partner version timestamp. Automatically generated by Procountor and updated every time the partner is modified. When using PATCH /businesspartners, it is required to include the latest version timestamp of the partner to the request. This prevents conflicts if the partner is being modified from several sources.It is not required for POST and will be omitted
-   * @format date-time
-   */
-  version?: string;
+  /** Dimension items connected with dimension. */
+  items?: BusinessPartnerDefaultDimensionItem[];
 }
 
-export interface BusinessPartnerSearchResult {
-  /** Search results. */
-  results?: BusinessPartnerBasicInfo[];
-  /** Search result metadata. */
-  meta?: SearchResultMetaData;
+/** Dimension items connected with dimension. */
+export interface BusinessPartnerDefaultDimensionItem {
+  /**
+   * Unique identifier for the dimension item.
+   * @format int32
+   */
+  id?: number;
+  /** Code name of the dimension item. */
+  codeName: string;
+  /** Percentage value of the dimension item. */
+  percent: number;
+}
+
+export interface BusinessPartnerDefaultDimensionExtended {
+  /**
+   * Unique identifier for the dimension.
+   * @format int32
+   */
+  id?: number;
+  /** Name of the dimension. */
+  name?: string;
+  /** Dimension items connected with dimension. */
+  items?: BusinessPartnerDefaultDimensionItemExtended[];
+}
+
+/** Dimension items connected with dimension. */
+export interface BusinessPartnerDefaultDimensionItemExtended {
+  /**
+   * Unique identifier for the dimension item.
+   * @format int32
+   */
+  id?: number;
+  /** Code name of the dimension item. */
+  codeName: string;
+  /** Percentage value of the dimension item. */
+  percent: number;
+  /** Status of the dimension item. */
+  status?: boolean;
+  /** Description of the dimension item. */
+  description?: string;
 }
 
 export interface DefaultProduct {
@@ -2390,104 +2418,6 @@ export interface ProductValidityPeriod {
   notes?: string;
 }
 
-/** Default account of the given type. */
-export interface BusinessPartnerAccount {
-  /** Code of the account. */
-  code?: string;
-  /** Name of the account. */
-  name?: string;
-}
-
-/** Default accounts for the given invoice type. */
-export interface BusinessPartnerAccountsInfo {
-  /** Default account of the given type. */
-  debitAccount?: BusinessPartnerAccount;
-  /** Default account of the given type. */
-  creditAccount?: BusinessPartnerAccount;
-  /** Default account of the given type. */
-  reconciliationAccount?: BusinessPartnerAccount;
-}
-
-export interface BusinessPartnerDefaultAccounts {
-  /** Default VAT %. */
-  vatPercent?: number;
-  /** Default VAT deduction %. */
-  vatDeduction?: number;
-  /**
-   * VAT status.
-   * @format int32
-   */
-  vatStatus?: number;
-  /** VAT processing. */
-  vatProcessing?: string;
-  /** Incoming invoice parsing. If true always combine the invoice rows of an incoming invoice into one summary row using product 'Invoicing according to attachment'. */
-  combineInvoiceRows?: boolean;
-  /** Default accounts for the given invoice type. */
-  salesInvoiceAccounts?: BusinessPartnerAccountsInfo;
-  /** Default accounts for the given invoice type. */
-  purchaseInvoiceAccounts?: BusinessPartnerAccountsInfo;
-  /** Default accounts for the given invoice type. */
-  travelInvoiceAccounts?: BusinessPartnerAccountsInfo;
-  /** Default accounts for the given invoice type. */
-  expenseClaimAccounts?: BusinessPartnerAccountsInfo;
-  /** Default accounts for the given invoice type. */
-  journalAccounts?: BusinessPartnerAccountsInfo;
-}
-
-export interface BusinessPartnerDefaultDimensionExtended {
-  /**
-   * Unique identifier for the dimension.
-   * @format int32
-   */
-  id?: number;
-  /** Name of the dimension. */
-  name?: string;
-  /** Dimension items connected with dimension. */
-  items?: BusinessPartnerDefaultDimensionItemExtended[];
-}
-
-/** Dimension items connected with dimension. */
-export interface BusinessPartnerDefaultDimensionItemExtended {
-  /**
-   * Unique identifier for the dimension item.
-   * @format int32
-   */
-  id?: number;
-  /** Code name of the dimension item. */
-  codeName: string;
-  /** Percentage value of the dimension item. */
-  percent: number;
-  /** Status of the dimension item. */
-  status?: boolean;
-  /** Description of the dimension item. */
-  description?: string;
-}
-
-export interface BusinessPartnerDefaultDimension {
-  /**
-   * Unique identifier for the dimension.
-   * @format int32
-   */
-  id?: number;
-  /** Name of the dimension. */
-  name?: string;
-  /** Dimension items connected with dimension. */
-  items?: BusinessPartnerDefaultDimensionItem[];
-}
-
-/** Dimension items connected with dimension. */
-export interface BusinessPartnerDefaultDimensionItem {
-  /**
-   * Unique identifier for the dimension item.
-   * @format int32
-   */
-  id?: number;
-  /** Code name of the dimension item. */
-  codeName: string;
-  /** Percentage value of the dimension item. */
-  percent: number;
-}
-
 export interface BusinessPartnerGroupSearchResult {
   /** Search results. */
   results?: BusinessPartnerGroup[];
@@ -2495,9 +2425,133 @@ export interface BusinessPartnerGroupSearchResult {
   meta?: SearchResultMetaData;
 }
 
+/** Payment bank account. Not required if payment method is cash. Deprecated in counterParty section for invoices endpoints - used only with DIRECT_DEBIT payment method, which is deprecated as well. */
+export interface BankAccount {
+  /** Bank account IBAN. If using a financing agreement, the account number must match the account of the specified financing agreement. The account number must be valid for the specified country, include country code and exclude any spaces. */
+  accountNumber?: string;
+  /** Bank account BIC/SWIFT. Not supported for SALES_INVOICE and SALES_ORDER. */
+  bic?: string;
+}
+
+export interface PersonalDetails {
+  /**
+   * Partner register ID.
+   * @format int32
+   */
+  partnerId?: number;
+  /** First name of the person. */
+  firstName?: string;
+  /** Last name of the person. */
+  lastName?: string;
+  /** Language of the person. */
+  language?: "ENGLISH" | "FINNISH" | "SWEDISH" | "ESTONIAN" | "NORWEGIAN" | "DANISH";
+  /** Intermediary bank name and address. */
+  address?: Address;
+  /** Payment info of the partner. */
+  paymentInfo?: BusinessPartnerPaymentInfo;
+}
+
+/** Invoicing info data of the partner. */
+export interface BasicInvoicingInfo {
+  /** Customer number of the partner. */
+  customerNumber?: string;
+  /** Business identifier of the partner. */
+  identifier?: string;
+  /** Business identifier type of the partner. */
+  identifierType?: string;
+}
+
+/** Registry info data of the partner. */
+export interface BasicRegistryInfo {
+  /** Status of the partner. */
+  active?: boolean;
+}
+
+/** Search results. */
+export interface BusinessPartnerBasicInfo {
+  /**
+   * Unique identifier for the partner.
+   * @format int32
+   */
+  id?: number;
+  /** Name of the partner */
+  name?: string;
+  /** Intermediary bank name and address. */
+  billingAddress?: Address;
+  /** Invoicing info data of the partner. */
+  invoicingInfo?: BasicInvoicingInfo;
+  /** Registry info data of the partner. */
+  registryInfo?: BasicRegistryInfo;
+  /** Type of the partner. */
+  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  /**
+   * Business partner version timestamp. Automatically generated by Procountor and updated every time the partner is modified. When using PATCH /businesspartners, it is required to include the latest version timestamp of the partner to the request. This prevents conflicts if the partner is being modified from several sources.It is not required for POST and will be omitted
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface BusinessPartnerSearchResult {
+  /** Search results. */
+  results?: BusinessPartnerBasicInfo[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
 export interface LedgerAccounts {
   /** List of ledger accounts. */
   ledgerAccounts?: LedgerAccount[];
+}
+
+export interface CollectionsAndPenalExpenses {
+  /** Indicates if automatic handling of collection and penal costs is enabled. */
+  useAutomaticHandling?: boolean;
+  /** Penal expense product. */
+  collectionCostsProduct?: ProductBasicInfo;
+  /** Penal expense product. */
+  penalExpenseProduct?: ProductBasicInfo;
+  /**
+   * Penal expense date margin.
+   * @format int32
+   */
+  penalInterestDateMargin?: number;
+  /** The minimum sum of penal interest to be calculated. */
+  minimumPenalInterestSum?: number;
+  /** Default sales invoice interest rate. */
+  defaultSalesInvoiceInterest?: number;
+  /**
+   * Default terms of payment for sales invoices.
+   * @format int32
+   */
+  defaultSalesInvoicePaymentTerms?: number;
+  /** Collection partner. */
+  collectionPartner?: string;
+}
+
+/** Penal expense product. */
+export interface ProductBasicInfo {
+  /**
+   * Identifier of the product.
+   * @format int64
+   */
+  productId?: number;
+  /** Name of the product. */
+  name?: string;
+  /** Code of the product. */
+  code?: string;
+  /** Default account for the product. */
+  defaultAccount?: string;
+  /** Price of the product. */
+  price?: number;
+  /** Currency of the price. */
+  currency?: string;
+  /** Unit type of product. */
+  unit?: string;
+}
+
+export interface DeliveryTerms {
+  /** List of delivery terms. */
+  deliveryTerms?: string[];
 }
 
 /** The recipient code data. */
@@ -2636,52 +2690,6 @@ export interface CompanyBillingAddress {
   country?: string;
 }
 
-/** List of acceptors. */
-export interface Verifier {
-  /** First name of the user. */
-  firstname?: string;
-  /** Surname (last name) of the user. */
-  surname?: string;
-  /**
-   * Id of the user.
-   * @format int32
-   */
-  userId?: number;
-  /**
-   * Order number of the verifier.
-   * @format int32
-   */
-  orderNo?: number;
-}
-
-export interface VerifierList {
-  /**
-   * Id of the verifier list.
-   * @format int32
-   */
-  id?: number;
-  /** Name the verifier list. */
-  name?: string;
-  /** List of verifiers. */
-  verifiers?: Verifier[];
-  /** List of acceptors. */
-  acceptors?: Verifier[];
-}
-
-export interface VerifierListBasic {
-  /**
-   * Id of the verifier list.
-   * @format int32
-   */
-  id?: number;
-  /** Name the verifier list. */
-  name?: string;
-  /** List of user ids set as verifier. */
-  verifiers?: number[];
-  /** List of user ids set as acceptor. */
-  acceptors?: number[];
-}
-
 export interface CirculationSettings {
   /** Indicates if approval circulation is enabled for purchase invoices. */
   useForPurchaseInvoices?: boolean;
@@ -2754,6 +2762,24 @@ export interface Substitution {
   notes?: string;
 }
 
+/** List of acceptors. */
+export interface Verifier {
+  /** First name of the user. */
+  firstname?: string;
+  /** Surname (last name) of the user. */
+  surname?: string;
+  /**
+   * Id of the user.
+   * @format int32
+   */
+  userId?: number;
+  /**
+   * Order number of the verifier.
+   * @format int32
+   */
+  orderNo?: number;
+}
+
 export interface InvoiceTemplate {
   /**
    * Invoice template ID.
@@ -2764,55 +2790,32 @@ export interface InvoiceTemplate {
   name?: string;
 }
 
-export interface DeliveryTerms {
-  /** List of delivery terms. */
-  deliveryTerms?: string[];
-}
-
-export interface CollectionsAndPenalExpenses {
-  /** Indicates if automatic handling of collection and penal costs is enabled. */
-  useAutomaticHandling?: boolean;
-  /** Penal expense product. */
-  collectionCostsProduct?: ProductBasicInfo;
-  /** Penal expense product. */
-  penalExpenseProduct?: ProductBasicInfo;
+export interface VerifierListBasic {
   /**
-   * Penal expense date margin.
+   * Id of the verifier list.
    * @format int32
    */
-  penalInterestDateMargin?: number;
-  /** The minimum sum of penal interest to be calculated. */
-  minimumPenalInterestSum?: number;
-  /** Default sales invoice interest rate. */
-  defaultSalesInvoiceInterest?: number;
-  /**
-   * Default terms of payment for sales invoices.
-   * @format int32
-   */
-  defaultSalesInvoicePaymentTerms?: number;
-  /** Collection partner. */
-  collectionPartner?: string;
-}
-
-/** Penal expense product. */
-export interface ProductBasicInfo {
-  /**
-   * Identifier of the product.
-   * @format int64
-   */
-  productId?: number;
-  /** Name of the product. */
+  id?: number;
+  /** Name the verifier list. */
   name?: string;
-  /** Code of the product. */
-  code?: string;
-  /** Default account for the product. */
-  defaultAccount?: string;
-  /** Price of the product. */
-  price?: number;
-  /** Currency of the price. */
-  currency?: string;
-  /** Unit type of product. */
-  unit?: string;
+  /** List of user ids set as verifier. */
+  verifiers?: number[];
+  /** List of user ids set as acceptor. */
+  acceptors?: number[];
+}
+
+export interface VerifierList {
+  /**
+   * Id of the verifier list.
+   * @format int32
+   */
+  id?: number;
+  /** Name the verifier list. */
+  name?: string;
+  /** List of verifiers. */
+  verifiers?: Verifier[];
+  /** List of acceptors. */
+  acceptors?: Verifier[];
 }
 
 export interface CurrencyGroupRates {
@@ -3065,19 +3068,6 @@ export interface CurrencyExchangeRate {
   rate?: number;
 }
 
-export interface Dimension {
-  /**
-   * Dimension ID. Required in PUT
-   * @format int32
-   */
-  id?: number;
-  /** Dimension name. */
-  name: string;
-  /** Dimension items. */
-  items?: DimensionItem[];
-}
-
-/** Dimension items. */
 export interface DimensionItem {
   /**
    * Dimension item ID.
@@ -3092,6 +3082,19 @@ export interface DimensionItem {
   description?: string;
 }
 
+export interface Dimension {
+  /**
+   * Dimension ID. Required in PUT
+   * @format int32
+   */
+  id?: number;
+  /** Dimension name. */
+  name: string;
+  /** Dimension items. */
+  items?: DimensionItem[];
+}
+
+/** Search results. */
 export interface FactoringContract {
   /**
    * Factoring contract identifier.
@@ -3099,7 +3102,7 @@ export interface FactoringContract {
    */
   id?: number;
   /** Financing company information. */
-  financingCompany?: FinancingCompany;
+  financingCompany: FinancingCompany;
   /** Financing company bank account. */
   financingCompanyBankAccount: string;
   /** Agreegment number. */
@@ -3120,13 +3123,6 @@ export interface FactoringContract {
   status: "ACTIVE" | "INACTIVE";
 }
 
-export interface FactoringContractSearchResult {
-  /** Search results. */
-  results?: FactoringContract[];
-  /** Search result metadata. */
-  meta?: SearchResultMetaData;
-}
-
 /** Financing company information. */
 export interface FinancingCompany {
   /** Financing company code */
@@ -3144,6 +3140,13 @@ export interface TransferNotification {
    * @maxLength 1000
    */
   notification: string;
+}
+
+export interface FactoringContractSearchResult {
+  /** Search results. */
+  results?: FactoringContract[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
 }
 
 /** List of fiscal years. */
@@ -3239,6 +3242,23 @@ export interface TaggableUsersDTO {
   comments?: TaggableUserDTO[];
 }
 
+export interface InvoiceNotes {
+  /**
+   * Invoice notes. \n can be used as a line break.
+   * @minLength 0
+   * @maxLength 10000
+   */
+  notes: string;
+}
+
+export interface CheckingEventDTO {
+  /**
+   * Comment for verification or approval event.
+   * @max 100
+   */
+  comment?: string;
+}
+
 /** Only SALES_INVOICE, SALES_ORDER, PURCHASE_INVOICE and PURCHASE_ORDER. Cash discount set on the invoice. */
 export interface CashDiscount {
   /**
@@ -3249,7 +3269,7 @@ export interface CashDiscount {
   numberOfDays?: number;
   /**
    * Discount percentage specified in cash discount
-   * @max 100
+   * @max 99.99
    */
   discountPercentage?: number;
 }
@@ -3270,7 +3290,7 @@ export interface CounterParty {
   /** SALES_INVOICE and SALES_ORDER only. Email address of the buyer. Required if invoicing channel is EMAIL, otherwise not visible on the UI. */
   email?: string;
   /** Intermediary bank name and address. */
-  counterPartyAddress?: Address;
+  counterPartyAddress: Address;
   /** Payment bank account. Not required if payment method is cash. Deprecated in counterParty section for invoices endpoints - used only with DIRECT_DEBIT payment method, which is deprecated as well. */
   bankAccount?: BankAccount;
   /** SALES_INVOICE only. EInvoice address of the buyer. Required if invoicing channel is ELECTRONIC_INVOICE, otherwise not visible on the UI. */
@@ -3359,17 +3379,17 @@ export interface Invoice {
    */
   paymentDate?: string;
   /** This object holds information about the counterparty of the invoice. With sales invoices and sales orders, it is the buyer. With purchase invoices and purchase orders it is the seller. With travel and expense invoices, it is the reporter of the expenses */
-  counterParty?: CounterParty;
+  counterParty: CounterParty;
   /** Intermediary bank name and address. */
   billingAddress?: Address;
   /** Intermediary bank name and address. */
   deliveryAddress?: Address;
   /** Invoice payment info. Includes the bank account to which the invoice should be paid, how it should be paid and when it should be paid. */
-  paymentInfo?: PaymentInfo;
+  paymentInfo: PaymentInfo;
   /** Invoice delivery terms info. */
   deliveryTermsInfo?: DeliveryTermsInfoDTO;
   /** Invoice extra info. */
-  extraInfo?: ExtraInfo;
+  extraInfo: ExtraInfo;
   /**
    * Invoice discount percentage. Scale: 4.
    * @multipleOf 4
@@ -3955,14 +3975,74 @@ export interface TravelInformationItem {
   purpose?: string;
 }
 
-export interface CheckingEventDTO {
+/** List of invoice transactions. */
+export interface InvoiceTransaction {
+  /** Transaction action. */
+  action?:
+    | "APPROVAL"
+    | "ALLOCATE_PAYMENT_MANUALLY"
+    | "ALLOCATE_INVOICE_TO_INVOICE"
+    | "ALLOCATE_INVOICE_TO_JOURNAL"
+    | "ALLOCATE_INVOICE_TO_BANK_STATEMENT"
+    | "ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT"
+    | "VERIFICATION"
+    | "DIRECTED_TO_ANOTHER_VERIFIER"
+    | "DIRECTED_TO_ANOTHER_APPROVER"
+    | "COLLECTION_LETTER_DUETTOPRO"
+    | "PAYMENT_REMINDER_EMAIL"
+    | "CONVERTED_TO_INVOICE"
+    | "PAYMENT_REMINDER"
+    | "PAYMENT_WARNING"
+    | "PAYMENT_REMINDER_DUETTOFORTE"
+    | "CANCEL_PAYMENT_TRANSACTION"
+    | "RETURNED_PREVIOUS"
+    | "PAYMENT_REMINDER_MAIL"
+    | "COLLECTION_LETTER_SVEA"
+    | "COLLECTION_LETTER_SVEA_SHORT"
+    | "PAYMENT_REMINDER_SVEA"
+    | "PAYMENT_REMINDER_SVEA_SHORT"
+    | "DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION"
+    | "DELETED_PAYMENT_TRANSACTION"
+    | "UNFINISHED"
+    | "RESTORED_UNFINISHED"
+    | "DENY_PAYMENT"
+    | "SENT_FOR_PAYMENT"
+    | "MARKED_PAID"
+    | "RECEIVED_VIA_AUTOMATIC_TRANSFER"
+    | "RECEIVED_AS_EINVOICE"
+    | "RECEIVED_AS_SCANNED_INVOICE"
+    | "TARGETING_REMOVED"
+    | "SEND_TO_CIRCULATION"
+    | "SEND"
+    | "PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT"
+    | "SENDING_CANCELLED"
+    | "SEPA_PAYMENT_ERROR"
+    | "PAYMENT_ERROR_HANDLED"
+    | "COLLECTION_LETTER_ROPO"
+    | "PAYMENT_REMINDER_ROPO"
+    | "INVOICE_FACTORING_DELETED"
+    | "SENDING_ERROR_RECEIVED"
+    | "SENDING_ERROR_EMAIL_NOTIFICATION"
+    | "SENDING_ERROR_HANDLED"
+    | "SENDING_ERROR_MARK_AS_HANDLED"
+    | "SENDING_ERROR_REVERTED_TO_NOT_SENT";
+  /** Transaction name. */
+  name?: string;
   /**
-   * Comment for verification or approval event.
-   * @max 100
+   * Transaction date.
+   * @format date-time
    */
-  comment?: string;
+  date?: string;
+  /** Transaction details. */
+  details?: string;
 }
 
+export interface InvoiceTransactions {
+  /** List of invoice transactions. */
+  transactions?: InvoiceTransaction[];
+}
+
+/** Search results. */
 export interface PaymentEvent {
   /**
    * Unique identifier of the payment event
@@ -4026,10 +4106,10 @@ export interface PaymentEvent {
     | "DELETED"
     | "UNSAVED"
     | "PAYMENT_TRANSACTION_REMOVED";
-  /** Payment amount value. */
+  /** Payment amount in accounting currency. */
   amount?: number;
   /**
-   * Currency of the payment in ISO 4217 format.
+   * Currency of the payment in accounting currency in ISO 4217 format.
    * @example "EUR"
    */
   currency?:
@@ -4246,174 +4326,13 @@ export interface PaymentEvent {
     | "SKK";
   /** Payment description. Used only in sales invoices. */
   description?: string;
-}
-
-/** List of invoice transactions. */
-export interface InvoiceTransaction {
-  /** Transaction action. */
-  action?:
-    | "APPROVAL"
-    | "ALLOCATE_PAYMENT_MANUALLY"
-    | "ALLOCATE_INVOICE_TO_INVOICE"
-    | "ALLOCATE_INVOICE_TO_JOURNAL"
-    | "ALLOCATE_INVOICE_TO_BANK_STATEMENT"
-    | "ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT"
-    | "VERIFICATION"
-    | "DIRECTED_TO_ANOTHER_VERIFIER"
-    | "DIRECTED_TO_ANOTHER_APPROVER"
-    | "COLLECTION_LETTER_DUETTOPRO"
-    | "PAYMENT_REMINDER_EMAIL"
-    | "CONVERTED_TO_INVOICE"
-    | "PAYMENT_REMINDER"
-    | "PAYMENT_WARNING"
-    | "PAYMENT_REMINDER_DUETTOFORTE"
-    | "CANCEL_PAYMENT_TRANSACTION"
-    | "RETURNED_PREVIOUS"
-    | "PAYMENT_REMINDER_MAIL"
-    | "COLLECTION_LETTER_SVEA"
-    | "COLLECTION_LETTER_SVEA_SHORT"
-    | "PAYMENT_REMINDER_SVEA"
-    | "PAYMENT_REMINDER_SVEA_SHORT"
-    | "DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION"
-    | "DELETED_PAYMENT_TRANSACTION"
-    | "UNFINISHED"
-    | "RESTORED_UNFINISHED"
-    | "DENY_PAYMENT"
-    | "SENT_FOR_PAYMENT"
-    | "MARKED_PAID"
-    | "RECEIVED_VIA_AUTOMATIC_TRANSFER"
-    | "RECEIVED_AS_EINVOICE"
-    | "RECEIVED_AS_SCANNED_INVOICE"
-    | "TARGETING_REMOVED"
-    | "SEND_TO_CIRCULATION"
-    | "SEND"
-    | "PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT"
-    | "SENDING_CANCELLED"
-    | "SEPA_PAYMENT_ERROR"
-    | "PAYMENT_ERROR_HANDLED"
-    | "COLLECTION_LETTER_ROPO"
-    | "PAYMENT_REMINDER_ROPO"
-    | "INVOICE_FACTORING_DELETED"
-    | "SENDING_ERROR_RECEIVED"
-    | "SENDING_ERROR_EMAIL_NOTIFICATION"
-    | "SENDING_ERROR_HANDLED"
-    | "SENDING_ERROR_MARK_AS_HANDLED"
-    | "SENDING_ERROR_REVERTED_TO_NOT_SENT";
-  /** Transaction name. */
-  name?: string;
+  /** Payment amount in paid currency. */
+  paidAmount?: number;
   /**
-   * Transaction date.
-   * @format date-time
+   * Currency of the payment in paid currency in ISO 4217 format.
+   * @example "SEK"
    */
-  date?: string;
-  /** Transaction details. */
-  details?: string;
-}
-
-export interface InvoiceTransactions {
-  /** List of invoice transactions. */
-  transactions?: InvoiceTransaction[];
-}
-
-/** Search results. */
-export interface InvoiceBasicInfo {
-  /**
-   * Unique identifier of the invoice.
-   * @format int32
-   */
-  id?: number;
-  /**
-   * Business partner id. Used to link the invoice to a customer or supplier in the business partner register.
-   * @format int32
-   */
-  partnerId?: number;
-  /**
-   * Invoice type.
-   * @example "PURCHASE_INVOICE"
-   */
-  type?:
-    | "SALES_INVOICE"
-    | "SALES_ORDER"
-    | "PURCHASE_INVOICE"
-    | "PURCHASE_ORDER"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "PERIODIC_TAX_RETURN";
-  /**
-   * Invoice status.
-   * @example "UNFINISHED"
-   */
-  status?:
-    | "EMPTY"
-    | "UNFINISHED"
-    | "NOT_SENT"
-    | "SENT"
-    | "RECEIVED"
-    | "PAID"
-    | "PAYMENT_DENIED"
-    | "VERIFIED"
-    | "APPROVED"
-    | "INVALIDATED"
-    | "PAYMENT_QUEUED"
-    | "PARTLY_PAID"
-    | "PAYMENT_SENT_TO_BANK"
-    | "MARKED_PAID"
-    | "STARTED"
-    | "INVOICED"
-    | "OVERRIDDEN"
-    | "DELETED"
-    | "UNSAVED"
-    | "PAYMENT_TRANSACTION_REMOVED";
-  /**
-   * Invoice number generated by Procountor.
-   * @format int32
-   */
-  invoiceNumber?: number;
-  /** Invoice number from the biller in an external system. */
-  originalInvoiceNumber?: string;
-  /** Channel of distribution for the invoice. */
-  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
-  /**
-   * Invoice date. This is synonymous to billing date.
-   * @format date
-   */
-  date?: string;
-  /**
-   * Invoice payment due date.
-   * @format date
-   */
-  dueDate?: string;
-  /**
-   * Creation timestamp of the invoice. Automatically generated by Procountor.
-   * @format date-time
-   */
-  created?: string;
-  /**
-   * Invoice version timestamp. Automatically generated by Procountor and updated every time the invoice is modified.
-   * @format date-time
-   */
-  version?: string;
-}
-
-export interface InvoiceSearchResult {
-  /** Search results. */
-  results?: InvoiceBasicInfo[];
-  /** Search result metadata. */
-  meta?: SearchResultMetaData;
-}
-
-export interface PaymentEventSearchResult {
-  /** Search results. */
-  results?: PaymentEvent[];
-  /** Search result metadata. */
-  meta?: SearchResultMetaData;
-}
-
-export interface TransactionIdentifier {
-  /** Value of 2-factor transaction identifier. */
-  transactionIdentifier?: string;
-  /** Multifactor authentication confirmation handler application. */
-  confirmationApp?: string;
+  paidCurrency?: string;
 }
 
 export interface MarkInvoiceAsPaid {
@@ -4655,13 +4574,105 @@ export interface MarkInvoiceAsPaid {
     | "ADJUSTMENT";
 }
 
-export interface InvoiceNotes {
+export interface TransactionIdentifier {
+  /** Value of 2-factor transaction identifier. */
+  transactionIdentifier?: string;
+  /** Multifactor authentication confirmation handler application. */
+  confirmationApp?: string;
+}
+
+/** Search results. */
+export interface InvoiceBasicInfo {
   /**
-   * Invoice notes. \n can be used as a line break.
-   * @minLength 0
-   * @maxLength 10000
+   * Unique identifier of the invoice.
+   * @format int32
    */
-  notes: string;
+  id?: number;
+  /**
+   * Business partner id. Used to link the invoice to a customer or supplier in the business partner register.
+   * @format int32
+   */
+  partnerId?: number;
+  /**
+   * Invoice type.
+   * @example "PURCHASE_INVOICE"
+   */
+  type?:
+    | "SALES_INVOICE"
+    | "SALES_ORDER"
+    | "PURCHASE_INVOICE"
+    | "PURCHASE_ORDER"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "PERIODIC_TAX_RETURN";
+  /**
+   * Invoice status.
+   * @example "UNFINISHED"
+   */
+  status?:
+    | "EMPTY"
+    | "UNFINISHED"
+    | "NOT_SENT"
+    | "SENT"
+    | "RECEIVED"
+    | "PAID"
+    | "PAYMENT_DENIED"
+    | "VERIFIED"
+    | "APPROVED"
+    | "INVALIDATED"
+    | "PAYMENT_QUEUED"
+    | "PARTLY_PAID"
+    | "PAYMENT_SENT_TO_BANK"
+    | "MARKED_PAID"
+    | "STARTED"
+    | "INVOICED"
+    | "OVERRIDDEN"
+    | "DELETED"
+    | "UNSAVED"
+    | "PAYMENT_TRANSACTION_REMOVED";
+  /**
+   * Invoice number generated by Procountor.
+   * @format int32
+   */
+  invoiceNumber?: number;
+  /** Invoice number from the biller in an external system. */
+  originalInvoiceNumber?: string;
+  /** Channel of distribution for the invoice. */
+  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
+  /**
+   * Invoice date. This is synonymous to billing date.
+   * @format date
+   */
+  date?: string;
+  /**
+   * Invoice payment due date.
+   * @format date
+   */
+  dueDate?: string;
+  /**
+   * Creation timestamp of the invoice. Automatically generated by Procountor.
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * Invoice version timestamp. Automatically generated by Procountor and updated every time the invoice is modified.
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface InvoiceSearchResult {
+  /** Search results. */
+  results?: InvoiceBasicInfo[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
+export interface PaymentEventSearchResult {
+  /** Search results. */
+  results?: PaymentEvent[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
 }
 
 /** Values of dimension items associated with this transaction. The number of provided dimension items must be within the dimension max count defined by the purchased Procountor license. Provided dimension pairs (dimension id - item id) must be unique within the list provided. */
@@ -4926,6 +4937,13 @@ export interface LedgerReceiptSearchResult {
   meta?: SearchResultMetaData;
 }
 
+/** These are possible response models */
+export interface DirectSalaryPaymentsConfirmationResponseModels {
+  PaymentGroup?: PaymentGroup;
+  /** Response information message */
+  InfoMessage?: InfoMessage;
+}
+
 /** List of the payment IDs */
 export interface PaymentBasicInfo {
   /**
@@ -4937,7 +4955,6 @@ export interface PaymentBasicInfo {
   customId?: string;
 }
 
-/** Response for creating direct salary payment action (POST /payments/directsalarypayments) performed successfully */
 export interface PaymentGroup {
   /**
    * Id of the payment list.
@@ -4973,6 +4990,60 @@ export interface PaymentGroup {
   customId?: string;
   /** List of the payment IDs */
   payments?: PaymentBasicInfo[];
+}
+
+/** List containing DirectSalaryPayment objects. */
+export interface DirectSalaryPayment {
+  /** The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field. */
+  amount: number;
+  /** Bank reference code. */
+  bankReferenceCode?: string;
+  /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
+  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
+  /** Message for the payment, if reference payment is not used. */
+  message?: string;
+  /** Bank account number of the recipient. */
+  recipientBankAccount: string;
+  /** BIC code of recipient bank account number. */
+  recipientBicCode: string;
+  /** The recipient name. */
+  recipientName: string;
+  /** The recipient code data. */
+  recipientCode: BusinessIdentifier;
+  /**
+   * The code of the currency.
+   * @example "EUR"
+   */
+  currencyCode: "EUR";
+  /**
+   * Custom id for the payment.
+   * @maxLength 64
+   */
+  customId: string;
+}
+
+export interface DirectSalaryPayments {
+  /**
+   * Name of the direct salary payment list. Can be used for list identification.
+   * @maxLength 80
+   */
+  listName: string;
+  /** Name of the payment method. Used for all payments. */
+  paymentMethod: "FINNISH_SALARY_TRANSFER";
+  /**
+   * Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. Used for all payments.
+   * @example "2019-09-07"
+   */
+  paymentDate: string;
+  /** Bank account number of the person making the payment. The payer bank account has to be predefined in the environment to be able to use the payment. Used for all payments. */
+  payerBankAccount: string;
+  /**
+   * Optional custom identifier of the list. It can be used later to get list by this id.
+   * @maxLength 80
+   */
+  customId?: string;
+  /** List containing DirectSalaryPayment objects. */
+  payments: DirectSalaryPayment[];
 }
 
 export interface PaymentGroupSearchResult {
@@ -5018,8 +5089,55 @@ export interface SalaryGroupBaseInfo {
   customId?: string;
 }
 
-/** List containing DirectSalaryPayment objects. */
-export interface DirectSalaryPayment {
+/** Response for paying invoices action (POST /payments) performed successfully */
+export interface InvoicePaymentSummaries {
+  /** List of identifiers of added payments. */
+  transactions?: InvoicePaymentSummary[];
+}
+
+/** List of identifiers of added payments. */
+export interface InvoicePaymentSummary {
+  /**
+   * Identifier of created payment, provided by the application.
+   * @format int32
+   */
+  paymentId?: number;
+  /**
+   * Identifier of invoice associated with the payment.
+   * @format int32
+   */
+  invoiceId?: number;
+}
+
+/** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
+export interface PaymentSummaries {
+  /** List of identifiers of added payments. */
+  transactions?: PaymentSummary[];
+}
+
+/** List of identifiers of added payments. */
+export interface PaymentSummary {
+  /**
+   * Identifier of created payment, provided by the application.
+   * @format int32
+   */
+  paymentId?: number;
+  /** Optional identifier of requested payment object to be created. For example order number for a created direct bank transfer. Provided externally. */
+  customId?: string;
+}
+
+/** These are possible response models */
+export interface PaymentsConfirmationResponseModels {
+  /** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
+  PaymentSummaries?: PaymentSummaries;
+  /** Response information message */
+  InfoMessage?: InfoMessage;
+  /** Response for paying invoices action (POST /payments) performed successfully */
+  InvoicePaymentSummaries?: InvoicePaymentSummaries;
+}
+
+/** List containing DirectBankTransfer objects. */
+export interface DirectBankTransfer {
   /** The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field. */
   amount: number;
   /** Bank reference code. */
@@ -5032,84 +5150,348 @@ export interface DirectSalaryPayment {
   recipientBankAccount: string;
   /** BIC code of recipient bank account number. */
   recipientBicCode: string;
-  /** The recipient name. */
-  recipientName: string;
-  /** The recipient code data. */
-  recipientCode?: BusinessIdentifier;
-  /**
-   * The code of the currency.
-   * @example "EUR"
-   */
-  currencyCode: "EUR";
-  /**
-   * Custom id for the payment.
-   * @maxLength 64
-   */
-  customId: string;
-}
-
-export interface DirectSalaryPayments {
-  /**
-   * Name of the direct salary payment list. Can be used for list identification.
-   * @maxLength 80
-   */
-  listName: string;
-  /** Name of the payment method. Used for all payments. */
-  paymentMethod: "FINNISH_SALARY_TRANSFER";
-  /**
-   * Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. Used for all payments.
-   * @example "2019-09-07"
-   */
-  paymentDate: string;
-  /** Bank account number of the person making the payment. The payer bank account has to be predefined in the environment to be able to use the payment. Used for all payments. */
+  /** Payment method type defining what kind of payment has to be made. */
+  paymentMethod:
+    | "FINNISH_BANK_TRANSFER"
+    | "FINNISH_FOREIGN_PAYMENT"
+    | "FINNISH_EXPRESS_PAYMENT"
+    | "NORWEGIAN_DOMESTIC_PAYMENT"
+    | "NORWEGIAN_FOREIGN_PAYMENT"
+    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
+    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
+    | "SWEDISH_DOMESTIC_PAYMENT"
+    | "SWEDISH_FOREIGN_PAYMENT"
+    | "DENMARK_DOMESTIC_PAYMENT"
+    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
+    | "DENMARK_FOREIGN_PAYMENT";
+  /** Bank account number of the person making the payment. The payer bank account has to be predefined in the environment to be able to use the payment. */
   payerBankAccount: string;
-  /**
-   * Optional custom identifier of the list. It can be used later to get list by this id.
-   * @maxLength 80
-   */
+  /** Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. */
+  paymentDate: string;
+  /** Intermediary bank name and address. */
+  recipientNameAndAddress: Address;
+  /** Receiver bank clearing code. */
+  receiverBankClearingCode?: string;
+  /** Intermediary bank name and address. */
+  receiverBankNameAndAddress?: Address;
+  /** Intermediary bank name and address. */
+  intermediaryBankNameAndAddress?: Address;
+  /** Intermediary bank BIC. */
+  intermediaryBankBic?: string;
+  /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
+  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  /** Currency code. */
+  currencyCode:
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CZK"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EGP"
+    | "ERN"
+    | "ETB"
+    | "EUR"
+    | "FJD"
+    | "FKP"
+    | "GBP"
+    | "GEL"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "ILS"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NOK"
+    | "NPR"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PYG"
+    | "QAR"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SLL"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWL"
+    | "CNH"
+    | "CNT"
+    | "GGP"
+    | "IMP"
+    | "JEP"
+    | "KID"
+    | "NIS"
+    | "NTD"
+    | "PRB"
+    | "SLS"
+    | "RMB"
+    | "TVD"
+    | "ZWB"
+    | "ATS"
+    | "BEF"
+    | "CYP"
+    | "DEM"
+    | "EEK"
+    | "FRF"
+    | "FIM"
+    | "GRD"
+    | "IEP"
+    | "ITL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "MTL"
+    | "NLG"
+    | "PTE"
+    | "ESP"
+    | "SIT"
+    | "SKK";
+  /** Custom identifier of each direct bank transfer with a maximum length of 64. It's externally provided for easierassigning of transactions to payments. */
   customId?: string;
-  /** List containing DirectSalaryPayment objects. */
-  payments: DirectSalaryPayment[];
 }
 
-/** These are possible response models */
-export interface DirectSalaryPaymentsConfirmationResponseModels {
-  /** Response for creating direct salary payment action (POST /payments/directsalarypayments) performed successfully */
-  PaymentGroup?: PaymentGroup;
-  /** Response information message */
-  InfoMessage?: InfoMessage;
+export interface DirectBankTransferList {
+  /** List containing DirectBankTransfer objects. */
+  directBankTransfers: DirectBankTransfer[];
+}
+
+/** Information about error handling. Can be empty if message is not handled yet. */
+export interface ErrorHandlingInfo {
+  /**
+   * Date when the error message was handled.
+   * @format date
+   */
+  date?: string;
+  /**
+   * Unique identifier of the user who handled the error message.
+   * @format int32
+   */
+  userId?: number;
+  /** First name of the user who handled the error message. */
+  firstName?: string;
+  /** Last name of the user who handled the error message. */
+  lastName?: string;
+  /** Additional comment for handling the error message. */
+  comment?: string;
 }
 
 /** Search results. */
-export interface BasicPaymentTransactionData {
+export interface PaymentErrorMessage {
   /**
-   * Unique payment identifier.
+   * Unique identifier of the error message.
    * @format int32
    */
   id?: number;
   /**
-   * Unique invoice identifier.
-   * @format int32
-   */
-  invoiceId?: number;
-  /**
-   * Date specifying when the payment transaction has to be performed.
+   * Date when the error message was created.
    * @format date
    */
-  paymentDate?: string;
-  /** The amount of the payment in the given currency. Currency is defined within the invoice. */
-  amount?: number;
-  /** Recipient name. */
-  receiverName?: string;
-  /** Payment status. */
-  status?: string;
-  /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  createdDate?: string;
+  /** Type of error. */
+  type?:
+    | "ANY_ERROR"
+    | "PAYMENT_ERROR"
+    | "FINVOICE_SEND_ERROR"
+    | "FINVOICE_RECEIVE_ERROR"
+    | "TYEL_ERROR"
+    | "NETS_COLLECTION_ERROR";
+  /** Status of error handling. */
+  status?: "ALL" | "UNHANDLED" | "HANDLED";
+  /** Error code of error. */
+  errorCode?: string;
+  /**
+   * Identifier of payment object related to the error message. The related object can be an invoice or a direct bank transfer.
+   * @format int32
+   */
+  referenceId?: number;
+  /** Type of payment object related to the error message. NOTE: BANK_TRANSFER type was replaced by DIRECT_BANK_TRANSFER. */
+  referenceType?:
+    | "INVOICE"
+    | "PAYMENTS_ANNOUNCEMENT"
+    | "NETS_COLLECTION"
+    | "DIRECT_BANK_TRANSFER"
+    | "DIRECT_SALARY_PAYMENT"
+    | "DIRECT_SALARY_PAYMENT_LIST";
+  /** Detailed type of receipt related to the error message, sent only for invoices. */
+  invoiceType?:
+    | "VAT_FORM"
+    | "PAYMENT_CORRECTION"
+    | "TRACKING_PERIOD_OPENING_RECEIPT"
+    | "PERIODIC_TAX_RETURN"
+    | "UNKNOWN_RECEIPT_TYPE_F"
+    | "UNKNOWN_RECEIPT_TYPE_G"
+    | "ACCRUAL"
+    | "BILL_OF_CHARGES"
+    | "SALES_INVOICE"
+    | "JOURNAL"
+    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
+    | "JOURNAL_BYPASSING_INVOICE_PAGE"
+    | "PURCHASE_INVOICE"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | "SALARY"
+    | "REFERENCE_PAYMENT"
+    | "EMPLOYER_CONTRIBUTION"
+    | "TRAVEL_INVOICE"
+    | "TRAVEL_PLAN"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "PURCHASE_ORDER"
+    | "VAT_SUMMARY"
+    | "SALES_ORDER"
+    | "OFFER";
+  /** Information about error handling. Can be empty if message is not handled yet. */
+  errorHandlingInfo?: ErrorHandlingInfo;
 }
 
-export interface PaymentSearchResult {
+export interface PaymentErrorMessageSearchResult {
   /** Search results. */
-  results?: BasicPaymentTransactionData[];
+  results?: PaymentErrorMessage[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
 }
@@ -5366,96 +5748,36 @@ export interface PaymentRowInfo {
   status?: string;
 }
 
-/** Information about error handling. Can be empty if message is not handled yet. */
-export interface ErrorHandlingInfo {
-  /**
-   * Date when the error message was handled.
-   * @format date
-   */
-  date?: string;
-  /**
-   * Unique identifier of the user who handled the error message.
-   * @format int32
-   */
-  userId?: number;
-  /** First name of the user who handled the error message. */
-  firstName?: string;
-  /** Last name of the user who handled the error message. */
-  lastName?: string;
-  /** Additional comment for handling the error message. */
-  comment?: string;
-}
-
 /** Search results. */
-export interface PaymentErrorMessage {
+export interface BasicPaymentTransactionData {
   /**
-   * Unique identifier of the error message.
+   * Unique payment identifier.
    * @format int32
    */
   id?: number;
   /**
-   * Date when the error message was created.
-   * @format date
-   */
-  createdDate?: string;
-  /** Type of error. */
-  type?:
-    | "ANY_ERROR"
-    | "PAYMENT_ERROR"
-    | "FINVOICE_SEND_ERROR"
-    | "FINVOICE_RECEIVE_ERROR"
-    | "TYEL_ERROR"
-    | "NETS_COLLECTION_ERROR";
-  /** Status of error handling. */
-  status?: "ALL" | "UNHANDLED" | "HANDLED";
-  /** Error code of error. */
-  errorCode?: string;
-  /**
-   * Identifier of payment object related to the error message. The related object can be an invoice or a direct bank transfer.
+   * Unique invoice identifier.
    * @format int32
    */
-  referenceId?: number;
-  /** Type of payment object related to the error message. NOTE: BANK_TRANSFER type was replaced by DIRECT_BANK_TRANSFER. */
-  referenceType?:
-    | "INVOICE"
-    | "PAYMENTS_ANNOUNCEMENT"
-    | "NETS_COLLECTION"
-    | "DIRECT_BANK_TRANSFER"
-    | "DIRECT_SALARY_PAYMENT"
-    | "DIRECT_SALARY_PAYMENT_LIST";
-  /** Detailed type of receipt related to the error message, sent only for invoices. */
-  invoiceType?:
-    | "VAT_FORM"
-    | "PAYMENT_CORRECTION"
-    | "TRACKING_PERIOD_OPENING_RECEIPT"
-    | "PERIODIC_TAX_RETURN"
-    | "UNKNOWN_RECEIPT_TYPE_F"
-    | "UNKNOWN_RECEIPT_TYPE_G"
-    | "ACCRUAL"
-    | "BILL_OF_CHARGES"
-    | "SALES_INVOICE"
-    | "JOURNAL"
-    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
-    | "JOURNAL_BYPASSING_INVOICE_PAGE"
-    | "PURCHASE_INVOICE"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
-    | "SALARY"
-    | "REFERENCE_PAYMENT"
-    | "EMPLOYER_CONTRIBUTION"
-    | "TRAVEL_INVOICE"
-    | "TRAVEL_PLAN"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "PURCHASE_ORDER"
-    | "VAT_SUMMARY"
-    | "SALES_ORDER"
-    | "OFFER";
-  /** Information about error handling. Can be empty if message is not handled yet. */
-  errorHandlingInfo?: ErrorHandlingInfo;
+  invoiceId?: number;
+  /**
+   * Date specifying when the payment transaction has to be performed.
+   * @format date
+   */
+  paymentDate?: string;
+  /** The amount of the payment in the given currency. Currency is defined within the invoice. */
+  amount?: number;
+  /** Recipient name. */
+  receiverName?: string;
+  /** Payment status. */
+  status?: string;
+  /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
+  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
 }
 
-export interface PaymentErrorMessageSearchResult {
+export interface PaymentSearchResult {
   /** Search results. */
-  results?: PaymentErrorMessage[];
+  results?: BasicPaymentTransactionData[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
 }
@@ -5493,7 +5815,7 @@ export interface InvoicePayment {
   /** Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. */
   paymentDate: string;
   /** Intermediary bank name and address. */
-  recipientNameAndAddress?: Address;
+  recipientNameAndAddress: Address;
   /** Receiver bank clearing code. */
   receiverBankClearingCode?: string;
   /** Intermediary bank name and address. */
@@ -5521,319 +5843,6 @@ export interface InvoicePaymentList {
   payments: InvoicePayment[];
 }
 
-/** List containing DirectBankTransfer objects. */
-export interface DirectBankTransfer {
-  /** The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field. */
-  amount: number;
-  /** Bank reference code. */
-  bankReferenceCode?: string;
-  /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
-  /** Message for the payment, if reference payment is not used. */
-  message?: string;
-  /** Bank account number of the recipient. */
-  recipientBankAccount: string;
-  /** BIC code of recipient bank account number. */
-  recipientBicCode: string;
-  /** Payment method type defining what kind of payment has to be made. */
-  paymentMethod:
-    | "FINNISH_BANK_TRANSFER"
-    | "FINNISH_FOREIGN_PAYMENT"
-    | "FINNISH_EXPRESS_PAYMENT"
-    | "NORWEGIAN_DOMESTIC_PAYMENT"
-    | "NORWEGIAN_FOREIGN_PAYMENT"
-    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
-    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
-    | "SWEDISH_DOMESTIC_PAYMENT"
-    | "SWEDISH_FOREIGN_PAYMENT"
-    | "DENMARK_DOMESTIC_PAYMENT"
-    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
-    | "DENMARK_FOREIGN_PAYMENT";
-  /** Bank account number of the person making the payment. The payer bank account has to be predefined in the environment to be able to use the payment. */
-  payerBankAccount: string;
-  /** Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. */
-  paymentDate: string;
-  /** Intermediary bank name and address. */
-  recipientNameAndAddress?: Address;
-  /** Receiver bank clearing code. */
-  receiverBankClearingCode?: string;
-  /** Intermediary bank name and address. */
-  receiverBankNameAndAddress?: Address;
-  /** Intermediary bank name and address. */
-  intermediaryBankNameAndAddress?: Address;
-  /** Intermediary bank BIC. */
-  intermediaryBankBic?: string;
-  /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
-  /** Currency code. */
-  currencyCode:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CZK"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EGP"
-    | "ERN"
-    | "ETB"
-    | "EUR"
-    | "FJD"
-    | "FKP"
-    | "GBP"
-    | "GEL"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "ILS"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NOK"
-    | "NPR"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PYG"
-    | "QAR"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SLL"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWL"
-    | "CNH"
-    | "CNT"
-    | "GGP"
-    | "IMP"
-    | "JEP"
-    | "KID"
-    | "NIS"
-    | "NTD"
-    | "PRB"
-    | "SLS"
-    | "RMB"
-    | "TVD"
-    | "ZWB"
-    | "ATS"
-    | "BEF"
-    | "CYP"
-    | "DEM"
-    | "EEK"
-    | "FRF"
-    | "FIM"
-    | "GRD"
-    | "IEP"
-    | "ITL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "MTL"
-    | "NLG"
-    | "PTE"
-    | "ESP"
-    | "SIT"
-    | "SKK";
-  /** Custom identifier of each direct bank transfer with a maximum length of 64. It's externally provided for easierassigning of transactions to payments. */
-  customId?: string;
-}
-
-export interface DirectBankTransferList {
-  /** List containing DirectBankTransfer objects. */
-  directBankTransfers: DirectBankTransfer[];
-}
-
-/** Response for paying invoices action (POST /payments) performed successfully */
-export interface InvoicePaymentSummaries {
-  /** List of identifiers of added payments. */
-  transactions?: InvoicePaymentSummary[];
-}
-
-/** List of identifiers of added payments. */
-export interface InvoicePaymentSummary {
-  /**
-   * Identifier of created payment, provided by the application.
-   * @format int32
-   */
-  paymentId?: number;
-  /**
-   * Identifier of invoice associated with the payment.
-   * @format int32
-   */
-  invoiceId?: number;
-}
-
-/** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
-export interface PaymentSummaries {
-  /** List of identifiers of added payments. */
-  transactions?: PaymentSummary[];
-}
-
-/** List of identifiers of added payments. */
-export interface PaymentSummary {
-  /**
-   * Identifier of created payment, provided by the application.
-   * @format int32
-   */
-  paymentId?: number;
-  /** Optional identifier of requested payment object to be created. For example order number for a created direct bank transfer. Provided externally. */
-  customId?: string;
-}
-
-/** These are possible response models */
-export interface PaymentsConfirmationResponseModels {
-  /** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
-  PaymentSummaries?: PaymentSummaries;
-  /** Response information message */
-  InfoMessage?: InfoMessage;
-  /** Response for paying invoices action (POST /payments) performed successfully */
-  InvoicePaymentSummaries?: InvoicePaymentSummaries;
-}
-
 export interface ProductGroup {
   /**
    * Product group id.
@@ -5846,16 +5855,16 @@ export interface ProductGroup {
   type?: "SALES" | "PURCHASE" | "TRAVEL";
 }
 
+export interface ProductGroups {
+  /** List of product groups */
+  productGroups?: ProductGroup[];
+}
+
 export interface ProductSearchResult {
   /** Search results. */
   results?: Product[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
-}
-
-export interface ProductGroups {
-  /** List of product groups */
-  productGroups?: ProductGroup[];
 }
 
 /** Search results. */
@@ -5969,22 +5978,7 @@ export interface AccountingReportRequest {
 export interface AccountingReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default "["SALES_INVOICE",
-   * "PURCHASE_INVOICE",
-   * "TRAVEL_INVOICE",
-   * "BILL_OF_CHARGES",
-   * "JOURNAL",
-   * "SALARY",
-   * "VAT_FORM",
-   * "EMPLOYER_CONTRIBUTION",
-   * "PERIODIC_TAX_RETURN",
-   * "VAT_SUMMARY",
-   * "SALES_ORDER",
-   * "PURCHASE_ORDER",
-   * "REFERENCE_PAYMENT",
-   * "BANK_STATEMENT_AS_RECEIPT",
-   * "RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * "
+   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
@@ -6585,22 +6579,7 @@ export interface GeneralLedgerReportRequest {
 export interface GeneralLedgerReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default "["SALES_INVOICE",
-   * "PURCHASE_INVOICE",
-   * "TRAVEL_INVOICE",
-   * "BILL_OF_CHARGES",
-   * "JOURNAL",
-   * "SALARY",
-   * "VAT_FORM",
-   * "EMPLOYER_CONTRIBUTION",
-   * "PERIODIC_TAX_RETURN",
-   * "VAT_SUMMARY",
-   * "SALES_ORDER",
-   * "PURCHASE_ORDER",
-   * "REFERENCE_PAYMENT",
-   * "BANK_STATEMENT_AS_RECEIPT",
-   * "RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * "
+   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
@@ -7142,22 +7121,7 @@ export interface LedgerAccountsReportRequest {
 export interface LedgerAccountsReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default "["SALES_INVOICE",
-   * "PURCHASE_INVOICE",
-   * "TRAVEL_INVOICE",
-   * "BILL_OF_CHARGES",
-   * "JOURNAL",
-   * "SALARY",
-   * "VAT_FORM",
-   * "EMPLOYER_CONTRIBUTION",
-   * "PERIODIC_TAX_RETURN",
-   * "VAT_SUMMARY",
-   * "SALES_ORDER",
-   * "PURCHASE_ORDER",
-   * "REFERENCE_PAYMENT",
-   * "BANK_STATEMENT_AS_RECEIPT",
-   * "RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * "
+   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
@@ -7704,13 +7668,6 @@ export interface Status {
   documentation?: string;
 }
 
-export interface UserProfile {
-  /** First name of the user. */
-  firstname?: string;
-  /** Surname (last name) of the user. */
-  surname?: string;
-}
-
 export interface User {
   /**
    * User ID of this user.
@@ -7896,6 +7853,13 @@ export interface UserRights {
   financialManagement?: FinancialManagementRights;
 }
 
+export interface UserProfile {
+  /** First name of the user. */
+  firstname?: string;
+  /** Surname (last name) of the user. */
+  surname?: string;
+}
+
 /** List of available VATs in different countries. */
 export interface VatCountryInfo {
   /** VAT country */
@@ -7944,6 +7908,19 @@ export interface VatPercentages {
   vatPercentages?: number[];
 }
 
+export interface CreatedWebhookResponse {
+  /**
+   * HTTP response status.
+   * @format int32
+   */
+  status?: number;
+  /**
+   * Generated UUID
+   * @format uuid
+   */
+  uuid?: string;
+}
+
 export interface Webhook {
   /**
    * Generated webhook UUID.
@@ -7981,19 +7958,6 @@ export interface WebhookSearchResult {
   results?: Webhook[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
-}
-
-export interface CreatedWebhookResponse {
-  /**
-   * HTTP response status.
-   * @format int32
-   */
-  status?: number;
-  /**
-   * Generated UUID
-   * @format uuid
-   */
-  uuid?: string;
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
@@ -8042,7 +8006,7 @@ export class HttpClient<SecurityDataType = unknown> {
   constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || "https://api-test.procountor.com/api",
+      baseURL: axiosConfig.baseURL || "https://pts-procountor.pubdev.azure.procountor.com/api",
     });
     this.secure = secure;
     this.format = format;
@@ -8132,15 +8096,91 @@ export class HttpClient<SecurityDataType = unknown> {
 /**
  * @title Procountor API
  * @version 1.0.0
- * @baseUrl https://api-test.procountor.com/api
- * @externalDocs https://api-test.procountor.com/api/openapi.json
+ * @baseUrl https://pts-procountor.pubdev.azure.procountor.com/api
+ * @externalDocs https://pts-procountor.pubdev.azure.procountor.com/api/openapi.json
  *
  * Procountor API documentation
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   attachments = {
     /**
-     * @description Returns a list containing basic information for the attachments. The ID in each result entry can be used to fetch complete attachment details with the GET /attachments/{attachmentId} endpoint. The document management need to be active in order to use this endpoint, it can be set on to an environment from Management -> Company info -> Usage settings -> Documents -> Activate Documents in environment. There is a fee associated with having 'Document management' on for non Solo environments!
+     * @description Returns an attachment based on given attachment ID. Both attachment metadata (application/json) and the file itself will be returned. Content-type for the response is multipart/mixed.
+     *
+     * @tags Attachments
+     * @name GetAttachment
+     * @summary Get an attachment.
+     * @request GET:/attachments/{attachmentId}
+     * @secure
+     * @response `200` `Attachment` Attachment was successfully found.
+     * @response `404` `ErrorMessages` Attachment not found.
+     */
+    getAttachment: (attachmentId: number, params: RequestParams = {}) =>
+      this.request<Attachment, ErrorMessages>({
+        path: `/attachments/${attachmentId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Deletes an attachment based on a given attachment ID.
+     *
+     * @tags Attachments
+     * @name DeleteAttachment
+     * @summary Delete an attachment.
+     * @request DELETE:/attachments/{attachmentId}
+     * @secure
+     * @response `204` `void` Attachment was successfully deleted.
+     * @response `403` `ErrorMessages` Insufficient user rights or this attachment is not editable.
+     * @response `404` `ErrorMessages` Attachment not found.
+     */
+    deleteAttachment: (attachmentId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/attachments/${attachmentId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Renames an attachment based on the given attachment ID. The file extension can't be changed. Other properties than the filename can't be changed.
+     *
+     * @tags Attachments
+     * @name RenameAttachment
+     * @summary Renames an attachment.
+     * @request PATCH:/attachments/{attachmentId}
+     * @secure
+     * @response `200` `Attachment` Attachment was successfully renamed.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Attachment for given id has not been found
+     */
+    renameAttachment: (
+      attachmentId: number,
+      data: AttachmentRename,
+      query?: {
+        /**
+         * Name of the attachment file
+         * @example "example-pdf2.pdf"
+         */
+        name?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Attachment, ErrorMessages>({
+        path: `/attachments/${attachmentId}`,
+        method: "PATCH",
+        query: query,
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list containing basic information for the attachments. The ID in each result entry can be used to fetch complete attachment details with the GET /attachments/{attachmentId} endpoint. The document management need to be active in order to use this endpoint, it can be set on to an environment from Management -> Company info -> Usage settings -> Documents -> Activate Documents in environment. There is a fee associated with having 'Document management' on for non Solo environments! This endpoint supports username parameter in HTTP header.
      *
      * @tags Attachments
      * @name GetAttachments
@@ -8182,11 +8222,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "attachment.txt"
          */
         name?: string;
-        /**
-         * Name of the user
-         * @example "Procountor"
-         */
-        username?: string;
         /**
          * Attachment type
          * @example "SALES_INVOICE"
@@ -8289,8 +8324,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     saveAttachment: (
       data: {
         /** A list of attachments added to the reference payment. */
-        meta?: Attachment;
-        file?: object;
+        meta: Attachment;
+        file: object;
       },
       params: RequestParams = {},
     ) =>
@@ -8303,130 +8338,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-
-    /**
-     * @description Returns an attachment based on given attachment ID. Both attachment metadata (application/json) and the file itself will be returned. Content-type for the response is multipart/mixed.
-     *
-     * @tags Attachments
-     * @name GetAttachment
-     * @summary Get an attachment.
-     * @request GET:/attachments/{attachmentId}
-     * @secure
-     * @response `200` `Attachment` Attachment was successfully found.
-     * @response `404` `ErrorMessages` Attachment not found.
-     */
-    getAttachment: (attachmentId: number, params: RequestParams = {}) =>
-      this.request<Attachment, ErrorMessages>({
-        path: `/attachments/${attachmentId}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Deletes an attachment based on a given attachment ID.
-     *
-     * @tags Attachments
-     * @name DeleteAttachment
-     * @summary Delete an attachment.
-     * @request DELETE:/attachments/{attachmentId}
-     * @secure
-     * @response `204` `void` Attachment was successfully deleted.
-     * @response `403` `ErrorMessages` Insufficient user rights or this attachment is not editable.
-     * @response `404` `ErrorMessages` Attachment not found.
-     */
-    deleteAttachment: (attachmentId: number, params: RequestParams = {}) =>
-      this.request<void, ErrorMessages>({
-        path: `/attachments/${attachmentId}`,
-        method: "DELETE",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * @description Renames an attachment based on the given attachment ID. The file extension can't be changed. Other properties than the filename can't be changed.
-     *
-     * @tags Attachments
-     * @name RenameAttachment
-     * @summary Renames an attachment.
-     * @request PATCH:/attachments/{attachmentId}
-     * @secure
-     * @response `200` `Attachment` Attachment was successfully renamed.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Attachment for given id has not been found
-     */
-    renameAttachment: (
-      attachmentId: number,
-      data: AttachmentRename,
-      query?: {
-        /**
-         * Name of the attachment file
-         * @example "example-pdf2.pdf"
-         */
-        name?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Attachment, ErrorMessages>({
-        path: `/attachments/${attachmentId}`,
-        method: "PATCH",
-        query: query,
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
   };
   bankaccounts = {
-    /**
-     * @description This endpoint returns detailed information about the bank account with given id.
-     *
-     * @tags Bank accounts
-     * @name GetBankAccount
-     * @summary Get the bank account information.
-     * @request GET:/bankaccounts/{id}
-     * @secure
-     * @response `200` `CompanyBankAccount` The bank account was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Bank account not found.
-     */
-    getBankAccount: (id: number, params: RequestParams = {}) =>
-      this.request<CompanyBankAccount, ErrorMessages>({
-        path: `/bankaccounts/${id}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Endpoint for updating company bank account. Returns updated bank information.
-     *
-     * @tags Bank accounts
-     * @name UpdateBankAccount
-     * @summary Update company bank account.
-     * @request PUT:/bankaccounts/{id}
-     * @secure
-     * @response `200` `CompanyBankAccount` The bank account was successfully updated.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Bank account not found.
-     * @response `409` `ErrorMessages` Bank account already in use.
-     */
-    updateBankAccount: (id: number, data: CompanyBankAccount, params: RequestParams = {}) =>
-      this.request<CompanyBankAccount, ErrorMessages>({
-        path: `/bankaccounts/${id}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
     /**
      * @description Returns the list of bank accounts for the current environment. This endpoint can be used for getting the data based on certain search criteria.
      *
@@ -8503,6 +8416,52 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts`,
         method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint returns detailed information about the bank account with given id.
+     *
+     * @tags Bank accounts
+     * @name GetBankAccount
+     * @summary Get the bank account information.
+     * @request GET:/bankaccounts/{id}
+     * @secure
+     * @response `200` `CompanyBankAccount` The bank account was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Bank account not found.
+     */
+    getBankAccount: (id: number, params: RequestParams = {}) =>
+      this.request<CompanyBankAccount, ErrorMessages>({
+        path: `/bankaccounts/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Endpoint for updating company bank account. Returns updated bank information.
+     *
+     * @tags Bank accounts
+     * @name UpdateBankAccount
+     * @summary Update company bank account.
+     * @request PUT:/bankaccounts/{id}
+     * @secure
+     * @response `200` `CompanyBankAccount` The bank account was successfully updated.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Bank account not found.
+     * @response `409` `ErrorMessages` Bank account already in use.
+     */
+    updateBankAccount: (id: number, data: CompanyBankAccount, params: RequestParams = {}) =>
+      this.request<CompanyBankAccount, ErrorMessages>({
+        path: `/bankaccounts/${id}`,
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -8600,7 +8559,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns all bank statements that match the request criteria. Each BankStatementEvent can have a list of child events. In that case, the event model contains an additional "event" property with an array of BankStatementEvents as its value.
+     * @description Returns all bank statements that match the request criteria. Each BankStatementEvent can have a list of child events. In that case, the event model contains an additional "event" property with an array of BankStatementEvents as its value. This endpoint supports accountNumber parameter in HTTP header.
      *
      * @tags Bank statements
      * @name GetBankStatements
@@ -8612,11 +8571,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     getBankStatements: (
       query?: {
-        /**
-         * The bank account number to use when searching bank statements
-         * @example "FI1234567890123456"
-         */
-        accountNumber?: string;
         /**
          * Start date of the search (invoice billing date)
          * @format date
@@ -8674,6 +8628,77 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   businesspartners = {
+    /**
+     * @description Returns business partner groups ordered by group ID.
+     *
+     * @tags Business partners
+     * @name GetPartnerGroups
+     * @summary Finds business partners groups matching search criteria.
+     * @request GET:/businesspartners/groups
+     * @secure
+     * @response `200` `BusinessPartnerGroupSearchResult` Business partner groups were successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     */
+    getPartnerGroups: (
+      query?: {
+        /**
+         * Business partner group name. Uses substring matching.
+         * @example "Test group"
+         */
+        name?: string;
+        /** Status of business partner group. */
+        active?: boolean;
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int64
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int64
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<BusinessPartnerGroupSearchResult, ErrorMessages>({
+        path: `/businesspartners/groups`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Create a new business partner group with given data.
+     *
+     * @tags Business partners
+     * @name CreateBusinessPartnerGroup
+     * @summary Create a new business partner group.
+     * @request POST:/businesspartners/groups
+     * @secure
+     * @response `200` `BusinessPartnerGroup` Business partner group was successfully created.
+     * @response `400` `ErrorMessages` Business partner group contains invalid data.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     */
+    createBusinessPartnerGroup: (data: BusinessPartnerGroup, params: RequestParams = {}) =>
+      this.request<BusinessPartnerGroup, ErrorMessages>({
+        path: `/businesspartners/groups`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * @description Endpoint returns BusinessPartner for given id with all details. Also accepts multiple comma-separated ids. Max 200 ids per request.
      *
@@ -8752,6 +8777,116 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description Returns default accounts for a business partner with the given ID with vat information. Default accounts are not available for business partner type 'PERSON'
+     *
+     * @tags Business partners
+     * @name GetDefaultAccounts
+     * @summary Get default accounts of business partner.
+     * @request GET:/businesspartners/{id}/defaults/accounts
+     * @secure
+     * @response `200` `BusinessPartnerDefaultAccounts` Default accounts were successfully returned.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No partner found for given id or partner type is 'PERSON'.
+     */
+    getDefaultAccounts: (id: number, params: RequestParams = {}) =>
+      this.request<BusinessPartnerDefaultAccounts, ErrorMessages>({
+        path: `/businesspartners/${id}/defaults/accounts`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default dimensions for a business partner with the given ID.
+     *
+     * @tags Business partners
+     * @name GetDefaultDimensions
+     * @summary Get default dimensions of business partner.
+     * @request GET:/businesspartners/{id}/defaults/dimensions
+     * @secure
+     * @response `200` `(BusinessPartnerDefaultDimension)[]` The partner default dimensions was successfully returned.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     */
+    getDefaultDimensions: (id: number, params: RequestParams = {}) =>
+      this.request<BusinessPartnerDefaultDimension[], ErrorMessages>({
+        path: `/businesspartners/${id}/defaults/dimensions`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default dimension for a business partner with the given partner and dimension ID.
+     *
+     * @tags Business partners
+     * @name GetDefaultDimensions1
+     * @summary Get default dimension of business partner.
+     * @request GET:/businesspartners/{id}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully returned.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
+     */
+    getDefaultDimensions1: (id: number, dimensionId: number, params: RequestParams = {}) =>
+      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
+        path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates default dimension for a business partner with the given partner and dimension ID.
+     *
+     * @tags Business partners
+     * @name UpdateDefaultDimensions
+     * @summary Update default dimension of business partner.
+     * @request PUT:/businesspartners/{id}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully updated.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
+     */
+    updateDefaultDimensions: (
+      id: number,
+      dimensionId: number,
+      data: BusinessPartnerDefaultDimensionExtended,
+      params: RequestParams = {},
+    ) =>
+      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
+        path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Endpoint returns default products for given business partner id with all details.
+     *
+     * @tags Business partners
+     * @name GetDefaultProducts
+     * @summary Get a business partner default products.
+     * @request GET:/businesspartners/{id}/defaults/products
+     * @secure
+     * @response `200` `(DefaultProduct)[]` The partner was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No partner found for given id.
+     */
+    getDefaultProducts: (id: number, params: RequestParams = {}) =>
+      this.request<DefaultProduct[], ErrorMessages>({
+        path: `/businesspartners/${id}/defaults/products`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Returns business partner group with requested group ID.
      *
      * @tags Business partners
@@ -8817,7 +8952,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns basic information: register id, name, billing address, id, customer no, partner type, active/inactive.
+     * @description Returns basic information: register id, name, billing address, id, customer no, partner type, active/inactive. This endpoint supports name and identifier parameters in HTTP header.
      *
      * @tags Business partners
      * @name SearchBusinessPartners
@@ -8830,20 +8965,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     searchBusinessPartners: (
       query?: {
         /**
-         * Business partner name
-         * @example "Pr Oy"
-         */
-        name?: string;
-        /**
          * Business identifier type of the partner
          * @example "FN"
          */
         identifierType?: string;
-        /**
-         * Business identifier of the partner
-         * @example "0836922-4"
-         */
-        identifier?: string;
         /**
          * Customer number
          * @example 100015
@@ -8942,187 +9067,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-
-    /**
-     * @description Endpoint returns default products for given business partner id with all details.
-     *
-     * @tags Business partners
-     * @name GetDefaultProducts
-     * @summary Get a business partner default products.
-     * @request GET:/businesspartners/{id}/defaults/products
-     * @secure
-     * @response `200` `(DefaultProduct)[]` The partner was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` No partner found for given id.
-     */
-    getDefaultProducts: (id: number, params: RequestParams = {}) =>
-      this.request<DefaultProduct[], ErrorMessages>({
-        path: `/businesspartners/${id}/defaults/products`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns default accounts for a business partner with the given ID with vat information. Default accounts are not available for business partner type 'PERSON'
-     *
-     * @tags Business partners
-     * @name GetDefaultAccounts
-     * @summary Get default accounts of business partner.
-     * @request GET:/businesspartners/{id}/defaults/accounts
-     * @secure
-     * @response `200` `BusinessPartnerDefaultAccounts` Default accounts were successfully returned.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     * @response `404` `ErrorMessages` No partner found for given id or partner type is 'PERSON'.
-     */
-    getDefaultAccounts: (id: number, params: RequestParams = {}) =>
-      this.request<BusinessPartnerDefaultAccounts, ErrorMessages>({
-        path: `/businesspartners/${id}/defaults/accounts`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns default dimension for a business partner with the given partner and dimension ID.
-     *
-     * @tags Business partners
-     * @name GetDefaultDimensions
-     * @summary Get default dimension of business partner.
-     * @request GET:/businesspartners/{id}/defaults/dimensions/{dimensionId}
-     * @secure
-     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully returned.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
-     */
-    getDefaultDimensions: (id: number, dimensionId: number, params: RequestParams = {}) =>
-      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
-        path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Updates default dimension for a business partner with the given partner and dimension ID.
-     *
-     * @tags Business partners
-     * @name UpdateDefaultDimensions
-     * @summary Update default dimension of business partner.
-     * @request PUT:/businesspartners/{id}/defaults/dimensions/{dimensionId}
-     * @secure
-     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully updated.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
-     */
-    updateDefaultDimensions: (
-      id: number,
-      dimensionId: number,
-      data: BusinessPartnerDefaultDimensionExtended,
-      params: RequestParams = {},
-    ) =>
-      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
-        path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns default dimensions for a business partner with the given ID.
-     *
-     * @tags Business partners
-     * @name GetDefaultDimensions1
-     * @summary Get default dimensions of business partner.
-     * @request GET:/businesspartners/{id}/defaults/dimensions
-     * @secure
-     * @response `200` `(BusinessPartnerDefaultDimension)[]` The partner default dimensions was successfully returned.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     */
-    getDefaultDimensions1: (id: number, params: RequestParams = {}) =>
-      this.request<BusinessPartnerDefaultDimension[], ErrorMessages>({
-        path: `/businesspartners/${id}/defaults/dimensions`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns business partner groups ordered by group ID.
-     *
-     * @tags Business partners
-     * @name GetPartnerGroups
-     * @summary Finds business partners groups matching search criteria.
-     * @request GET:/businesspartners/groups
-     * @secure
-     * @response `200` `BusinessPartnerGroupSearchResult` Business partner groups were successfully returned.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     */
-    getPartnerGroups: (
-      query?: {
-        /**
-         * Business partner group name. Uses substring matching.
-         * @example "Test group"
-         */
-        name?: string;
-        /** Status of business partner group. */
-        active?: boolean;
-        /**
-         * Page size for the results. Maximum value: 200.
-         * @format int64
-         * @max 200
-         * @default 50
-         * @example 20
-         */
-        size?: number;
-        /**
-         * Page number for the results
-         * @format int64
-         * @default 0
-         * @example 2
-         */
-        page?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<BusinessPartnerGroupSearchResult, ErrorMessages>({
-        path: `/businesspartners/groups`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Create a new business partner group with given data.
-     *
-     * @tags Business partners
-     * @name CreateBusinessPartnerGroup
-     * @summary Create a new business partner group.
-     * @request POST:/businesspartners/groups
-     * @secure
-     * @response `200` `BusinessPartnerGroup` Business partner group was successfully created.
-     * @response `400` `ErrorMessages` Business partner group contains invalid data.
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
-     */
-    createBusinessPartnerGroup: (data: BusinessPartnerGroup, params: RequestParams = {}) =>
-      this.request<BusinessPartnerGroup, ErrorMessages>({
-        path: `/businesspartners/groups`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
   };
   coa = {
     /**
@@ -9145,6 +9089,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   company = {
+    /**
+     * @description Returns company collection and penal expenses settings.
+     *
+     * @tags Company
+     * @name GetCompanyCollectionPenalExpensesSettings
+     * @summary Get collection and penal expenses settings.
+     * @request GET:/company/expenses/collectionpenal/settings
+     * @secure
+     * @response `200` `CollectionsAndPenalExpenses` Delivery methods was successfully returned.
+     */
+    getCompanyCollectionPenalExpensesSettings: (params: RequestParams = {}) =>
+      this.request<CollectionsAndPenalExpenses, any>({
+        path: `/company/expenses/collectionpenal/settings`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list of delivery terms allowed in the environment.
+     *
+     * @tags Company
+     * @name GetCompanyDeliveryTerms
+     * @summary Get delivery terms.
+     * @request GET:/company/deliveryterms
+     * @secure
+     * @response `200` `DeliveryTerms` Delivery methods was successfully returned.
+     */
+    getCompanyDeliveryTerms: (params: RequestParams = {}) =>
+      this.request<DeliveryTerms, any>({
+        path: `/company/deliveryterms`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * @description Returns basic information of the currently logged in company.
      *
@@ -9191,47 +9173,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns list of verifiers.
-     *
-     * @tags Company
-     * @name GetVerifierList
-     * @summary Get list of verifiers.
-     * @request GET:/company/invoicecirculation/verifierlists/{id}
-     * @secure
-     * @response `200` `VerifierList` List of verifiers was successfully returned.
-     * @response `403` `ErrorMessages` No access right to company information.
-     * @response `404` `ErrorMessages` Verifier list not found.
-     */
-    getVerifierList: (id: number, params: RequestParams = {}) =>
-      this.request<VerifierList, ErrorMessages>({
-        path: `/company/invoicecirculation/verifierlists/${id}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns all verifiers lists.
-     *
-     * @tags Company
-     * @name GetVerifierList1
-     * @summary Get all verifiers lists.
-     * @request GET:/company/invoicecirculation/verifierlists
-     * @secure
-     * @response `200` `(VerifierListBasic)[]` Verifiers lists was successfully returned.
-     * @response `403` `ErrorMessages` No access right to company information.
-     */
-    getVerifierList1: (params: RequestParams = {}) =>
-      this.request<VerifierListBasic[], ErrorMessages>({
-        path: `/company/invoicecirculation/verifierlists`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Returns invoice circulation settings.
      *
      * @tags Company
@@ -9272,18 +9213,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns a list of delivery terms allowed in the environment.
+     * @description Returns all verifiers lists.
      *
      * @tags Company
-     * @name GetCompanyDeliveryTerms
-     * @summary Get delivery terms.
-     * @request GET:/company/deliveryterms
+     * @name GetVerifierList
+     * @summary Get all verifiers lists.
+     * @request GET:/company/invoicecirculation/verifierlists
      * @secure
-     * @response `200` `DeliveryTerms` Delivery methods was successfully returned.
+     * @response `200` `(VerifierListBasic)[]` Verifiers lists was successfully returned.
+     * @response `403` `ErrorMessages` No access right to company information.
      */
-    getCompanyDeliveryTerms: (params: RequestParams = {}) =>
-      this.request<DeliveryTerms, any>({
-        path: `/company/deliveryterms`,
+    getVerifierList: (params: RequestParams = {}) =>
+      this.request<VerifierListBasic[], ErrorMessages>({
+        path: `/company/invoicecirculation/verifierlists`,
         method: "GET",
         secure: true,
         format: "json",
@@ -9291,18 +9233,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns company collection and penal expenses settings.
+     * @description Returns list of verifiers.
      *
      * @tags Company
-     * @name GetCompanyCollectionPenalExpensesSettings
-     * @summary Get collection and penal expenses settings.
-     * @request GET:/company/expenses/collectionpenal/settings
+     * @name GetVerifierList1
+     * @summary Get list of verifiers.
+     * @request GET:/company/invoicecirculation/verifierlists/{id}
      * @secure
-     * @response `200` `CollectionsAndPenalExpenses` Delivery methods was successfully returned.
+     * @response `200` `VerifierList` List of verifiers was successfully returned.
+     * @response `403` `ErrorMessages` No access right to company information.
+     * @response `404` `ErrorMessages` Verifier list not found.
      */
-    getCompanyCollectionPenalExpensesSettings: (params: RequestParams = {}) =>
-      this.request<CollectionsAndPenalExpenses, any>({
-        path: `/company/expenses/collectionpenal/settings`,
+    getVerifierList1: (id: number, params: RequestParams = {}) =>
+      this.request<VerifierList, ErrorMessages>({
+        path: `/company/invoicecirculation/verifierlists/${id}`,
         method: "GET",
         secure: true,
         format: "json",
@@ -9434,49 +9378,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   };
   dimensions = {
     /**
-     * @description Returns a list of all dimensions and dimension items for the current company. Dimensions can be set on the Dimensions page in Procountor.
-     *
-     * @tags Dimensions
-     * @name GetDimensions
-     * @summary Get all dimensions with dimension items.
-     * @request GET:/dimensions
-     * @secure
-     * @response `200` `(Dimension)[]` Dimensions were successfully returned.
-     */
-    getDimensions: (params: RequestParams = {}) =>
-      this.request<Dimension[], any>({
-        path: `/dimensions`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description This endpoint allows to update a dimension without its items.
-     *
-     * @tags Dimensions
-     * @name UpdateDimension
-     * @summary Update dimension.
-     * @request PUT:/dimensions
-     * @secure
-     * @response `200` `Dimension` The dimension was successfully updated.
-     * @response `400` `ErrorMessages` The dimension contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights
-     * @response `404` `ErrorMessages` Dimension could not be found.
-     */
-    updateDimension: (data: Dimension, params: RequestParams = {}) =>
-      this.request<Dimension, ErrorMessages>({
-        path: `/dimensions`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description This endpoint modifies an item for dimension identified by id.
      *
      * @tags Dimensions
@@ -9540,6 +9441,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/dimensions/${dimensionId}`,
         method: "GET",
         secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list of all dimensions and dimension items for the current company. Dimensions can be set on the Dimensions page in Procountor.
+     *
+     * @tags Dimensions
+     * @name GetDimensions
+     * @summary Get all dimensions with dimension items.
+     * @request GET:/dimensions
+     * @secure
+     * @response `200` `(Dimension)[]` Dimensions were successfully returned.
+     */
+    getDimensions: (params: RequestParams = {}) =>
+      this.request<Dimension[], any>({
+        path: `/dimensions`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint allows to update a dimension without its items.
+     *
+     * @tags Dimensions
+     * @name UpdateDimension
+     * @summary Update dimension.
+     * @request PUT:/dimensions
+     * @secure
+     * @response `200` `Dimension` The dimension was successfully updated.
+     * @response `400` `ErrorMessages` The dimension contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights
+     * @response `404` `ErrorMessages` Dimension could not be found.
+     */
+    updateDimension: (data: Dimension, params: RequestParams = {}) =>
+      this.request<Dimension, ErrorMessages>({
+        path: `/dimensions`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
         format: "json",
         ...params,
       }),
@@ -9728,6 +9672,52 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description The notes of an invoice can be modified regardless of the invoice status. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
+     *
+     * @tags Invoices
+     * @name AddNotesToInvoice
+     * @summary Update notes for the specified invoice.
+     * @request PUT:/invoices/{invoiceId}/notes
+     * @secure
+     * @response `200` `InfoMessage` The invoice notes were successfully updated.
+     * @response `400` `ErrorMessages` Request contains invalid data or invoice type not supported.
+     * @response `404` `ErrorMessages` Invoice not found or insufficient user rights.
+     */
+    addNotesToInvoice: (invoiceId: number, data: InvoiceNotes, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/invoices/${invoiceId}/notes`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Supports purchase, travel, expense and sales invoices. Configure invoice circulation settings in the Procountor environment before using this. Note that for sales invoice comment will be ignored.
+     *
+     * @tags Invoices
+     * @name ApproveInvoice
+     * @summary Approve an invoice.
+     * @request PUT:/invoices/{invoiceId}/approve
+     * @secure
+     * @response `200` `InfoMessage` The invoice was successfully approved.
+     * @response `403` `ErrorMessages` Insufficient user rights or invalid invoice status.
+     * @response `404` `ErrorMessages` Invoice not found.
+     */
+    approveInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/invoices/${invoiceId}/approve`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Confirm to make an action related to the given identifier.
      *
      * @tags Invoices
@@ -9798,6 +9788,194 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description Returns an invoice page image based on given invoice ID and page number.
+     *
+     * @tags Invoices
+     * @name GetInvoiceImage
+     * @summary Get an invoice page image.
+     * @request GET:/invoices/{invoiceId}/image
+     * @secure
+     * @response `200` `Attachment` The invoice image was successfully returned.
+     * @response `404` `ErrorMessages` Invoice not found or invoice page image does not exist.
+     */
+    getInvoiceImage: (
+      invoiceId: number,
+      query?: {
+        /**
+         * The invoice page number.
+         * @format int64
+         * @default 1
+         * @example 2
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Attachment, ErrorMessages>({
+        path: `/invoices/${invoiceId}/image`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns the requested invoice transactions.
+     *
+     * @tags Invoices
+     * @name GetInvoiceTransactions
+     * @summary Get an invoice transactions.
+     * @request GET:/invoices/{invoiceId}/transactions
+     * @secure
+     * @response `200` `InvoiceTransactions` The invoice transactions was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Invoice or invoice transactions not found.
+     */
+    getInvoiceTransactions: (invoiceId: number, params: RequestParams = {}) =>
+      this.request<InvoiceTransactions, ErrorMessages>({
+        path: `/invoices/${invoiceId}/transactions`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns single payment event for given payment event id and invoice id.
+     *
+     * @tags Invoices
+     * @name GetPaymentEventByIdAndInvoiceId
+     * @summary Get payment event by specified payment event id and invoice id.
+     * @request GET:/invoices/{invoiceId}/paymentevents/{paymentEventId}
+     * @secure
+     * @response `200` `PaymentEvent` The single payment event for the given invoice id and payment event id was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Payment event or invoice related to payment event not found.
+     */
+    getPaymentEventByIdAndInvoiceId: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
+      this.request<PaymentEvent, ErrorMessages>({
+        path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Remove a payment event which is not actually related to paying through the software i.e. with the status 'marked paid'. For other payments please use DELETE payments/{paymentId} endpoint.
+     *
+     * @tags Invoices
+     * @name RemovePaymentEvent
+     * @summary Remove a payment event.
+     * @request DELETE:/invoices/{invoiceId}/paymentevents/{paymentEventId}
+     * @secure
+     * @response `202` `TransactionIdentifier` Request for confirmation of remove payment event sent successfully.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
+     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
+     */
+    removePaymentEvent: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
+      this.request<TransactionIdentifier, ErrorMessages>({
+        path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
+        method: "DELETE",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Invoice can be set as invalidated only if it's fiscal year and it's accounting period are open. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
+     *
+     * @tags Invoices
+     * @name MarkInvoiceAsInvalidated
+     * @summary Set specified invoice to invalidated state.
+     * @request PUT:/invoices/{invoiceId}/invalidate
+     * @secure
+     * @response `200` `InfoMessage` The invoice was successfully marked as invalidated.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or invoice in closed fiscal year.
+     * @response `404` `ErrorMessages` Invoice not found.
+     */
+    markInvoiceAsInvalidated: (invoiceId: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/invoices/${invoiceId}/invalidate`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Mark payment events as paid. Supported invoice types: SALES_INVOICE, PURCHASE_INVOICE, TRAVEL_INVOICE, SALARY, PERIODIC_TAX_RETURN, BILL_OF_CHARGES. Payment event should always be requested with an invoice currency. In case if currency on the invoice and in the environment are different, amount is converted to environment currency using currency rate from the invoice.
+     *
+     * @tags Invoices
+     * @name MarkInvoiceAsPaid
+     * @summary Mark as paid.
+     * @request PUT:/invoices/{invoiceId}/paymentevents/markpaid
+     * @secure
+     * @response `200` `PaymentEvent` Request to mark invoice as paid processed correctly.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or invoice in wrong status.
+     * @response `404` `ErrorMessages` Invoice not found.
+     */
+    markInvoiceAsPaid: (invoiceId: number, data: MarkInvoiceAsPaid, params: RequestParams = {}) =>
+      this.request<PaymentEvent, ErrorMessages>({
+        path: `/invoices/${invoiceId}/paymentevents/markpaid`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Invoice can be set as unfinished only if it's fiscal year and it's accounting period are open. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
+     *
+     * @tags Invoices
+     * @name MarkInvoiceAsUnfinished
+     * @summary Set specified invoice to unfinished state.
+     * @request PUT:/invoices/{invoiceId}/unfinished
+     * @secure
+     * @response `200` `InfoMessage` The invoice was successfully marked as unfinished.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or invoice in closed fiscal year.
+     * @response `404` `ErrorMessages` Invoice not found.
+     */
+    markInvoiceAsUnfinished: (invoiceId: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/invoices/${invoiceId}/unfinished`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Invoice can be set as rejected only if it's fiscal year and it's accounting period are open. Supports purchase, sales, travel and expense (bill of charges) invoices.
+     *
+     * @tags Invoices
+     * @name RejectInvoice
+     * @summary Set specified invoice to rejected state / payment denied.
+     * @request PUT:/invoices/{invoiceId}/reject
+     * @secure
+     * @response `200` `InfoMessage` The invoice was successfully rejected.
+     * @response `403` `ErrorMessages` Invoice status cannot be changed.
+     * @response `404` `ErrorMessages` Invoice not found or insufficient user rights.
+     */
+    rejectInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/invoices/${invoiceId}/reject`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Search invoices. Returns a list containing basic information for the invoices. The ID in each result entry can be used to fetch complete invoice details with the GET /invoices/{invoiceId} endpoint. Supports purchase, purchase order, sales, sales order, self-assessed tax, travel and expense (bill of charges) invoices.
      *
      * @tags Invoices
@@ -9816,7 +9994,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice status
          * @example "UNFINISHED"
          */
-        status?: string;
+        status?: (
+          | "EMPTY"
+          | "UNFINISHED"
+          | "NOT_SENT"
+          | "SENT"
+          | "RECEIVED"
+          | "PAID"
+          | "PAYMENT_DENIED"
+          | "VERIFIED"
+          | "APPROVED"
+          | "INVALIDATED"
+          | "PAYMENT_QUEUED"
+          | "PARTLY_PAID"
+          | "PAYMENT_SENT_TO_BANK"
+          | "MARKED_PAID"
+          | "STARTED"
+          | "INVOICED"
+          | "OVERRIDDEN"
+          | "DELETED"
+          | "UNSAVED"
+          | "PAYMENT_TRANSACTION_REMOVED"
+        )[];
         /**
          * Start date of the search (invoice billing date)
          * @format date
@@ -9977,160 +10176,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Supports travel, expense and purchase invoices. Invoice circulation needs to be configured and enabled in Procountor settings. For travel and expanse invoices it marks invoice status as 'RECEIVED' when it is in 'UNFINISHED' status.
-     *
-     * @tags Invoices
-     * @name SendToCirculation
-     * @summary Send an invoice to circulation.
-     * @request PUT:/invoices/{invoiceId}/sendToCirculation
-     * @secure
-     * @response `200` `InfoMessage` The invoice was successfully send to circulation.
-     * @response `403` `ErrorMessages` Insufficient user rights, invalid invoice status or empty list of approvers when invoice circulation is enabled.
-     * @response `404` `ErrorMessages` Invoice not found or the user has no rights to view invoices.
-     */
-    sendToCirculation: (invoiceId: number, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/sendToCirculation`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Supports purchase, travel, expense and sales invoices. Configure invoice circulation settings in the Procountor environment before using this. Note that for sales invoice comment will be ignored.
-     *
-     * @tags Invoices
-     * @name ApproveInvoice
-     * @summary Approve an invoice.
-     * @request PUT:/invoices/{invoiceId}/approve
-     * @secure
-     * @response `200` `InfoMessage` The invoice was successfully approved.
-     * @response `403` `ErrorMessages` Insufficient user rights or invalid invoice status.
-     * @response `404` `ErrorMessages` Invoice not found.
-     */
-    approveInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/approve`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Invoice can be set as rejected only if it's fiscal year and it's accounting period are open. Supports purchase, sales, travel and expense (bill of charges) invoices.
-     *
-     * @tags Invoices
-     * @name RejectInvoice
-     * @summary Set specified invoice to rejected state / payment denied.
-     * @request PUT:/invoices/{invoiceId}/reject
-     * @secure
-     * @response `200` `InfoMessage` The invoice was successfully rejected.
-     * @response `403` `ErrorMessages` Invoice status cannot be changed.
-     * @response `404` `ErrorMessages` Invoice not found or insufficient user rights.
-     */
-    rejectInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/reject`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns single payment event for given payment event id and invoice id.
-     *
-     * @tags Invoices
-     * @name GetPaymentEventByIdAndInvoiceId
-     * @summary Get payment event by specified payment event id and invoice id.
-     * @request GET:/invoices/{invoiceId}/paymentevents/{paymentEventId}
-     * @secure
-     * @response `200` `PaymentEvent` The single payment event for the given invoice id and payment event id was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Payment event or invoice related to payment event not found.
-     */
-    getPaymentEventByIdAndInvoiceId: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
-      this.request<PaymentEvent, ErrorMessages>({
-        path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Remove a payment event which is not actually related to paying through the software i.e. with the status 'marked paid'. For other payments please use DELETE payments/{paymentId} endpoint.
-     *
-     * @tags Invoices
-     * @name RemovePaymentEvent
-     * @summary Remove a payment event.
-     * @request DELETE:/invoices/{invoiceId}/paymentevents/{paymentEventId}
-     * @secure
-     * @response `202` `TransactionIdentifier` Request for confirmation of remove payment event sent successfully.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
-     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
-     */
-    removePaymentEvent: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
-      this.request<TransactionIdentifier, ErrorMessages>({
-        path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns the requested invoice transactions.
-     *
-     * @tags Invoices
-     * @name GetInvoiceTransactions
-     * @summary Get an invoice transactions.
-     * @request GET:/invoices/{invoiceId}/transactions
-     * @secure
-     * @response `200` `InvoiceTransactions` The invoice transactions was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Invoice or invoice transactions not found.
-     */
-    getInvoiceTransactions: (invoiceId: number, params: RequestParams = {}) =>
-      this.request<InvoiceTransactions, ErrorMessages>({
-        path: `/invoices/${invoiceId}/transactions`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Supports purchase, travel and expense invoices. Configure invoice circulation settings in the Procountor environment before using this.
-     *
-     * @tags Invoices
-     * @name VerifyInvoice
-     * @summary Verify an invoice.
-     * @request PUT:/invoices/{invoiceId}/verify
-     * @secure
-     * @response `200` `InfoMessage` The invoice was successfully verified.
-     * @response `403` `ErrorMessages` Insufficient user rights or invalid invoice status.
-     * @response `404` `ErrorMessages` Invoice not found.
-     */
-    verifyInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/verify`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Returns payment events for the requested invoice.
      *
      * @tags Invoices
@@ -10186,30 +10231,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Mark payment events as paid. Supported invoice types: SALES_INVOICE, PURCHASE_INVOICE, TRAVEL_INVOICE, SALARY, PERIODIC_TAX_RETURN, BILL_OF_CHARGES. Payment event should always be requested with an invoice currency. In case if currency on the invoice and in the environment are different, amount is converted to environment currency using currency rate from the invoice.
-     *
-     * @tags Invoices
-     * @name MarkInvoiceAsPaid
-     * @summary Mark as paid.
-     * @request PUT:/invoices/{invoiceId}/paymentevents/markpaid
-     * @secure
-     * @response `200` `PaymentEvent` Request to mark invoice as paid processed correctly.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or invoice in wrong status.
-     * @response `404` `ErrorMessages` Invoice not found.
-     */
-    markInvoiceAsPaid: (invoiceId: number, data: MarkInvoiceAsPaid, params: RequestParams = {}) =>
-      this.request<PaymentEvent, ErrorMessages>({
-        path: `/invoices/${invoiceId}/paymentevents/markpaid`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Supports sales invoices. Only invoices with status as 'NOT_SENT' and 'SENT' can be send.
      *
      * @tags Invoices
@@ -10232,21 +10253,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Invoice can be set as unfinished only if it's fiscal year and it's accounting period are open. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
+     * @description Supports travel, expense and purchase invoices. Invoice circulation needs to be configured and enabled in Procountor settings. For travel and expanse invoices it marks invoice status as 'RECEIVED' when it is in 'UNFINISHED' status.
      *
      * @tags Invoices
-     * @name MarkInvoiceAsUnfinished
-     * @summary Set specified invoice to unfinished state.
-     * @request PUT:/invoices/{invoiceId}/unfinished
+     * @name SendToCirculation
+     * @summary Send an invoice to circulation.
+     * @request PUT:/invoices/{invoiceId}/sendToCirculation
      * @secure
-     * @response `200` `InfoMessage` The invoice was successfully marked as unfinished.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or invoice in closed fiscal year.
-     * @response `404` `ErrorMessages` Invoice not found.
+     * @response `200` `InfoMessage` The invoice was successfully send to circulation.
+     * @response `403` `ErrorMessages` Insufficient user rights, invalid invoice status or empty list of approvers when invoice circulation is enabled.
+     * @response `404` `ErrorMessages` Invoice not found or the user has no rights to view invoices.
      */
-    markInvoiceAsUnfinished: (invoiceId: number, params: RequestParams = {}) =>
+    sendToCirculation: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/unfinished`,
+        path: `/invoices/${invoiceId}/sendToCirculation`,
         method: "PUT",
         secure: true,
         format: "json",
@@ -10254,42 +10274,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Invoice can be set as invalidated only if it's fiscal year and it's accounting period are open. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
+     * @description Supports purchase, travel and expense invoices. Configure invoice circulation settings in the Procountor environment before using this.
      *
      * @tags Invoices
-     * @name MarkInvoiceAsInvalidated
-     * @summary Set specified invoice to invalidated state.
-     * @request PUT:/invoices/{invoiceId}/invalidate
+     * @name VerifyInvoice
+     * @summary Verify an invoice.
+     * @request PUT:/invoices/{invoiceId}/verify
      * @secure
-     * @response `200` `InfoMessage` The invoice was successfully marked as invalidated.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or invoice in closed fiscal year.
+     * @response `200` `InfoMessage` The invoice was successfully verified.
+     * @response `403` `ErrorMessages` Insufficient user rights or invalid invoice status.
      * @response `404` `ErrorMessages` Invoice not found.
      */
-    markInvoiceAsInvalidated: (invoiceId: number, params: RequestParams = {}) =>
+    verifyInvoice: (invoiceId: number, data: CheckingEventDTO, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/invalidate`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description The notes of an invoice can be modified regardless of the invoice status. Supported invoice types: BILL_OF_CHARGES, PURCHASE_INVOICE, SALES_INVOICE, TRAVEL_INVOICE.
-     *
-     * @tags Invoices
-     * @name AddNotesToInvoice
-     * @summary Update notes for the specified invoice.
-     * @request PUT:/invoices/{invoiceId}/notes
-     * @secure
-     * @response `200` `InfoMessage` The invoice notes were successfully updated.
-     * @response `400` `ErrorMessages` Request contains invalid data or invoice type not supported.
-     * @response `404` `ErrorMessages` Invoice not found or insufficient user rights.
-     */
-    addNotesToInvoice: (invoiceId: number, data: InvoiceNotes, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/notes`,
+        path: `/invoices/${invoiceId}/verify`,
         method: "PUT",
         body: data,
         secure: true,
@@ -10299,6 +10297,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
   };
   ledgerreceipts = {
+    /**
+     * @description Receipt can be set as approved only if it's status is UNFINISHED. Supported receipt types: JOURNAL.
+     *
+     * @tags Ledger receipts
+     * @name ApproveInvoice1
+     * @summary Approve a ledger receipt.
+     * @request PUT:/ledgerreceipts/{receiptId}/approve
+     * @secure
+     * @response `200` `InfoMessage` The receipt was successfully marked as approved.
+     * @response `403` `ErrorMessages` Insufficient user rights or invalid receipt status.
+     * @response `404` `ErrorMessages` Receipt not found.
+     */
+    approveInvoice1: (receiptId: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/ledgerreceipts/${receiptId}/approve`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * @description Returns the requested ledger receipt. Also accepts multiple comma-separated ids. Max 200 ids per request.Supported ledger receipt types are journals, sales invoice ledger receipts, travel invoice ledger receipts, expense invoice ledger receipts, purchase ledger invoice receipts, VAT form ledger receipts, salary ledger receipts, employer contribution ledger receipts, purchase order ledger receipts, sales order ledger receipts, bank statement as a receipt ledger receipts, receipt for opening the accounts ledger receipts, reference payment ledger receipts, tracking period opening receipt ledger receipts, self-assessed tax ledger receipts and VAT summary ledger receipts.
      *
@@ -10347,6 +10366,50 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Receipt can be invalidated only if it's fiscal year and it's accounting period are open. Supported receipt types: JOURNAL.
+     *
+     * @tags Ledger receipts
+     * @name MarkLedgerReceiptAsInvalidated
+     * @summary Invalidate specified receipt
+     * @request PUT:/ledgerreceipts/{receiptId}/invalidate
+     * @secure
+     * @response `200` `InfoMessage` The receipt was successfully invalidated.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or receipt in closed fiscal year.
+     * @response `404` `ErrorMessages` Receipt not found.
+     */
+    markLedgerReceiptAsInvalidated: (receiptId: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/ledgerreceipts/${receiptId}/invalidate`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Receipt can be set as unfinished only if it's fiscal year and it's accounting period are open. Supported receipt types: JOURNAL.
+     *
+     * @tags Ledger receipts
+     * @name MarkLedgerReceiptAsUnfinished
+     * @summary Set specified receipt to unfinished state.
+     * @request PUT:/ledgerreceipts/{receiptId}/unfinished
+     * @secure
+     * @response `200` `InfoMessage` The receipt was successfully marked as unfinished.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights or receipt in closed fiscal year.
+     * @response `404` `ErrorMessages` Receipt not found.
+     */
+    markLedgerReceiptAsUnfinished: (receiptId: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/ledgerreceipts/${receiptId}/unfinished`,
+        method: "PUT",
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -10514,89 +10577,49 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-
-    /**
-     * @description Receipt can be set as unfinished only if it's fiscal year and it's accounting period are open. Supported receipt types: JOURNAL.
-     *
-     * @tags Ledger receipts
-     * @name MarkLedgerReceiptAsUnfinished
-     * @summary Set specified receipt to unfinished state.
-     * @request PUT:/ledgerreceipts/{receiptId}/unfinished
-     * @secure
-     * @response `200` `InfoMessage` The receipt was successfully marked as unfinished.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or receipt in closed fiscal year.
-     * @response `404` `ErrorMessages` Receipt not found.
-     */
-    markLedgerReceiptAsUnfinished: (receiptId: number, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/ledgerreceipts/${receiptId}/unfinished`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Receipt can be invalidated only if it's fiscal year and it's accounting period are open. Supported receipt types: JOURNAL.
-     *
-     * @tags Ledger receipts
-     * @name MarkLedgerReceiptAsInvalidated
-     * @summary Invalidate specified receipt
-     * @request PUT:/ledgerreceipts/{receiptId}/invalidate
-     * @secure
-     * @response `200` `InfoMessage` The receipt was successfully invalidated.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights or receipt in closed fiscal year.
-     * @response `404` `ErrorMessages` Receipt not found.
-     */
-    markLedgerReceiptAsInvalidated: (receiptId: number, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/ledgerreceipts/${receiptId}/invalidate`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Receipt can be set as approved only if it's status is UNFINISHED. Supported receipt types: JOURNAL.
-     *
-     * @tags Ledger receipts
-     * @name ApproveInvoice1
-     * @summary Approve a ledger receipt.
-     * @request PUT:/ledgerreceipts/{receiptId}/approve
-     * @secure
-     * @response `200` `InfoMessage` The receipt was successfully marked as approved.
-     * @response `403` `ErrorMessages` Insufficient user rights or invalid receipt status.
-     * @response `404` `ErrorMessages` Receipt not found.
-     */
-    approveInvoice1: (receiptId: number, params: RequestParams = {}) =>
-      this.request<InfoMessage, ErrorMessages>({
-        path: `/ledgerreceipts/${receiptId}/approve`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
   };
   payments = {
     /**
-     * @description Getting direct salary payments by given payment list id.
+     * @description Canceling direct salary payments are possible only if all payments can be canceled.
      *
      * @tags Payments
-     * @name GetDirectSalaryPaymentsByPaymentListId
-     * @summary Get direct salary payments by payment list id
-     * @request GET:/payments/directsalarypayments/{paymentlistId}
+     * @name CancelDirectSalaryPayments
+     * @summary Cancel direct salary payments. Supports only Finnish environments.
+     * @request PUT:/payments/directsalarypayments/{paymentlistId}/cancel
      * @secure
-     * @response `200` `PaymentGroup` Direct salary payments list with specified payment list id returned successfully.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Direct salary payments list with given payment list id not found.
+     * @response `202` `TransactionIdentifier` Request for canceling direct salary payments sent successfully and transaction identifier returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or payments are already being processed.
+     * @response `404` `ErrorMessages` Payment list with given id not found.
      */
-    getDirectSalaryPaymentsByPaymentListId: (paymentlistId: number, params: RequestParams = {}) =>
-      this.request<PaymentGroup, ErrorMessages>({
-        path: `/payments/directsalarypayments/${paymentlistId}`,
-        method: "GET",
+    cancelDirectSalaryPayments: (paymentlistId: number, params: RequestParams = {}) =>
+      this.request<TransactionIdentifier, ErrorMessages>({
+        path: `/payments/directsalarypayments/${paymentlistId}/cancel`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Confirm to make an action related to the given identifier.
+     *
+     * @tags Payments
+     * @name Confirm1
+     * @summary Confirmation of action with the given identifier. Supports only Finnish environments.
+     * @request PUT:/payments/directsalarypayments/{transactionIdentifier}/confirm
+     * @secure
+     * @response `200` `DirectSalaryPaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct salary payments</b> (POST /payments/directsalarypayments):   <b>PaymentGroup</b> <br><b>2. For canceling a payment</b> (PUT /payments/directsalarypayments/{paymentlistId}/cancel):   <b>InfoMessage</b>
+     * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
+     * @response `403` `ErrorMessages` Transaction not belong to the user, insufficient payment user rights or payment in a wrong status.
+     * @response `404` `ErrorMessages` Element not found or request contains invalid data.
+     * @response `406` `ErrorMessages` Transaction rejected.
+     * @response `408` `ErrorMessages` Transaction expired.
+     * @response `409` `ErrorMessages` Transaction already processed.
+     */
+    confirm1: (transactionIdentifier: string, params: RequestParams = {}) =>
+      this.request<DirectSalaryPaymentsConfirmationResponseModels, ErrorMessages>({
+        path: `/payments/directsalarypayments/${transactionIdentifier}/confirm`,
+        method: "PUT",
         secure: true,
         format: "json",
         ...params,
@@ -10607,7 +10630,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Payments
      * @name SearchSalaryPaymentGroups
-     * @summary Get salary payment transactions.
+     * @summary Get salary payment transactions. Supports only Finnish environments.
      * @request GET:/payments/directsalarypayments
      * @secure
      * @response `200` `PaymentGroupSearchResult` The salary payment transactions were successfully returned.
@@ -10681,7 +10704,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      *
      * @tags Payments
      * @name CreateDirectSalaryPayments
-     * @summary Create direct salary payments.
+     * @summary Create direct salary payments. Supports only Finnish environments.
      * @request POST:/payments/directsalarypayments
      * @secure
      * @response `202` `TransactionIdentifier` Request for creating direct salary payments sent successfully and transaction identifier returned.
@@ -10701,20 +10724,41 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Canceling direct salary payments are possible only if all payments can be canceled.
+     * @description Getting direct salary payments by given payment list id.
      *
      * @tags Payments
-     * @name CancelDirectSalaryPayments
-     * @summary Cancel direct salary payments.
-     * @request PUT:/payments/directsalarypayments/{paymentlistId}/cancel
+     * @name GetDirectSalaryPaymentsByPaymentListId
+     * @summary Get direct salary payments by payment list id. Supports only Finnish environments.
+     * @request GET:/payments/directsalarypayments/{paymentlistId}
      * @secure
-     * @response `202` `TransactionIdentifier` Request for canceling direct salary payments sent successfully and transaction identifier returned.
-     * @response `403` `ErrorMessages` Insufficient user rights or payments are already being processed.
-     * @response `404` `ErrorMessages` Payment list with given id not found.
+     * @response `200` `PaymentGroup` Direct salary payments list with specified payment list id returned successfully.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Direct salary payments list with given payment list id not found.
      */
-    cancelDirectSalaryPayments: (paymentlistId: number, params: RequestParams = {}) =>
+    getDirectSalaryPaymentsByPaymentListId: (paymentlistId: number, params: RequestParams = {}) =>
+      this.request<PaymentGroup, ErrorMessages>({
+        path: `/payments/directsalarypayments/${paymentlistId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Cancel a payment which is ready to be paid but not paid yet. Salary payment method is not supported.
+     *
+     * @tags Payments
+     * @name CancelPayment
+     * @summary Cancel a payment.
+     * @request PUT:/payments/{paymentId}/cancel
+     * @secure
+     * @response `202` `TransactionIdentifier` Request for confirmation of cancel payment sent successfully and transaction identifier returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
+     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
+     */
+    cancelPayment: (paymentId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
-        path: `/payments/directsalarypayments/${paymentlistId}/cancel`,
+        path: `/payments/${paymentId}/cancel`,
         method: "PUT",
         secure: true,
         format: "json",
@@ -10725,22 +10769,162 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description Confirm to make an action related to the given identifier.
      *
      * @tags Payments
-     * @name Confirm1
+     * @name Confirm2
      * @summary Confirmation of action with the given identifier.
-     * @request PUT:/payments/directsalarypayments/{transactionIdentifier}/confirm
+     * @request PUT:/payments/{transactionIdentifier}/confirm
      * @secure
-     * @response `200` `DirectSalaryPaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct salary payments</b> (POST /payments/directsalarypayments):   <b>PaymentGroup</b> <br><b>2. For canceling a payment</b> (PUT /payments/directsalarypayments/{paymentlistId}/cancel):   <b>InfoMessage</b>
+     * @response `200` `PaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct bank transfers</b> (POST /payments/directbanktransfers):   <b>PaymentSummaries</b> <br><b>2. For paying invoices</b> (POST /payments):   <b>InvoicePaymentSummaries</b> <br><b>3. For canceling a payment</b> (PUT /payments/{paymentId}/cancel):   <b>InfoMessage</b> <br><b>4. For deleting a payment</b> (DELETE /payments/{paymentId}):   <b>InfoMessage</b>
      * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
      * @response `403` `ErrorMessages` Transaction not belong to the user, insufficient payment user rights or payment in a wrong status.
      * @response `404` `ErrorMessages` Element not found or request contains invalid data.
-     * @response `406` `ErrorMessages` Transaction rejected.
-     * @response `408` `ErrorMessages` Transaction expired.
+     * @response `406` `ErrorMessages` Transaction rejected. End user rejected the transaction.
+     * @response `408` `ErrorMessages` Transaction expired. Expiration time: 5 minutes.
      * @response `409` `ErrorMessages` Transaction already processed.
      */
-    confirm1: (transactionIdentifier: string, params: RequestParams = {}) =>
-      this.request<DirectSalaryPaymentsConfirmationResponseModels, ErrorMessages>({
-        path: `/payments/directsalarypayments/${transactionIdentifier}/confirm`,
+    confirm2: (transactionIdentifier: string, params: RequestParams = {}) =>
+      this.request<PaymentsConfirmationResponseModels, ErrorMessages>({
+        path: `/payments/${transactionIdentifier}/confirm`,
         method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates direct bank transfers with given data.
+     *
+     * @tags Payments
+     * @name CreateDirectBankTransfers
+     * @summary Create direct bank transfers.
+     * @request POST:/payments/directbanktransfers
+     * @secure
+     * @response `202` `TransactionIdentifier` Request for creating direct bank transfers sent successfully and transaction identifier returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Some of required data not found.
+     */
+    createDirectBankTransfers: (data: DirectBankTransferList, params: RequestParams = {}) =>
+      this.request<TransactionIdentifier, ErrorMessages>({
+        path: `/payments/directbanktransfers`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns all payment error messages that match the request criteria.
+     *
+     * @tags Payments
+     * @name GetErrorMessages
+     * @summary Get error messages.
+     * @request GET:/payments/errormessages
+     * @secure
+     * @response `200` `PaymentErrorMessageSearchResult` The payment error messages were successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getErrorMessages: (
+      query?: {
+        /**
+         * Start date of the search (value date).
+         * @format date
+         * @example "2016-08-31"
+         */
+        createdStartDate?: string;
+        /**
+         * End date of the search (value date).
+         * @format date
+         * @example "2016-08-31"
+         */
+        createdEndDate?: string;
+        /**
+         * Type of error message.
+         * @example "PAYMENT_ERROR"
+         */
+        type?: "PAYMENT_ERROR" | "NETS_COLLECTION_ERROR";
+        /**
+         * Handling status of error message.
+         * @example "UNHANDLED"
+         */
+        status?: "ALL" | "UNHANDLED" | "HANDLED";
+        /**
+         * Previous error message ID for pagination.
+         * @format int64
+         * @example 123456
+         */
+        previousId?: number;
+        /**
+         * Order the results by message ID.
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int64
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int64
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<PaymentErrorMessageSearchResult, ErrorMessages>({
+        path: `/payments/errormessages`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a payment transaction with provided id that matches the request criteria.
+     *
+     * @tags Payments
+     * @name GetPaymentRowById
+     * @summary Get a payment transaction.
+     * @request GET:/payments/{paymentId}
+     * @secure
+     * @response `200` `PaymentRowInfo` The payment transaction was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Payment not found or user has insufficient rights.
+     */
+    getPaymentRowById: (paymentId: number, params: RequestParams = {}) =>
+      this.request<PaymentRowInfo, ErrorMessages>({
+        path: `/payments/${paymentId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Remove a payment which is not queued or paid.
+     *
+     * @tags Payments
+     * @name RemovePayment
+     * @summary Remove a payment.
+     * @request DELETE:/payments/{paymentId}
+     * @secure
+     * @response `202` `TransactionIdentifier` Request for confirmation of remove payment sent successfully and transaction identifier returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
+     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
+     */
+    removePayment: (paymentId: number, params: RequestParams = {}) =>
+      this.request<TransactionIdentifier, ErrorMessages>({
+        path: `/payments/${paymentId}`,
+        method: "DELETE",
         secure: true,
         format: "json",
         ...params,
@@ -10838,337 +11022,8 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-
-    /**
-     * @description Returns a payment transaction with provided id that matches the request criteria.
-     *
-     * @tags Payments
-     * @name GetPaymentRowById
-     * @summary Get a payment transaction.
-     * @request GET:/payments/{paymentId}
-     * @secure
-     * @response `200` `PaymentRowInfo` The payment transaction was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Payment not found or user has insufficient rights.
-     */
-    getPaymentRowById: (paymentId: number, params: RequestParams = {}) =>
-      this.request<PaymentRowInfo, ErrorMessages>({
-        path: `/payments/${paymentId}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Remove a payment which is not queued or paid.
-     *
-     * @tags Payments
-     * @name RemovePayment
-     * @summary Remove a payment.
-     * @request DELETE:/payments/{paymentId}
-     * @secure
-     * @response `202` `TransactionIdentifier` Request for confirmation of remove payment sent successfully and transaction identifier returned.
-     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
-     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
-     */
-    removePayment: (paymentId: number, params: RequestParams = {}) =>
-      this.request<TransactionIdentifier, ErrorMessages>({
-        path: `/payments/${paymentId}`,
-        method: "DELETE",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Returns all payment error messages that match the request criteria.
-     *
-     * @tags Payments
-     * @name GetErrorMessages
-     * @summary Get error messages.
-     * @request GET:/payments/errormessages
-     * @secure
-     * @response `200` `PaymentErrorMessageSearchResult` The payment error messages were successfully returned.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     */
-    getErrorMessages: (
-      query?: {
-        /**
-         * Start date of the search (value date).
-         * @format date
-         * @example "2016-08-31"
-         */
-        createdStartDate?: string;
-        /**
-         * End date of the search (value date).
-         * @format date
-         * @example "2016-08-31"
-         */
-        createdEndDate?: string;
-        /**
-         * Type of error message.
-         * @example "PAYMENT_ERROR"
-         */
-        type?: "PAYMENT_ERROR" | "NETS_COLLECTION_ERROR";
-        /**
-         * Handling status of error message.
-         * @example "UNHANDLED"
-         */
-        status?: "ALL" | "UNHANDLED" | "HANDLED";
-        /**
-         * Previous error message ID for pagination.
-         * @format int64
-         * @example 123456
-         */
-        previousId?: number;
-        /**
-         * Order the results by message ID.
-         * @example "ASC"
-         */
-        orderById?: "ASC" | "DESC";
-        /**
-         * Page size for the results. Maximum value: 200.
-         * @format int64
-         * @max 200
-         * @default 50
-         * @example 20
-         */
-        size?: number;
-        /**
-         * Page number for the results
-         * @format int64
-         * @default 0
-         * @example 2
-         */
-        page?: number;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<PaymentErrorMessageSearchResult, ErrorMessages>({
-        path: `/payments/errormessages`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Cancel a payment which is ready to be paid but not paid yet. Salary payment method is not supported.
-     *
-     * @tags Payments
-     * @name CancelPayment
-     * @summary Cancel a payment.
-     * @request PUT:/payments/{paymentId}/cancel
-     * @secure
-     * @response `202` `TransactionIdentifier` Request for confirmation of cancel payment sent successfully and transaction identifier returned.
-     * @response `403` `ErrorMessages` Insufficient user rights or payment in a wrong status.
-     * @response `404` `ErrorMessages` Payment not found or request contains invalid data.
-     */
-    cancelPayment: (paymentId: number, params: RequestParams = {}) =>
-      this.request<TransactionIdentifier, ErrorMessages>({
-        path: `/payments/${paymentId}/cancel`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Creates direct bank transfers with given data.
-     *
-     * @tags Payments
-     * @name CreateDirectBankTransfers
-     * @summary Create direct bank transfers.
-     * @request POST:/payments/directbanktransfers
-     * @secure
-     * @response `202` `TransactionIdentifier` Request for creating direct bank transfers sent successfully and transaction identifier returned.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Some of required data not found.
-     */
-    createDirectBankTransfers: (data: DirectBankTransferList, params: RequestParams = {}) =>
-      this.request<TransactionIdentifier, ErrorMessages>({
-        path: `/payments/directbanktransfers`,
-        method: "POST",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Confirm to make an action related to the given identifier.
-     *
-     * @tags Payments
-     * @name Confirm2
-     * @summary Confirmation of action with the given identifier.
-     * @request PUT:/payments/{transactionIdentifier}/confirm
-     * @secure
-     * @response `200` `PaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct bank transfers</b> (POST /payments/directbanktransfers):   <b>PaymentSummaries</b> <br><b>2. For paying invoices</b> (POST /payments):   <b>InvoicePaymentSummaries</b> <br><b>3. For canceling a payment</b> (PUT /payments/{paymentId}/cancel):   <b>InfoMessage</b> <br><b>4. For deleting a payment</b> (DELETE /payments/{paymentId}):   <b>InfoMessage</b>
-     * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
-     * @response `403` `ErrorMessages` Transaction not belong to the user, insufficient payment user rights or payment in a wrong status.
-     * @response `404` `ErrorMessages` Element not found or request contains invalid data.
-     * @response `406` `ErrorMessages` Transaction rejected. End user rejected the transaction.
-     * @response `408` `ErrorMessages` Transaction expired. Expiration time: 5 minutes.
-     * @response `409` `ErrorMessages` Transaction already processed.
-     */
-    confirm2: (transactionIdentifier: string, params: RequestParams = {}) =>
-      this.request<PaymentsConfirmationResponseModels, ErrorMessages>({
-        path: `/payments/${transactionIdentifier}/confirm`,
-        method: "PUT",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
   };
   products = {
-    /**
-     * @description Returns the requested product by its id.
-     *
-     * @tags Products
-     * @name GetProduct
-     * @summary Get a product.
-     * @request GET:/products/{productId}
-     * @secure
-     * @response `200` `Product` The product was successfully returned.
-     * @response `404` `ErrorMessages` Product not found.
-     */
-    getProduct: (
-      productId: number,
-      query?: {
-        /**
-         * Include localized product names.
-         * @default false
-         * @example true
-         */
-        includeLocalizations?: boolean;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Product, ErrorMessages>({
-        path: `/products/${productId}`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Updates a product and returns it.
-     *
-     * @tags Products
-     * @name UpdateProduct
-     * @summary Update a product.
-     * @request PUT:/products/{productId}
-     * @secure
-     * @response `200` `Product` The product was successfully updated.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Product not found.
-     */
-    updateProduct: (productId: number, data: Product, params: RequestParams = {}) =>
-      this.request<Product, ErrorMessages>({
-        path: `/products/${productId}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Remove a product by given id and returns status code 204.
-     *
-     * @tags Products
-     * @name RemoveProductById
-     * @summary Remove a product.
-     * @request DELETE:/products/{productId}
-     * @secure
-     * @response `204` `void` The product was successfully removed.
-     * @response `400` `ErrorMessages` The product with product type TRAVEL cannot be removed.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Product not found.
-     */
-    removeProductById: (productId: number, params: RequestParams = {}) =>
-      this.request<void, ErrorMessages>({
-        path: `/products/${productId}`,
-        method: "DELETE",
-        secure: true,
-        ...params,
-      }),
-
-    /**
-     * @description Returns the requested product group by its id.
-     *
-     * @tags Products
-     * @name GetProductGroupByGroupId
-     * @summary Getting product group.
-     * @request GET:/products/groups/{groupId}
-     * @secure
-     * @response `200` `ProductGroup` The product group was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Product group not found.
-     */
-    getProductGroupByGroupId: (groupId: number, params: RequestParams = {}) =>
-      this.request<ProductGroup, ErrorMessages>({
-        path: `/products/groups/${groupId}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Updates a product group name and returns it.
-     *
-     * @tags Products
-     * @name UpdateProductGroupName
-     * @summary Update a product group name.
-     * @request PUT:/products/groups/{groupId}
-     * @secure
-     * @response `200` `ProductGroup` The product group name was successfully updated.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Product group not found.
-     */
-    updateProductGroupName: (groupId: number, data: ProductGroup, params: RequestParams = {}) =>
-      this.request<ProductGroup, ErrorMessages>({
-        path: `/products/groups/${groupId}`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description Remove a product group (except product group with TRAVEL type) by given id and returns status code 204.
-     *
-     * @tags Products
-     * @name RemoveProductGroupById
-     * @summary Remove a product group.
-     * @request DELETE:/products/groups/{groupId}
-     * @secure
-     * @response `204` `void` The product group was successfully removed.
-     * @response `400` `ErrorMessages` The product group with product type TRAVEL cannot be removed.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Product group not found.
-     * @response `409` `ErrorMessages` The product group cannot be removed, because it contains related products. Error message alsowill return list of product identifiers that are linked to product group.
-     */
-    removeProductGroupById: (groupId: number, params: RequestParams = {}) =>
-      this.request<void, ErrorMessages>({
-        path: `/products/groups/${groupId}`,
-        method: "DELETE",
-        secure: true,
-        ...params,
-      }),
-
     /**
      * @description Returns a paginated list of products in the current environment, starting from "previousId" limited by "size". with a metadata about the pagination.
      *
@@ -11183,6 +11038,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getProducts: (
       query?: {
         /**
+         * Name of product matched by substring.
+         * @example "product"
+         */
+        name?: string;
+        /**
          * Previous Id for pagination
          * @format int64
          * @default 0
@@ -11190,7 +11050,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         previousId?: number;
         /**
-         * Maximum number of results. Defaults to 50.
+         * Page size for the results. Maximum value: 200.
          * @format int64
          * @max 200
          * @default 50
@@ -11329,71 +11189,33 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         format: "json",
         ...params,
       }),
-  };
-  referencepayments = {
+
     /**
-     * @description Returns all reference payments that match the request criteria.
+     * @description Returns the requested product by its id. Also accepts multiple comma-separated ids. Max 200 ids per request.
      *
-     * @tags Reference payments
-     * @name GetReferencePayments
-     * @summary Get reference payments.
-     * @request GET:/referencepayments
+     * @tags Products
+     * @name GetProduct
+     * @summary Get a product.
+     * @request GET:/products/{productId}
      * @secure
-     * @response `200` `ReferencePaymentsSearchResult` The reference payments were successfully returned
+     * @response `200` `Product` The product was successfully returned.
      * @response `400` `ErrorMessages` Request contains invalid data
-     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights
+     * @response `404` `ErrorMessages` Product not found.
      */
-    getReferencePayments: (
+    getProduct: (
+      productId: number,
       query?: {
         /**
-         * The bank account number to use when searching for related reference payments
-         * @example "FI1234567890123456"
+         * Include localized product names.
+         * @default false
+         * @example true
          */
-        accountNumber?: string;
-        /**
-         * Start date of the search (value date)
-         * @format date
-         * @example "2016-08-31"
-         */
-        startDate?: string;
-        /**
-         * End date of the search (value date)
-         * @format date
-         * @example "2016-12-31"
-         */
-        endDate?: string;
-        /**
-         * Previous id for pagination
-         * @format int64
-         * @example 123456
-         */
-        previousId?: number;
-        /**
-         * Order the results by ID
-         * @default "DESC"
-         * @example "ASC"
-         */
-        orderById?: "ASC" | "DESC";
-        /**
-         * Page size for the results. Maximum value: 200.
-         * @format int64
-         * @max 200
-         * @default 50
-         * @example 20
-         */
-        size?: number;
-        /**
-         * Page number for the results
-         * @format int64
-         * @default 0
-         * @example 2
-         */
-        page?: number;
+        includeLocalizations?: boolean;
       },
       params: RequestParams = {},
     ) =>
-      this.request<ReferencePaymentsSearchResult, ErrorMessages>({
-        path: `/referencepayments`,
+      this.request<Product, ErrorMessages>({
+        path: `/products/${productId}`,
         method: "GET",
         query: query,
         secure: true,
@@ -11401,6 +11223,118 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
 
+    /**
+     * @description Updates a product and returns it.
+     *
+     * @tags Products
+     * @name UpdateProduct
+     * @summary Update a product.
+     * @request PUT:/products/{productId}
+     * @secure
+     * @response `200` `Product` The product was successfully updated.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Product not found.
+     */
+    updateProduct: (productId: number, data: Product, params: RequestParams = {}) =>
+      this.request<Product, ErrorMessages>({
+        path: `/products/${productId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Remove a product by given id and returns status code 204.
+     *
+     * @tags Products
+     * @name RemoveProductById
+     * @summary Remove a product.
+     * @request DELETE:/products/{productId}
+     * @secure
+     * @response `204` `void` The product was successfully removed.
+     * @response `400` `ErrorMessages` The product with product type TRAVEL cannot be removed.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Product not found.
+     */
+    removeProductById: (productId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/products/${productId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns the requested product group by its id.
+     *
+     * @tags Products
+     * @name GetProductGroupByGroupId
+     * @summary Getting product group.
+     * @request GET:/products/groups/{groupId}
+     * @secure
+     * @response `200` `ProductGroup` The product group was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Product group not found.
+     */
+    getProductGroupByGroupId: (groupId: number, params: RequestParams = {}) =>
+      this.request<ProductGroup, ErrorMessages>({
+        path: `/products/groups/${groupId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates a product group name and returns it.
+     *
+     * @tags Products
+     * @name UpdateProductGroupName
+     * @summary Update a product group name.
+     * @request PUT:/products/groups/{groupId}
+     * @secure
+     * @response `200` `ProductGroup` The product group name was successfully updated.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Product group not found.
+     */
+    updateProductGroupName: (groupId: number, data: ProductGroup, params: RequestParams = {}) =>
+      this.request<ProductGroup, ErrorMessages>({
+        path: `/products/groups/${groupId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Remove a product group (except product group with TRAVEL type) by given id and returns status code 204.
+     *
+     * @tags Products
+     * @name RemoveProductGroupById
+     * @summary Remove a product group.
+     * @request DELETE:/products/groups/{groupId}
+     * @secure
+     * @response `204` `void` The product group was successfully removed.
+     * @response `400` `ErrorMessages` The product group with product type TRAVEL cannot be removed.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Product group not found.
+     * @response `409` `ErrorMessages` The product group cannot be removed, because it contains related products. Error message alsowill return list of product identifiers that are linked to product group.
+     */
+    removeProductGroupById: (groupId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/products/groups/${groupId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+  };
+  referencepayments = {
     /**
      * No description
      *
@@ -11442,6 +11376,76 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/referencepayments/${referencePaymentId}/metadata`,
         method: "DELETE",
         secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns all reference payments that match the request criteria. This endpoint supports accountNumber parameter in HTTP header.
+     *
+     * @tags Reference payments
+     * @name GetReferencePayments
+     * @summary Get reference payments.
+     * @request GET:/referencepayments
+     * @secure
+     * @response `200` `ReferencePaymentsSearchResult` The reference payments were successfully returned
+     * @response `400` `ErrorMessages` Request contains invalid data
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights
+     */
+    getReferencePayments: (
+      query?: {
+        /**
+         * Start date of the search (value date)
+         * @format date
+         * @example "2016-08-31"
+         */
+        startDate?: string;
+        /**
+         * End date of the search (value date)
+         * @format date
+         * @example "2016-12-31"
+         */
+        endDate?: string;
+        /**
+         * Previous id for pagination
+         * @format int64
+         * @example 123456
+         */
+        previousId?: number;
+        /**
+         * Order the results by ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int64
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int64
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * The bank account number to use when searching for related reference payments.
+         * @example "FI1234567890123456"
+         */
+        accountNumber?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<ReferencePaymentsSearchResult, ErrorMessages>({
+        path: `/referencepayments`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
         ...params,
       }),
   };
@@ -11582,26 +11586,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns a user profile based on the given user ID. Same company users only.
-     *
-     * @tags Users
-     * @name GetUserProfile
-     * @summary Get a user profile.
-     * @request GET:/users/profiles/{userid}
-     * @secure
-     * @response `200` `UserProfile` The user was successfully returned.
-     * @response `404` `ErrorMessages` User with given id not found.
-     */
-    getUserProfile: (userid: number, params: RequestParams = {}) =>
-      this.request<UserProfile, ErrorMessages>({
-        path: `/users/profiles/${userid}`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Returns details of the currently logged in user based on the Access token. Use this endpoint for obtaining the companyId of the current environment.
      *
      * @tags Users
@@ -11657,6 +11641,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrentUserRights: (params: RequestParams = {}) =>
       this.request<UserPrivileges, any>({
         path: `/users/rights`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a user profile based on the given user ID. Same company users only.
+     *
+     * @tags Users
+     * @name GetUserProfile
+     * @summary Get a user profile.
+     * @request GET:/users/profiles/{userid}
+     * @secure
+     * @response `200` `UserProfile` The user was successfully returned.
+     * @response `404` `ErrorMessages` User with given id not found.
+     */
+    getUserProfile: (userid: number, params: RequestParams = {}) =>
+      this.request<UserProfile, ErrorMessages>({
+        path: `/users/profiles/${userid}`,
         method: "GET",
         secure: true,
         format: "json",

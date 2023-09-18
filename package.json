@@ -1,13 +1,13 @@
 {
   "name": "@rantalainen/procountor-api-client",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsc --watch",
     "test": "nodemon test.js",
     "build": "tsc",
-    "openapi": "npx swagger-typescript-api -p https://api-test.procountor.com/api/openapi.json -o ./src -n api.ts -r --axios"
+    "openapi": "npx swagger-typescript-api -p https://pts-procountor.pubdev.azure.procountor.com/api/openapi.json -o ./src -n api.ts -r --axios"
   },
   "repository": {
     "type": "git",
