@@ -105,3 +105,6 @@ dist
 
 nodemon.json
 test.js
+test.ts
+output/
+input/

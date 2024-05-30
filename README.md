@@ -45,7 +45,3 @@ Available methods can be found in the [API documentation](https://procountor.com
 
 - Procountor: https://secure.procountor.com/procountor/com/
 - Procountor Developer Guide: https://dev.procountor.com/
-
-## Changelog
-
-- 1.0.0 First release

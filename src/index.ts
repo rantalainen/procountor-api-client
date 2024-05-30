@@ -7,6 +7,8 @@ import CacheableLookup from 'cacheable-lookup';
 import FormData from 'form-data';
 import { FileBuffer } from './file-buffer';
 
+export { FileBuffer };
+
 // DNS cache to prevent ENOTFOUND and other such issues
 const dnsCache = new CacheableLookup();
 let dnsCacheInstalled = false;
@@ -146,7 +148,7 @@ class ProcountorApiClientInstance extends Api<any> {
             contentType: formItem.type
           });
         } else {
-          formData.append(key, this.stringifyFormItem(formItem));
+          formData.append(key, this.stringifyFormItem(formItem), { contentType: 'application/json' });
         }
       }
 
