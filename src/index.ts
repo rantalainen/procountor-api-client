@@ -1,4 +1,4 @@
-import { Api, ApiConfig } from './api';
+import { Api, ApiConfig, Attachment } from './api';
 import axios, { AxiosRequestConfig } from 'axios';
 import { HttpsAgent } from 'agentkeepalive';
 import { IProcountorApiClientAccessToken, IProcountorApiClientConfig, IProcountorApiClientOptions } from './interfaces';
@@ -74,8 +74,22 @@ export class ProcountorApiClient {
     });
     this.api.setSecurityData(this);
 
-    // Install axios error handler
+    // Install Axios handlers
+    this.installQueryParamsHandler();
     this.installErrorHandler();
+  }
+
+  private installQueryParamsHandler() {
+    this.api.instance.interceptors.request.use((config) => {
+      // Check if there are params to be serialized
+      if (config.params) {
+        config.paramsSerializer = {
+          // Serialize params as a comma-separated list
+          serialize: (params: any) => new URLSearchParams(params).toString()
+        };
+      }
+      return config;
+    });
   }
 
   private installErrorHandler() {
@@ -155,4 +169,28 @@ class ProcountorApiClientInstance extends Api<any> {
       return formData;
     }, new FormData());
   }
+
+  helpers = {
+    /**
+     * @description Using this endpoint you can add an attachment. The attachment can be of any type but limited to max 10000000 bytes.
+     *
+     * @tags Attachments
+     * @name SaveAttachment
+     * @summary Add a new attachment.
+     * @request POST:/attachments
+     * @secure
+     * @response `200` `Attachment` Attachment was successfully added.
+     * @response `400` `ErrorMessages` File size too big.
+     */
+    saveAttachment: async (meta: Attachment, file: Buffer) => {
+      if (!meta.mimeType) {
+        throw new Error('Procountor error: Save attachment requires meta.mimeType');
+      }
+
+      return await this.attachments.saveAttachment({
+        meta,
+        file: new FileBuffer(file, meta.name, meta.mimeType) as unknown as File
+      });
+    }
+  };
 }
