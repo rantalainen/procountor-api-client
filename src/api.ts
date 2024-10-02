@@ -2062,60 +2062,6 @@ export interface BusinessPartnerDefaultAccounts {
   journalAccounts?: BusinessPartnerAccountsInfo;
 }
 
-export interface BusinessPartnerDefaultDimension {
-  /**
-   * Unique identifier for the dimension.
-   * @format int32
-   */
-  id?: number;
-  /** Name of the dimension. */
-  name?: string;
-  /** Dimension items connected with dimension. */
-  items?: BusinessPartnerDefaultDimensionItem[];
-}
-
-export interface BusinessPartnerDefaultDimensionExtended {
-  /**
-   * Unique identifier for the dimension.
-   * @format int32
-   */
-  id?: number;
-  /** Name of the dimension. */
-  name?: string;
-  /** Dimension items connected with dimension. */
-  items?: BusinessPartnerDefaultDimensionItemExtended[];
-}
-
-/** Dimension items connected with dimension. */
-export interface BusinessPartnerDefaultDimensionItem {
-  /**
-   * Unique identifier for the dimension item.
-   * @format int32
-   */
-  id?: number;
-  /** Code name of the dimension item. */
-  codeName: string;
-  /** Percentage value of the dimension item. */
-  percent: number;
-}
-
-/** Dimension items connected with dimension. */
-export interface BusinessPartnerDefaultDimensionItemExtended {
-  /**
-   * Unique identifier for the dimension item.
-   * @format int32
-   */
-  id?: number;
-  /** Code name of the dimension item. */
-  codeName: string;
-  /** Percentage value of the dimension item. */
-  percent: number;
-  /** Status of the dimension item. */
-  status?: boolean;
-  /** Description of the dimension item. */
-  description?: string;
-}
-
 /** Delivery address of the partner. */
 export interface BusinessPartnerDeliveryAddress {
   /**
@@ -4849,6 +4795,60 @@ export interface CurrencyRate {
 
 /** Data model for which constraint violations occurred. */
 export type DataModel = object;
+
+export interface DefaultDimension {
+  /**
+   * Unique identifier for the dimension.
+   * @format int32
+   */
+  id?: number;
+  /** Name of the dimension. */
+  name?: string;
+  /** Dimension items connected with dimension. */
+  items?: DefaultDimensionItem[];
+}
+
+export interface DefaultDimensionBasicData {
+  /**
+   * Unique identifier for the dimension.
+   * @format int32
+   */
+  id?: number;
+  /** Name of the dimension. */
+  name?: string;
+  /** Dimension items connected with dimension. */
+  items?: DefaultDimensionItemBasicData[];
+}
+
+/** Dimension items connected with dimension. */
+export interface DefaultDimensionItem {
+  /**
+   * Unique identifier for the dimension item.
+   * @format int32
+   */
+  id?: number;
+  /** Code name of the dimension item. */
+  codeName: string;
+  /** Percentage value of the dimension item. */
+  percent: number;
+  /** Status of the dimension item. */
+  status?: boolean;
+  /** Description of the dimension item. */
+  description?: string;
+}
+
+/** Dimension items connected with dimension. */
+export interface DefaultDimensionItemBasicData {
+  /**
+   * Unique identifier for the dimension item.
+   * @format int32
+   */
+  id?: number;
+  /** Code name of the dimension item. */
+  codeName: string;
+  /** Percentage value of the dimension item. */
+  percent: number;
+}
 
 export interface DefaultProduct {
   /**
@@ -7911,13 +7911,13 @@ export interface InvoiceRow {
    */
   endDate?: string;
   /**
-   * Header text of the content row associated with invoice row
+   * Header text of the content row associated with invoice row. Supported in sales offer, sales order and sales invoice.
    * @minLength 0
    * @maxLength 512
    */
   headerText?: string;
   /**
-   * Explanation text of the content row associated with invoice row
+   * Explanation text of the content row associated with invoice row. Supported in sales offer, sales order and sales invoice.
    * @minLength 0
    * @maxLength 512
    */
@@ -14559,10 +14559,7 @@ export interface Webhook {
   authenticationType: "HMAC" | "NONE";
   /** Webhook's authentication meta. */
   authenticationMeta?: Record<string, object>;
-  /**
-   * Collection of subscribed event types.
-   * @uniqueItems true
-   */
+  /** Collection of subscribed event types. */
   subscriptions: (
     | "DIRECTBANKDATATRANSFER_PAYMENT_CREATED"
     | "DIRECT_SALARY_PAYMENTS_CANCELED"
@@ -15466,6 +15463,51 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description Returns default dimension for the given person and dimension ids.
+     *
+     * @tags Persons
+     * @name GetPersonDefaultDimensionById
+     * @summary Get a default dimension of a person.
+     * @request GET:/persons/{id}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `DefaultDimension` The person default dimension was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No person found for given person id or no dimension found for given person and dimension id.
+     */
+    getPersonDefaultDimensionById: (id: number, dimensionId: number, params: RequestParams = {}) =>
+      this.request<DefaultDimension, ErrorMessages>({
+        path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates default dimension for a person with the given person and dimension ids.
+     *
+     * @tags Persons
+     * @name UpdateDefaultDimension
+     * @summary Update default dimension of a person.
+     * @request PUT:/persons/{id}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `DefaultDimension` The person default dimension was successfully updated.
+     * @response `400` `ErrorMessages` Default dimension contains invalid data.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No person found for given person id or no dimension found for given person and dimension id.
+     */
+    updateDefaultDimension: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
+      this.request<DefaultDimension, ErrorMessages>({
+        path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Returns the list of persons with basic information: id, name (combined as lastname, firstname), address, identifier, identifierType and personNumber.
      *
      * @tags Persons
@@ -15556,6 +15598,48 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default products for the given person id.
+     *
+     * @tags Persons
+     * @name GetPersonDefaultProducts
+     * @summary Get a default products of a person.
+     * @request GET:/persons/{id}/defaults/products
+     * @secure
+     * @response `200` `(DefaultProduct)[]` The person default products were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No person found for given person id.
+     */
+    getPersonDefaultProducts: (id: number, params: RequestParams = {}) =>
+      this.request<DefaultProduct[], ErrorMessages>({
+        path: `/persons/${id}/defaults/products`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default dimensions for the given person id
+     *
+     * @tags Persons
+     * @name GetPersonDefaultDimensionsByPersonId
+     * @summary Get a default dimensions of a person
+     * @request GET:/persons/{id}/defaults/dimensions
+     * @secure
+     * @response `200` `(DefaultDimensionBasicData)[]` The person default dimensions were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No person found for given person id.
+     */
+    getPersonDefaultDimensionsByPersonId: (id: number, params: RequestParams = {}) =>
+      this.request<DefaultDimensionBasicData[], ErrorMessages>({
+        path: `/persons/${id}/defaults/dimensions`,
+        method: "GET",
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -15890,7 +15974,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Remove a payment which is not queued or paid.
+     * @description Remove a payment which is not queued or paid. Supports only invoice payment.
      *
      * @tags Payments
      * @name RemovePayment
@@ -16545,20 +16629,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Indicates the invoice comment has been read by the tagged user. Supported invoice types are TRAVEL_INVOICE, BILL_OF_CHARGES and PURCHASE_INVOICE.
+     * @description Sets the invoice comment as read by current user. Supported invoice types are TRAVEL_INVOICE, BILL_OF_CHARGES and PURCHASE_INVOICE.
      *
      * @tags Invoices
      * @name SetCommentReadByUser
      * @summary Marks comment as read.
-     * @request PUT:/invoices/{invoiceId}/comments/{commentId}/{userTagId}/read
+     * @request PUT:/invoices/{invoiceId}/comments/{commentId}/read
      * @secure
-     * @response `200` `InfoMessage` Taggable users were successfully returned.
-     * @response `400` `ErrorMessages` Comment already read.
-     * @response `404` `ErrorMessages` Invoice, comment or user tag could not be found.
+     * @response `200` `InfoMessage` Comment marked as read.
+     * @response `400` `ErrorMessages` Only tagged user can mark comment as read.
+     * @response `404` `ErrorMessages` Comment not found for invoice.
      */
-    setCommentReadByUser: (invoiceId: number, commentId: number, userTagId: number, params: RequestParams = {}) =>
+    setCommentReadByUser: (invoiceId: number, commentId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
-        path: `/invoices/${invoiceId}/comments/${commentId}/${userTagId}/read`,
+        path: `/invoices/${invoiceId}/comments/${commentId}/read`,
         method: "PUT",
         secure: true,
         format: "json",
@@ -17153,10 +17237,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      * @response `200` `(Dimension)[]` Dimensions were successfully returned.
      */
-    getDimensions: (params: RequestParams = {}) =>
+    getDimensions: (
+      query?: {
+        /** Name of the dimension. Supports partial search. */
+        name?: string;
+        /** Name of the dimension item. Supports partial search. */
+        codeName?: string;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Dimension[], any>({
         path: `/dimensions`,
         method: "GET",
+        query: query,
         secure: true,
         format: "json",
         ...params,
@@ -17531,12 +17624,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get default dimension of business partner.
      * @request GET:/businesspartners/{id}/defaults/dimensions/{dimensionId}
      * @secure
-     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully returned.
+     * @response `200` `DefaultDimension` The partner default dimension was successfully returned.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
      */
     getDefaultDimension: (id: number, dimensionId: number, params: RequestParams = {}) =>
-      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
+      this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
         method: "GET",
         secure: true,
@@ -17548,21 +17641,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description Updates default dimension for a business partner with the given partner and dimension ID.
      *
      * @tags Business partners
-     * @name UpdateDefaultDimension
+     * @name UpdateDefaultDimension1
      * @summary Update default dimension of business partner.
      * @request PUT:/businesspartners/{id}/defaults/dimensions/{dimensionId}
      * @secure
-     * @response `200` `BusinessPartnerDefaultDimensionExtended` The partner default dimension was successfully updated.
+     * @response `200` `DefaultDimension` The partner default dimension was successfully updated.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
      */
-    updateDefaultDimension: (
-      id: number,
-      dimensionId: number,
-      data: BusinessPartnerDefaultDimensionExtended,
-      params: RequestParams = {},
-    ) =>
-      this.request<BusinessPartnerDefaultDimensionExtended, ErrorMessages>({
+    updateDefaultDimension1: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
+      this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
         method: "PUT",
         body: data,
@@ -17839,11 +17927,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get default dimensions of business partner.
      * @request GET:/businesspartners/{id}/defaults/dimensions
      * @secure
-     * @response `200` `(BusinessPartnerDefaultDimension)[]` The partner default dimensions was successfully returned.
+     * @response `200` `(DefaultDimensionBasicData)[]` The partner default dimensions was successfully returned.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      */
     getDefaultDimensions: (id: number, params: RequestParams = {}) =>
-      this.request<BusinessPartnerDefaultDimension[], ErrorMessages>({
+      this.request<DefaultDimensionBasicData[], ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions`,
         method: "GET",
         secure: true,
