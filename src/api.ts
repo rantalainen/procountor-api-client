@@ -9,6 +9,30 @@
  * ---------------------------------------------------------------
  */
 
+/** Accident insurance policies. Occupational accident insurance. */
+export interface AccidentInsurancePolicy {
+  /**
+   * Unique identifier of accident insurance policy.
+   * @format int64
+   */
+  id?: number;
+  /** Insurance provider name. */
+  providerName?: string;
+  /** Insurance provider code. */
+  providerCode?: string;
+  /** Policy number. */
+  number?: string;
+  /** Is policy active. */
+  active?: boolean;
+  /** Label. */
+  label?: string;
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
 /** Generated accounting report data. */
 export interface AccountingReportData {
   /** List of accounting report periods. */
@@ -4511,7 +4535,7 @@ export interface CounterParty {
   /**
    * Name of the contact person.
    * @minLength 0
-   * @maxLength 28
+   * @maxLength 70
    */
   contactPersonName?: string;
   /** SALES_INVOICE, SALES_ORDER, PURCHASE_INVOICE and PURCHASE_ORDER only. Business ID or national identification number. */
@@ -5473,6 +5497,64 @@ export interface EInvoiceAddress {
   ediId?: string;
 }
 
+export interface EInvoiceData {
+  /** Electronic invoice operator name. */
+  operator?: string;
+  /**
+   * Electronic invoice operator ID.
+   * @format int32
+   */
+  operatorId?: number;
+  /** Sending address of operator. */
+  sendingAddress?: string;
+  /** Receiving address of operator */
+  receivingAddress?: string;
+  /** `true`, if the receiving address is public in Tieke  */
+  receivingAddressPublicInTieke?: boolean;
+  /** Electronic Data Interchange ID of operator */
+  edi?: string;
+  /** Latest date when invoicer announcement was created or updated */
+  invoicerAnnouncementUpdated?: string;
+  /** Date when electronic invoice operator was added */
+  created?: string;
+  /** User who has added the electronic invoice operator */
+  creator?: string;
+  /** Web service customer number */
+  wsCustomerNumber?: string;
+}
+
+/** Search results. */
+export interface Employee {
+  /**
+   * Unique employee identifier.
+   * @format int64
+   */
+  id?: number;
+  /** Employee last name. */
+  lastName?: string;
+  /** Employee first name. */
+  firstName?: string;
+  /** Employee SSN id, it can be also Finnish business id. */
+  ssn?: string;
+  /** Address of Person. */
+  employeeAddress?: PersonBasicAddress;
+  /** Person number. */
+  personNumber?: string;
+  /** The channel which is used for delivering Salary Slips for the given Employee. */
+  salaryChannel?: "EMAIL" | "ESALARY" | "MAIL" | "MOBILE" | "NO_SENDING" | "PAPER";
+  /** Automated Tax Card. */
+  automatedTaxCard?: boolean;
+  /** Status of the Employee. */
+  active?: boolean;
+}
+
+export interface EmployeeSearchResult {
+  /** Search results. */
+  results?: Employee[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
 /** Information about error handling. Can be empty if message is not handled yet. */
 export interface ErrorHandlingInfo {
   /**
@@ -5563,25 +5645,6 @@ export interface FactoringContractSearchResult {
   results?: FactoringContract[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
-}
-
-/**
- * Contains rights for financial management functionalities.
- * @deprecated
- */
-export interface FinancialManagementRightsOld {
-  /** Access level to closing of accounts tool functionality. */
-  closingOfAccountsTool?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to notifications functionality. */
-  notifications?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to accounting reports functionality. */
-  accountReporting?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to archive functionality. */
-  archive?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to import data functionality. */
-  importData?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to incomes register certificate functionality. (Only Finnish environment) */
-  incomesRegisterCertificate?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
 }
 
 /** Financing company information. */
@@ -6154,6 +6217,32 @@ export interface GeneralLedgerReportResponse {
   reportParameters?: GeneralLedgerReportRequest;
   /** Report data. */
   ledgerAccount?: GeneralLedgerReportData;
+}
+
+/** Incomes register info. */
+export interface IncomesRegisterConfiguration {
+  /**
+   * Unique identifier of incomes register configuration.
+   * @format int64
+   */
+  id?: number;
+  /** Keva: Suborganisation ID. */
+  kevaSuborganisationId?: string;
+  /** Payer types. */
+  payerTypes?: (
+    | "PUBLIC_SECTOR"
+    | "HOUSEHOLD"
+    | "FOREIGN_GROUP_COMPANY"
+    | "STATE"
+    | "UNINCORPORATED_STATE_ENTERPRISE"
+    | "TEMPORARY_EMPLOYER"
+    | "POOL_OF_HOUSEHOLDS"
+  )[];
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
 }
 
 /** Response information message */
@@ -8040,8 +8129,20 @@ export interface InvoicingInfo {
   language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
   /** Email of the partner. */
   email?: string;
-  einvoiceAddress?: string;
+  /** Does the customer deny Procountors sending of payment reminders as e-invoice */
+  denyEinvoiceReminders?: boolean;
   einvoiceOperator?: string;
+  einvoiceAddress?: string;
+}
+
+export interface LaborUnionSettingsBasicData {
+  /**
+   * Unique identifier of labor union setting.
+   * @format int64
+   */
+  id?: number;
+  /** Labor union setting name. */
+  name?: string;
 }
 
 /** Ledger account used for the accounting. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts. */
@@ -8987,7 +9088,7 @@ export interface LedgerReceipt {
   /** Partner code. Identifier for the related company or person. May represent a business ID, national identification number (HETU in Finland) or an account number, depending on the receipt type. */
   partnerCode?: string;
   /** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
-  SerialNumber?: SerialNumberDTO;
+  serialNumber?: SerialNumber;
   /**
    * Ledger receipt version timestamp. Automatically generated by Procountor and updated every time the receipt is modified. When using PUT /ledgerreceipts, it is required to include the latest version timestamp of the receipt to the request. This prevents conflicts if the receipt is being modified from several sources.
    * @format date-time
@@ -9077,7 +9178,7 @@ export interface LedgerReceiptBasicInfo {
    */
   invoiceNumber?: number;
   /** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
-  SerialNumber?: SerialNumberDTO;
+  serialNumber?: SerialNumber;
   /**
    * Creation timestamp of the ledger receipt. Automatically generated by Procountor.
    * @format date-time
@@ -9121,23 +9222,6 @@ export interface ManagementRights {
   groupLetter?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to audit log functionality. */
   auditLog?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
-}
-
-/**
- * Contains rights for management functionalities.
- * @deprecated
- */
-export interface ManagementRightsOld {
-  /** Access level to basic company info functionality. */
-  basicCompanyInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to basic accounting info functionality. */
-  basicAccountingInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to edit personal info functionality. */
-  editPersonalInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to company user management functionality. */
-  companyUserManagement?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to set up a company functionality. */
-  setUpACompany?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
 }
 
 export interface MarkInvoiceAsPaid {
@@ -11463,27 +11547,6 @@ export interface PaymentSummary {
   customId?: string;
 }
 
-/**
- * Contains rights for payment transactions functionalities.
- * @deprecated
- */
-export interface PaymentTransactionsRightsOld {
-  /** Access level to payment functionality. */
-  payment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to approval functionality. */
-  approval?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to payment allocation functionality. */
-  paymentAllocation?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to bank statement and reference payments functionality. */
-  bankStatementAndReferencePayment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to mark paid elsewhere functionality. */
-  markPaidElsewhere?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to salary payments functionality. */
-  salaryPayments?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to direct bank transfer functionality. */
-  directBankTransfer?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-}
-
 /** These are possible response models */
 export interface PaymentsConfirmationResponseModels {
   /** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
@@ -11492,6 +11555,28 @@ export interface PaymentsConfirmationResponseModels {
   InfoMessage?: InfoMessage;
   /** Response for paying invoices action (POST /payments) performed successfully */
   InvoicePaymentSummaries?: InvoicePaymentSummaries;
+}
+
+/** Pension contracts. Employees' pension insurance. */
+export interface PensionContract {
+  /**
+   * Unique identifier of pension contract.
+   * @format int64
+   */
+  id?: number;
+  /** Pension provider name. */
+  providerName?: string;
+  /** Agreement number. */
+  number?: string;
+  /** Is contract active. */
+  active?: boolean;
+  /** Label. */
+  label?: string;
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
 }
 
 export interface Person {
@@ -12109,6 +12194,7 @@ export interface PersonBasicAddress {
     | "ZIMBABWE";
 }
 
+/** Search results. */
 export interface PersonBasicInfo {
   /**
    * Unique identifier of a Person in Person register. This id is same as business partner's partnerId for type PERSON.
@@ -12670,6 +12756,13 @@ export interface PersonRegistryInfo {
    * @maxLength 40
    */
   homeMunicipality?: string;
+}
+
+export interface PersonSearchResult {
+  /** Search results. */
+  results?: PersonBasicInfo[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
 }
 
 export interface PersonalDetails {
@@ -13292,29 +13385,6 @@ export interface PurchasesRights {
   fixedAssetsRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
-/**
- * Contains rights for purchases functionalities.
- * @deprecated
- */
-export interface PurchasesRightsOld {
-  /** Access level to new purchase invoice functionality. */
-  newPurchaseInvoice?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to new travel and expense invoice functionality. */
-  newTravelAndExpenseInvoice?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to new journal receipt functionality. */
-  newJournalReceipt?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to search invoices functionality. */
-  searchInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to verification functionality. */
-  verification?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to supplier register functionality. */
-  supplierRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to product register functionality. */
-  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to fixes assets register functionality. (Only Swedish environment) */
-  fixedAssetsRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-}
-
 /** Search results. */
 export interface ReferencePayment {
   /**
@@ -13407,6 +13477,19 @@ export interface RegistryInfo {
   partnerGroups?: BusinessPartnerGroup[];
 }
 
+export interface SalariesBasicInfo {
+  /** Yearly figures. Employer payment percentages. */
+  yearlyFigures?: YearlyFigures;
+  /** Work hours. */
+  workHours?: WorkHours;
+  /** Incomes register info. */
+  incomesRegisterConfiguration?: IncomesRegisterConfiguration;
+  /** Pension contracts. Employees' pension insurance. */
+  pensionContracts?: PensionContract[];
+  /** Accident insurance policies. Occupational accident insurance. */
+  accidentInsurancePolicies?: AccidentInsurancePolicy[];
+}
+
 /** Contains rights for salaries functionalities. */
 export interface SalariesRights {
   /** Access level to payroll functionality. */
@@ -13421,17 +13504,63 @@ export interface SalariesRights {
   personalWorkHourTrackingOnly?: boolean;
 }
 
-/**
- * Contains rights for salaries functionalities.
- * @deprecated
- */
-export interface SalariesRightsOld {
-  /** Access level to payroll accounting (all salary functions) functionality. */
-  payrollAccounting?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to person register functionality. */
-  personRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to working time tracking functionality. */
-  workingTimeTracking?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
+/** Search results. */
+export interface SalaryType {
+  /** Salary type name. */
+  name?: string;
+  /**
+   * Salary type code.
+   * @format int64
+   */
+  code?: number;
+  /** Salary category. */
+  category?:
+    | "DEDUCTIONS_FROM_NET_PAY"
+    | "EMPLOYER_PAYMENTS"
+    | "FRINGE_BENEFITS"
+    | "INFORMATIVE_ITEMS"
+    | "OTHER_TAXABLE_EARNINGS"
+    | "SALARY_FOR_TIME_WORKED"
+    | "TAX"
+    | "TAX_FREE_ITEMS";
+  /** Salary type unit. */
+  unit?: "HOUR" | "PIECE";
+  /** Unit value of Salary type. */
+  unitValue?: number;
+  /** Payment percent of Salary type. */
+  paymentPercent?: number;
+  /** Affects health insurance. */
+  affectsHealthInsurance?: boolean;
+  /** Affects pension insurance. */
+  affectsPensionInsurance?: boolean;
+  /** Affects unemployment insurance. */
+  affectsUnemploymentInsurance?: boolean;
+  /** Affects accident and group life insurance. */
+  affectsAccidentAndGroupLifeInsurance?: boolean;
+  /** Income type name. */
+  incomeType?: string;
+  /**
+   * Income type code.
+   * @format int32
+   */
+  incomeTypeCode?: number;
+  /** Salary type name translations. */
+  translations?: SalaryTypeTranslation[];
+}
+
+export interface SalaryTypeSearchResult {
+  /** Search results. */
+  results?: SalaryType[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
+/** Salary type name translations. */
+export interface SalaryTypeTranslation {
+  /** Language code in ISO 639-1 format. */
+  languageCode?: string;
+  /** Salary type name translation for the given language code. */
+  translation?: string;
 }
 
 /** Contains rights for sales functionalities. */
@@ -13446,23 +13575,6 @@ export interface SalesRights {
   customerRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to product register functionality. */
   productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
-}
-
-/**
- * Contains rights for sales functionalities.
- * @deprecated
- */
-export interface SalesRightsOld {
-  /** Access level to new sales invoice/Group invoice functionality. */
-  newSalesInvoice?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to sales invoice search functionality. */
-  salesInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to customer register functionality. */
-  customerRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to product register functionality. */
-  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
-  /** Access level to group letter functionality. */
-  groupLetter?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_RIGHTS" | "VIEWING_RIGHTS";
 }
 
 /** Search result metadata. */
@@ -13490,7 +13602,7 @@ export interface SearchResultMetaData {
 }
 
 /** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
-export interface SerialNumberDTO {
+export interface SerialNumber {
   /** Ledger receipt series. */
   series?: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
   /**
@@ -13792,6 +13904,16 @@ export interface SessionInfo {
   userName?: string;
   /** Company settings. These are settings for 3rd party client usage to identify what features are usable for current company (in order to avoid requests that are bound to fail) */
   companySettings?: CompanySettings;
+}
+
+export interface SieAvailabilityResponse {
+  /**
+   * Specifies the last valid end date.
+   * @format date
+   */
+  lastValidEndDate?: string;
+  /** List of the accounting period start dates. */
+  accountingPeriodStart?: string[];
 }
 
 export interface Status {
@@ -14342,35 +14464,6 @@ export interface User {
   socialSecurityNumber?: string;
 }
 
-/**
- * User limitations in environment
- * @deprecated
- */
-export interface UserLimitationsOld {
-  /** Is personal sales invoices only limitations enabled. */
-  personalSalesInvoicesOnly?: boolean;
-  /** Is personal purchases invoices only limitation enabled. */
-  personalPurchaseInvoicesOnly?: boolean;
-  /** Is personal travel and expense invoices limitation enabled. */
-  personalTravelAndExpenseInvoiceOnly?: boolean;
-  /** Is personal journal receipts only limitation enabled. */
-  personalJournalReceiptsOnly?: boolean;
-  /** Is personal salaries only limitation enabled. */
-  personalSalariesOnly?: boolean;
-  /** Is only allow accounting viewing limitation enabled. */
-  onlyAllowAccountingViewing?: boolean;
-  /** Is search for personal approvals only limitation enabled. */
-  searchForPersonalApprovalsOnly?: boolean;
-  /** Is rights to accounting only limitation enabled. */
-  rightsToAccountingOnly?: boolean;
-  /** Is limited dimensions limitation enabled. */
-  limitedDimensions?: boolean;
-  /** Is personal work hour tracking limitation enabled. */
-  personalWorkHourTrackingOnly?: boolean;
-  /** Is login limitation enabled. */
-  login?: boolean;
-}
-
 /** User rights in environment */
 export interface UserPermissions {
   /** Contains rights for management functionalities. */
@@ -14400,16 +14493,6 @@ export interface UserPrivileges {
   rights?: UserPermissions;
 }
 
-/** @deprecated */
-export interface UserPrivilegesOld {
-  /** Role of a current user */
-  role?: string;
-  /** User rights in environment */
-  rights?: UserRightsOld;
-  /** User limitations in environment */
-  limitations?: UserLimitationsOld;
-}
-
 export interface UserProfile {
   /** First name of the user. */
   firstname?: string;
@@ -14425,25 +14508,6 @@ export interface UserRights {
   limitedDimensions?: boolean;
   /** Is login limitation enabled. */
   blockSoloLoginToProcountor?: boolean;
-}
-
-/**
- * User rights in environment
- * @deprecated
- */
-export interface UserRightsOld {
-  /** Contains rights for management functionalities. */
-  management?: ManagementRightsOld;
-  /** Contains rights for sales functionalities. */
-  sales?: SalesRightsOld;
-  /** Contains rights for purchases functionalities. */
-  purchases?: PurchasesRightsOld;
-  /** Contains rights for salaries functionalities. */
-  salaries?: SalariesRightsOld;
-  /** Contains rights for payment transactions functionalities. */
-  paymentTransactions?: PaymentTransactionsRightsOld;
-  /** Contains rights for financial management functionalities. */
-  financialManagement?: FinancialManagementRightsOld;
 }
 
 /** List of available VATs in different countries. */
@@ -14578,6 +14642,47 @@ export interface WebhookSearchResult {
   results?: Webhook[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
+}
+
+/** Work hours. */
+export interface WorkHours {
+  /**
+   * Unique identifier of work hours.
+   * @format int64
+   */
+  id?: number;
+  /** Work hours per month. */
+  monthly?: number;
+  /** Work hours per week. */
+  weekly?: number;
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
+/** Yearly figures. Employer payment percentages. */
+export interface YearlyFigures {
+  /**
+   * Year.
+   * @format int32
+   */
+  year?: number;
+  /** Salaries paid during year. */
+  paidSalariesSum?: number;
+  /** Employer's Employees' Pension Act contribution percent. */
+  pensionInsuranceContributionPercent?: number;
+  /** Unemployment insurance payment base percent. */
+  unemploymentInsurancePercentBasic?: number;
+  /** Unemployment insurance payment additional percent. */
+  unemploymentInsurancePercentAdditional?: number;
+  /** Occupational accident insurance percent. */
+  accidentInsurancePercent?: number;
+  /** Group life insurance charge percent. */
+  groupLifeInsurancePercent?: number;
+  /** Health care insurance contribution percent. */
+  healthCareInsurancePercent?: number;
 }
 
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
@@ -14947,26 +15052,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns details of user rights for the currently logged in user. This endpoint will be removed in Procountor release version 93.0 (API version 24.10) in October.
-     *
-     * @tags Users
-     * @name GetOldUserRights
-     * @summary Get the user rights (old).
-     * @request GET:/users/rights/old
-     * @deprecated
-     * @secure
-     * @response `200` `UserPrivilegesOld` The user rights was successfully returned.
-     */
-    getOldUserRights: (params: RequestParams = {}) =>
-      this.request<UserPrivilegesOld, any>({
-        path: `/users/rights/old`,
-        method: "GET",
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Returns a user profile based on the given user ID. Same company users only.
      *
      * @tags Users
@@ -15260,6 +15345,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      * @response `200` `ProductSearchResult` The products were successfully returned
      * @response `400` `ErrorMessages` Request contains invalid data
+     * @response `403` `ErrorMessages` Insufficient user rights.
      */
     getProducts: (
       query?: {
@@ -15294,7 +15380,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         group?: number[];
         /**
-         * Register type of product
+         * Register type of product. If not given, then SALES and PURCHASE returned as default
          * @example "TRAVEL"
          */
         type?: "SALES" | "PURCHASE" | "TRAVEL";
@@ -15508,14 +15594,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
-     * @description Returns the list of persons with basic information: id, name (combined as lastname, firstname), address, identifier, identifierType and personNumber.
+     * @description Returns the list of persons with basic information: id, lastname, firstname, address, identifier, identifierType and personNumber.
      *
      * @tags Persons
      * @name GetPersons
      * @summary Get the list of persons matching search criteria.
      * @request GET:/persons
      * @secure
-     * @response `200` `(PersonBasicInfo)[]` List of persons was successfully returned.
+     * @response `200` `(PersonSearchResult)[]` List of persons was successfully returned.
      * @response `403` `ErrorMessages` Insufficient user rights.
      */
     getPersons: (
@@ -15570,7 +15656,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       },
       params: RequestParams = {},
     ) =>
-      this.request<PersonBasicInfo[], ErrorMessages>({
+      this.request<PersonSearchResult[], ErrorMessages>({
         path: `/persons`,
         method: "GET",
         query: query,
@@ -16572,10 +16658,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` Insufficient user rights or invoice in wrong status.
      * @response `404` `ErrorMessages` Invoice not found.
      */
-    markInvoiceAsPaid: (invoiceId: number, data: MarkInvoiceAsPaid, params: RequestParams = {}) =>
+    markInvoiceAsPaid: (
+      invoiceId: number,
+      data: MarkInvoiceAsPaid,
+      query?: {
+        /** Supported only for SALES_INVOICE type. Default is false. When marking the overdue sales invoice as paid, if you want to automatically include a penal expense in the business partner's next sales invoice, then call the endpoint with addPenalExpense=true. Automatic handling of collection and penal costs setting must be enabled prior to this and penal expense product must be already defined. */
+        addPenalExpense?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<PaymentEvent, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/markpaid`,
         method: "PUT",
+        query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -16860,10 +16955,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` Insufficient user rights.
      * @response `404` `ErrorMessages` Invoice could not be saved.
      */
-    saveInvoice: (data: Invoice, params: RequestParams = {}) =>
+    saveInvoice: (
+      data: Invoice,
+      query?: {
+        /** Supported only for SALES_INVOICE type. Default is false. If true, automatically adds the collection cost(s), if payment reminders were sent earlier to the business partner and/or penal cost, if the business partner had paid the earlier invoice late. These costs are added only if Automatic handling of collection and penal costs setting is enabled, and collection costs product and penal expense product have been defined. */
+        addCollectionPenalCosts?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices`,
         method: "POST",
+        query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
@@ -17228,59 +17331,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   };
   dimensions = {
     /**
-     * @description Returns a list of all dimensions and dimension items for the current company. Dimensions can be set on the Dimensions page in Procountor.
-     *
-     * @tags Dimensions
-     * @name GetDimensions
-     * @summary Get all dimensions with dimension items.
-     * @request GET:/dimensions
-     * @secure
-     * @response `200` `(Dimension)[]` Dimensions were successfully returned.
-     */
-    getDimensions: (
-      query?: {
-        /** Name of the dimension. Supports partial search. */
-        name?: string;
-        /** Name of the dimension item. Supports partial search. */
-        codeName?: string;
-      },
-      params: RequestParams = {},
-    ) =>
-      this.request<Dimension[], any>({
-        path: `/dimensions`,
-        method: "GET",
-        query: query,
-        secure: true,
-        format: "json",
-        ...params,
-      }),
-
-    /**
-     * @description This endpoint will be deprecated and removed in the future. Please use PUT /dimensions/{dimensionId} instead to update the dimension name.
-     *
-     * @tags Dimensions
-     * @name UpdateDimension
-     * @summary Update dimension.
-     * @request PUT:/dimensions
-     * @deprecated
-     * @secure
-     * @response `200` `Dimension` The dimension was successfully updated.
-     * @response `400` `ErrorMessages` The dimension contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights
-     * @response `404` `ErrorMessages` Dimension could not be found.
-     */
-    updateDimension: (data: Dimension, params: RequestParams = {}) =>
-      this.request<Dimension, ErrorMessages>({
-        path: `/dimensions`,
-        method: "PUT",
-        body: data,
-        secure: true,
-        type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
-
-    /**
      * @description Returns a specified dimension with its dimension items.
      *
      * @tags Dimensions
@@ -17304,7 +17354,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @description This endpoint allows to update a dimension name
      *
      * @tags Dimensions
-     * @name UpdateDimension1
+     * @name UpdateDimension
      * @summary Update dimension.
      * @request PUT:/dimensions/{dimensionId}
      * @secure
@@ -17313,7 +17363,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` Insufficient user rights
      * @response `404` `ErrorMessages` Dimension could not be found.
      */
-    updateDimension1: (dimensionId: number, data: DimensionName, params: RequestParams = {}) =>
+    updateDimension: (dimensionId: number, data: DimensionName, params: RequestParams = {}) =>
       this.request<DimensionName, ErrorMessages>({
         path: `/dimensions/${dimensionId}`,
         method: "PUT",
@@ -17368,6 +17418,34 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         body: data,
         secure: true,
         type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list of all dimensions and dimension items for the current company. Dimensions can be set on the Dimensions page in Procountor.
+     *
+     * @tags Dimensions
+     * @name GetDimensions
+     * @summary Get all dimensions with dimension items.
+     * @request GET:/dimensions
+     * @secure
+     * @response `200` `(Dimension)[]` Dimensions were successfully returned.
+     */
+    getDimensions: (
+      query?: {
+        /** Name of the dimension. Supports partial search. */
+        name?: string;
+        /** Name of the dimension item. Supports partial search. */
+        codeName?: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<Dimension[], any>({
+        path: `/dimensions`,
+        method: "GET",
+        query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -17519,6 +17597,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       }),
 
     /**
+     * @description Returns company's electronic invoice addresses
+     *
+     * @tags Company
+     * @name GetEInvoiceAddresses
+     * @summary Get company's electronic invoice addresses
+     * @request GET:/company/einvoiceaddresses
+     * @secure
+     * @response `200` `EInvoiceData` Electronic invoice addresses were successfully returned.
+     */
+    getEInvoiceAddresses: (params: RequestParams = {}) =>
+      this.request<EInvoiceData, any>({
+        path: `/company/einvoiceaddresses`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
      * @description Returns a list of delivery terms allowed in the environment.
      *
      * @tags Company
@@ -17527,9 +17624,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/company/deliveryterms
      * @secure
      * @response `200` `DeliveryTerms` Delivery methods was successfully returned.
+     * @response `403` `ErrorMessages` No access right to delivery terms.
      */
     getCompanyDeliveryTerms: (params: RequestParams = {}) =>
-      this.request<DeliveryTerms, any>({
+      this.request<DeliveryTerms, ErrorMessages>({
         path: `/company/deliveryterms`,
         method: "GET",
         secure: true,
@@ -18482,6 +18580,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
           | "EMPLOYEE_INFO"
           | "ENVIRONMENT"
           | "NETS_COLLECTION"
+          | "COST_RECEIPT"
           | "REFERENCE_PAYMENT_EVENT"
         )[];
         /**
@@ -18738,6 +18837,213 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   };
+  payrolls = {
+    /**
+     * @description Return the Salary Types list.
+     *
+     * @tags Payrolls
+     * @name GetSalaryTypes
+     * @summary Get the list of salary types matching search criteria.
+     * @request GET:/payrolls/salarytypes
+     * @secure
+     * @response `200` `SalaryTypeSearchResult` List of salary types was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSalaryTypes: (
+      query?: {
+        /**
+         * Salary Type name
+         *
+         * Also partial - search matches returned.
+         * @example "Time-rate pay"
+         */
+        name?: string;
+        /**
+         * Salary type code
+         * @example 1000
+         */
+        code?: number;
+        /**
+         * Salary category
+         * @example "TAX"
+         */
+        category?:
+          | "SALARY_FOR_TIME_WORKED"
+          | "OTHER_TAXABLE_EARNINGS"
+          | "FRINGE_BENEFITS"
+          | "TAX_FREE_ITEMS"
+          | "TAX"
+          | "DEDUCTIONS_FROM_NET_PAY"
+          | "INFORMATIVE_ITEMS"
+          | "EMPLOYER_PAYMENTS";
+        /**
+         * Income Type name
+         *
+         * Also partial - search matches returned.
+         * @example "Time-rate pay"
+         */
+        incomeType?: string;
+        /**
+         * Income type code
+         * @example 201
+         */
+        incomeTypeCode?: number;
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by salary type code
+         * @default "ASC"
+         * @example "ASC"
+         */
+        orderByCode?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalaryTypeSearchResult, ErrorMessages>({
+        path: `/payrolls/salarytypes`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salaries basic info.
+     *
+     * @tags Payrolls
+     * @name GetSalariesBasicInfo
+     * @summary Get salaries basic info.
+     * @request GET:/payrolls/salariesbasicinfo
+     * @secure
+     * @response `200` `SalariesBasicInfo` The salaries basic info was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salaries basic info yearly figures not found.
+     */
+    getSalariesBasicInfo: (
+      query?: {
+        /**
+         * Year from which yearly figures will be returned. If not set returns yearly figures from current year.
+         * @example 2023
+         */
+        year?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalariesBasicInfo, ErrorMessages>({
+        path: `/payrolls/salariesbasicinfo`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns basic data of all labor union settings.
+     *
+     * @tags Payrolls
+     * @name GetLaborUnionSettingsBasicData
+     * @summary Find list of labor union settings basic data.
+     * @request GET:/payrolls/laborunionsettings
+     * @secure
+     * @response `200` `(LaborUnionSettingsBasicData)[]` Labor union settings were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getLaborUnionSettingsBasicData: (params: RequestParams = {}) =>
+      this.request<LaborUnionSettingsBasicData[], ErrorMessages>({
+        path: `/payrolls/laborunionsettings`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns the list of employees with information: id, lastname, firstname, ssn, address, personNumber, salaryChannel, automatedTaxCard and active.
+     *
+     * @tags Employees
+     * @name GetEmployee
+     * @summary Get the list of employees matching search criteria.
+     * @request GET:/payrolls/employees
+     * @secure
+     * @response `200` `(EmployeeSearchResult)[]` Employees were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getEmployee: (
+      query?: {
+        /**
+         * Person number
+         *
+         * Also partial - search matches returned.
+         * @example "CUST12367Z"
+         */
+        personNumber?: string;
+        /**
+         * Unique identifier of Business Partner Group of type PERSON
+         * @example 123456
+         */
+        personGroupId?: number;
+        /**
+         * Include inactive persons
+         * @default false
+         */
+        includeInactive?: boolean;
+        /**
+         * Salary channel
+         * @example "EMAIL"
+         */
+        salaryChannel?: "NO_SENDING" | "MAIL" | "EMAIL" | "PAPER" | "MOBILE" | "ESALARY";
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by Employee ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<EmployeeSearchResult[], ErrorMessages>({
+        path: `/payrolls/employees`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
   currencies = {
     /**
      * @description Returns all available currencies.
@@ -18874,6 +19180,64 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getChartOfAccount: (params: RequestParams = {}) =>
       this.request<LedgerAccounts, any>({
         path: `/coa`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+  };
+  sie = {
+    /**
+     * @description Returns a SIE file for given accounting period start date and export end date.
+     *
+     * @tags SIE file
+     * @name GetSieFile
+     * @summary Get SIE file.
+     * @request GET:/SIE/file
+     * @secure
+     * @response `200` `File` SIE file successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSieFile: (
+      query: {
+        /**
+         * Start date of accounting period
+         * @format date
+         * @example "2022-01-31"
+         */
+        accountingPeriodStart: string;
+        /**
+         * End date of the export
+         * @format date
+         * @example "2022-01-31"
+         */
+        exportEndDate: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<File, ErrorMessages>({
+        path: `/SIE/file`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns details about SIE export availability.
+     *
+     * @tags SIE file
+     * @name GetSieAvailability
+     * @summary Get information about SIE export availability.
+     * @request GET:/SIE/availability
+     * @secure
+     * @response `200` `SieAvailabilityResponse` SIE export availability information was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSieAvailability: (params: RequestParams = {}) =>
+      this.request<SieAvailabilityResponse, ErrorMessages>({
+        path: `/SIE/availability`,
         method: "GET",
         secure: true,
         format: "json",
