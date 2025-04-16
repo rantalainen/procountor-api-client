@@ -1,6 +1,6 @@
 # procountor-api-client
 
-**ProcountorApiClient** is a third party [Procountor API](https://dev.procountor.com/api-reference/) client for NodeJS. It is a wrapper around an API client that has been [automatically generated](https://www.npmjs.com/package/swagger-typescript-api) using the [OpenAPI schema](https://api-test.procountor.com/api/openapi.json) provided by Procountor.
+**ProcountorApiClient** is a third party [Procountor API](https://dev.procountor.com/api-reference/) client for NodeJS. It is a wrapper around an API client that has been [automatically generated](https://www.npmjs.com/package/swagger-typescript-api) using the [OpenAPI schema](https://pts-procountor.pubdev.azure.procountor.com/api/openapi.json) provided by Procountor.
 
 ## Installation
 
