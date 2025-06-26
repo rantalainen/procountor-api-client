@@ -13,7 +13,7 @@ export interface IProcountorApiClientConfig extends ApiConfig<any> {
   /**
    * API base url,
    * by default: `https://api.procountor.com/api`.
-   * Use `https://api-test.procountor.com/api` for testing.
+   * Use `https://pts-api.procountor.com/api` for testing.
    */
   baseURL?: string;
   /** Request timeout in milliseconds, defaults to 120000 (120 secs) */
