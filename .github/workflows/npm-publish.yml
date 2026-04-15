@@ -14,16 +14,18 @@ jobs:
   publish-npm:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 18
+          node-version: 24
           registry-url: https://registry.npmjs.org/
+      - name: Update npm
+        run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build
       - name: Publish NPM
         if: '!github.event.release.prerelease'
-        run: npm publish
+        run: npm publish --access public
       - name: Publish NPM (beta)
         if: 'github.event.release.prerelease'
-        run: npm publish --tag beta
+        run: npm publish --access public --tag beta
