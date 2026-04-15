@@ -3,9 +3,6 @@
 
 name: Npm Publish Package
 
-env:
-  NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
-
 on:
   release:
     types: [created]

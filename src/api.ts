@@ -9,7 +9,42 @@
  * ---------------------------------------------------------------
  */
 
-/** Accident insurance policies. Occupational accident insurance. */
+export interface AccidentInsurance {
+  /**
+   * Unique identifier of employee accident insurance.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Accident insurance policy ID.
+   * @format int64
+   */
+  accidentInsurancePolicyId?: number;
+  /**
+   * Accident insurance percentage (category of risk). Scale: 2.
+   * @min 0
+   * @max 100
+   */
+  percent: number;
+  /**
+   * Statistics Finland's classification of occupations (TK10).
+   * @minLength 0
+   * @maxLength 20
+   */
+  occupationalTitleId?: string;
+  /**
+   * Keva's titles.
+   * @minLength 0
+   * @maxLength 20
+   */
+  kevaOccupationalTitleId?: string;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
+}
+
 export interface AccidentInsurancePolicy {
   /**
    * Unique identifier of accident insurance policy.
@@ -33,13 +68,11 @@ export interface AccidentInsurancePolicy {
   version?: string;
 }
 
-/** Generated accounting report data. */
 export interface AccountingReportData {
   /** List of accounting report periods. */
   periods?: AccountingReportPeriod[];
 }
 
-/** List of accounting report periods. */
 export interface AccountingReportPeriod {
   /**
    * Start date of the accounting report period.
@@ -58,7 +91,6 @@ export interface AccountingReportPeriod {
   rows?: AccountingReportRow[];
 }
 
-/** Report parameters that were used to generate the accounting report. */
 export interface AccountingReportRequest {
   /**
    * Report start date. Optional, if missing, starting date of the tracking period 'endDate' is in will be used. (financial year if not available)
@@ -72,268 +104,266 @@ export interface AccountingReportRequest {
   endDate: string;
   /**
    * List of receipt statuses for report. Default value depends on company rights.
-   * @example ["APPROVED","SENT","PAID","UNFINISHED"]
+   * @uniqueItems true
    */
   receiptStatus?: (
-    | 'APPROVED'
-    | 'SENT'
-    | 'NOT_SENT'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAID'
-    | 'PARTLY_PAID,'
-    | 'MARKED_PAID'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_DENIED'
-    | 'UNFINISHED'
-    | 'VERIFIED'
-    | 'RECEIVED'
+    | "APPROVED"
+    | "SENT"
+    | "NOT_SENT"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAID"
+    | "PARTLY_PAID,"
+    | "MARKED_PAID"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_DENIED"
+    | "UNFINISHED"
+    | "VERIFIED"
+    | "RECEIVED"
   )[];
   /** Report type. */
-  type: 'INCOME_STATEMENT, CASH_FLOW, BALANCE_SHEET';
+  type: "INCOME_STATEMENT, CASH_FLOW, BALANCE_SHEET";
   /** Accounting report request options. */
   options?: AccountingReportRequestOptions;
 }
 
-/** Accounting report request options. */
 export interface AccountingReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
+   * @uniqueItems true
    */
   receiptType?: (
-    | 'SALES_INVOICE'
-    | 'PURCHASE_INVOICE'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'JOURNAL'
-    | 'SALARY'
-    | 'VAT_FORM'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'PERIODIC_TAX_RETURN'
-    | 'VAT_SUMMARY'
-    | 'SALES_ORDER'
-    | 'PURCHASE_ORDER'
-    | 'REFERENCE_PAYMENT'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | "SALES_INVOICE"
+    | "PURCHASE_INVOICE"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "JOURNAL"
+    | "SALARY"
+    | "VAT_FORM"
+    | "EMPLOYER_CONTRIBUTION"
+    | "PERIODIC_TAX_RETURN"
+    | "VAT_SUMMARY"
+    | "SALES_ORDER"
+    | "PURCHASE_ORDER"
+    | "REFERENCE_PAYMENT"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -353,217 +383,217 @@ export interface AccountingReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Customer company ID that will be used in the accounting report. */
@@ -577,7 +607,6 @@ export interface AccountingReportResponse {
   reportData?: AccountingReportData;
 }
 
-/** Accounting report period rows. */
 export interface AccountingReportRow {
   /**
    * Id of the accounting report row.
@@ -585,7 +614,7 @@ export interface AccountingReportRow {
    */
   rowId?: number;
   /** Type of the accounting report row. */
-  type?: 'BALANCE' | 'ROW_FUNCTION';
+  type?: "BALANCE" | "ROW_FUNCTION";
   /** Name of the accounting row. */
   name?: string;
   /** Value of the accounting row. */
@@ -594,7 +623,6 @@ export interface AccountingReportRow {
   formula?: string;
 }
 
-/** Ledger receipt transactions. */
 export interface AccountingReportTransaction {
   /**
    * Ledger transaction ID.
@@ -620,54 +648,54 @@ export interface AccountingReportTransaction {
   invoiceDate?: string;
   /** Ledger receipt type. */
   type?:
-    | 'ACCRUAL'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'BILL_OF_CHARGES'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'JOURNAL'
-    | 'JOURNAL_BYPASSING_INVOICE_PAGE'
-    | 'JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE'
-    | 'OFFER'
-    | 'PAYMENT_CORRECTION'
-    | 'PERIODIC_TAX_RETURN'
-    | 'PURCHASE_INVOICE'
-    | 'PURCHASE_ORDER'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
-    | 'REFERENCE_PAYMENT'
-    | 'SALARY'
-    | 'SALES_INVOICE'
-    | 'SALES_ORDER'
-    | 'TRACKING_PERIOD_OPENING_RECEIPT'
-    | 'TRAVEL_INVOICE'
-    | 'TRAVEL_PLAN'
-    | 'UNKNOWN_RECEIPT_TYPE_F'
-    | 'UNKNOWN_RECEIPT_TYPE_G'
-    | 'VAT_FORM'
-    | 'VAT_SUMMARY';
+    | "ACCRUAL"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "BILL_OF_CHARGES"
+    | "EMPLOYER_CONTRIBUTION"
+    | "JOURNAL"
+    | "JOURNAL_BYPASSING_INVOICE_PAGE"
+    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
+    | "OFFER"
+    | "PAYMENT_CORRECTION"
+    | "PERIODIC_TAX_RETURN"
+    | "PURCHASE_INVOICE"
+    | "PURCHASE_ORDER"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | "REFERENCE_PAYMENT"
+    | "SALARY"
+    | "SALES_INVOICE"
+    | "SALES_ORDER"
+    | "TRACKING_PERIOD_OPENING_RECEIPT"
+    | "TRAVEL_INVOICE"
+    | "TRAVEL_PLAN"
+    | "UNKNOWN_RECEIPT_TYPE_F"
+    | "UNKNOWN_RECEIPT_TYPE_G"
+    | "VAT_FORM"
+    | "VAT_SUMMARY";
   /** Ledger transaction accounting value. */
   accountingValue?: number;
   /** Receipt status. */
   status?:
-    | 'APPROVED'
-    | 'DELETED'
-    | 'EMPTY'
-    | 'INVALIDATED'
-    | 'INVOICED'
-    | 'MARKED_PAID'
-    | 'NOT_SENT'
-    | 'OVERRIDDEN'
-    | 'PAID'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_DENIED'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAYMENT_TRANSACTION_REMOVED'
-    | 'RECEIVED'
-    | 'SENT'
-    | 'STARTED'
-    | 'UNFINISHED'
-    | 'UNSAVED'
-    | 'VERIFIED';
+    | "APPROVED"
+    | "DELETED"
+    | "EMPTY"
+    | "INVALIDATED"
+    | "INVOICED"
+    | "MARKED_PAID"
+    | "NOT_SENT"
+    | "OVERRIDDEN"
+    | "PAID"
+    | "PARTLY_PAID"
+    | "PAYMENT_DENIED"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_REMOVED"
+    | "RECEIVED"
+    | "SENT"
+    | "STARTED"
+    | "UNFINISHED"
+    | "UNSAVED"
+    | "VERIFIED";
   /** Vat percent. */
   vatPercent?: number;
   /** Vat amount. */
@@ -695,24 +723,23 @@ export interface AccountingReportTransaction {
   endDate?: string;
 }
 
-/** Contains rights for accounting functionalities. */
 export interface AccountingRights {
   /** Access level to journal receipts functionality. */
-  journalReceipts?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  journalReceipts?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to journal receipt search functionality. */
-  journalReceiptSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  journalReceiptSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal journal receipts only limitation enabled. */
   personalJournalReceiptsOnly?: boolean;
   /** Access level to closing of account tools functionality. */
-  closingOfAccountTools?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  closingOfAccountTools?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is prevent creating/editing invoices limitation enabled. */
   preventCreatingEditingInvoices?: boolean;
   /** Is prevent editing accounting page limitation enabled. */
   preventEditingAccountingPage?: boolean;
   /** Access level to accounting reports functionality. */
-  accountingReports?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  accountingReports?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to archive functionality. */
-  archive?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  archive?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
 export interface AllocationMetadata {
@@ -720,7 +747,6 @@ export interface AllocationMetadata {
   allocationMetadataRows?: AllocationMetadataRow[];
 }
 
-/** Metadata allocations for the target resource. */
 export interface AllocationMetadataRow {
   /**
    * Unique identifier of the metadata. Generated by Procountor and present in the object returned.
@@ -732,6 +758,12 @@ export interface AllocationMetadataRow {
   /** Sum of the allocation metadata in the currency of the Reference Payment or Bank Statement Event that the metadata is for. */
   sum: number;
   /**
+   * Allocation metadata comment.
+   * @minLength 0
+   * @maxLength 512
+   */
+  comment?: string;
+  /**
    * Event VAT status. Use here the numeric parts of VAT status codes listed in "VAT defaults" in Procountor. For example, for VAT status code "vat_12", use value 12. For Reference Payment metadata, the VAT status must be allowed for use in sales. For Bank Statement Event metadata, both purchase and sales VAT statuses are allowed.
    * @format int32
    */
@@ -740,7 +772,6 @@ export interface AllocationMetadataRow {
   ledgerAccountCode?: string;
 }
 
-/** Metadata allocations for the bank statement event. */
 export interface AllocationMetadataWithFullLedgerAccountDataRow {
   /**
    * Unique identifier of the metadata. Generated by Procountor and present in the object returned.
@@ -756,8 +787,353 @@ export interface AllocationMetadataWithFullLedgerAccountDataRow {
    * @format int32
    */
   vatStatus?: number;
+  /**
+   * Allocation metadata comment.
+   * @minLength 0
+   * @maxLength 512
+   */
+  comment?: string;
   /** Ledger account used for the accounting. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts. */
   ledgerAccount?: LedgerAccount;
+}
+
+export interface ApiIntegrationApproveRequest {
+  /** List of company IDs to approve. */
+  approve?: number[];
+  /** List of company IDs to reject with reason of rejection. */
+  reject?: ApiIntegrationRejected[];
+}
+
+export interface ApiIntegrationApproveResult {
+  integrationId?: string;
+  companiesIntegrated?: ApiIntegrationApprovedDTO[];
+}
+
+export interface ApiIntegrationApprovedDTO {
+  /** @format int32 */
+  companyId?: number;
+  apiKey?: string;
+}
+
+export interface ApiIntegrationCompany {
+  /**
+   * Id of the company who wants to activate the integration.
+   * @format int32
+   */
+  companyId?: number;
+  /** Additional info of the company who wants to activate the integration. */
+  extraInfo?: ApiIntegrationCompanyExtraInfo;
+}
+
+export interface ApiIntegrationCompanyExtraInfo {
+  /** Name of the company. Returned if requested in the integration specification and the user has given their consent to share. */
+  companyName?: string;
+  /** Country of the company. Returned if requested in the integration specification and the user has given their consent to share. */
+  country?:
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
+  /** Accounting office of the company. Returned if requested in the integration specification and the user has given their consent to share. */
+  accountingOfficeName?: string;
+  /** Business identifier of the company */
+  businessIdentifier?: BusinessIdentifier;
+}
+
+export interface ApiIntegrationCustomer {
+  /**
+   * Customer Company ID.
+   * @format int32
+   */
+  companyId?: number;
+  /** Integration template version status. */
+  integrationVersionStatus?:
+    | "APPROVED"
+    | "DELETED"
+    | "DEPRECATED"
+    | "INVALIDATED"
+    | "NEW"
+    | "PENDING_APPROVAL"
+    | "REJECTED";
+}
+
+export interface ApiIntegrationInitiator {
+  /** Email address of the user. Returned if requested in the integration specification and the user has given their consent to share. */
+  email?: string;
+  /** Firstname and lastname of the user. Returned if requested in the integration specification and the user has given their consent to share. */
+  userFullName?: string;
+}
+
+export interface ApiIntegrationRejected {
+  /**
+   * Company ID for which API integration is rejected.
+   * @format int32
+   */
+  companyId?: number;
+  /**
+   * Reason for rejection.
+   * @minLength 0
+   * @maxLength 255
+   */
+  reason?: string;
+}
+
+export interface ApiIntegrationRequestData {
+  /** ID of the integration. */
+  integrationId: string;
+  /** Request expiration date. */
+  expires?: string;
+  /** Request initiator data. */
+  initiator?: ApiIntegrationInitiator;
+  /** Companies selected for integration. */
+  companiesToIntegrate?: ApiIntegrationCompany[];
 }
 
 export interface Attachment {
@@ -773,21 +1149,21 @@ export interface Attachment {
   name: string;
   /** Reference type of the attachment. Indicates what object is the owner of the attachment. Exception: for JOURNAL type ledger receipts, use type INVOICE. */
   referenceType:
-    | 'BANKSTATEMENTEVENT'
-    | 'COST_RECEIPT'
-    | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
-    | 'EMPLOYEE_INFO'
-    | 'ENVIRONMENT'
-    | 'FINANCIAL_STATEMENT'
-    | 'INVOICE'
-    | 'INVOICEDRAFT_ITEM'
-    | 'LEDGERRECEIPT'
-    | 'NETS_COLLECTION'
-    | 'PERSON_BUSINESS_PARTNER_REGISTER'
-    | 'PURCHASE_PRODUCT_REGISTER'
-    | 'REFERENCE_PAYMENT'
-    | 'SALES_PRODUCT_REGISTER'
-    | 'SUPPLIER_BUSINESS_PARTNER_REGISTER';
+    | "BANKSTATEMENTEVENT"
+    | "COST_RECEIPT"
+    | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
+    | "EMPLOYEE_INFO"
+    | "ENVIRONMENT"
+    | "FINANCIAL_STATEMENT"
+    | "INVOICE"
+    | "INVOICEDRAFT_ITEM"
+    | "LEDGERRECEIPT"
+    | "NETS_COLLECTION"
+    | "PERSON_BUSINESS_PARTNER_REGISTER"
+    | "PURCHASE_PRODUCT_REGISTER"
+    | "REFERENCE_PAYMENT"
+    | "SALES_PRODUCT_REGISTER"
+    | "SUPPLIER_BUSINESS_PARTNER_REGISTER";
   /**
    * Unique identifier of the referenced object. Exception: for JOURNAL type ledger receipts, use the value of invoiceId referring to the associated invoice.
    * @format int32
@@ -814,7 +1190,19 @@ export interface AttachmentSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Bank account number. */
+export interface AverageDailyActualWorkdays {
+  /**
+   * Actual workdays in first year.
+   * @format int32
+   */
+  actualWorkdaysInFirstYear: number;
+  /**
+   * Actual workdays in second year. Only if salary slip payment period covers two years.
+   * @format int32
+   */
+  actualWorkdaysInSecondYear?: number;
+}
+
 export interface BankAccount {
   /** Bank account IBAN. If using a financing agreement, the account number must match the account of the specified financing agreement. The account number must be valid for the specified country, include country code and exclude any spaces. */
   accountNumber?: string;
@@ -822,15 +1210,13 @@ export interface BankAccount {
   bic?: string;
 }
 
-/** Aliases for the bank account if any exists in the given environment. Used on Swedish and Danish environments. */
 export interface BankAccountAlias {
   /** Type of associated account number. */
-  type: 'BANKGIRO' | 'KREDITOR' | 'PLUSGIRO';
+  type: "BANKGIRO" | "KREDITOR" | "PLUSGIRO";
   /** Associated account number. */
   accountNumber: string;
 }
 
-/** Search results. */
 export interface BankStatement {
   /**
    * Unique identifier of the bank statement.
@@ -854,217 +1240,217 @@ export interface BankStatement {
    * @example "EUR"
    */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /**
    * Number of deposits during the bank statement period.
    * @format int32
@@ -1092,7 +1478,6 @@ export interface BankStatement {
   events?: BankStatementEvent[];
 }
 
-/** List of bank statement events. Events can be nested. */
 export interface BankStatementEvent {
   /**
    * Unique identifier of the bank statement event.
@@ -1156,7 +1541,37 @@ export interface BankStatementsSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Basic invoicing information. */
+export interface BasicFactoringContract {
+  /**
+   * Factoring contract identifier.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Financing company name.
+   * @minLength 1
+   */
+  financingCompanyName: string;
+  /**
+   * Financing company bank account.
+   * @minLength 1
+   */
+  financingCompanyBankAccount: string;
+  /**
+   * Agreement number.
+   * @minLength 1
+   * @maxLength 80
+   */
+  contractNumber: string;
+  /** Transfer notifications. */
+  transferNotification?: TransferNotification[];
+  /**
+   * Contract status.
+   * @default "ACTIVE"
+   */
+  status?: "ACTIVE" | "INACTIVE";
+}
+
 export interface BasicInvoicingInfo {
   /** Customer number of the partner. */
   customerNumber?: string;
@@ -1166,7 +1581,6 @@ export interface BasicInvoicingInfo {
   identifierType?: string;
 }
 
-/** Search results. */
 export interface BasicPaymentTransactionData {
   /**
    * Unique payment identifier.
@@ -1189,43 +1603,259 @@ export interface BasicPaymentTransactionData {
   receiverName?: string;
   /** Payment status. */
   status?:
-    | 'APPROVED'
-    | 'DELETED'
-    | 'EMPTY'
-    | 'INVALIDATED'
-    | 'INVOICED'
-    | 'MARKED_PAID'
-    | 'NOT_SENT'
-    | 'OVERRIDDEN'
-    | 'PAID'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_DENIED'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAYMENT_TRANSACTION_REMOVED'
-    | 'RECEIVED'
-    | 'SENT'
-    | 'STARTED'
-    | 'UNFINISHED'
-    | 'UNSAVED'
-    | 'VERIFIED';
+    | "APPROVED"
+    | "DELETED"
+    | "EMPTY"
+    | "INVALIDATED"
+    | "INVOICED"
+    | "MARKED_PAID"
+    | "NOT_SENT"
+    | "OVERRIDDEN"
+    | "PAID"
+    | "PARTLY_PAID"
+    | "PAYMENT_DENIED"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_REMOVED"
+    | "RECEIVED"
+    | "SENT"
+    | "STARTED"
+    | "UNFINISHED"
+    | "UNSAVED"
+    | "VERIFIED";
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
+  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  /** Payment amount in paid currency. */
+  paidAmount?: number;
+  /**
+   * Currency of the payment in paid currency in ISO 4217 format.
+   * @example "SEK"
+   */
+  paidCurrency?:
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
 }
 
-/** Registry info data of the partner. */
 export interface BasicRegistryInfo {
   /** Status of the partner. */
   active?: boolean;
 }
 
-/** Company identifier of current company. */
 export interface BusinessIdentifier {
   /**
    * Business Registration Number (BRN) type of current company identifier. (example values: HETU, SSN, FI, NO,...)
    * @example "HETU"
    */
-  brnType?: 'ASSN' | 'DK' | 'FI' | 'HETU' | 'NO' | 'PN' | 'SE' | 'SSN' | 'YHD';
+  brnType?: "ASSN" | "DK" | "FI" | "HETU" | "NO" | "PN" | "SE" | "SSN" | "YHD";
   /**
    * Business Registration Number (BRN) code (Example value: '1234567-8', basically BRN without type prefix).
    * @minLength 0
@@ -1248,7 +1878,7 @@ export interface BusinessPartner {
    */
   name: string;
   /** Type of the partner. */
-  type: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
+  type: "CUSTOMER" | "SUPPLIER" | "PERSON";
   /** Address of the partner. Required for customer */
   address?: BusinessPartnerAddress;
   /** Billing address of the partner. */
@@ -1274,7 +1904,6 @@ export interface BusinessPartner {
   version?: string;
 }
 
-/** Default account of the given type. */
 export interface BusinessPartnerAccount {
   /** Code of the account. */
   code?: string;
@@ -1282,7 +1911,6 @@ export interface BusinessPartnerAccount {
   name?: string;
 }
 
-/** Default accounts for the given invoice type. */
 export interface BusinessPartnerAccountsInfo {
   /** Default account of the given type. */
   debitAccount?: BusinessPartnerAccount;
@@ -1292,7 +1920,6 @@ export interface BusinessPartnerAccountsInfo {
   reconciliationAccount?: BusinessPartnerAccount;
 }
 
-/** Additional info of the partner. */
 export interface BusinessPartnerAdditionalInfo {
   /**
    * Default additional information of the partner.
@@ -1310,39 +1937,39 @@ export interface BusinessPartnerAdditionalInfo {
   group?: string;
   /** Company ID of the partner. If provided partnerCompanyId will be validated according to the type. */
   parentCompanyIdType?:
-    | ''
-    | 'HETU'
-    | 'YHD'
-    | 'PN'
-    | 'NO'
-    | 'AT'
-    | 'BE'
-    | 'BG'
-    | 'CY'
-    | 'HR'
-    | 'CZ'
-    | 'DK'
-    | 'EE'
-    | 'FI'
-    | 'FR'
-    | 'DE'
-    | 'GB'
-    | 'EL'
-    | 'HU'
-    | 'IE'
-    | 'IT'
-    | 'LV'
-    | 'LT'
-    | 'LU'
-    | 'MT'
-    | 'NL'
-    | 'PL'
-    | 'PT'
-    | 'RO'
-    | 'SK'
-    | 'SI'
-    | 'ES'
-    | 'SE';
+    | ""
+    | "HETU"
+    | "YHD"
+    | "PN"
+    | "NO"
+    | "AT"
+    | "BE"
+    | "BG"
+    | "CY"
+    | "HR"
+    | "CZ"
+    | "DK"
+    | "EE"
+    | "FI"
+    | "FR"
+    | "DE"
+    | "GB"
+    | "EL"
+    | "HU"
+    | "IE"
+    | "IT"
+    | "LV"
+    | "LT"
+    | "LU"
+    | "MT"
+    | "NL"
+    | "PL"
+    | "PT"
+    | "RO"
+    | "SK"
+    | "SI"
+    | "ES"
+    | "SE";
   /**
    * Parent company ID of the partner.
    * @minLength 0
@@ -1401,17 +2028,16 @@ export interface BusinessPartnerAdditionalInfo {
    * Invoice ledger of the partner. If not provided, it will be automatically set to INVOICE_LEDGER.
    * @default "INVOICE_LEDGER"
    */
-  invoiceLedger?: 'CLEARING' | 'INVOICE_LEDGER';
+  invoiceLedger?: "CLEARING" | "INVOICE_LEDGER";
 }
 
-/** Address of the partner. Required for customer */
 export interface BusinessPartnerAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -1419,25 +2045,19 @@ export interface BusinessPartnerAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -1447,257 +2067,257 @@ export interface BusinessPartnerAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -1706,7 +2326,6 @@ export interface BusinessPartnerAddress {
   subdivision?: string;
 }
 
-/** Search results. */
 export interface BusinessPartnerBasicInfo {
   /**
    * Unique identifier for the partner.
@@ -1717,12 +2336,12 @@ export interface BusinessPartnerBasicInfo {
   name?: string;
   /** Billing address of the partner. */
   billingAddress?: BusinessPartnerBillingAddress;
-  /** Basic invoicing information. */
+  /** Invoicing info data of the partner. */
   invoicingInfo?: BasicInvoicingInfo;
   /** Registry info data of the partner. */
   registryInfo?: BasicRegistryInfo;
   /** Type of the partner. */
-  type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
+  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
   /**
    * Business partner version timestamp. Automatically generated by Procountor and updated every time the partner is modified. When using PATCH /businesspartners, it is required to include the latest version timestamp of the partner to the request. This prevents conflicts if the partner is being modified from several sources.It is not required for POST and will be omitted
    * @format date-time
@@ -1730,14 +2349,13 @@ export interface BusinessPartnerBasicInfo {
   version?: string;
 }
 
-/** Billing address of the partner. */
 export interface BusinessPartnerBillingAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -1745,25 +2363,19 @@ export interface BusinessPartnerBillingAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -1773,257 +2385,257 @@ export interface BusinessPartnerBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -2032,7 +2644,6 @@ export interface BusinessPartnerBillingAddress {
   subdivision?: string;
 }
 
-/** Contact persons of the partner. */
 export interface BusinessPartnerContactPerson {
   /**
    * Contact person ID.
@@ -2086,14 +2697,13 @@ export interface BusinessPartnerDefaultAccounts {
   journalAccounts?: BusinessPartnerAccountsInfo;
 }
 
-/** Delivery address of the partner. */
 export interface BusinessPartnerDeliveryAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -2101,25 +2711,19 @@ export interface BusinessPartnerDeliveryAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -2129,257 +2733,257 @@ export interface BusinessPartnerDeliveryAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -2401,8 +3005,8 @@ export interface BusinessPartnerGroup {
    */
   name: string;
   /** Type of the partner group. */
-  type: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
-  /** Is partner group active? NOTE: If the business partner group is in use in the debt collection settings for the Maksuvahti service, then it can't be set to inactive */
+  type: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  /** Is partner group active? NOTE: If the business partner group is in use in the debt collection settings for the Maksuvahti service, Ropo service or is set as the automatic distraint authority group, then it can't be set to inactive */
   active?: boolean;
 }
 
@@ -2413,236 +3017,235 @@ export interface BusinessPartnerGroupSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Payment information for the person. */
 export interface BusinessPartnerPaymentDetails {
   /** Payment method. */
   paymentMethod?:
-    | 'BANK_TRANSFER'
-    | 'CASH'
-    | 'CLEARING'
-    | 'CREDIT_CARD_CHARGE'
-    | 'DIRECT_DEBIT'
-    | 'DIRECT_PAYMENT'
-    | 'DKLMPKRE'
-    | 'DOMESTIC_PAYMENT_BANKGIRO'
-    | 'DOMESTIC_PAYMENT_CREDITOR'
-    | 'DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'FOREIGN_PAYMENT'
-    | 'NETS'
-    | 'OTHER';
+    | "BANK_TRANSFER"
+    | "CASH"
+    | "CLEARING"
+    | "CREDIT_CARD_CHARGE"
+    | "DIRECT_DEBIT"
+    | "DIRECT_PAYMENT"
+    | "DKLMPKRE"
+    | "DOMESTIC_PAYMENT_BANKGIRO"
+    | "DOMESTIC_PAYMENT_CREDITOR"
+    | "DOMESTIC_PAYMENT_PLUSGIRO"
+    | "FOREIGN_PAYMENT"
+    | "NETS"
+    | "OTHER";
   /** Default currency. */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Bank account number. */
   bankAccount?: BankAccount;
   /** Payment term days. */
@@ -2657,7 +3260,6 @@ export interface BusinessPartnerPaymentDetails {
   clearingCode?: string;
 }
 
-/** Payment info of the partner. */
 export interface BusinessPartnerPaymentInfo {
   /**
    * Factoring contract ID of the partner.
@@ -2666,19 +3268,19 @@ export interface BusinessPartnerPaymentInfo {
   factoringContractId?: number;
   /** Payment method of the partner. The DKLMPKRE method is deprecated and read only, DOMESTIC_PAYMENT_CREDITOR should be used instead. */
   paymentMethod:
-    | 'BANK_TRANSFER'
-    | 'DIRECT_DEBIT'
-    | 'DIRECT_PAYMENT'
-    | 'CLEARING'
-    | 'CREDIT_CARD_CHARGE'
-    | 'FOREIGN_PAYMENT'
-    | 'OTHER'
-    | 'CASH'
-    | 'DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'DOMESTIC_PAYMENT_BANKGIRO'
-    | 'DOMESTIC_PAYMENT_CREDITOR'
-    | 'DKLMPKRE'
-    | 'NETS';
+    | "BANK_TRANSFER"
+    | "DIRECT_DEBIT"
+    | "DIRECT_PAYMENT"
+    | "CLEARING"
+    | "CREDIT_CARD_CHARGE"
+    | "FOREIGN_PAYMENT"
+    | "OTHER"
+    | "CASH"
+    | "DOMESTIC_PAYMENT_PLUSGIRO"
+    | "DOMESTIC_PAYMENT_BANKGIRO"
+    | "DOMESTIC_PAYMENT_CREDITOR"
+    | "DKLMPKRE"
+    | "NETS";
   /** Bank account ID of the partner. */
   bankAccount?: string;
   /** Payment term days of the partner. */
@@ -2693,217 +3295,217 @@ export interface BusinessPartnerPaymentInfo {
   cashDiscount?: CashDiscount;
   /** Currency of the partner. */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Delivery method of the partner. */
   deliveryMethod?: string;
   /** Clearing code of the bank account. */
@@ -2921,15 +3523,31 @@ export interface BusinessPartnerSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Only SALES_INVOICE, SALES_ORDER, PURCHASE_INVOICE and PURCHASE_ORDER. Cash discount set on the invoice. */
+export interface CarBenefitRowDetails {
+  /**
+   * Unique identifier of employee salary base car benefit row details.
+   * @format int64
+   */
+  id?: number;
+  /** Age group of the car. */
+  carAgeGroup: "A" | "ABROAD" | "B" | "C";
+  /** Whether benefit is limited. */
+  benefitLimited: boolean;
+  /**
+   * The carbon dioxide emission value (g/km) of the car. Scale: 2.
+   * @min 0
+   * @max 100
+   */
+  emissionValue?: number;
+}
+
 export interface CashDiscount {
   /** Up to three cash discount options can be provided. Any additional values enteredwill be ignored. Provided cash discount options will be saved in ascending order by numberOfDays. */
   optionList?: CashDiscountOption[];
   /** The payment term type indicates the start point for payment due date calculation.On Danish environment, may select between two options: FROM_INV_DATE or FROM_END_OF_MONTH.For other environments, the only selectable term type is FROM_INV_DATE,which is also the default value across all environments. */
-  cashDiscountsTermType?: 'FROM_END_OF_MONTH' | 'FROM_INV_DATE';
+  cashDiscountsTermType?: "FROM_END_OF_MONTH" | "FROM_INV_DATE";
 }
 
-/** Up to three cash discount options can be provided. Any additional values enteredwill be ignored. Provided cash discount options will be saved in ascending order by numberOfDays. */
 export interface CashDiscountOption {
   /**
    * Days specified in cash discount
@@ -2940,7 +3558,6 @@ export interface CashDiscountOption {
   /**
    * Discount percentage specified in cash discount
    * @max 99.99
-   * @exclusiveMax false
    */
   discountPercentage?: number;
 }
@@ -2961,15 +3578,13 @@ export interface CirculationSettings {
   /** Indicates if approval circulation is enabled for travel and expense invoices. */
   useForTravelAndExpenseInvoices?: boolean;
   /** Represents the amount of time in which circulation notification will be sent. */
-  reminderInterval?: 'EVERY_SECOND_DAY' | 'EVERY_THIRD_DAY' | 'ONCE_A_DAY' | 'ONCE_A_WEEK' | 'ONLY_ONCE';
+  reminderInterval?: "EVERY_SECOND_DAY" | "EVERY_THIRD_DAY" | "ONCE_A_DAY" | "ONCE_A_WEEK" | "ONLY_ONCE";
   /** Indicates whether forced notifications are enabled. */
   forceNotifications?: boolean;
   /** Indicates if determined order is enabled for verification and approval. */
   useDeterminedOrder?: boolean;
   /** Indicates whether payment is allowed only after approval. */
   allowPaymentOnlyWhenApproved?: boolean;
-  /** Indicates whether payee information change is not allowed. */
-  preventPayeeInformationChange?: boolean;
   /** Indicates whether specific discussion for invoice is allowed. */
   allowInvoiceSpecificDiscussion?: boolean;
   /** Indicates whether extended tagging in discussion is allowed. */
@@ -2999,7 +3614,7 @@ export interface CirculationSettings {
 export interface CollectionsAndPenalExpenses {
   /** Indicates if automatic handling of collection and penal costs is enabled. */
   useAutomaticHandling?: boolean;
-  /** Penal expense product. */
+  /** Collection costs product. */
   collectionCostsProduct?: ProductBasicInfo;
   /** Penal expense product. */
   penalExpenseProduct?: ProductBasicInfo;
@@ -3021,7 +3636,6 @@ export interface CollectionsAndPenalExpenses {
   collectionPartner?: string;
 }
 
-/** List of comments. */
 export interface Comment {
   /**
    * Identifier for the comment.
@@ -3073,285 +3687,301 @@ export interface Company {
    * @format int32
    */
   id: number;
-  /** Name of current company. */
+  /**
+   * Name of current company.
+   * @minLength 1
+   */
   name: string;
   /** Country of current company. */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /** Product version of current company. */
   productVersion?:
-    | 'BACKOFFICE'
-    | 'BACKOFFICE_BASIC'
-    | 'BACKOFFICE_PLUS'
-    | 'BACKOFFICE_PREMIUM'
-    | 'FINAGO_SOLO'
-    | 'FINANCIALS_ALKU'
-    | 'FINANCIALS_BASIC'
-    | 'FINANCIALS_ENTERPRISE'
-    | 'FINANCIALS_GOLD'
-    | 'FINANCIALS_LIGHT'
-    | 'FINANCIALS_MAX'
-    | 'FINANCIALS_PLATINUM'
-    | 'FINANCIALS_PLUS'
-    | 'FINANCIALS_PREMIUM'
-    | 'FINANCIALS_SILVER'
-    | 'FINANCIALS_UNLIMITED'
-    | 'FLEX'
-    | 'SALES_GOLD'
-    | 'SALES_PLATINUM'
-    | 'SALES_SILVER';
+    | "BACKOFFICE"
+    | "BACKOFFICE_BASIC"
+    | "BACKOFFICE_PLUS"
+    | "BACKOFFICE_PREMIUM"
+    | "FINAGO_SOLO"
+    | "FINANCIALS_ALKU"
+    | "FINANCIALS_BASIC"
+    | "FINANCIALS_ENTERPRISE"
+    | "FINANCIALS_GOLD"
+    | "FINANCIALS_LIGHT"
+    | "FINANCIALS_MAX"
+    | "FINANCIALS_PLATINUM"
+    | "FINANCIALS_PLUS"
+    | "FINANCIALS_PREMIUM"
+    | "FINANCIALS_SILVER"
+    | "FINANCIALS_TIER_ONE"
+    | "FINANCIALS_TIER_THREE"
+    | "FINANCIALS_TIER_TWO"
+    | "FINANCIALS_UNLIMITED"
+    | "FLEX"
+    | "SALES_GOLD"
+    | "SALES_PLATINUM"
+    | "SALES_SILVER"
+    | "SME_BETTER";
   /** Operation type of current company. */
-  operationType?: 'BROKEN' | 'CEASED' | 'CLOSED' | 'DEMONSTRATION' | 'EDUCATIONAL' | 'ELISA_PURCHASE' | 'PRODUCTION' | 'SPECIAL' | 'TRIAL';
+  operationType?:
+    | "BROKEN"
+    | "CEASED"
+    | "CLOSED"
+    | "DEMONSTRATION"
+    | "EDUCATIONAL"
+    | "ELISA_PURCHASE"
+    | "PRODUCTION"
+    | "SPECIAL"
+    | "TRIAL";
   /** Accounting name of current company. */
   accountingOfficeName?: string;
   /**
@@ -3377,9 +4007,12 @@ export interface Company {
   businessIdentifier?: BusinessIdentifier;
   /** Languages supported in coa for given environment. */
   accountingCoaLanguages?: string[];
+  /** Accounting and invoicing currency of company. */
+  companyCurrency?: "DKK" | "EUR" | "NOK" | "SEK";
+  /** Currency rate search density of company. */
+  currencyRateSearchDensity?: "DAILY_EXCHANGE_RATE" | "LAST_DAY_OF_THE_MONTH" | "PROCOUNTOR_FIXED_RATE";
 }
 
-/** Address of current company. */
 export interface CompanyAddress {
   /**
    * Specifier, such as c/o address.
@@ -3416,257 +4049,257 @@ export interface CompanyAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
 }
 
 export interface CompanyBankAccount {
@@ -3696,223 +4329,223 @@ export interface CompanyBankAccount {
    * @example "EUR"
    */
   currency:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Information if the bank account is used as default bank account for invoice in the given environment. */
   defaultForInvoice: boolean;
   /** Information if the bank account is used as default bank account for payment in the given environment. */
   defaultForPayment: boolean;
   /** Information if the bank account is active or not. If set to INACTIVE then all properties will be set to false */
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
   /**
    * Order number. Can be used for display ordering instead of ID.
    * @format int32
@@ -3933,7 +4566,7 @@ export interface CompanyBankAccount {
   bankAddress?: string;
   /**
    * The ledger account number.
-   * @example "1910"
+   * @example 1910
    */
   ledgerAccount: string;
   /**
@@ -3963,7 +4596,6 @@ export interface CompanyBankAccount {
   created?: string;
 }
 
-/** Search results. */
 export interface CompanyBankAccountBasicInfo {
   /**
    * Unique identifier of the bank account.
@@ -3991,223 +4623,223 @@ export interface CompanyBankAccountBasicInfo {
    * @example "EUR"
    */
   currency:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Information if the bank account is used as default bank account for invoice in the given environment. */
   defaultForInvoice: boolean;
   /** Information if the bank account is used as default bank account for payment in the given environment. */
   defaultForPayment: boolean;
   /** Information if the bank account is active or not. If set to INACTIVE then all properties will be set to false */
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
   /**
    * Order number. Can be used for display ordering instead of ID.
    * @format int32
@@ -4229,7 +4861,6 @@ export interface CompanyBankAccountSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Billing address of current company. */
 export interface CompanyBillingAddress {
   /**
    * Street of company billing address.
@@ -4257,271 +4888,296 @@ export interface CompanyBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
 }
 
 export interface CompanyCurrency {
   /** Currency of company. */
-  companyCurrency?: 'DKK' | 'EUR' | 'NOK' | 'SEK';
+  companyCurrency?: "DKK" | "EUR" | "NOK" | "SEK";
 }
 
-/** Company settings. These are settings for 3rd party client usage to identify what features are usable for current company (in order to avoid requests that are bound to fail) */
 export interface CompanySettings {
   /** Is invoice discussion enabled. */
   invoiceDiscussionEnabled?: boolean;
 }
 
-/** This object holds information about the counterparty of the invoice. With sales invoices and sales orders, it is the buyer. With purchase invoices and purchase orders it is the seller. With travel and expense invoices, it is the reporter of the expenses */
+export interface CompanyUsageSettings {
+  /** The default invoice channel for the company */
+  defaultInvoiceChannel?: "EDIFACT" | "ELECTRONIC_INVOICE" | "EMAIL" | "MAIL" | "NO_SENDING" | "PAPER_INVOICE";
+  /** Cash discount settings for the company */
+  cashDiscount?: CompanyUsageSettingsCashDiscount;
+  /** Accounting by row settings for the company */
+  accountingByRow?: CompanyUsageSettingsAccountingByRow;
+}
+
+export interface CompanyUsageSettingsAccountingByRow {
+  /** Indicates if sales invoice posting is enabled */
+  salesInvoicePosting?: boolean;
+  /** Indicates if purchase invoice posting is enabled */
+  purchaseInvoicePosting?: boolean;
+  /** Indicates if travel and expense invoice posting is enabled */
+  travelAndExpenseInvoicePosting?: boolean;
+  /** Indicates if salary posting is enabled */
+  salaryPosting?: boolean;
+}
+
+export interface CompanyUsageSettingsCashDiscount {
+  /** Indicates if cash discount is applied for sales invoices */
+  cashDiscountForSales?: boolean;
+  /** Indicates if cash discount is applied for purchase invoices */
+  cashDiscountForPurchase?: boolean;
+}
+
 export interface CounterParty {
   /**
    * Name of the contact person.
@@ -4537,9 +5193,11 @@ export interface CounterParty {
   customerNumber?: string;
   /** SALES_INVOICE, SALES_ORDER and PURCHASE_ORDER only. Email address of the buyer. Required to be correct if supported. */
   email?: string;
+  /** Blind carbon copy addresses. Supported only in SALES_INVOICE, SALES_ORDER and OFFER. Maximum 4 email addresses can be provided. Must not match the main email address and each Bcc address must be free of special characters and no longer than 256 characters. */
+  bccAddresses?: string[];
   /** Counterparty address. In the case of a sales invoice this is the buyer's address, and in the case of a purchase invoice and purchase order it is the seller. Even if the invoice is linked to a business partner by partnerId, the counterparty address can be different from the address saved for that business partner in the partner register. */
   counterPartyAddress: InvoiceCounterpartyAddress;
-  /** Bank account number. */
+  /** SALES_INVOICE only. Required if the payment method requires defining the bank accounts for both parties. */
   bankAccount?: BankAccount;
   einvoiceAddress?: EInvoiceAddress;
 }
@@ -4570,217 +5228,217 @@ export interface CurrencyExchangeRate {
   queryDay?: string;
   /** Currency of exchange rate. */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /**
    * Day of exchange rate.
    * @format date
@@ -4802,14 +5460,12 @@ export interface CurrencyGroupRates {
   rates?: CurrencyRate[];
 }
 
-/** List of currency rates. */
 export interface CurrencyRate {
   currencyRate?: number;
   currencyCode?: string;
 }
 
-/** Data model for which constraint violations occurred. */
-export type DataModel = object;
+export type DataModel = any;
 
 export interface DefaultDimension {
   /**
@@ -4835,7 +5491,6 @@ export interface DefaultDimensionBasicData {
   items?: DefaultDimensionItemBasicData[];
 }
 
-/** Dimension items connected with dimension. */
 export interface DefaultDimensionItem {
   /**
    * Unique identifier for the dimension item.
@@ -4852,7 +5507,6 @@ export interface DefaultDimensionItem {
   description?: string;
 }
 
-/** Dimension items connected with dimension. */
 export interface DefaultDimensionItemBasicData {
   /**
    * Unique identifier for the dimension item.
@@ -4879,7 +5533,6 @@ export interface DefaultProduct {
   validityPeriods?: ProductValidityPeriod[];
 }
 
-/** Default settings of the default product */
 export interface DefaultProductSettings {
   /** Information whether special discount is in use */
   useSpecialDiscount?: boolean;
@@ -4904,7 +5557,6 @@ export interface DeliveryTerms {
   deliveryTerms?: string[];
 }
 
-/** Invoice delivery terms info. */
 export interface DeliveryTermsInfo {
   /** Name for terms of delivery. */
   name?: string;
@@ -4924,7 +5576,6 @@ export interface Dimension {
   items?: DimensionItem[];
 }
 
-/** Dimension items. */
 export interface DimensionItem {
   /**
    * Dimension item ID. Required in PUT
@@ -4939,7 +5590,6 @@ export interface DimensionItem {
   description?: string;
 }
 
-/** Values of dimension items associated with this transaction. The number of provided dimension items must be within the dimension max count defined by the purchased Procountor license. Provided dimension pairs (dimension id - item id) must be unique within the list provided. */
 export interface DimensionItemValue {
   /**
    * Dimension ID. Must exist in the current environment. For a list of available dimensions, see the GET /dimensions endpoint.
@@ -4955,6 +5605,11 @@ export interface DimensionItemValue {
   value: number;
 }
 
+export interface DimensionItemValueList {
+  /** Values of dimension items associated with this transaction. The number of provided dimension items must be within the dimension max count defined by the purchased Procountor license. Provided dimension pairs (dimension id - item id) must be unique within the list provided. */
+  dimensionItemValues: DimensionItemValue[];
+}
+
 export interface DimensionName {
   /**
    * Dimension name.
@@ -4964,12 +5619,10 @@ export interface DimensionName {
   name: string;
 }
 
-/** List containing DirectBankTransfer objects. */
 export interface DirectBankTransfer {
   /**
    * The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field.
    * @min 0
-   * @exclusiveMin true
    */
   amount: number;
   /**
@@ -4979,7 +5632,7 @@ export interface DirectBankTransfer {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
+  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -5000,18 +5653,18 @@ export interface DirectBankTransfer {
   recipientBicCode?: string;
   /** Payment method type defining what kind of payment has to be made. */
   paymentMethod:
-    | 'DENMARK_DOMESTIC_PAYMENT'
-    | 'DENMARK_DOMESTIC_PAYMENT_CREDITOR'
-    | 'DENMARK_FOREIGN_PAYMENT'
-    | 'FINNISH_BANK_TRANSFER'
-    | 'FINNISH_EXPRESS_PAYMENT'
-    | 'FINNISH_FOREIGN_PAYMENT'
-    | 'NORWEGIAN_DOMESTIC_PAYMENT'
-    | 'NORWEGIAN_FOREIGN_PAYMENT'
-    | 'SWEDISH_DOMESTIC_PAYMENT'
-    | 'SWEDISH_DOMESTIC_PAYMENT_BANKGIRO'
-    | 'SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'SWEDISH_FOREIGN_PAYMENT';
+    | "DENMARK_DOMESTIC_PAYMENT"
+    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
+    | "DENMARK_FOREIGN_PAYMENT"
+    | "FINNISH_BANK_TRANSFER"
+    | "FINNISH_EXPRESS_PAYMENT"
+    | "FINNISH_FOREIGN_PAYMENT"
+    | "NORWEGIAN_DOMESTIC_PAYMENT"
+    | "NORWEGIAN_FOREIGN_PAYMENT"
+    | "SWEDISH_DOMESTIC_PAYMENT"
+    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
+    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
+    | "SWEDISH_FOREIGN_PAYMENT";
   /** The payer bank account. It has to be predefined in the environment to be able to use the payment. If not set than default bank account for payment is taken. */
   payerBankAccount?: string;
   /**
@@ -5030,220 +5683,220 @@ export interface DirectBankTransfer {
   /** Intermediary bank BIC. */
   intermediaryBankBic?: string;
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
+  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
   /** Currency code. */
   currencyCode:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /**
    * Custom identifier of each direct bank transfer with a maximum length of 64. It's externally provided for easierassigning of transactions to payments.
    * @minLength 1
@@ -5261,12 +5914,10 @@ export interface DirectBankTransferList {
   directBankTransfers: DirectBankTransfer[];
 }
 
-/** List containing DirectSalaryPayment objects. */
 export interface DirectSalaryPayment {
   /**
    * The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field.
    * @min 0
-   * @exclusiveMin true
    */
   amount: number;
   /**
@@ -5276,7 +5927,7 @@ export interface DirectSalaryPayment {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
+  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -5301,13 +5952,13 @@ export interface DirectSalaryPayment {
    * @maxLength 80
    */
   recipientName: string;
-  /** Company identifier of current company. */
+  /** The recipient code data. */
   recipientCode: BusinessIdentifier;
   /**
    * The code of the currency.
    * @example "EUR"
    */
-  currencyCode: 'EUR';
+  currencyCode: "EUR";
   /**
    * Custom id for the payment.
    * @minLength 1
@@ -5330,9 +5981,14 @@ export interface DirectSalaryPaymentGroup {
    */
   created?: string;
   /** Payment status. */
-  status?: 'PAID' | 'PAYMENT_QUEUED' | 'PAYMENT_SENT_TO_BANK' | 'PAYMENT_TRANSACTION_CANCELLED' | 'PAYMENT_TRANSACTION_REMOVED';
+  status?:
+    | "PAID"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_CANCELLED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /** Payment method. */
-  paymentMethod?: 'FINNISH_SALARY_TRANSFER';
+  paymentMethod?: "FINNISH_SALARY_TRANSFER";
   /**
    * Date of the payment
    * @format date-time
@@ -5348,7 +6004,6 @@ export interface DirectSalaryPaymentGroup {
   payments?: PaymentBasicInfo[];
 }
 
-/** Search results. */
 export interface DirectSalaryPaymentGroupBaseInfo {
   /**
    * Id of the payment list.
@@ -5363,9 +6018,14 @@ export interface DirectSalaryPaymentGroupBaseInfo {
    */
   created?: string;
   /** Payment status. */
-  status?: 'PAID' | 'PAYMENT_QUEUED' | 'PAYMENT_SENT_TO_BANK' | 'PAYMENT_TRANSACTION_CANCELLED' | 'PAYMENT_TRANSACTION_REMOVED';
+  status?:
+    | "PAID"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_CANCELLED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /** Payment method. */
-  paymentMethod?: 'FINNISH_SALARY_TRANSFER';
+  paymentMethod?: "FINNISH_SALARY_TRANSFER";
   /**
    * Date of the payment
    * @format date-time
@@ -5386,6 +6046,18 @@ export interface DirectSalaryPaymentGroupBaseInfoSearchResult {
   meta?: SearchResultMetaData;
 }
 
+export interface DirectSalaryPaymentResult {
+  /**
+   * Id of the payment list.
+   * @format int32
+   */
+  id?: number;
+  /** Custom identifier of the payment list. */
+  customId?: string;
+  /** List of the payment IDs */
+  payments?: PaymentBasicInfo[];
+}
+
 export interface DirectSalaryPayments {
   /**
    * Name of the direct salary payment list. Can be used for list identification.
@@ -5394,7 +6066,7 @@ export interface DirectSalaryPayments {
    */
   listName: string;
   /** Name of the payment method. Used for all payments. */
-  paymentMethod: 'FINNISH_SALARY_TRANSFER';
+  paymentMethod: "FINNISH_SALARY_TRANSFER";
   /**
    * Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. Used for all payments.
    * @format date
@@ -5419,12 +6091,12 @@ export interface DirectSalaryPayments {
 
 /** These are possible response models */
 export interface DirectSalaryPaymentsConfirmationResponseModels {
+  /** Response for creating direct salary payment action (POST /payments/directsalarypayments) performed successfully */
   PaymentGroup?: DirectSalaryPaymentGroup;
-  /** Response information message */
+  /** Response for cancelling (PUT /payments/directsalarypayments/{paymentlistId}/cancel) payment action performedsuccessfully */
   InfoMessage?: InfoMessage;
 }
 
-/** Search results. */
 export interface Document {
   /**
    * ID of the attachment.
@@ -5447,21 +6119,21 @@ export interface Document {
   referenceId?: number;
   /** Attachment reference type */
   referenceType?:
-    | 'BANKSTATEMENTEVENT'
-    | 'COST_RECEIPT'
-    | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
-    | 'EMPLOYEE_INFO'
-    | 'ENVIRONMENT'
-    | 'FINANCIAL_STATEMENT'
-    | 'INVOICE'
-    | 'INVOICEDRAFT_ITEM'
-    | 'LEDGERRECEIPT'
-    | 'NETS_COLLECTION'
-    | 'PERSON_BUSINESS_PARTNER_REGISTER'
-    | 'PURCHASE_PRODUCT_REGISTER'
-    | 'REFERENCE_PAYMENT'
-    | 'SALES_PRODUCT_REGISTER'
-    | 'SUPPLIER_BUSINESS_PARTNER_REGISTER';
+    | "BANKSTATEMENTEVENT"
+    | "COST_RECEIPT"
+    | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
+    | "EMPLOYEE_INFO"
+    | "ENVIRONMENT"
+    | "FINANCIAL_STATEMENT"
+    | "INVOICE"
+    | "INVOICEDRAFT_ITEM"
+    | "LEDGERRECEIPT"
+    | "NETS_COLLECTION"
+    | "PERSON_BUSINESS_PARTNER_REGISTER"
+    | "PURCHASE_PRODUCT_REGISTER"
+    | "REFERENCE_PAYMENT"
+    | "SALES_PRODUCT_REGISTER"
+    | "SUPPLIER_BUSINESS_PARTNER_REGISTER";
   /**
    * Attaching time.
    * @format date-time
@@ -5504,7 +6176,6 @@ export interface EInvoiceData {
   wsCustomerNumber?: string;
 }
 
-/** Search results. */
 export interface Employee {
   /**
    * Unique employee identifier.
@@ -5522,11 +6193,67 @@ export interface Employee {
   /** Person number. */
   personNumber?: string;
   /** The channel which is used for delivering Salary Slips for the given Employee. */
-  salaryChannel?: 'EMAIL' | 'ESALARY' | 'MAIL' | 'MOBILE' | 'NO_SENDING' | 'PAPER';
+  salaryChannel?: "NO_SENDING" | "MAIL" | "EMAIL" | "MOBILE" | "ESALARY";
   /** Automated Tax Card. */
   automatedTaxCard?: boolean;
   /** Status of the Employee. */
   active?: boolean;
+}
+
+export interface EmployeeDataForSalarySlip {
+  /**
+   * Unique identifier of the employee.
+   * @format int64
+   */
+  employeeId: number;
+  /**
+   * Calendar workdays. If not provided will be automatically calculated and set based on payment period.
+   * @format int32
+   * @min 0
+   * @max 255
+   */
+  calendarWorkdays?: number;
+  /**
+   * Absent days.
+   * @format int32
+   * @min 0
+   * @max 255
+   */
+  absentDays?: number;
+  /**
+   * Pension insurance contributions.
+   * @min 0
+   * @max 100
+   */
+  pensionInsuranceContributionPercent?: number;
+  /**
+   * Unemployment insurance payment.
+   * @min 0
+   * @max 100
+   */
+  unemploymentInsurancePercent?: number;
+  /**
+   * Occupational accident insurance.
+   * @min 0
+   * @max 100
+   */
+  accidentInsurancePercent?: number;
+  /**
+   * Group life insurance contribution.
+   * @min 0
+   * @max 100
+   */
+  groupLifeInsurancePercent?: number;
+  /**
+   * Health care insurance contribution.
+   * @min 0
+   * @max 100
+   */
+  healthCareInsurancePercent?: number;
+  /** Holiday pay values requested to pay on salary slip. */
+  holidayPayData?: HolidayPayData;
+  /** Working hour reduction values requested to pay on salary slip. */
+  workingHourReductionPayData?: WorkingHourReductionPayData;
 }
 
 export interface EmployeeSearchResult {
@@ -5536,7 +6263,71 @@ export interface EmployeeSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Information about error handling. Can be empty if message is not handled yet. */
+export interface Employment {
+  /**
+   * Employment start date.
+   * @format date
+   */
+  startDate?: string;
+  /**
+   * Employment end date.
+   * @format date
+   */
+  endDate?: string;
+  /**
+   * Type. Can be enum value or any string.
+   * @minLength 0
+   * @maxLength 255
+   */
+  type?: "PERMANENT" | "FIXED_TERM" | "TEMPORARY" | "PART_TIME" | "TRAINEE" | "PENSIONER" | "NOT_EMPLOYED";
+  /**
+   * Reason for termination. When employment type is Keva, the reason code must be from Kevas numeric codes.
+   * @minLength 0
+   * @maxLength 255
+   */
+  terminationReason:
+    | "NOT_APPLICABLE"
+    | "EMPLOYEES_RESIGNATION"
+    | "OTHER"
+    | "TERMINATION_GROUNDS"
+    | "FINANCIAL_AND_PRODUCTION_GROUNDS"
+    | "JOINT_AGREEMENT"
+    | "RETIREMENT"
+    | "FIXED_TERM_EMPLOYMENT_TERMINATION";
+  /**
+   * Registration grounds id (Keva).
+   * @minLength 0
+   * @maxLength 80
+   */
+  registrationGroundId?: string;
+  /**
+   * Hours per week. Scale: 2.
+   * @min 0.01
+   * @max 168
+   */
+  hoursPerWeek?: number;
+  /** Employment type. */
+  employmentType?: "FULL_TIME" | "NOT_AVAILABLE" | "PART_TIME";
+  /**
+   * Part-time percent. Required when employment type is set to "PART_TIME". Scale: 2.
+   * @min 0.01
+   * @max 100
+   */
+  partTimePercent?: number;
+  /**
+   * Unique identifier of employee employment.
+   * @format int64
+   */
+  id?: number;
+  /** Keva. */
+  keva: boolean;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
+}
+
 export interface ErrorHandlingInfo {
   /**
    * Date when the error message was handled.
@@ -5556,7 +6347,6 @@ export interface ErrorHandlingInfo {
   comment?: string;
 }
 
-/** List of error messages. */
 export interface ErrorMessage {
   /**
    * HTTP response status.
@@ -5567,7 +6357,10 @@ export interface ErrorMessage {
   field?: string;
   /** Validation error code or description.  */
   message?: string;
-  /** Data model for which constraint violations occurred. */
+  /**
+   * Data model for which constraint violations occurred.
+   * @deprecated
+   */
   model?: DataModel;
 }
 
@@ -5576,7 +6369,6 @@ export interface ErrorMessages {
   errors?: ErrorMessage[];
 }
 
-/** Invoice extra info. */
 export interface ExtraInfo {
   /** Indicates if accounting by row is used (true) or not (false). Accounting by row means that a separate ledger transaction is created for each invoice row. */
   accountingByRow: boolean;
@@ -5584,7 +6376,6 @@ export interface ExtraInfo {
   unitPricesIncludeVat: boolean;
 }
 
-/** Search results. */
 export interface FactoringContract {
   /**
    * Factoring contract identifier.
@@ -5618,7 +6409,7 @@ export interface FactoringContract {
   /** WS customer number. */
   wsCustomerNumber?: string;
   /** Contract status. */
-  status: 'ACTIVE' | 'INACTIVE';
+  status: "ACTIVE" | "INACTIVE";
 }
 
 export interface FactoringContractSearchResult {
@@ -5628,7 +6419,6 @@ export interface FactoringContractSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Financing company information. */
 export interface FinancingCompany {
   /** Financing company code */
   id?: string;
@@ -5636,7 +6426,6 @@ export interface FinancingCompany {
   name?: string;
 }
 
-/** List of fiscal years. */
 export interface FiscalYear {
   /**
    * Unique identifier of the fiscal year.
@@ -5669,7 +6458,6 @@ export interface FiscalYears {
   fiscalYears?: FiscalYear[];
 }
 
-/** Report data. */
 export interface GeneralLedgerReportData {
   /** Ledger account code. */
   id?: string;
@@ -5681,7 +6469,6 @@ export interface GeneralLedgerReportData {
   ledgerReceiptTransactions?: AccountingReportTransaction[];
 }
 
-/** Report parameters that were used to generate the report. */
 export interface GeneralLedgerReportRequest {
   /**
    * Report start date. Optional, if missing, starting date of the tracking period 'endDate' is in will be used. (financial year if not available)
@@ -5695,266 +6482,264 @@ export interface GeneralLedgerReportRequest {
   endDate: string;
   /**
    * List of receipt statuses for report. Default value depends on company rights.
-   * @example ["APPROVED","SENT","PAID","UNFINISHED"]
+   * @uniqueItems true
    */
   receiptStatus?: (
-    | 'APPROVED'
-    | 'SENT'
-    | 'NOT_SENT'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAID'
-    | 'PARTLY_PAID,'
-    | 'MARKED_PAID'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_DENIED'
-    | 'UNFINISHED'
-    | 'VERIFIED'
-    | 'RECEIVED'
+    | "APPROVED"
+    | "SENT"
+    | "NOT_SENT"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAID"
+    | "PARTLY_PAID,"
+    | "MARKED_PAID"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_DENIED"
+    | "UNFINISHED"
+    | "VERIFIED"
+    | "RECEIVED"
   )[];
   /** Report request options. */
   options?: GeneralLedgerReportRequestOptions;
 }
 
-/** Report request options. */
 export interface GeneralLedgerReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
+   * @uniqueItems true
    */
   receiptType?: (
-    | 'SALES_INVOICE'
-    | 'PURCHASE_INVOICE'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'JOURNAL'
-    | 'SALARY'
-    | 'VAT_FORM'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'PERIODIC_TAX_RETURN'
-    | 'VAT_SUMMARY'
-    | 'SALES_ORDER'
-    | 'PURCHASE_ORDER'
-    | 'REFERENCE_PAYMENT'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | "SALES_INVOICE"
+    | "PURCHASE_INVOICE"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "JOURNAL"
+    | "SALARY"
+    | "VAT_FORM"
+    | "EMPLOYER_CONTRIBUTION"
+    | "PERIODIC_TAX_RETURN"
+    | "VAT_SUMMARY"
+    | "SALES_ORDER"
+    | "PURCHASE_ORDER"
+    | "REFERENCE_PAYMENT"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -5974,217 +6759,217 @@ export interface GeneralLedgerReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Receipt Numbers that will be used in the general ledger report. */
@@ -6200,7 +6985,214 @@ export interface GeneralLedgerReportResponse {
   ledgerAccount?: GeneralLedgerReportData;
 }
 
-/** Incomes register info. */
+export interface HolidayPay {
+  /** Holiday calculation setting on/off. */
+  useHolidayCalculation?: boolean;
+  /**
+   * Holiday earning start date.
+   * @format date
+   */
+  holidayEarningStartDate?: string;
+  /**
+   * Holiday bonus earning start date.
+   * @format date
+   */
+  holidayBonusEarningStartDate?: string;
+  /** Total remaining holiday days. */
+  totalRemainingHolidayDays?: number;
+  /** Total remaining holiday pay. */
+  totalRemainingHolidayPay?: number;
+  /** Total remaining holiday bonus days. */
+  totalRemainingHolidayBonusDays?: number;
+  /**
+   * Total remaining additional leave days.
+   * @format int32
+   */
+  totalRemainingAdditionalLeaveDays?: number;
+  /** Yearly remaining holiday information per holiday credit year. */
+  yearlyRemainings?: HolidayPayYearlyRemaining[];
+}
+
+export interface HolidayPayData {
+  /**
+   * Number of holiday pay days to create holiday pay rows.
+   * @format int32
+   * @min 1
+   */
+  holidayDays?: number;
+  /**
+   * Amount of holiday pay compensation to create holiday pay rows.
+   * @min 0.01
+   */
+  rightForTimeOffAmount?: number;
+  /**
+   * Number of holiday bonus pay days to create holiday pay rows.
+   * @format int32
+   * @min 1
+   */
+  holidayBonusDays?: number;
+  /**
+   * Number of holiday pay additional leave days to create holiday pay rows.
+   * @format int32
+   * @min 1
+   */
+  holidayAdditionalLeaveDays?: number;
+}
+
+export interface HolidayPayYearlyRemaining {
+  /**
+   * Holiday credit year (e.g., 2025 represents 1.4.2025 - 31.3.2026).
+   * @format int32
+   */
+  holidayCreditYear?: number;
+  /**
+   * Remaining holiday days for this year.
+   * @format int32
+   */
+  remainingHolidayDays?: number;
+  /** Remaining holiday pay for this year. */
+  remainingHolidayPay?: number;
+  /**
+   * Remaining holiday bonus days for this year.
+   * @format int32
+   */
+  remainingHolidayBonusDays?: number;
+  /**
+   * Remaining additional leave days for this year.
+   * @format int32
+   */
+  remainingAdditionalLeaveDays?: number;
+}
+
+export interface HolidayRowDetails {
+  /**
+   * Holiday credit year.
+   * @format int32
+   */
+  holidayCreditYear?: number;
+  /** Holiday pay percentage. */
+  holidayPayPercentage?: number;
+  /**
+   * Holiday days spent. Only for employees with monthly with workday divider calculation basis.
+   * @format int32
+   * @min 1
+   */
+  holidayDaysSpent?: number;
+  /** Holiday bonus calculation basis. */
+  holidayBonusCalculationBasis?:
+    | "AVERAGE_DAILY"
+    | "AVERAGE_HOURLY"
+    | "MONTHLY_PLUS_SHIFT_COMPENSATIONS"
+    | "MONTHLY_WITH_STANDARD_DIVIDER"
+    | "MONTHLY_WITH_WORKDAY_DIVIDER"
+    | "PERCENTAGE_BASED"
+    | "PERCENTAGE_FOR_CONSTRUCTION_14_PLUS_4_5"
+    | "PERCENTAGE_FOR_CONSTRUCTION_18_5_OR_14_PLUS_4_5"
+    | "RIGHT_FOR_TIME_OFF";
+  /** Is holiday pay correction. */
+  correction?: boolean;
+}
+
+export interface HolidaysWorkingTimeAllocation {
+  /**
+   * Working time in first month.
+   * @min -500
+   * @max 500
+   */
+  workingTimeInFirstMonth: number;
+  /**
+   * Working time in second month. Only if salary slip payment period covers two months.
+   * @min -500
+   * @max 500
+   */
+  workingTimeInSecondMonth?: number;
+  /** Working time type. */
+  workingTimeType?: "DAYS" | "HOURS";
+  /** Average daily actual workday. Only for employees with average daily calculation basis. */
+  averageDailyActualWorkdays?: AverageDailyActualWorkdays;
+}
+
+export interface IncomeConfiguration {
+  /**
+   * Unique identifier of employee income configuration.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Base salary. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  baseSalaryValue: number;
+  /** Base salary type. */
+  baseSalaryType:
+    | "COMPENSATION"
+    | "HOURLY"
+    | "ONE_DAY"
+    | "ONE_MONTH"
+    | "ONE_MONTH_TOTAL"
+    | "ONE_WEEK"
+    | "PAYMENT_BY_JOB"
+    | "TWO_WEEKS";
+  /**
+   * Compensation for work base salary type code. Allowed salary types codes: 2900, 2901, 2902
+   * @format int64
+   */
+  compensationForWorkBaseSalaryTypeCode?: number;
+  /**
+   * The amount of hours belonging to the base salary. For HOURLY base salary type allowed value is 1. Scale: 2.
+   * @min 0.01
+   * @max 8760
+   */
+  baseSalaryHours: number;
+  /**
+   * Monthly base salary. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  monthlyBaseSalary?: number;
+  /**
+   * Personal hourly salary. Not allowed in POST. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  personalHourlySalary?: number;
+  /** Applied special handling of travel expenses. */
+  travelExpensesSpecialHandling: "NONE" | "NON_PROFIT_ORGANISATION" | "RECIPIENT_OF_COMPENSATION_FOR_WORK";
+  /**
+   * Applied income earner types.
+   * @uniqueItems true
+   */
+  earnerTypes?: (
+    | "EMPLOYED_WITH_ASSISTANCE_FROM_THE_STATE_EMPLOYMENT_FUND"
+    | "JOINT_OWNER_WITH_PAYER"
+    | "PARTIAL_OWNER"
+    | "KEY_EMPLOYEE"
+    | "ORGANISATION"
+    | "PERSON_WORKING_IN_A_FRONTIER_DISTRICT"
+    | "PERSON_WORKING_ABROAD"
+    | "ATHLETE"
+    | "PERFORMING_ARTIST"
+    | "SELF_EMPLOYED_PERSON_NO_OBLIGATION_TO_TAKE_OUT_YEL_OR_MYEL_INSURANCE"
+    | "INVOICING_SERVICE_CLIENT"
+  )[];
+  /**
+   * Employee tax number (FI).
+   * @minLength 0
+   * @maxLength 12
+   */
+  taxNumber?: string;
+  /** The channel which is used for delivering Salary Slips for the given Employee. */
+  salaryChannel: "NO_SENDING" | "MAIL" | "EMAIL" | "MOBILE" | "ESALARY";
+  /** Exclude from automated withholding percentage request (VeroAPI). */
+  excludedFromAutomatedWithholdingPercentageRequest: boolean;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
+}
+
 export interface IncomesRegisterConfiguration {
   /**
    * Unique identifier of incomes register configuration.
@@ -6209,15 +7201,18 @@ export interface IncomesRegisterConfiguration {
   id?: number;
   /** Keva: Suborganisation ID. */
   kevaSuborganisationId?: string;
-  /** Payer types. */
+  /**
+   * Payer types.
+   * @uniqueItems true
+   */
   payerTypes?: (
-    | 'PUBLIC_SECTOR'
-    | 'HOUSEHOLD'
-    | 'FOREIGN_GROUP_COMPANY'
-    | 'STATE'
-    | 'UNINCORPORATED_STATE_ENTERPRISE'
-    | 'TEMPORARY_EMPLOYER'
-    | 'POOL_OF_HOUSEHOLDS'
+    | "PUBLIC_SECTOR"
+    | "HOUSEHOLD"
+    | "FOREIGN_GROUP_COMPANY"
+    | "STATE"
+    | "UNINCORPORATED_STATE_ENTERPRISE"
+    | "TEMPORARY_EMPLOYER"
+    | "POOL_OF_HOUSEHOLDS"
   )[];
   /**
    * Version.
@@ -6230,6 +7225,312 @@ export interface IncomesRegisterConfiguration {
 export interface InfoMessage {
   /** Message with detail information about a result of action. */
   message?: string;
+}
+
+export interface InsurancesConfiguration {
+  /** Pension insurance. */
+  pensionInsurance: PensionInsurance;
+  /** Accident insurance. */
+  accidentInsurance: AccidentInsurance;
+  /**
+   * Applied insurance exception types. No obligation to provide exception types.
+   * @uniqueItems true
+   */
+  noObligationExceptionTypes?: (
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_EARNINGS_RELATED_PENSION_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_HEALTH_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_UNEMPLOYMENT_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_ACCIDENT_AND_OCCUPATIONAL_DISEASE_INSURANCE"
+  )[];
+  /**
+   * Applied insurance exception types. Not subject to Finnish social security exception types.
+   * @uniqueItems true
+   */
+  notSubjectExceptionTypes?: (
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_EARNINGS_RELATED_PENSION_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_HEALTH_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_UNEMPLOYMENT_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_ACCIDENT_AND_OCCUPATIONAL_DISEASE_INSURANCE"
+  )[];
+  /** Voluntary insurance in Finland. Earnings-related pension. */
+  pensionVoluntarilyPaid: boolean;
+}
+
+export interface InternationalSituationsConfiguration {
+  /**
+   * Unique identifier of employee international situations configuration.
+   * @format int64
+   */
+  id?: number;
+  /** Social security certificate. */
+  socialSecurityCertificate?: "FROM_FINLAND_A1" | "NON_SOCIAL_SECURITY" | "TO_FINLAND_A1";
+  /** Not subject to withholding in Finland. */
+  notSubjectToWithholding: boolean;
+  /** Non-resident taxpayer. */
+  nonResidentTaxPayer: boolean;
+  /**
+   * Tax Identification Number.
+   * @minLength 0
+   * @maxLength 30
+   */
+  taxIdentificationNumber?: string;
+  /** Six-month rule is applicable. */
+  sixMonthRuleApplicability?: "NO" | "YES";
+  /** Country code. */
+  country?:
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
 }
 
 export interface Invoice {
@@ -6245,38 +7546,38 @@ export interface Invoice {
   partnerId?: number;
   /** Invoice type. Note that this affects validation requirements. PERIODIC_TAX_RETURN is supported only by GET /invoices endpoint. It's not supported by PUT and POST /invoices endpoints. */
   type:
-    | 'SALES_INVOICE'
-    | 'SALES_ORDER'
-    | 'PURCHASE_INVOICE'
-    | 'PURCHASE_ORDER'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'PERIODIC_TAX_RETURN';
+    | "SALES_INVOICE"
+    | "SALES_ORDER"
+    | "PURCHASE_INVOICE"
+    | "PURCHASE_ORDER"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "PERIODIC_TAX_RETURN";
   /**
    * Invoice status. A new invoice created through the API will have its status set as UNFINISHED. Updating invoice is possible when its status is UNFINISHED. Updating expense claim, purchase, purchase order and travel invoice is possible when the status is UNFINISHED or RECEIVED. PUT /invoices endpoint is not able to change invoice status.
    * @example "UNFINISHED"
    */
   status?:
-    | 'EMPTY'
-    | 'UNFINISHED'
-    | 'NOT_SENT'
-    | 'SENT'
-    | 'RECEIVED'
-    | 'PAID'
-    | 'PAYMENT_DENIED'
-    | 'VERIFIED'
-    | 'APPROVED'
-    | 'INVALIDATED'
-    | 'PAYMENT_QUEUED'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'MARKED_PAID'
-    | 'STARTED'
-    | 'INVOICED'
-    | 'OVERRIDDEN'
-    | 'DELETED'
-    | 'UNSAVED'
-    | 'PAYMENT_TRANSACTION_REMOVED';
+    | "EMPTY"
+    | "UNFINISHED"
+    | "NOT_SENT"
+    | "SENT"
+    | "RECEIVED"
+    | "PAID"
+    | "PAYMENT_DENIED"
+    | "VERIFIED"
+    | "APPROVED"
+    | "INVALIDATED"
+    | "PAYMENT_QUEUED"
+    | "PARTLY_PAID"
+    | "PAYMENT_SENT_TO_BANK"
+    | "MARKED_PAID"
+    | "STARTED"
+    | "INVOICED"
+    | "OVERRIDDEN"
+    | "DELETED"
+    | "UNSAVED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /**
    * Invoice date. This is synonymous to billing date.
    * @format date
@@ -6301,7 +7602,6 @@ export interface Invoice {
   extraInfo: ExtraInfo;
   /**
    * Invoice discount percentage. Scale: 4.
-   * @multipleOf 4
    * @max 100
    */
   discountPercent: number;
@@ -6340,7 +7640,7 @@ export interface Invoice {
    */
   deliveryEndDate?: string;
   /** Delivery method for the goods. SALES_INVOICE and SALES_ORDER do not support type OTHER. */
-  deliveryMethod?: 'MAILING' | 'ONLINE' | 'COURIER' | 'VRCARGO' | 'BUS' | 'FREIGHT' | 'RETRIEVABLE' | 'OTHER';
+  deliveryMethod?: "MAILING" | "ONLINE" | "COURIER" | "VRCARGO" | "BUS" | "FREIGHT" | "RETRIEVABLE" | "OTHER";
   /**
    * Delivery instructions.
    * @minLength 0
@@ -6348,16 +7648,13 @@ export interface Invoice {
    */
   deliveryInstructions?: string;
   /** Channel of distribution for the invoice. Values EDIFACT and PAPER_INVOICE are not allowed for POST /invoices and PUT /invoices endpoints. */
-  invoiceChannel: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
+  invoiceChannel: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
   /** Invoice operator related information. It is a read-only property shown only for purchase invoices. */
   invoiceOperatorInfo?: InvoiceOperatorInfo;
-  /**
-   * Penal interest rate. Scale: 2.
-   * @multipleOf 2
-   */
+  /** Penal interest rate. Scale: 2. */
   penaltyPercent?: number;
   /** Language of the invoice. Required for sales invoices and sales orders, otherwise ignored. */
-  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
+  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
   /**
    * SALES_INVOICE and SALES_ORDER only. ID of invoice template.
    * @format int32
@@ -6374,257 +7671,257 @@ export interface Invoice {
    * @example "SWEDEN"
    */
   vatCountry?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * ID of the ledger receipt linked to this invoice. A ledger receipt is linked to every invoice for holding its accounting information. For defining ledger accounts, dimensions or VAT status regarding the invoice, modify the ledger receipt. See PUT /ledgerreceipts for more info.
    * @format int32
@@ -6662,17 +7959,33 @@ export interface Invoice {
   /** Tender reference. Valid only in Finnish environments for SALES_INVOICE and PURCHASE_INVOICE. */
   tenderReference?: string;
   /**
+   * Buyer reference. Valid only in Finnish environments for SALES_INVOICE and PURCHASE_INVOICE.
+   * @minLength 0
+   * @maxLength 70
+   */
+  buyerReferenceIdentifier?: string;
+  /**
+   * Seller reference. Valid only in Finnish environments for SALES_INVOICE and PURCHASE_INVOICE.
+   * @minLength 0
+   * @maxLength 70
+   */
+  sellerReferenceIdentifier?: string;
+  /**
    * Invoice version. This field is required in the PUT /invoices/{invoiceId} endpoint.
    * @format date-time
    */
   version?: string;
   /** Invoice sum info. If the invoice has currency other than the one set for the environment, it returns sum for both the accounting and invoice currency. */
   invoiceSumInfo?: InvoiceSumInfo[];
+  /**
+   * Invoice owner's user ID.
+   * @format int32
+   */
+  creatorId?: number;
   /** It marks invoice as an offer. It is applicable only to SALES_ORDER type of invoices. */
   isOffer?: boolean;
 }
 
-/** Invoice circulation related approval information. */
 export interface InvoiceApprovalInformation {
   /** List of invoice acceptors. */
   acceptors?: InvoiceCheckerInformation[];
@@ -6680,7 +7993,6 @@ export interface InvoiceApprovalInformation {
   verifiers?: InvoiceCheckerInformation[];
 }
 
-/** Search results. */
 export interface InvoiceBasicInfo {
   /**
    * Unique identifier of the invoice.
@@ -6697,38 +8009,38 @@ export interface InvoiceBasicInfo {
    * @example "PURCHASE_INVOICE"
    */
   type?:
-    | 'SALES_INVOICE'
-    | 'SALES_ORDER'
-    | 'PURCHASE_INVOICE'
-    | 'PURCHASE_ORDER'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'PERIODIC_TAX_RETURN';
+    | "SALES_INVOICE"
+    | "SALES_ORDER"
+    | "PURCHASE_INVOICE"
+    | "PURCHASE_ORDER"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "PERIODIC_TAX_RETURN";
   /**
    * Invoice status.
    * @example "UNFINISHED"
    */
   status?:
-    | 'EMPTY'
-    | 'UNFINISHED'
-    | 'NOT_SENT'
-    | 'SENT'
-    | 'RECEIVED'
-    | 'PAID'
-    | 'PAYMENT_DENIED'
-    | 'VERIFIED'
-    | 'APPROVED'
-    | 'INVALIDATED'
-    | 'PAYMENT_QUEUED'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'MARKED_PAID'
-    | 'STARTED'
-    | 'INVOICED'
-    | 'OVERRIDDEN'
-    | 'DELETED'
-    | 'UNSAVED'
-    | 'PAYMENT_TRANSACTION_REMOVED';
+    | "EMPTY"
+    | "UNFINISHED"
+    | "NOT_SENT"
+    | "SENT"
+    | "RECEIVED"
+    | "PAID"
+    | "PAYMENT_DENIED"
+    | "VERIFIED"
+    | "APPROVED"
+    | "INVALIDATED"
+    | "PAYMENT_QUEUED"
+    | "PARTLY_PAID"
+    | "PAYMENT_SENT_TO_BANK"
+    | "MARKED_PAID"
+    | "STARTED"
+    | "INVOICED"
+    | "OVERRIDDEN"
+    | "DELETED"
+    | "UNSAVED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /**
    * Invoice number generated by Procountor.
    * @format int32
@@ -6737,7 +8049,7 @@ export interface InvoiceBasicInfo {
   /** Invoice number from the biller in an external system. */
   originalInvoiceNumber?: string;
   /** Channel of distribution for the invoice. */
-  invoiceChannel?: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
+  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
   /**
    * Invoice date. This is synonymous to billing date.
    * @format date
@@ -6749,27 +8061,42 @@ export interface InvoiceBasicInfo {
    */
   dueDate?: string;
   /**
+   * Invoice payment new due date.
+   * @format date
+   */
+  newDueDate?: string;
+  /**
    * Creation timestamp of the invoice. Automatically generated by Procountor.
    * @format date-time
+   * @example "2017-09-27T12:12:42"
    */
   created?: string;
   /**
    * Invoice version timestamp. Automatically generated by Procountor and updated every time the invoice is modified.
    * @format date-time
+   * @example "2017-09-27T12:12:42"
    */
   version?: string;
   /** Invoice sum info. If the invoice has currency other than the one set for the environment, it returns sum for both the accounting and invoice currency. */
   invoiceSumInfo?: InvoiceSumInfo[];
+  /**
+   * Invoice owner's user ID.
+   * @format int32
+   */
+  creatorId?: number;
+  /** This object holds information about the counterparty of the invoice. With sales invoices and sales orders, it is the buyer. With purchase invoices and purchase orders it is the seller. With travel and expense invoices, it is the reporter of the expenses */
+  counterParty: CounterParty;
+  /** Indicates whether the invoice is an offer. */
+  isOffer?: boolean;
 }
 
-/** The address where the invoice should be sent. If omitted for sales invoice, assumed to equal the counter party address. If billing address is not needed for sales invoice, please send an empty value: billingAddress:{}. Note: For purchase invoice and purchase order, this is a billing delivery address and corresponds to the 'Buyer delivery address' section on UI. */
 export interface InvoiceBillingAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -6777,25 +8104,37 @@ export interface InvoiceBillingAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * Street.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * Zip code.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * City.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 40
    */
@@ -6805,257 +8144,257 @@ export interface InvoiceBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7078,17 +8417,15 @@ export interface InvoiceCheckerInformation {
   eventPerformed?: string;
 }
 
-/** Contains rights for invoice circulation functionalities. */
 export interface InvoiceCirculationRights {
   /** Access level to verification functionality. */
-  verification?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  verification?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to approval functionality. */
-  approval?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  approval?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal approvals or verifications only limitation enabled. */
   personalApprovalsOrVerificationsOnly?: boolean;
 }
 
-/** Counterparty address. In the case of a sales invoice this is the buyer's address, and in the case of a purchase invoice and purchase order it is the seller. Even if the invoice is linked to a business partner by partnerId, the counterparty address can be different from the address saved for that business partner in the partner register. */
 export interface InvoiceCounterpartyAddress {
   /**
    * Name ("first line") in the address.
@@ -7103,25 +8440,37 @@ export interface InvoiceCounterpartyAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * Street.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * Zip code.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   * City.
    *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL.
+   * In that case, must be specified in counterPartyAddress if not specified in billingAddress.
+   *
+   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case,
+   * must be specified in billingAddress and counterPartyAddress.
    * @minLength 0
    * @maxLength 40
    */
@@ -7131,257 +8480,257 @@ export interface InvoiceCounterpartyAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7390,14 +8739,13 @@ export interface InvoiceCounterpartyAddress {
   subdivision?: string;
 }
 
-/** The address where the goods should be delivered. If omitted for a sales or purchase invoice, assumed to equal the counter party address. If delivery address is not needed for sales or purchase invoice, please send an empty value: deliveryAddress:{}. Note: This value has no correspondence on the UI with purchase invoices and purchase orders. For defining a delivery address for a purchase invoice or purchase order, use the billingAddress property instead. */
 export interface InvoiceDeliveryAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -7405,25 +8753,19 @@ export interface InvoiceDeliveryAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -7433,257 +8775,257 @@ export interface InvoiceDeliveryAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7706,7 +9048,6 @@ export interface InvoiceNotes {
   notes: string;
 }
 
-/** Invoice operator related information. It is a read-only property shown only for purchase invoices. */
 export interface InvoiceOperatorInfo {
   /** Invoice operator. */
   operator?: string;
@@ -7714,12 +9055,10 @@ export interface InvoiceOperatorInfo {
   receivingAddress?: string;
 }
 
-/** List containing InvoicePayment objects. */
 export interface InvoicePayment {
   /**
    * The amount of the payment in the given currency. Currency is defined within the invoice, which identifier is set in invoiceId field.
    * @min 0
-   * @exclusiveMin true
    */
   amount: number;
   /**
@@ -7729,7 +9068,7 @@ export interface InvoicePayment {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
+  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -7750,18 +9089,18 @@ export interface InvoicePayment {
   recipientBicCode?: string;
   /** Payment method type defining what kind of payment has to be made. */
   paymentMethod:
-    | 'DENMARK_DOMESTIC_PAYMENT'
-    | 'DENMARK_DOMESTIC_PAYMENT_CREDITOR'
-    | 'DENMARK_FOREIGN_PAYMENT'
-    | 'FINNISH_BANK_TRANSFER'
-    | 'FINNISH_EXPRESS_PAYMENT'
-    | 'FINNISH_FOREIGN_PAYMENT'
-    | 'NORWEGIAN_DOMESTIC_PAYMENT'
-    | 'NORWEGIAN_FOREIGN_PAYMENT'
-    | 'SWEDISH_DOMESTIC_PAYMENT'
-    | 'SWEDISH_DOMESTIC_PAYMENT_BANKGIRO'
-    | 'SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'SWEDISH_FOREIGN_PAYMENT';
+    | "DENMARK_DOMESTIC_PAYMENT"
+    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
+    | "DENMARK_FOREIGN_PAYMENT"
+    | "FINNISH_BANK_TRANSFER"
+    | "FINNISH_EXPRESS_PAYMENT"
+    | "FINNISH_FOREIGN_PAYMENT"
+    | "NORWEGIAN_DOMESTIC_PAYMENT"
+    | "NORWEGIAN_FOREIGN_PAYMENT"
+    | "SWEDISH_DOMESTIC_PAYMENT"
+    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
+    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
+    | "SWEDISH_FOREIGN_PAYMENT";
   /** The payer bank account. It has to be predefined in the environment to be able to use the payment. If not set than default bank account for payment is taken. */
   payerBankAccount?: string;
   /**
@@ -7780,7 +9119,7 @@ export interface InvoicePayment {
   /** Intermediary bank BIC. */
   intermediaryBankBic?: string;
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
+  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
   /**
    * Unique identifier of the invoice.
    * @format int32
@@ -7802,13 +9141,11 @@ export interface InvoicePaymentList {
   payments: InvoicePayment[];
 }
 
-/** Response for paying invoices action (POST /payments) performed successfully */
 export interface InvoicePaymentSummaries {
   /** List of identifiers of added payments. */
   transactions?: InvoicePaymentSummary[];
 }
 
-/** List of identifiers of added payments. */
 export interface InvoicePaymentSummary {
   /**
    * Identifier of created payment, provided by the application.
@@ -7822,7 +9159,6 @@ export interface InvoicePaymentSummary {
   invoiceId?: number;
 }
 
-/** Invoice rows. An invoice should always have at least one row. The only exception are PERIODIC_TAX_RETURN invoices which do not have any invoice rows. */
 export interface InvoiceRow {
   /**
    * Unique identifier for a invoice row.
@@ -7834,7 +9170,10 @@ export interface InvoiceRow {
    * @format int32
    */
   productId?: number;
-  /** Product name. */
+  /**
+   * Product name.
+   * @minLength 1
+   */
   product: string;
   /** Product code. */
   productCode?: string;
@@ -7842,117 +9181,117 @@ export interface InvoiceRow {
   quantity: number;
   /** Product unit. */
   unit:
-    | 'CM'
-    | 'LOT'
-    | 'GRAM'
-    | 'HOUR'
-    | 'PERSON'
-    | 'LINEAR_METER'
-    | 'KILOGRAM'
-    | 'MONTH'
-    | 'KILOMETER'
-    | 'PIECE'
-    | 'KILOWATT_HOUR'
-    | 'LITER'
-    | 'BOX'
-    | 'METER'
-    | 'SQUARE_METER'
-    | 'CUBIC_METER'
-    | 'SALE_UNIT'
-    | 'MINUTE'
-    | 'MILLIMETER'
-    | 'PARCEL'
-    | 'BOTTLE'
-    | 'CAN'
-    | 'BAG'
-    | 'DAY'
-    | 'ROLL'
-    | 'PAGE'
-    | 'SACK'
-    | 'SERIES'
-    | 'TUBE'
-    | 'TON'
-    | 'YEAR'
-    | 'WEEK'
-    | 'FULL_DAY'
-    | 'KILOBIT'
-    | 'MEGABIT'
-    | 'GIGABIT'
-    | 'TERABIT'
-    | 'SQUARE_CENTIMETRE'
-    | 'CENTILITRE'
-    | 'CUP'
-    | 'DECILITRE'
-    | 'GALLON_UK'
-    | 'GALLON_US'
-    | 'MILLILITRE'
-    | 'PINT_UK'
-    | 'PINT_US'
-    | 'AMPERE'
-    | 'AMPERE_HOUR'
-    | 'AMPERE_MINUTE'
-    | 'KILOAMPERE_HOUR'
-    | 'KILOVOLT'
-    | 'MILLIVOLT'
-    | 'MILLIAMPERE_HOUR'
-    | 'FOOT'
-    | 'INCH'
-    | 'MILE'
-    | 'YARD'
-    | 'EXAJOULE'
-    | 'GIGAJOULE'
-    | 'JOULE'
-    | 'JOULE_PER_SECOND'
-    | 'KILOJOULE'
-    | 'MILLIJOULE'
-    | 'PETAJOULE'
-    | 'TERAJOULE'
-    | 'GRAM_PER_CUBIC_METRE'
-    | 'GRAM_PER_SQUARE_METRE'
-    | 'KILOGRAM_PER_CUBIC_METRE'
-    | 'KILOGRAM_PER_SQUARE_METRE'
-    | 'MILLIGRAM'
-    | 'MILLIGRAM_PER_CUBIC_METRE'
-    | 'OUNCE'
-    | 'POUND'
-    | 'STONE_UK'
-    | 'DOZEN'
-    | 'DOZEN_PACK'
-    | 'EIGHT_PACK'
-    | 'FIVE_PACK'
-    | 'FOUR_PACK'
-    | 'HUNDRED'
-    | 'JAR'
-    | 'NINE_PACK'
-    | 'NUMBER_OF_WORDS'
-    | 'PAIR'
-    | 'PALLET'
-    | 'PLATE'
-    | 'SET'
-    | 'SEVEN_PACK'
-    | 'SIX_PACK'
-    | 'TEN_PACK'
-    | 'THREE_PACK'
-    | 'TWO_PACK'
-    | 'WRAP'
-    | 'GIGAWATT'
-    | 'GIGAWATT_HOUR'
-    | 'KILOWATT'
-    | 'MEGAWATT_HOUR'
-    | 'MILLIWATT'
-    | 'TERAWATT'
-    | 'TERAWATT_HOUR'
-    | 'WATT'
-    | 'WATT_HOUR'
-    | 'BAR'
-    | 'KILOPASCAL'
-    | 'PASCAL'
-    | 'KILOBYTE'
-    | 'MEGABYTE'
-    | 'GIGABYTE'
-    | 'SECOND'
-    | 'HECTARE'
-    | 'NO_UNIT';
+    | "CM"
+    | "LOT"
+    | "GRAM"
+    | "HOUR"
+    | "PERSON"
+    | "LINEAR_METER"
+    | "KILOGRAM"
+    | "MONTH"
+    | "KILOMETER"
+    | "PIECE"
+    | "KILOWATT_HOUR"
+    | "LITER"
+    | "BOX"
+    | "METER"
+    | "SQUARE_METER"
+    | "CUBIC_METER"
+    | "SALE_UNIT"
+    | "MINUTE"
+    | "MILLIMETER"
+    | "PARCEL"
+    | "BOTTLE"
+    | "CAN"
+    | "BAG"
+    | "DAY"
+    | "ROLL"
+    | "PAGE"
+    | "SACK"
+    | "SERIES"
+    | "TUBE"
+    | "TON"
+    | "YEAR"
+    | "WEEK"
+    | "FULL_DAY"
+    | "KILOBIT"
+    | "MEGABIT"
+    | "GIGABIT"
+    | "TERABIT"
+    | "SQUARE_CENTIMETRE"
+    | "CENTILITRE"
+    | "CUP"
+    | "DECILITRE"
+    | "GALLON_UK"
+    | "GALLON_US"
+    | "MILLILITRE"
+    | "PINT_UK"
+    | "PINT_US"
+    | "AMPERE"
+    | "AMPERE_HOUR"
+    | "AMPERE_MINUTE"
+    | "KILOAMPERE_HOUR"
+    | "KILOVOLT"
+    | "MILLIVOLT"
+    | "MILLIAMPERE_HOUR"
+    | "FOOT"
+    | "INCH"
+    | "MILE"
+    | "YARD"
+    | "EXAJOULE"
+    | "GIGAJOULE"
+    | "JOULE"
+    | "JOULE_PER_SECOND"
+    | "KILOJOULE"
+    | "MILLIJOULE"
+    | "PETAJOULE"
+    | "TERAJOULE"
+    | "GRAM_PER_CUBIC_METRE"
+    | "GRAM_PER_SQUARE_METRE"
+    | "KILOGRAM_PER_CUBIC_METRE"
+    | "KILOGRAM_PER_SQUARE_METRE"
+    | "MILLIGRAM"
+    | "MILLIGRAM_PER_CUBIC_METRE"
+    | "OUNCE"
+    | "POUND"
+    | "STONE_UK"
+    | "DOZEN"
+    | "DOZEN_PACK"
+    | "EIGHT_PACK"
+    | "FIVE_PACK"
+    | "FOUR_PACK"
+    | "HUNDRED"
+    | "JAR"
+    | "NINE_PACK"
+    | "NUMBER_OF_WORDS"
+    | "PAIR"
+    | "PALLET"
+    | "PLATE"
+    | "SET"
+    | "SEVEN_PACK"
+    | "SIX_PACK"
+    | "TEN_PACK"
+    | "THREE_PACK"
+    | "TWO_PACK"
+    | "WRAP"
+    | "GIGAWATT"
+    | "GIGAWATT_HOUR"
+    | "KILOWATT"
+    | "MEGAWATT_HOUR"
+    | "MILLIWATT"
+    | "TERAWATT"
+    | "TERAWATT_HOUR"
+    | "WATT"
+    | "WATT_HOUR"
+    | "BAR"
+    | "KILOPASCAL"
+    | "PASCAL"
+    | "KILOBYTE"
+    | "MEGABYTE"
+    | "GIGABYTE"
+    | "SECOND"
+    | "HECTARE"
+    | "NO_UNIT";
   /** Product unit price. This value is affected by the "unit prices include VAT" setting on the invoice. */
   unitPrice: number;
   /** Product discount percentage. */
@@ -8001,7 +9340,6 @@ export interface InvoiceSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Invoice sum info. If the invoice has currency other than the one set for the environment, it returns sum for both the accounting and invoice currency. */
 export interface InvoiceSumInfo {
   /** Accounting currency set for the environment or some other currency set in the invoice in ISO 4217 format. */
   currency?: string;
@@ -8025,57 +9363,56 @@ export interface InvoiceTemplate {
   name?: string;
 }
 
-/** List of invoice transactions. */
 export interface InvoiceTransaction {
   /** Transaction action. */
   action?:
-    | 'APPROVAL'
-    | 'ALLOCATE_PAYMENT_MANUALLY'
-    | 'ALLOCATE_INVOICE_TO_INVOICE'
-    | 'ALLOCATE_INVOICE_TO_JOURNAL'
-    | 'ALLOCATE_INVOICE_TO_BANK_STATEMENT'
-    | 'ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT'
-    | 'VERIFICATION'
-    | 'DIRECTED_TO_ANOTHER_VERIFIER'
-    | 'DIRECTED_TO_ANOTHER_APPROVER'
-    | 'COLLECTION_LETTER_DUETTOPRO'
-    | 'PAYMENT_REMINDER_EMAIL'
-    | 'CONVERTED_TO_INVOICE'
-    | 'PAYMENT_REMINDER'
-    | 'PAYMENT_WARNING'
-    | 'PAYMENT_REMINDER_DUETTOFORTE'
-    | 'CANCEL_PAYMENT_TRANSACTION'
-    | 'RETURNED_PREVIOUS'
-    | 'PAYMENT_REMINDER_MAIL'
-    | 'COLLECTION_LETTER_SVEA'
-    | 'COLLECTION_LETTER_SVEA_SHORT'
-    | 'PAYMENT_REMINDER_SVEA'
-    | 'PAYMENT_REMINDER_SVEA_SHORT'
-    | 'DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION'
-    | 'DELETED_PAYMENT_TRANSACTION'
-    | 'UNFINISHED'
-    | 'RESTORED_UNFINISHED'
-    | 'DENY_PAYMENT'
-    | 'SENT_FOR_PAYMENT'
-    | 'MARKED_PAID'
-    | 'RECEIVED_VIA_AUTOMATIC_TRANSFER'
-    | 'RECEIVED_AS_EINVOICE'
-    | 'RECEIVED_AS_SCANNED_INVOICE'
-    | 'TARGETING_REMOVED'
-    | 'SEND_TO_CIRCULATION'
-    | 'SEND'
-    | 'PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT'
-    | 'SENDING_CANCELLED'
-    | 'SEPA_PAYMENT_ERROR'
-    | 'PAYMENT_ERROR_HANDLED'
-    | 'COLLECTION_LETTER_ROPO'
-    | 'PAYMENT_REMINDER_ROPO'
-    | 'INVOICE_FACTORING_DELETED'
-    | 'SENDING_ERROR_RECEIVED'
-    | 'SENDING_ERROR_EMAIL_NOTIFICATION'
-    | 'SENDING_ERROR_HANDLED'
-    | 'SENDING_ERROR_MARK_AS_HANDLED'
-    | 'SENDING_ERROR_REVERTED_TO_NOT_SENT';
+    | "APPROVAL"
+    | "ALLOCATE_PAYMENT_MANUALLY"
+    | "ALLOCATE_INVOICE_TO_INVOICE"
+    | "ALLOCATE_INVOICE_TO_JOURNAL"
+    | "ALLOCATE_INVOICE_TO_BANK_STATEMENT"
+    | "ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT"
+    | "VERIFICATION"
+    | "DIRECTED_TO_ANOTHER_VERIFIER"
+    | "DIRECTED_TO_ANOTHER_APPROVER"
+    | "COLLECTION_LETTER_DUETTOPRO"
+    | "PAYMENT_REMINDER_EMAIL"
+    | "CONVERTED_TO_INVOICE"
+    | "PAYMENT_REMINDER"
+    | "PAYMENT_WARNING"
+    | "PAYMENT_REMINDER_DUETTOFORTE"
+    | "CANCEL_PAYMENT_TRANSACTION"
+    | "RETURNED_PREVIOUS"
+    | "PAYMENT_REMINDER_MAIL"
+    | "COLLECTION_LETTER_SVEA"
+    | "COLLECTION_LETTER_SVEA_SHORT"
+    | "PAYMENT_REMINDER_SVEA"
+    | "PAYMENT_REMINDER_SVEA_SHORT"
+    | "DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION"
+    | "DELETED_PAYMENT_TRANSACTION"
+    | "UNFINISHED"
+    | "RESTORED_UNFINISHED"
+    | "DENY_PAYMENT"
+    | "SENT_FOR_PAYMENT"
+    | "MARKED_PAID"
+    | "RECEIVED_VIA_AUTOMATIC_TRANSFER"
+    | "RECEIVED_AS_EINVOICE"
+    | "RECEIVED_AS_SCANNED_INVOICE"
+    | "TARGETING_REMOVED"
+    | "SEND_TO_CIRCULATION"
+    | "SEND"
+    | "PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT"
+    | "SENDING_CANCELLED"
+    | "SEPA_PAYMENT_ERROR"
+    | "PAYMENT_ERROR_HANDLED"
+    | "COLLECTION_LETTER_ROPO"
+    | "PAYMENT_REMINDER_ROPO"
+    | "INVOICE_FACTORING_DELETED"
+    | "SENDING_ERROR_RECEIVED"
+    | "SENDING_ERROR_EMAIL_NOTIFICATION"
+    | "SENDING_ERROR_HANDLED"
+    | "SENDING_ERROR_MARK_AS_HANDLED"
+    | "SENDING_ERROR_REVERTED_TO_NOT_SENT";
   /** Transaction name. */
   name?: string;
   /**
@@ -8092,7 +9429,21 @@ export interface InvoiceTransactions {
   transactions?: InvoiceTransaction[];
 }
 
-/** Invoicing info data of the partner. */
+export interface InvoiceTransactionsByInvoice {
+  /**
+   * Invoice ID.
+   * @format int32
+   */
+  invoiceId?: number;
+  /** Transactions of the invoice. */
+  transactions?: InvoiceTransaction[];
+}
+
+export interface InvoiceTransactionsByInvoicesDTO {
+  /** List of invoice transaction results. */
+  results?: InvoiceTransactionsByInvoice[];
+}
+
 export interface InvoicingInfo {
   /** Customer number of the partner. */
   customerNumber?: string;
@@ -8103,17 +9454,129 @@ export interface InvoicingInfo {
   /** OVT of the partner. */
   ovt?: string;
   /** Invoice channel of the partner. */
-  invoiceChannel?: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
+  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
   /** Contact person of the partner. */
   contactPerson?: string;
   /** Language of the partner. */
-  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
+  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
   /** Email of the partner. */
   email?: string;
+  /** Blind carbon copy addresses. Supported only in SALES_INVOICE, SALES_ORDER and OFFER. Maximum 4 email addresses can be provided. Must not match the main email address and each Bcc address must be free of special characters and no longer than 256 characters. */
+  bccAddresses?: string[];
   /** Does the customer deny Procountors sending of payment reminders as e-invoice */
   denyEinvoiceReminders?: boolean;
-  einvoiceOperator?: string;
+  /** Order reference */
+  orderReference?: string;
+  /** Seller reference identifier. Supported only in Finnish environments. */
+  sellerReferenceIdentifier?: string;
+  /** Buyer reference identifier. Supported only in Finnish environments. */
+  buyerReferenceIdentifier?: string;
+  /** Order number. Supported only in Finnish environments. */
+  orderNumber?: string;
+  /** Agreement number. Supported only in Finnish environments. */
+  agreementNumber?: string;
+  /** Accounting code. Supported only in Finnish environments. */
+  accountingCode?: string;
+  /** Delivery site. Supported only in Finnish environments. */
+  deliverySite?: string;
+  /** Tender reference. Supported only in Finnish environments. */
+  tenderReference?: string;
   einvoiceAddress?: string;
+  einvoiceOperator?: string;
+}
+
+export interface Journal {
+  /**
+   * Unique identifier of the journal receipt.
+   * @format int32
+   */
+  id?: number;
+  /**
+   * ID of the ledger receipt linked to this journal receipt.
+   * @format int32
+   */
+  ledgerReceiptId?: number;
+  /**
+   * Technical ID for the business partner. Used to link the journal receipt to a customer or supplier in the business partner register. If supplied, the company must have this partner ID in the corresponding register.
+   * @format int32
+   */
+  partnerId?: number;
+  /** Receipt type. This particular endpoint only supports JOURNAL type. */
+  type: "JOURNAL";
+  /**
+   * Journal receipt status.
+   * @example "INVALIDATED"
+   */
+  status?: "UNFINISHED" | "APPROVED" | "INVALIDATED";
+  /**
+   * Receipt number generated by Procountor.
+   * @format int32
+   */
+  invoiceNumber?: number;
+  /**
+   * Journal receipt date. This is synonymous to billing date.
+   * @format date
+   */
+  date?: string;
+  /**
+   * Creation timestamp of the journal. Automatically generated by Procountor.
+   * @format date-time
+   * @example "2017-09-27T12:12:42"
+   */
+  created?: string;
+  /**
+   * Journal receipt version.
+   * @format date-time
+   */
+  version?: string;
+  /** This object holds information about the counterparty of the journal receipt. */
+  counterParty?: CounterParty;
+}
+
+export interface LaborUnionMembership {
+  /**
+   * Unique identifier of employee labor union membership.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Labor union setting ID.
+   * @format int64
+   */
+  laborUnionSettingId: number;
+  /**
+   * Labor union department.
+   * @minLength 0
+   * @maxLength 80
+   */
+  department?: string;
+  /**
+   * Membership ID.
+   * @minLength 0
+   * @maxLength 80
+   */
+  membershipId?: string;
+  /**
+   * Membership start date.
+   * @format date
+   */
+  membershipStart: string;
+  /**
+   * Membership end date.
+   * @format date
+   */
+  membershipEnd?: string;
+  /**
+   * Explanation.
+   * @minLength 0
+   * @maxLength 200
+   */
+  explanation?: string;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
 }
 
 export interface LaborUnionSettingsBasicData {
@@ -8126,7 +9589,6 @@ export interface LaborUnionSettingsBasicData {
   name?: string;
 }
 
-/** Ledger account used for the accounting. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts. */
 export interface LedgerAccount {
   /** Ledger account code. */
   ledgerAccountCode?: string;
@@ -8138,7 +9600,6 @@ export interface LedgerAccount {
   translations?: LedgerAccountTranslation[];
 }
 
-/** Ledger account name translations. If there is no translations available for given account, api response body will not contain translations list at all. */
 export interface LedgerAccountTranslation {
   /** Language code in ISO 639-1 format. */
   languageCode?: string;
@@ -8151,13 +9612,11 @@ export interface LedgerAccounts {
   ledgerAccounts?: LedgerAccount[];
 }
 
-/** Report data. */
 export interface LedgerAccountsReportData {
   /** List of report periods. */
   periods?: LedgerAccountsReportPeriod[];
 }
 
-/** List of report periods. */
 export interface LedgerAccountsReportPeriod {
   /**
    * Start date of the report period.
@@ -8176,7 +9635,6 @@ export interface LedgerAccountsReportPeriod {
   rows?: LedgerAccountsReportRow[];
 }
 
-/** Report parameters that were used to generate the report. */
 export interface LedgerAccountsReportRequest {
   /**
    * Report start date. Optional, if missing, starting date of the tracking period 'endDate' is in will be used. (financial year if not available)
@@ -8190,266 +9648,264 @@ export interface LedgerAccountsReportRequest {
   endDate: string;
   /**
    * List of receipt statuses for report. Default value depends on company rights.
-   * @example ["APPROVED","SENT","PAID","UNFINISHED"]
+   * @uniqueItems true
    */
   receiptStatus?: (
-    | 'APPROVED'
-    | 'SENT'
-    | 'NOT_SENT'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAID'
-    | 'PARTLY_PAID,'
-    | 'MARKED_PAID'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_DENIED'
-    | 'UNFINISHED'
-    | 'VERIFIED'
-    | 'RECEIVED'
+    | "APPROVED"
+    | "SENT"
+    | "NOT_SENT"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAID"
+    | "PARTLY_PAID,"
+    | "MARKED_PAID"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_DENIED"
+    | "UNFINISHED"
+    | "VERIFIED"
+    | "RECEIVED"
   )[];
   /** Report request options. */
   options?: LedgerAccountsReportRequestOptions;
 }
 
-/** Report request options. */
 export interface LedgerAccountsReportRequestOptions {
   /**
    * Receipt types that will be included in the report.
-   * @default ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE","BILL_OF_CHARGES","JOURNAL","SALARY","VAT_FORM","EMPLOYER_CONTRIBUTION","PERIODIC_TAX_RETURN","VAT_SUMMARY","SALES_ORDER","PURCHASE_ORDER","REFERENCE_PAYMENT","BANK_STATEMENT_AS_RECEIPT","RECEIPT_FOR_OPENING_ACCOUNTS"]
-   * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
+   * @uniqueItems true
    */
   receiptType?: (
-    | 'SALES_INVOICE'
-    | 'PURCHASE_INVOICE'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'JOURNAL'
-    | 'SALARY'
-    | 'VAT_FORM'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'PERIODIC_TAX_RETURN'
-    | 'VAT_SUMMARY'
-    | 'SALES_ORDER'
-    | 'PURCHASE_ORDER'
-    | 'REFERENCE_PAYMENT'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | "SALES_INVOICE"
+    | "PURCHASE_INVOICE"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "JOURNAL"
+    | "SALARY"
+    | "VAT_FORM"
+    | "EMPLOYER_CONTRIBUTION"
+    | "PERIODIC_TAX_RETURN"
+    | "VAT_SUMMARY"
+    | "SALES_ORDER"
+    | "PURCHASE_ORDER"
+    | "REFERENCE_PAYMENT"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -8469,217 +9925,217 @@ export interface LedgerAccountsReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Customer company ID that will be used in the report. */
@@ -8693,7 +10149,6 @@ export interface LedgerAccountsReportResponse {
   reportData?: LedgerAccountsReportData;
 }
 
-/** Report period rows. */
 export interface LedgerAccountsReportRow {
   /** Name of the row. */
   name?: string;
@@ -8709,44 +10164,44 @@ export interface LedgerReceipt {
   id?: number;
   /** Ledger receipt type. Use JOURNAL for creating ledger receipts (vouchers) containing ledger transactions without linkage to pre-existing resources. Other types are automatically generated by Procountor for holding accounting information for e.g. invoices. Types allowed for POST = JOURNAL. Types allowed for PUT = JOURNAL, SALES_INVOICE, PURCHASE_INVOICE, TRAVEL_INVOICE, BILL_OF_CHARGES Types allowed for GET listed below */
   type:
-    | 'JOURNAL'
-    | 'PURCHASE_INVOICE'
-    | 'SALES_INVOICE'
-    | 'PERIODIC_TAX_RETURN'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'VAT_FORM'
-    | 'SALARY'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'PURCHASE_ORDER'
-    | 'SALES_ORDER'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
-    | 'REFERENCE_PAYMENT'
-    | 'TRACKING_PERIOD_OPENING_RECEIPT'
-    | 'VAT_SUMMARY';
+    | "JOURNAL"
+    | "PURCHASE_INVOICE"
+    | "SALES_INVOICE"
+    | "PERIODIC_TAX_RETURN"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "VAT_FORM"
+    | "SALARY"
+    | "EMPLOYER_CONTRIBUTION"
+    | "PURCHASE_ORDER"
+    | "SALES_ORDER"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | "REFERENCE_PAYMENT"
+    | "TRACKING_PERIOD_OPENING_RECEIPT"
+    | "VAT_SUMMARY";
   /** Ledger receipt status. Status of a ledger receipt equals the status of the linked invoice. All ledger receipts are initially created with status UNFINISHED. For journals, possible statuses are UNFINISHED, APPROVED and INVALIDATED. Ledger receipt statuses cannot be directly modified through the API. */
   status?:
-    | 'APPROVED'
-    | 'DELETED'
-    | 'EMPTY'
-    | 'INVALIDATED'
-    | 'INVOICED'
-    | 'MARKED_PAID'
-    | 'NOT_SENT'
-    | 'OVERRIDDEN'
-    | 'PAID'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_DENIED'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAYMENT_TRANSACTION_REMOVED'
-    | 'RECEIVED'
-    | 'SENT'
-    | 'STARTED'
-    | 'UNFINISHED'
-    | 'UNSAVED'
-    | 'VERIFIED';
+    | "APPROVED"
+    | "DELETED"
+    | "EMPTY"
+    | "INVALIDATED"
+    | "INVOICED"
+    | "MARKED_PAID"
+    | "NOT_SENT"
+    | "OVERRIDDEN"
+    | "PAID"
+    | "PARTLY_PAID"
+    | "PAYMENT_DENIED"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_REMOVED"
+    | "RECEIVED"
+    | "SENT"
+    | "STARTED"
+    | "UNFINISHED"
+    | "UNSAVED"
+    | "VERIFIED";
   /**
    * Ledger receipt name.
    * @minLength 0
@@ -8759,7 +10214,7 @@ export interface LedgerReceipt {
    */
   receiptDate: string;
   /** Ledger receipt VAT type. */
-  vatType: 'PURCHASE' | 'SALES';
+  vatType: "PURCHASE" | "SALES";
   /**
    * Ledger receipt VAT status. This can be overridden on transaction level. Use here the numeric parts of VAT status codes listed in "VAT defaults" in Procountor. For example, for VAT status code "vat_12", use value 12. The VAT status used must be enabled for the current receipt type (sales/purchase).
    * @format int32
@@ -8770,257 +10225,257 @@ export interface LedgerReceipt {
    * @example "SWEDEN"
    */
   vatProcessing?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * ID of the linked invoice. For sales and purchase invoice ledger receipts, this refers to the invoice the receipt holds accounting data for. For journal receipts, an invoice is automatically generated to store certain data fields. Use this ID in POST /attachments endpoint.
    * @format int32
@@ -9055,7 +10510,7 @@ export interface LedgerReceipt {
    */
   transactionDescription?: string;
   /** Receipt validity time. */
-  receiptValidity?: 'EMPTY' | 'IMMEDIATELY' | 'OVER_3_YEARS' | 'SERVICE_PERIOD';
+  receiptValidity?: "EMPTY" | "IMMEDIATELY" | "OVER_3_YEARS" | "SERVICE_PERIOD";
   /**
    * Start date of the receipt period. If set, must precede the end date of the period.
    * @format date
@@ -9066,6 +10521,11 @@ export interface LedgerReceipt {
    * @format date
    */
   periodEndDate?: string;
+  /**
+   * Technical ID for the business partner. Link the related invoice to a customer or supplier in the business partner register. If supplied, the company must have this partner ID in the corresponding register.
+   * @format int32
+   */
+  partnerId?: number;
   /** Partner code. Identifier for the related company or person. May represent a business ID, national identification number (HETU in Finland) or an account number, depending on the receipt type. */
   partnerCode?: string;
   /** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
@@ -9077,24 +10537,26 @@ export interface LedgerReceipt {
   version?: string;
   /** Accounting depreciation method for the receipt. */
   depreciation?:
-    | 'EMPTY'
-    | 'REDUCING_BALANCE_25_PERCENT'
-    | 'REDUCING_BALANCE_4_PERCENT'
-    | 'REDUCING_BALANCE_7_PERCENT'
-    | 'STRAIGHT_LINE_DEPRECIATION_3_YEARS'
-    | 'STRAIGHT_LINE_DEPRECIATION_5_YEARS';
+    | "EMPTY"
+    | "REDUCING_BALANCE_25_PERCENT"
+    | "REDUCING_BALANCE_4_PERCENT"
+    | "REDUCING_BALANCE_7_PERCENT"
+    | "STRAIGHT_LINE_DEPRECIATION_3_YEARS"
+    | "STRAIGHT_LINE_DEPRECIATION_5_YEARS";
   /**
    * VAT date to be used if payment based VAT is enabled
    * @format date
    */
   vatDate?: string;
-  /** List containing transactions on the receipt. At least one transaction must be provided. */
+  /**
+   * List containing transactions on the receipt. At least one transaction must be provided.
+   * @minItems 1
+   */
   transactions: Transaction[];
   /** List of attachments added to this receipt. Use POST and DELETE /attachments to add and delete attachments. */
   attachments?: Attachment[];
 }
 
-/** Search results. */
 export interface LedgerReceiptBasicInfo {
   /**
    * Unique identifier for the ledger receipt.
@@ -9103,44 +10565,44 @@ export interface LedgerReceiptBasicInfo {
   id?: number;
   /** Ledger receipt type. */
   type?:
-    | 'JOURNAL'
-    | 'PURCHASE_INVOICE'
-    | 'SALES_INVOICE'
-    | 'PERIODIC_TAX_RETURN'
-    | 'TRAVEL_INVOICE'
-    | 'BILL_OF_CHARGES'
-    | 'VAT_FORM'
-    | 'SALARY'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'PURCHASE_ORDER'
-    | 'SALES_ORDER'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
-    | 'REFERENCE_PAYMENT'
-    | 'TRACKING_PERIOD_OPENING_RECEIPT'
-    | 'VAT_SUMMARY';
+    | "JOURNAL"
+    | "PURCHASE_INVOICE"
+    | "SALES_INVOICE"
+    | "PERIODIC_TAX_RETURN"
+    | "TRAVEL_INVOICE"
+    | "BILL_OF_CHARGES"
+    | "VAT_FORM"
+    | "SALARY"
+    | "EMPLOYER_CONTRIBUTION"
+    | "PURCHASE_ORDER"
+    | "SALES_ORDER"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | "REFERENCE_PAYMENT"
+    | "TRACKING_PERIOD_OPENING_RECEIPT"
+    | "VAT_SUMMARY";
   /** Ledger receipt status. */
   status?:
-    | 'EMPTY'
-    | 'UNFINISHED'
-    | 'NOT_SENT'
-    | 'SENT'
-    | 'RECEIVED'
-    | 'PAID'
-    | 'PAYMENT_DENIED'
-    | 'VERIFIED'
-    | 'APPROVED'
-    | 'INVALIDATED'
-    | 'PAYMENT_QUEUED'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'MARKED_PAID'
-    | 'STARTED'
-    | 'INVOICED'
-    | 'OVERRIDDEN'
-    | 'DELETED'
-    | 'UNSAVED'
-    | 'PAYMENT_TRANSACTION_REMOVED';
+    | "EMPTY"
+    | "UNFINISHED"
+    | "NOT_SENT"
+    | "SENT"
+    | "RECEIVED"
+    | "PAID"
+    | "PAYMENT_DENIED"
+    | "VERIFIED"
+    | "APPROVED"
+    | "INVALIDATED"
+    | "PAYMENT_QUEUED"
+    | "PARTLY_PAID"
+    | "PAYMENT_SENT_TO_BANK"
+    | "MARKED_PAID"
+    | "STARTED"
+    | "INVOICED"
+    | "OVERRIDDEN"
+    | "DELETED"
+    | "UNSAVED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /** Ledger receipt name. */
   name?: string;
   /**
@@ -9163,11 +10625,13 @@ export interface LedgerReceiptBasicInfo {
   /**
    * Creation timestamp of the ledger receipt. Automatically generated by Procountor.
    * @format date-time
+   * @example "2017-09-27T12:12:42"
    */
   created?: string;
   /**
    * Ledger receipt version timestamp. Automatically generated by Procountor and updated every time the ledger receipt is modified.
    * @format date-time
+   * @example "2017-09-27T12:12:42"
    */
   version?: string;
 }
@@ -9179,30 +10643,29 @@ export interface LedgerReceiptSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Contains rights for management functionalities. */
 export interface ManagementRights {
   /** Access level to basic company info functionality. */
-  basicCompanyInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  basicCompanyInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to basic accounting info functionality. */
-  basicAccountingInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  basicAccountingInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to chart of accounts and default reports functionality. */
-  chartOfAccountsAndDefaultReports?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  chartOfAccountsAndDefaultReports?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to users and user rights functionality. */
-  usersAndUserRights?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  usersAndUserRights?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to company user management functionality. */
-  companyUserManagement?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  companyUserManagement?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to set up a company functionality. */
-  setUpACompany?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  setUpACompany?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to import data functionality. */
-  importData?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  importData?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to notifications functionality. */
-  notifications?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  notifications?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to incomes register certificate functionality. */
-  incomesRegisterCertificate?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  incomesRegisterCertificate?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to group letter functionality. */
-  groupLetter?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  groupLetter?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to audit log functionality. */
-  auditLog?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  auditLog?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
 export interface MarkInvoiceAsPaid {
@@ -9218,217 +10681,217 @@ export interface MarkInvoiceAsPaid {
    * @example "USD"
    */
   currency:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /**
    * Payment description. Used only in sales invoices.
    * @minLength 0
@@ -9437,18 +10900,95 @@ export interface MarkInvoiceAsPaid {
   description?: string;
   /** Payment method type. Used only in sales invoices. */
   paymentMethodType?:
-    | 'ADJUSTMENT'
-    | 'BANK_STATEMENT'
-    | 'CASH'
-    | 'CHARGE_CARD'
-    | 'CORRECTION'
-    | 'CREDIT_LOSS'
-    | 'CREDIT_NOTE'
-    | 'EXTERNAL_BANK_TRANSFER'
-    | 'SET_OFF';
+    | "ADJUSTMENT"
+    | "BANK_STATEMENT"
+    | "CASH"
+    | "CHARGE_CARD"
+    | "CORRECTION"
+    | "CREDIT_LOSS"
+    | "CREDIT_NOTE"
+    | "EXTERNAL_BANK_TRANSFER"
+    | "SET_OFF";
 }
 
-/** List of the payment IDs */
+export interface MfaInfoMessage {
+  /** Message with detail information about a result of action. */
+  message?: string;
+}
+
+/** These are possible results for transaction requests made with multi-factor authentication (MFA). Only one of the fields will be non-null, depending on the type of transaction that was performed. For example, if the transaction request was made by POST /payments/directbanktransfers, the directPayments field will contain the result, while the other fields will be null. This class encapsulates the different possible outcomes of MFA-protected transactions into a single response model. */
+export interface MfaTransactionResult {
+  /** Result of creating direct bank transfers action performed successfully. Returned if transaction request was made by <b> POST /payments/directbanktransfers</b> */
+  directBankTransfers?: PaymentSummaries;
+  /** Result of paying invoices action performed successfully. Returned if transaction request was made by <b>POST /payments</b> */
+  invoicePayments?: InvoicePaymentSummaries;
+  /** Result for creating direct salary payment action performed successfully. Returned if transaction request was made by <b>POST /payments/directsalarypayments</b> */
+  directSalaryPayment?: DirectSalaryPaymentResult;
+  /**
+   * General response for action performed successfully (canceling, deleting, updating). Returned if transaction request was made by:
+   * <br><b>- DELETE /payments/{paymentId}</b>
+   * <br><b>- DELETE /invoices/{invoiceId}/paymentevents/{paymentEventId}</b>
+   * <br><b>- PUT /payments/{paymentId}/cancel</b>
+   * <br><b>- PUT /payments/directsalarypayments/{paymentListId}/cancel</b>
+   * <br><b>- PUT /users</b>
+   */
+  info?: MfaInfoMessage;
+}
+
+export interface NewSalaryList {
+  /**
+   * Salary list name.
+   * @minLength 0
+   * @maxLength 80
+   */
+  name: string;
+  /**
+   * Holiday credit year.
+   * @format int32
+   */
+  holidayYear?: number;
+  /**
+   * Payment period start.
+   * @format date
+   */
+  paymentPeriodStart: string;
+  /**
+   * Payment period end.
+   * @format date
+   */
+  paymentPeriodEnd: string;
+  /**
+   * Earnings period start.
+   * @format date
+   */
+  earningsPeriodStart?: string;
+  /**
+   * Earnings period end.
+   * @format date
+   */
+  earningsPeriodEnd?: string;
+  /**
+   * Accounting date.
+   * @format date
+   */
+  accountingDate: string;
+  /**
+   * Due date.
+   * @format date
+   */
+  dueDate: string;
+  /**
+   * Payday.
+   * @format date
+   */
+  payday: string;
+  /**
+   * Employees data needed to create salary slip for employee.
+   * @minItems 1
+   */
+  employeesDataForSalarySlip: EmployeeDataForSalarySlip[];
+}
+
 export interface PaymentBasicInfo {
   /**
    * Id of the payment
@@ -9459,7 +10999,6 @@ export interface PaymentBasicInfo {
   customId?: string;
 }
 
-/** Search results. */
 export interface PaymentErrorMessage {
   /**
    * Unique identifier of the error message.
@@ -9472,9 +11011,15 @@ export interface PaymentErrorMessage {
    */
   createdDate?: string;
   /** Type of error. */
-  type?: 'ANY_ERROR' | 'PAYMENT_ERROR' | 'FINVOICE_SEND_ERROR' | 'FINVOICE_RECEIVE_ERROR' | 'TYEL_ERROR' | 'NETS_COLLECTION_ERROR';
+  type?:
+    | "ANY_ERROR"
+    | "PAYMENT_ERROR"
+    | "FINVOICE_SEND_ERROR"
+    | "FINVOICE_RECEIVE_ERROR"
+    | "TYEL_ERROR"
+    | "NETS_COLLECTION_ERROR";
   /** Status of error handling. */
-  status?: 'ALL' | 'HANDLED' | 'UNHANDLED';
+  status?: "ALL" | "HANDLED" | "UNHANDLED";
   /** Error code of error. */
   errorCode?: string;
   /**
@@ -9484,38 +11029,38 @@ export interface PaymentErrorMessage {
   referenceId?: number;
   /** Type of payment object related to the error message. NOTE: BANK_TRANSFER type was replaced by DIRECT_BANK_TRANSFER. */
   referenceType?:
-    | 'DIRECT_BANK_TRANSFER'
-    | 'DIRECT_SALARY_PAYMENT'
-    | 'DIRECT_SALARY_PAYMENT_LIST'
-    | 'INVOICE'
-    | 'NETS_COLLECTION'
-    | 'PAYMENTS_ANNOUNCEMENT';
+    | "DIRECT_BANK_TRANSFER"
+    | "DIRECT_SALARY_PAYMENT"
+    | "DIRECT_SALARY_PAYMENT_LIST"
+    | "INVOICE"
+    | "NETS_COLLECTION"
+    | "PAYMENTS_ANNOUNCEMENT";
   /** Detailed type of receipt related to the error message, sent only for invoices. */
   invoiceType?:
-    | 'VAT_FORM'
-    | 'PAYMENT_CORRECTION'
-    | 'TRACKING_PERIOD_OPENING_RECEIPT'
-    | 'PERIODIC_TAX_RETURN'
-    | 'UNKNOWN_RECEIPT_TYPE_F'
-    | 'UNKNOWN_RECEIPT_TYPE_G'
-    | 'ACCRUAL'
-    | 'BILL_OF_CHARGES'
-    | 'SALES_INVOICE'
-    | 'JOURNAL'
-    | 'JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE'
-    | 'JOURNAL_BYPASSING_INVOICE_PAGE'
-    | 'PURCHASE_INVOICE'
-    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
-    | 'SALARY'
-    | 'REFERENCE_PAYMENT'
-    | 'EMPLOYER_CONTRIBUTION'
-    | 'TRAVEL_INVOICE'
-    | 'TRAVEL_PLAN'
-    | 'BANK_STATEMENT_AS_RECEIPT'
-    | 'PURCHASE_ORDER'
-    | 'VAT_SUMMARY'
-    | 'SALES_ORDER'
-    | 'OFFER';
+    | "VAT_FORM"
+    | "PAYMENT_CORRECTION"
+    | "TRACKING_PERIOD_OPENING_RECEIPT"
+    | "PERIODIC_TAX_RETURN"
+    | "UNKNOWN_RECEIPT_TYPE_F"
+    | "UNKNOWN_RECEIPT_TYPE_G"
+    | "ACCRUAL"
+    | "BILL_OF_CHARGES"
+    | "SALES_INVOICE"
+    | "JOURNAL"
+    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
+    | "JOURNAL_BYPASSING_INVOICE_PAGE"
+    | "PURCHASE_INVOICE"
+    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | "SALARY"
+    | "REFERENCE_PAYMENT"
+    | "EMPLOYER_CONTRIBUTION"
+    | "TRAVEL_INVOICE"
+    | "TRAVEL_PLAN"
+    | "BANK_STATEMENT_AS_RECEIPT"
+    | "PURCHASE_ORDER"
+    | "VAT_SUMMARY"
+    | "SALES_ORDER"
+    | "OFFER";
   /** Information about error handling. Can be empty if message is not handled yet. */
   errorHandlingInfo?: ErrorHandlingInfo;
 }
@@ -9540,29 +11085,29 @@ export interface PaymentEvent {
   invoiceId?: number;
   /** Type of payment. */
   type?:
-    | 'ADJUSTMENT'
-    | 'BANKSTATEMENT'
-    | 'BANKSTATEMENT_TO_INVOICE'
-    | 'BANKSTATEMENT_TO_JOURNAL'
-    | 'BANKTRANSFERELSEWHERE'
-    | 'CASH'
-    | 'CASHDISCOUNT'
-    | 'CHARGECARD'
-    | 'COMPENSATIONINVOICE'
-    | 'CORRECTION'
-    | 'CREDITLOSS'
-    | 'ELSEWHERE'
-    | 'INVOICE_TO_INVOICE'
-    | 'INVOICE_TO_JOURNAL'
-    | 'JOURNAL_TO_INVOICE'
-    | 'JOURNAL_TO_JOURNAL'
-    | 'NETS_DK_INVOICE'
-    | 'OTHERPAYMENTMETHOD'
-    | 'REFERENCEPAYMENT'
-    | 'REFERENCEPAYMENT_TO_INVOICE'
-    | 'REFERENCEPAYMENT_TO_JOURNAL'
-    | 'SETOFF'
-    | 'TRANSACTION_FOCUSED';
+    | "ADJUSTMENT"
+    | "BANKSTATEMENT"
+    | "BANKSTATEMENT_TO_INVOICE"
+    | "BANKSTATEMENT_TO_JOURNAL"
+    | "BANKTRANSFERELSEWHERE"
+    | "CASH"
+    | "CASHDISCOUNT"
+    | "CHARGECARD"
+    | "COMPENSATIONINVOICE"
+    | "CORRECTION"
+    | "CREDITLOSS"
+    | "ELSEWHERE"
+    | "INVOICE_TO_INVOICE"
+    | "INVOICE_TO_JOURNAL"
+    | "JOURNAL_TO_INVOICE"
+    | "JOURNAL_TO_JOURNAL"
+    | "NETS_DK_INVOICE"
+    | "OTHERPAYMENTMETHOD"
+    | "REFERENCEPAYMENT"
+    | "REFERENCEPAYMENT_TO_INVOICE"
+    | "REFERENCEPAYMENT_TO_JOURNAL"
+    | "SETOFF"
+    | "TRANSACTION_FOCUSED";
   /**
    * Date when the payment transaction has to be performed.
    * @format date
@@ -9570,26 +11115,26 @@ export interface PaymentEvent {
   paymentDate?: string;
   /** Status of payment. */
   status?:
-    | 'EMPTY'
-    | 'UNFINISHED'
-    | 'NOT_SENT'
-    | 'SENT'
-    | 'RECEIVED'
-    | 'PAID'
-    | 'PAYMENT_DENIED'
-    | 'VERIFIED'
-    | 'APPROVED'
-    | 'INVALIDATED'
-    | 'PAYMENT_QUEUED'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'MARKED_PAID'
-    | 'STARTED'
-    | 'INVOICED'
-    | 'OVERRIDDEN'
-    | 'DELETED'
-    | 'UNSAVED'
-    | 'PAYMENT_TRANSACTION_REMOVED';
+    | "EMPTY"
+    | "UNFINISHED"
+    | "NOT_SENT"
+    | "SENT"
+    | "RECEIVED"
+    | "PAID"
+    | "PAYMENT_DENIED"
+    | "VERIFIED"
+    | "APPROVED"
+    | "INVALIDATED"
+    | "PAYMENT_QUEUED"
+    | "PARTLY_PAID"
+    | "PAYMENT_SENT_TO_BANK"
+    | "MARKED_PAID"
+    | "STARTED"
+    | "INVOICED"
+    | "OVERRIDDEN"
+    | "DELETED"
+    | "UNSAVED"
+    | "PAYMENT_TRANSACTION_REMOVED";
   /** Payment amount in accounting currency. */
   amount?: number;
   /**
@@ -9597,217 +11142,217 @@ export interface PaymentEvent {
    * @example "EUR"
    */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Payment description. Used only in sales invoices. */
   description?: string;
   /** Payment amount in paid currency. */
@@ -9817,217 +11362,217 @@ export interface PaymentEvent {
    * @example "SEK"
    */
   paidCurrency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
 }
 
 export interface PaymentEventSearchResult {
@@ -10037,239 +11582,238 @@ export interface PaymentEventSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Invoice payment info. Includes the bank account to which the invoice should be paid, how it should be paid and when it should be paid. */
 export interface PaymentInfo {
   /** Payment method. Methods other than BANK_TRANSFER, CASH, CLEARING may require fields not supported by the API. The DIRECT_DEBIT method is not supported by POST /invoices and PUT /invoices endpoints. The DKLMPKRE method is deprecated and read only, DOMESTIC_PAYMENT_CREDITOR should be used instead. */
   paymentMethod:
-    | 'BANK_TRANSFER'
-    | 'DIRECT_PAYMENT'
-    | 'CLEARING'
-    | 'CREDIT_CARD_CHARGE'
-    | 'FOREIGN_PAYMENT'
-    | 'OTHER'
-    | 'CASH'
-    | 'DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'DOMESTIC_PAYMENT_BANKGIRO'
-    | 'DOMESTIC_PAYMENT_CREDITOR'
-    | 'DKLMPKRE'
-    | 'NETS';
+    | "BANK_TRANSFER"
+    | "DIRECT_PAYMENT"
+    | "CLEARING"
+    | "CREDIT_CARD_CHARGE"
+    | "FOREIGN_PAYMENT"
+    | "OTHER"
+    | "CASH"
+    | "DOMESTIC_PAYMENT_PLUSGIRO"
+    | "DOMESTIC_PAYMENT_BANKGIRO"
+    | "DOMESTIC_PAYMENT_CREDITOR"
+    | "DKLMPKRE"
+    | "NETS";
   /**
    * Currency of the payment in ISO 4217 format.
    * @example "EUR"
    */
   currency:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
-  /** Bank account number. */
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
+  /** Payment bank account. Not required if payment method is cash. Deprecated in counterParty section for invoices endpoints - used only with DIRECT_DEBIT payment method, which is deprecated as well. */
   bankAccount?: BankAccount;
   /**
    * Payment due date. The payment term can be 0-999 days.
@@ -10277,11 +11821,14 @@ export interface PaymentInfo {
    */
   dueDate: string;
   /**
+   * Payment new due date.
+   * @format date
+   */
+  newDueDate?: string;
+  /**
    * Currency exchange rate. Calculated as the amount of one unit of domestic currency in foreign currency. Only foreign currency payments should have a value other than 1.
    * @min 0
-   * @exclusiveMin true
    * @max 1000000
-   * @exclusiveMax false
    * @example 1
    */
   currencyRate: number;
@@ -10291,11 +11838,11 @@ export interface PaymentInfo {
   cashDiscount?: CashDiscount;
   /**
    * Payment reference code. If specified, must be a valid reference code where the last digit is a check digit. If the field is given an empty string value, a reference code is automatically generated by Procountor. If the field is not provided at all, no reference code will be assigned to the invoice.
-   * @example "26013"
+   * @example 26013
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
+  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
   /**
    * Receiver bank's clearing code for foreign payments.
    * @minLength 0
@@ -10304,14 +11851,13 @@ export interface PaymentInfo {
   clearingCode?: string;
 }
 
-/** Intermediary bank name and address. If filled in, then it have to be filled in full. Used in foreign payments. */
 export interface PaymentIntermediaryBankNameAndAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -10319,25 +11865,19 @@ export interface PaymentIntermediaryBankNameAndAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -10347,257 +11887,257 @@ export interface PaymentIntermediaryBankNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -10606,14 +12146,13 @@ export interface PaymentIntermediaryBankNameAndAddress {
   subdivision?: string;
 }
 
-/** Recipient bank name and address. Used in foreign payments. */
 export interface PaymentReceiverBankNameAndAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -10621,25 +12160,19 @@ export interface PaymentReceiverBankNameAndAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -10649,257 +12182,257 @@ export interface PaymentReceiverBankNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -10908,7 +12441,6 @@ export interface PaymentReceiverBankNameAndAddress {
   subdivision?: string;
 }
 
-/** Recipient name with address. Recipient name is mandatory and is always in use, other fields are omitted in scenarios different then described below. In case of: foreign payments, Norway NETS payments, Norway SpareBank payments, Sweden Swedbank with missing bank reference payments and Sweden DanskeBank with missing bank reference payments full receiver address is needed. */
 export interface PaymentRecipientNameAndAddress {
   /**
    * Name ("first line") in the address.
@@ -10923,25 +12455,19 @@ export interface PaymentRecipientNameAndAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -10951,257 +12477,257 @@ export interface PaymentRecipientNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -11210,20 +12736,21 @@ export interface PaymentRecipientNameAndAddress {
   subdivision?: string;
 }
 
-/** Contains rights for payment transactions functionalities. */
 export interface PaymentRights {
   /** Access level to payment functionality. */
-  payment?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  payment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to salary payments functionality. */
-  salaryPayments?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  salaryPayments?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to mark as paid functionality. */
-  markAsPaid?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  markAsPaid?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  /** Access level to mark salary as paid functionality. */
+  markSalaryAsPaid?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to direct bank transfer functionality. */
-  directBankTransfer?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  directBankTransfer?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to bank statement and reference payment functionality. */
-  bankStatementAndReferencePayment?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  bankStatementAndReferencePayment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to payment allocation functionality. */
-  paymentAllocation?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  paymentAllocation?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
 export interface PaymentRowInfo {
@@ -11248,217 +12775,217 @@ export interface PaymentRowInfo {
   receiverName?: string;
   /** Currency of payment. */
   currency?:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Payer bank account. */
   payerAccount?: string;
   /** Payer BIC (Bank Identifier Code) code. */
@@ -11476,26 +13003,26 @@ export interface PaymentRowInfo {
    * @example "SENT"
    */
   status?:
-    | 'APPROVED'
-    | 'DELETED'
-    | 'EMPTY'
-    | 'INVALIDATED'
-    | 'INVOICED'
-    | 'MARKED_PAID'
-    | 'NOT_SENT'
-    | 'OVERRIDDEN'
-    | 'PAID'
-    | 'PARTLY_PAID'
-    | 'PAYMENT_DENIED'
-    | 'PAYMENT_QUEUED'
-    | 'PAYMENT_SENT_TO_BANK'
-    | 'PAYMENT_TRANSACTION_REMOVED'
-    | 'RECEIVED'
-    | 'SENT'
-    | 'STARTED'
-    | 'UNFINISHED'
-    | 'UNSAVED'
-    | 'VERIFIED';
+    | "APPROVED"
+    | "DELETED"
+    | "EMPTY"
+    | "INVALIDATED"
+    | "INVOICED"
+    | "MARKED_PAID"
+    | "NOT_SENT"
+    | "OVERRIDDEN"
+    | "PAID"
+    | "PARTLY_PAID"
+    | "PAYMENT_DENIED"
+    | "PAYMENT_QUEUED"
+    | "PAYMENT_SENT_TO_BANK"
+    | "PAYMENT_TRANSACTION_REMOVED"
+    | "RECEIVED"
+    | "SENT"
+    | "STARTED"
+    | "UNFINISHED"
+    | "UNSAVED"
+    | "VERIFIED";
 }
 
 export interface PaymentSearchResult {
@@ -11505,13 +13032,11 @@ export interface PaymentSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
 export interface PaymentSummaries {
   /** List of identifiers of added payments. */
   transactions?: PaymentSummary[];
 }
 
-/** List of identifiers of added payments. */
 export interface PaymentSummary {
   /**
    * Identifier of created payment, provided by the application.
@@ -11526,13 +13051,12 @@ export interface PaymentSummary {
 export interface PaymentsConfirmationResponseModels {
   /** Response for creating direct bank transfers action (POST /payments/directbanktransfers) performed successfully */
   PaymentSummaries?: PaymentSummaries;
-  /** Response information message */
+  /** Response for deleting (DELETE /payments/{paymentId} or cancelling (PUT /payments/{paymentId}/cancel) payment action performed successfully */
   InfoMessage?: InfoMessage;
   /** Response for paying invoices action (POST /payments) performed successfully */
   InvoicePaymentSummaries?: InvoicePaymentSummaries;
 }
 
-/** Pension contracts. Employees' pension insurance. */
 export interface PensionContract {
   /**
    * Unique identifier of pension contract.
@@ -11549,6 +13073,26 @@ export interface PensionContract {
   label?: string;
   /**
    * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface PensionInsurance {
+  /**
+   * Unique identifier of employee pension insurance.
+   * @format int64
+   */
+  id?: number;
+  /** Pension insurance type. */
+  type: "MYEL" | "NONE" | "TYEL" | "YEL";
+  /**
+   * Pension contract ID.
+   * @format int64
+   */
+  pensionContractId?: number;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
    * @format date-time
    */
   version?: string;
@@ -11595,14 +13139,13 @@ export interface Person {
   version?: string;
 }
 
-/** Address of the person. Value may be empty. */
 export interface PersonAddress {
   /**
    * Name ("first line") in the address.
    * @minLength 0
    * @maxLength 80
    */
-  name: string;
+  name?: string;
   /**
    * Specifier, such as c/o address.
    * @minLength 0
@@ -11610,25 +13153,19 @@ export interface PersonAddress {
    */
   specifier?: string;
   /**
-   * Street. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Street.
    * @minLength 0
    * @maxLength 80
    */
   street?: string;
   /**
-   * Zip code. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * Zip code.
    * @minLength 0
    * @maxLength 20
    */
   zip?: string;
   /**
-   * City. Required for SALES_INVOICE and SALES_ORDER if invoicing channel is MAIL. In that case, must be specified in counterPartyAddress if not specified in billingAddress.
-   *
-   * Required for SALES_INVOICE if invoicing channel is ELECTRONIC_INVOICE. In that case, must be specified in billingAddress and counterPartyAddress.
+   * City.
    * @minLength 0
    * @maxLength 40
    */
@@ -11638,257 +13175,257 @@ export interface PersonAddress {
    * @example "SWEDEN"
    */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Subdivision of the city
    * @minLength 0
@@ -11897,7 +13434,6 @@ export interface PersonAddress {
   subdivision?: string;
 }
 
-/** Address of Person. */
 export interface PersonBasicAddress {
   /**
    * Street name.
@@ -11919,257 +13455,256 @@ export interface PersonBasicAddress {
   city?: string;
   /** Country code. */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
 }
 
-/** Search results. */
 export interface PersonBasicInfo {
   /**
    * Unique identifier of a Person in Person register. This id is same as business partner's partnerId for type PERSON.
@@ -12188,7 +13723,6 @@ export interface PersonBasicInfo {
   registryInfo?: PersonBasicRegistryInfo;
 }
 
-/** Invoicing information. */
 export interface PersonBasicInvoicingInfo {
   /**
    * Person number.
@@ -12208,47 +13742,45 @@ export interface PersonBasicInvoicingInfo {
    * @maxLength 20
    */
   identifierType?:
-    | 'FI'
-    | 'HETU'
-    | 'YHD'
-    | 'NO'
-    | 'AT'
-    | 'BE'
-    | 'BG'
-    | 'CY'
-    | 'HR'
-    | 'CZ'
-    | 'DK'
-    | 'EE'
-    | 'FR'
-    | 'DE'
-    | 'GB'
-    | 'EL'
-    | 'HU'
-    | 'IE'
-    | 'IT'
-    | 'LV'
-    | 'LT'
-    | 'LU'
-    | 'MT'
-    | 'NL'
-    | 'PL'
-    | 'PT'
-    | 'RO'
-    | 'SK'
-    | 'SI'
-    | 'ES'
-    | 'SE'
-    | 'XI';
+    | "FI"
+    | "HETU"
+    | "YHD"
+    | "NO"
+    | "AT"
+    | "BE"
+    | "BG"
+    | "CY"
+    | "HR"
+    | "CZ"
+    | "DK"
+    | "EE"
+    | "FR"
+    | "DE"
+    | "GB"
+    | "EL"
+    | "HU"
+    | "IE"
+    | "IT"
+    | "LV"
+    | "LT"
+    | "LU"
+    | "MT"
+    | "NL"
+    | "PL"
+    | "PT"
+    | "RO"
+    | "SK"
+    | "SI"
+    | "ES"
+    | "SE"
+    | "XI";
 }
 
-/** Register information. */
 export interface PersonBasicRegistryInfo {
   /** Status of the person */
   active: boolean;
 }
 
-/** Address. */
 export interface PersonFullAddress {
   /**
    * Street name.
@@ -12270,254 +13802,254 @@ export interface PersonFullAddress {
   city?: string;
   /** Country code. */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Specifier. Not allowed for Swedish environment.
    * @minLength 0
@@ -12538,7 +14070,6 @@ export interface PersonFullAddress {
   postOfficeBox?: string;
 }
 
-/** Invoicing information. */
 export interface PersonInvoicingInfo {
   /**
    * Person number.
@@ -12558,38 +14089,38 @@ export interface PersonInvoicingInfo {
    * @maxLength 20
    */
   identifierType?:
-    | 'FI'
-    | 'HETU'
-    | 'YHD'
-    | 'NO'
-    | 'AT'
-    | 'BE'
-    | 'BG'
-    | 'CY'
-    | 'HR'
-    | 'CZ'
-    | 'DK'
-    | 'EE'
-    | 'FR'
-    | 'DE'
-    | 'GB'
-    | 'EL'
-    | 'HU'
-    | 'IE'
-    | 'IT'
-    | 'LV'
-    | 'LT'
-    | 'LU'
-    | 'MT'
-    | 'NL'
-    | 'PL'
-    | 'PT'
-    | 'RO'
-    | 'SK'
-    | 'SI'
-    | 'ES'
-    | 'SE'
-    | 'XI';
+    | "FI"
+    | "HETU"
+    | "YHD"
+    | "NO"
+    | "AT"
+    | "BE"
+    | "BG"
+    | "CY"
+    | "HR"
+    | "CZ"
+    | "DK"
+    | "EE"
+    | "FR"
+    | "DE"
+    | "GB"
+    | "EL"
+    | "HU"
+    | "IE"
+    | "IT"
+    | "LV"
+    | "LT"
+    | "LU"
+    | "MT"
+    | "NL"
+    | "PL"
+    | "PT"
+    | "RO"
+    | "SK"
+    | "SI"
+    | "ES"
+    | "SE"
+    | "XI";
   /**
    * Date of birth. Not allowed for Swedish environment.
    * @format date
@@ -12597,9 +14128,9 @@ export interface PersonInvoicingInfo {
    */
   dateOfBirth?: string;
   /** Language. */
-  language: 'ENGLISH' | 'FINNISH' | 'SWEDISH';
+  language: "ENGLISH" | "FINNISH" | "SWEDISH";
   /** Gender. */
-  gender: 'FEMALE' | 'MALE' | 'NOT_APPLICABLE';
+  gender: "FEMALE" | "MALE" | "NOT_APPLICABLE";
   /**
    * Identifier of person's home country.
    * @minLength 0
@@ -12608,23 +14139,22 @@ export interface PersonInvoicingInfo {
   homeCountryPersonId?: string;
 }
 
-/** Payment details. */
 export interface PersonPaymentInfo {
   /** Type of payment method. */
   paymentMethod:
-    | 'BANK_TRANSFER'
-    | 'DIRECT_DEBIT'
-    | 'DIRECT_PAYMENT'
-    | 'CLEARING'
-    | 'CREDIT_CARD_CHARGE'
-    | 'FOREIGN_PAYMENT'
-    | 'OTHER'
-    | 'CASH'
-    | 'DOMESTIC_PAYMENT_PLUSGIRO'
-    | 'DOMESTIC_PAYMENT_BANKGIRO'
-    | 'DOMESTIC_PAYMENT_CREDITOR'
-    | 'DKLMPKRE'
-    | 'NETS';
+    | "BANK_TRANSFER"
+    | "DIRECT_DEBIT"
+    | "DIRECT_PAYMENT"
+    | "CLEARING"
+    | "CREDIT_CARD_CHARGE"
+    | "FOREIGN_PAYMENT"
+    | "OTHER"
+    | "CASH"
+    | "DOMESTIC_PAYMENT_PLUSGIRO"
+    | "DOMESTIC_PAYMENT_BANKGIRO"
+    | "DOMESTIC_PAYMENT_CREDITOR"
+    | "DKLMPKRE"
+    | "NETS";
   /**
    * Clearing code.
    * @minLength 0
@@ -12669,7 +14199,6 @@ export interface PersonPaymentInfo {
   discountPercentage?: number;
 }
 
-/** Register information. */
 export interface PersonRegistryInfo {
   /** Status of the person */
   active: boolean;
@@ -12751,7 +14280,7 @@ export interface PersonalDetails {
   /** Last name of the person. */
   lastName?: string;
   /** Language of the person. */
-  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
+  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
   /** Address of the person. Value may be empty. */
   address?: PersonAddress;
   /** Payment information for the person. */
@@ -12760,7 +14289,6 @@ export interface PersonalDetails {
   invoicingInfo?: BasicInvoicingInfo;
 }
 
-/** Information about the default product */
 export interface Product {
   /**
    * Unique identifier of the product. Generated by Procountor.
@@ -12771,7 +14299,7 @@ export interface Product {
    * Product type: to which kind of invoices the product can be assigned.
    * @example "TRAVEL"
    */
-  type: 'PURCHASE' | 'SALES' | 'TRAVEL';
+  type: "PURCHASE" | "SALES" | "TRAVEL";
   /**
    * Product name.
    * @minLength 0
@@ -12786,123 +14314,121 @@ export interface Product {
   code?: string;
   /** Product unit. */
   unit?:
-    | 'AMPERE'
-    | 'AMPERE_HOUR'
-    | 'AMPERE_MINUTE'
-    | 'BAG'
-    | 'BAR'
-    | 'BOTTLE'
-    | 'BOX'
-    | 'CAN'
-    | 'CENTILITRE'
-    | 'CM'
-    | 'CUBIC_METER'
-    | 'CUP'
-    | 'DAY'
-    | 'DECILITRE'
-    | 'DOZEN'
-    | 'DOZEN_PACK'
-    | 'EIGHT_PACK'
-    | 'EXAJOULE'
-    | 'FIVE_PACK'
-    | 'FOOT'
-    | 'FOUR_PACK'
-    | 'FULL_DAY'
-    | 'GALLON_UK'
-    | 'GALLON_US'
-    | 'GIGABIT'
-    | 'GIGABYTE'
-    | 'GIGAJOULE'
-    | 'GIGAWATT'
-    | 'GIGAWATT_HOUR'
-    | 'GRAM'
-    | 'GRAM_PER_CUBIC_METRE'
-    | 'GRAM_PER_SQUARE_METRE'
-    | 'HECTARE'
-    | 'HOUR'
-    | 'HUNDRED'
-    | 'INCH'
-    | 'JAR'
-    | 'JOULE'
-    | 'JOULE_PER_SECOND'
-    | 'KILOAMPERE_HOUR'
-    | 'KILOBIT'
-    | 'KILOBYTE'
-    | 'KILOGRAM'
-    | 'KILOGRAM_PER_CUBIC_METRE'
-    | 'KILOGRAM_PER_SQUARE_METRE'
-    | 'KILOJOULE'
-    | 'KILOMETER'
-    | 'KILOPASCAL'
-    | 'KILOVOLT'
-    | 'KILOWATT'
-    | 'KILOWATT_HOUR'
-    | 'LINEAR_METER'
-    | 'LITER'
-    | 'LOT'
-    | 'MEGABIT'
-    | 'MEGABYTE'
-    | 'MEGAWATT_HOUR'
-    | 'METER'
-    | 'MILE'
-    | 'MILLIAMPERE_HOUR'
-    | 'MILLIGRAM'
-    | 'MILLIGRAM_PER_CUBIC_METRE'
-    | 'MILLIJOULE'
-    | 'MILLILITRE'
-    | 'MILLIMETER'
-    | 'MILLIVOLT'
-    | 'MILLIWATT'
-    | 'MINUTE'
-    | 'MONTH'
-    | 'NINE_PACK'
-    | 'NO_UNIT'
-    | 'NUMBER_OF_WORDS'
-    | 'OUNCE'
-    | 'PAGE'
-    | 'PAIR'
-    | 'PALLET'
-    | 'PARCEL'
-    | 'PASCAL'
-    | 'PERSON'
-    | 'PETAJOULE'
-    | 'PIECE'
-    | 'PINT_UK'
-    | 'PINT_US'
-    | 'PLATE'
-    | 'POUND'
-    | 'ROLL'
-    | 'SACK'
-    | 'SALE_UNIT'
-    | 'SECOND'
-    | 'SERIES'
-    | 'SET'
-    | 'SEVEN_PACK'
-    | 'SIX_PACK'
-    | 'SQUARE_CENTIMETRE'
-    | 'SQUARE_METER'
-    | 'STONE_UK'
-    | 'TEN_PACK'
-    | 'TERABIT'
-    | 'TERAJOULE'
-    | 'TERAWATT'
-    | 'TERAWATT_HOUR'
-    | 'THREE_PACK'
-    | 'TON'
-    | 'TUBE'
-    | 'TWO_PACK'
-    | 'WATT'
-    | 'WATT_HOUR'
-    | 'WEEK'
-    | 'WRAP'
-    | 'YARD'
-    | 'YEAR';
+    | "AMPERE"
+    | "AMPERE_HOUR"
+    | "AMPERE_MINUTE"
+    | "BAG"
+    | "BAR"
+    | "BOTTLE"
+    | "BOX"
+    | "CAN"
+    | "CENTILITRE"
+    | "CM"
+    | "CUBIC_METER"
+    | "CUP"
+    | "DAY"
+    | "DECILITRE"
+    | "DOZEN"
+    | "DOZEN_PACK"
+    | "EIGHT_PACK"
+    | "EXAJOULE"
+    | "FIVE_PACK"
+    | "FOOT"
+    | "FOUR_PACK"
+    | "FULL_DAY"
+    | "GALLON_UK"
+    | "GALLON_US"
+    | "GIGABIT"
+    | "GIGABYTE"
+    | "GIGAJOULE"
+    | "GIGAWATT"
+    | "GIGAWATT_HOUR"
+    | "GRAM"
+    | "GRAM_PER_CUBIC_METRE"
+    | "GRAM_PER_SQUARE_METRE"
+    | "HECTARE"
+    | "HOUR"
+    | "HUNDRED"
+    | "INCH"
+    | "JAR"
+    | "JOULE"
+    | "JOULE_PER_SECOND"
+    | "KILOAMPERE_HOUR"
+    | "KILOBIT"
+    | "KILOBYTE"
+    | "KILOGRAM"
+    | "KILOGRAM_PER_CUBIC_METRE"
+    | "KILOGRAM_PER_SQUARE_METRE"
+    | "KILOJOULE"
+    | "KILOMETER"
+    | "KILOPASCAL"
+    | "KILOVOLT"
+    | "KILOWATT"
+    | "KILOWATT_HOUR"
+    | "LINEAR_METER"
+    | "LITER"
+    | "LOT"
+    | "MEGABIT"
+    | "MEGABYTE"
+    | "MEGAWATT_HOUR"
+    | "METER"
+    | "MILE"
+    | "MILLIAMPERE_HOUR"
+    | "MILLIGRAM"
+    | "MILLIGRAM_PER_CUBIC_METRE"
+    | "MILLIJOULE"
+    | "MILLILITRE"
+    | "MILLIMETER"
+    | "MILLIVOLT"
+    | "MILLIWATT"
+    | "MINUTE"
+    | "MONTH"
+    | "NINE_PACK"
+    | "NO_UNIT"
+    | "NUMBER_OF_WORDS"
+    | "OUNCE"
+    | "PAGE"
+    | "PAIR"
+    | "PALLET"
+    | "PARCEL"
+    | "PASCAL"
+    | "PERSON"
+    | "PETAJOULE"
+    | "PIECE"
+    | "PINT_UK"
+    | "PINT_US"
+    | "PLATE"
+    | "POUND"
+    | "ROLL"
+    | "SACK"
+    | "SALE_UNIT"
+    | "SECOND"
+    | "SERIES"
+    | "SET"
+    | "SEVEN_PACK"
+    | "SIX_PACK"
+    | "SQUARE_CENTIMETRE"
+    | "SQUARE_METER"
+    | "STONE_UK"
+    | "TEN_PACK"
+    | "TERABIT"
+    | "TERAJOULE"
+    | "TERAWATT"
+    | "TERAWATT_HOUR"
+    | "THREE_PACK"
+    | "TON"
+    | "TUBE"
+    | "TWO_PACK"
+    | "WATT"
+    | "WATT_HOUR"
+    | "WEEK"
+    | "WRAP"
+    | "YARD"
+    | "YEAR";
   /**
    * Product discount percentage.
    * @min 0
-   * @exclusiveMin false
    * @max 100
-   * @exclusiveMax false
    */
   discount: number;
   /** Product price. */
@@ -12923,217 +14449,217 @@ export interface Product {
    * @example "EUR"
    */
   currency:
-    | 'AED'
-    | 'AFN'
-    | 'ALL'
-    | 'AMD'
-    | 'ANG'
-    | 'AOA'
-    | 'ARS'
-    | 'ATS'
-    | 'AUD'
-    | 'AWG'
-    | 'AZN'
-    | 'BAM'
-    | 'BBD'
-    | 'BDT'
-    | 'BEF'
-    | 'BGN'
-    | 'BHD'
-    | 'BIF'
-    | 'BMD'
-    | 'BND'
-    | 'BOB'
-    | 'BOV'
-    | 'BRL'
-    | 'BSD'
-    | 'BTN'
-    | 'BWP'
-    | 'BYN'
-    | 'BZD'
-    | 'CAD'
-    | 'CDF'
-    | 'CHE'
-    | 'CHF'
-    | 'CHW'
-    | 'CLF'
-    | 'CLP'
-    | 'CNH'
-    | 'CNT'
-    | 'CNY'
-    | 'COP'
-    | 'COU'
-    | 'CRC'
-    | 'CUC'
-    | 'CUP'
-    | 'CVE'
-    | 'CYP'
-    | 'CZK'
-    | 'DEM'
-    | 'DJF'
-    | 'DKK'
-    | 'DOP'
-    | 'DZD'
-    | 'EEK'
-    | 'EGP'
-    | 'ERN'
-    | 'ESP'
-    | 'ETB'
-    | 'EUR'
-    | 'FIM'
-    | 'FJD'
-    | 'FKP'
-    | 'FRF'
-    | 'GBP'
-    | 'GEL'
-    | 'GGP'
-    | 'GHS'
-    | 'GIP'
-    | 'GMD'
-    | 'GNF'
-    | 'GRD'
-    | 'GTQ'
-    | 'GYD'
-    | 'HKD'
-    | 'HNL'
-    | 'HRK'
-    | 'HTG'
-    | 'HUF'
-    | 'IDR'
-    | 'IEP'
-    | 'ILS'
-    | 'IMP'
-    | 'INR'
-    | 'IQD'
-    | 'IRR'
-    | 'ISK'
-    | 'ITL'
-    | 'JEP'
-    | 'JMD'
-    | 'JOD'
-    | 'JPY'
-    | 'KES'
-    | 'KGS'
-    | 'KHR'
-    | 'KID'
-    | 'KMF'
-    | 'KPW'
-    | 'KRW'
-    | 'KWD'
-    | 'KYD'
-    | 'KZT'
-    | 'LAK'
-    | 'LBP'
-    | 'LKR'
-    | 'LRD'
-    | 'LSL'
-    | 'LTL'
-    | 'LUF'
-    | 'LVL'
-    | 'LYD'
-    | 'MAD'
-    | 'MDL'
-    | 'MGA'
-    | 'MKD'
-    | 'MMK'
-    | 'MNT'
-    | 'MOP'
-    | 'MRO'
-    | 'MTL'
-    | 'MUR'
-    | 'MVR'
-    | 'MWK'
-    | 'MXN'
-    | 'MXV'
-    | 'MYR'
-    | 'MZN'
-    | 'NAD'
-    | 'NGN'
-    | 'NIO'
-    | 'NIS'
-    | 'NLG'
-    | 'NOK'
-    | 'NPR'
-    | 'NTD'
-    | 'NZD'
-    | 'OMR'
-    | 'PAB'
-    | 'PEN'
-    | 'PGK'
-    | 'PHP'
-    | 'PKR'
-    | 'PLN'
-    | 'PRB'
-    | 'PTE'
-    | 'PYG'
-    | 'QAR'
-    | 'RMB'
-    | 'RON'
-    | 'RSD'
-    | 'RUB'
-    | 'RWF'
-    | 'SAR'
-    | 'SBD'
-    | 'SCR'
-    | 'SDG'
-    | 'SEK'
-    | 'SGD'
-    | 'SHP'
-    | 'SIT'
-    | 'SKK'
-    | 'SLL'
-    | 'SLS'
-    | 'SOS'
-    | 'SRD'
-    | 'SSP'
-    | 'STN'
-    | 'SVC'
-    | 'SYP'
-    | 'SZL'
-    | 'THB'
-    | 'TJS'
-    | 'TMT'
-    | 'TND'
-    | 'TOP'
-    | 'TRY'
-    | 'TTD'
-    | 'TVD'
-    | 'TWD'
-    | 'TZS'
-    | 'UAH'
-    | 'UGX'
-    | 'USD'
-    | 'USN'
-    | 'UYI'
-    | 'UYU'
-    | 'UYW'
-    | 'UZS'
-    | 'VES'
-    | 'VND'
-    | 'VUV'
-    | 'WST'
-    | 'XAF'
-    | 'XAG'
-    | 'XAU'
-    | 'XBA'
-    | 'XBB'
-    | 'XBC'
-    | 'XBD'
-    | 'XCD'
-    | 'XDR'
-    | 'XOF'
-    | 'XPD'
-    | 'XPF'
-    | 'XPT'
-    | 'XSU'
-    | 'XTS'
-    | 'XUA'
-    | 'XXX'
-    | 'YER'
-    | 'ZAR'
-    | 'ZMW'
-    | 'ZWB'
-    | 'ZWL';
+    | "AED"
+    | "AFN"
+    | "ALL"
+    | "AMD"
+    | "ANG"
+    | "AOA"
+    | "ARS"
+    | "ATS"
+    | "AUD"
+    | "AWG"
+    | "AZN"
+    | "BAM"
+    | "BBD"
+    | "BDT"
+    | "BEF"
+    | "BGN"
+    | "BHD"
+    | "BIF"
+    | "BMD"
+    | "BND"
+    | "BOB"
+    | "BOV"
+    | "BRL"
+    | "BSD"
+    | "BTN"
+    | "BWP"
+    | "BYN"
+    | "BZD"
+    | "CAD"
+    | "CDF"
+    | "CHE"
+    | "CHF"
+    | "CHW"
+    | "CLF"
+    | "CLP"
+    | "CNH"
+    | "CNT"
+    | "CNY"
+    | "COP"
+    | "COU"
+    | "CRC"
+    | "CUC"
+    | "CUP"
+    | "CVE"
+    | "CYP"
+    | "CZK"
+    | "DEM"
+    | "DJF"
+    | "DKK"
+    | "DOP"
+    | "DZD"
+    | "EEK"
+    | "EGP"
+    | "ERN"
+    | "ESP"
+    | "ETB"
+    | "EUR"
+    | "FIM"
+    | "FJD"
+    | "FKP"
+    | "FRF"
+    | "GBP"
+    | "GEL"
+    | "GGP"
+    | "GHS"
+    | "GIP"
+    | "GMD"
+    | "GNF"
+    | "GRD"
+    | "GTQ"
+    | "GYD"
+    | "HKD"
+    | "HNL"
+    | "HRK"
+    | "HTG"
+    | "HUF"
+    | "IDR"
+    | "IEP"
+    | "ILS"
+    | "IMP"
+    | "INR"
+    | "IQD"
+    | "IRR"
+    | "ISK"
+    | "ITL"
+    | "JEP"
+    | "JMD"
+    | "JOD"
+    | "JPY"
+    | "KES"
+    | "KGS"
+    | "KHR"
+    | "KID"
+    | "KMF"
+    | "KPW"
+    | "KRW"
+    | "KWD"
+    | "KYD"
+    | "KZT"
+    | "LAK"
+    | "LBP"
+    | "LKR"
+    | "LRD"
+    | "LSL"
+    | "LTL"
+    | "LUF"
+    | "LVL"
+    | "LYD"
+    | "MAD"
+    | "MDL"
+    | "MGA"
+    | "MKD"
+    | "MMK"
+    | "MNT"
+    | "MOP"
+    | "MRO"
+    | "MTL"
+    | "MUR"
+    | "MVR"
+    | "MWK"
+    | "MXN"
+    | "MXV"
+    | "MYR"
+    | "MZN"
+    | "NAD"
+    | "NGN"
+    | "NIO"
+    | "NIS"
+    | "NLG"
+    | "NOK"
+    | "NPR"
+    | "NTD"
+    | "NZD"
+    | "OMR"
+    | "PAB"
+    | "PEN"
+    | "PGK"
+    | "PHP"
+    | "PKR"
+    | "PLN"
+    | "PRB"
+    | "PTE"
+    | "PYG"
+    | "QAR"
+    | "RMB"
+    | "RON"
+    | "RSD"
+    | "RUB"
+    | "RWF"
+    | "SAR"
+    | "SBD"
+    | "SCR"
+    | "SDG"
+    | "SEK"
+    | "SGD"
+    | "SHP"
+    | "SIT"
+    | "SKK"
+    | "SLL"
+    | "SLS"
+    | "SOS"
+    | "SRD"
+    | "SSP"
+    | "STN"
+    | "SVC"
+    | "SYP"
+    | "SZL"
+    | "THB"
+    | "TJS"
+    | "TMT"
+    | "TND"
+    | "TOP"
+    | "TRY"
+    | "TTD"
+    | "TVD"
+    | "TWD"
+    | "TZS"
+    | "UAH"
+    | "UGX"
+    | "USD"
+    | "USN"
+    | "UYI"
+    | "UYU"
+    | "UYW"
+    | "UZS"
+    | "VES"
+    | "VND"
+    | "VUV"
+    | "WST"
+    | "XAF"
+    | "XAG"
+    | "XAU"
+    | "XBA"
+    | "XBB"
+    | "XBC"
+    | "XBD"
+    | "XCD"
+    | "XDR"
+    | "XOF"
+    | "XPD"
+    | "XPF"
+    | "XPT"
+    | "XSU"
+    | "XTS"
+    | "XUA"
+    | "XXX"
+    | "YER"
+    | "ZAR"
+    | "ZMW"
+    | "ZWB"
+    | "ZWL";
   /** Product name localizations. */
   productLocalizations?: ProductLocalization[];
   /**
@@ -13151,9 +14677,16 @@ export interface Product {
    * @format date
    */
   endDate?: string;
+  /** Get bookkeeping account code for the product. Used by TRAVEL type only. */
+  bookkeepingAccount?: string;
+  /**
+   * Product version timestamp. Automatically generated by Procountor and updated every time the product is updated.
+   * @format date-time
+   * @example "2019-09-25T13:15:58"
+   */
+  version?: string;
 }
 
-/** Penal expense product. */
 export interface ProductBasicInfo {
   /**
    * Identifier of the product.
@@ -13172,117 +14705,117 @@ export interface ProductBasicInfo {
   currency?: string;
   /** Unit type of product. */
   unit?:
-    | 'AMPERE'
-    | 'AMPERE_HOUR'
-    | 'AMPERE_MINUTE'
-    | 'BAG'
-    | 'BAR'
-    | 'BOTTLE'
-    | 'BOX'
-    | 'CAN'
-    | 'CENTILITRE'
-    | 'CM'
-    | 'CUBIC_METER'
-    | 'CUP'
-    | 'DAY'
-    | 'DECILITRE'
-    | 'DOZEN'
-    | 'DOZEN_PACK'
-    | 'EIGHT_PACK'
-    | 'EXAJOULE'
-    | 'FIVE_PACK'
-    | 'FOOT'
-    | 'FOUR_PACK'
-    | 'FULL_DAY'
-    | 'GALLON_UK'
-    | 'GALLON_US'
-    | 'GIGABIT'
-    | 'GIGABYTE'
-    | 'GIGAJOULE'
-    | 'GIGAWATT'
-    | 'GIGAWATT_HOUR'
-    | 'GRAM'
-    | 'GRAM_PER_CUBIC_METRE'
-    | 'GRAM_PER_SQUARE_METRE'
-    | 'HECTARE'
-    | 'HOUR'
-    | 'HUNDRED'
-    | 'INCH'
-    | 'JAR'
-    | 'JOULE'
-    | 'JOULE_PER_SECOND'
-    | 'KILOAMPERE_HOUR'
-    | 'KILOBIT'
-    | 'KILOBYTE'
-    | 'KILOGRAM'
-    | 'KILOGRAM_PER_CUBIC_METRE'
-    | 'KILOGRAM_PER_SQUARE_METRE'
-    | 'KILOJOULE'
-    | 'KILOMETER'
-    | 'KILOPASCAL'
-    | 'KILOVOLT'
-    | 'KILOWATT'
-    | 'KILOWATT_HOUR'
-    | 'LINEAR_METER'
-    | 'LITER'
-    | 'LOT'
-    | 'MEGABIT'
-    | 'MEGABYTE'
-    | 'MEGAWATT_HOUR'
-    | 'METER'
-    | 'MILE'
-    | 'MILLIAMPERE_HOUR'
-    | 'MILLIGRAM'
-    | 'MILLIGRAM_PER_CUBIC_METRE'
-    | 'MILLIJOULE'
-    | 'MILLILITRE'
-    | 'MILLIMETER'
-    | 'MILLIVOLT'
-    | 'MILLIWATT'
-    | 'MINUTE'
-    | 'MONTH'
-    | 'NINE_PACK'
-    | 'NO_UNIT'
-    | 'NUMBER_OF_WORDS'
-    | 'OUNCE'
-    | 'PAGE'
-    | 'PAIR'
-    | 'PALLET'
-    | 'PARCEL'
-    | 'PASCAL'
-    | 'PERSON'
-    | 'PETAJOULE'
-    | 'PIECE'
-    | 'PINT_UK'
-    | 'PINT_US'
-    | 'PLATE'
-    | 'POUND'
-    | 'ROLL'
-    | 'SACK'
-    | 'SALE_UNIT'
-    | 'SECOND'
-    | 'SERIES'
-    | 'SET'
-    | 'SEVEN_PACK'
-    | 'SIX_PACK'
-    | 'SQUARE_CENTIMETRE'
-    | 'SQUARE_METER'
-    | 'STONE_UK'
-    | 'TEN_PACK'
-    | 'TERABIT'
-    | 'TERAJOULE'
-    | 'TERAWATT'
-    | 'TERAWATT_HOUR'
-    | 'THREE_PACK'
-    | 'TON'
-    | 'TUBE'
-    | 'TWO_PACK'
-    | 'WATT'
-    | 'WATT_HOUR'
-    | 'WEEK'
-    | 'WRAP'
-    | 'YARD'
-    | 'YEAR';
+    | "AMPERE"
+    | "AMPERE_HOUR"
+    | "AMPERE_MINUTE"
+    | "BAG"
+    | "BAR"
+    | "BOTTLE"
+    | "BOX"
+    | "CAN"
+    | "CENTILITRE"
+    | "CM"
+    | "CUBIC_METER"
+    | "CUP"
+    | "DAY"
+    | "DECILITRE"
+    | "DOZEN"
+    | "DOZEN_PACK"
+    | "EIGHT_PACK"
+    | "EXAJOULE"
+    | "FIVE_PACK"
+    | "FOOT"
+    | "FOUR_PACK"
+    | "FULL_DAY"
+    | "GALLON_UK"
+    | "GALLON_US"
+    | "GIGABIT"
+    | "GIGABYTE"
+    | "GIGAJOULE"
+    | "GIGAWATT"
+    | "GIGAWATT_HOUR"
+    | "GRAM"
+    | "GRAM_PER_CUBIC_METRE"
+    | "GRAM_PER_SQUARE_METRE"
+    | "HECTARE"
+    | "HOUR"
+    | "HUNDRED"
+    | "INCH"
+    | "JAR"
+    | "JOULE"
+    | "JOULE_PER_SECOND"
+    | "KILOAMPERE_HOUR"
+    | "KILOBIT"
+    | "KILOBYTE"
+    | "KILOGRAM"
+    | "KILOGRAM_PER_CUBIC_METRE"
+    | "KILOGRAM_PER_SQUARE_METRE"
+    | "KILOJOULE"
+    | "KILOMETER"
+    | "KILOPASCAL"
+    | "KILOVOLT"
+    | "KILOWATT"
+    | "KILOWATT_HOUR"
+    | "LINEAR_METER"
+    | "LITER"
+    | "LOT"
+    | "MEGABIT"
+    | "MEGABYTE"
+    | "MEGAWATT_HOUR"
+    | "METER"
+    | "MILE"
+    | "MILLIAMPERE_HOUR"
+    | "MILLIGRAM"
+    | "MILLIGRAM_PER_CUBIC_METRE"
+    | "MILLIJOULE"
+    | "MILLILITRE"
+    | "MILLIMETER"
+    | "MILLIVOLT"
+    | "MILLIWATT"
+    | "MINUTE"
+    | "MONTH"
+    | "NINE_PACK"
+    | "NO_UNIT"
+    | "NUMBER_OF_WORDS"
+    | "OUNCE"
+    | "PAGE"
+    | "PAIR"
+    | "PALLET"
+    | "PARCEL"
+    | "PASCAL"
+    | "PERSON"
+    | "PETAJOULE"
+    | "PIECE"
+    | "PINT_UK"
+    | "PINT_US"
+    | "PLATE"
+    | "POUND"
+    | "ROLL"
+    | "SACK"
+    | "SALE_UNIT"
+    | "SECOND"
+    | "SERIES"
+    | "SET"
+    | "SEVEN_PACK"
+    | "SIX_PACK"
+    | "SQUARE_CENTIMETRE"
+    | "SQUARE_METER"
+    | "STONE_UK"
+    | "TEN_PACK"
+    | "TERABIT"
+    | "TERAJOULE"
+    | "TERAWATT"
+    | "TERAWATT_HOUR"
+    | "THREE_PACK"
+    | "TON"
+    | "TUBE"
+    | "TWO_PACK"
+    | "WATT"
+    | "WATT_HOUR"
+    | "WEEK"
+    | "WRAP"
+    | "YARD"
+    | "YEAR";
 }
 
 export interface ProductGroup {
@@ -13301,7 +14834,7 @@ export interface ProductGroup {
    * Product type.
    * @example "TRAVEL"
    */
-  type?: 'PURCHASE' | 'SALES' | 'TRAVEL';
+  type?: "PURCHASE" | "SALES" | "TRAVEL";
 }
 
 export interface ProductGroups {
@@ -13309,10 +14842,9 @@ export interface ProductGroups {
   productGroups?: ProductGroup[];
 }
 
-/** Product name localizations. */
 export interface ProductLocalization {
   /** Product language */
-  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
+  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
   /**
    * Product name
    * @minLength 0
@@ -13328,7 +14860,6 @@ export interface ProductSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Validity periods of the default product */
 export interface ProductValidityPeriod {
   /**
    * Start date of the validity period
@@ -13344,23 +14875,60 @@ export interface ProductValidityPeriod {
   notes?: string;
 }
 
-/** Contains rights for purchases functionalities. */
 export interface PurchasesRights {
   /** Access level to purchase invoices functionality. */
-  purchaseInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  purchaseInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to purchase invoice search functionality. */
-  purchaseInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  purchaseInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal purchase invoices only limitation enabled. */
   personalPurchaseInvoicesOnly?: boolean;
   /** Access level to supplier register functionality. */
-  supplierRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  supplierRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to product register functionality. */
-  productRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to fixed assets register functionality. */
-  fixedAssetsRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  fixedAssetsRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
-/** Search results. */
+export interface RecoveryRowDetails {
+  /**
+   * Unique identifier of employee salary base recovery row details.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Value of overpaid tax. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  netRecoveryTaxValue?: number;
+  /**
+   * Start date of the payment period in which the overpayment occurred.
+   * @format date
+   */
+  paymentPeriodStart: string;
+  /**
+   * End date of the payment period in which the overpayment occurred.
+   * @format date
+   */
+  paymentPeriodEnd: string;
+  /**
+   * Start date of the earnings period in which the overpayment occurred.
+   * @format date
+   */
+  earningsPeriodStart?: string;
+  /**
+   * End date of the earnings period in which the overpayment occurred.
+   * @format date
+   */
+  earningsPeriodEnd?: string;
+  /**
+   * Date when the employee is assumed to receive salary.
+   * @format date
+   */
+  payday?: string;
+}
+
 export interface ReferencePayment {
   /**
    * Unique identifier of the reference payment.
@@ -13407,7 +14975,6 @@ export interface ReferencePaymentsSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Registry info data of the partner. */
 export interface RegistryInfo {
   /** Status of the partner. */
   active?: boolean;
@@ -13465,105 +15032,753 @@ export interface SalariesBasicInfo {
   accidentInsurancePolicies?: AccidentInsurancePolicy[];
 }
 
-/** Contains rights for salaries functionalities. */
 export interface SalariesRights {
   /** Access level to payroll functionality. */
-  payroll?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  payroll?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal salaries only limitation enabled. */
   personalSalariesOnly?: boolean;
   /** Access level to person register functionality. */
-  personRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  personRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to working time tracking functionality. */
-  workingTimeTracking?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  workingTimeTracking?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal work hour tracking only limitation enabled. */
   personalWorkHourTrackingOnly?: boolean;
 }
 
-/** Search results. */
-export interface SalaryList {
-  /** @format int32 */
+export interface SalaryBase {
+  /**
+   * Unique identifier of the salary base.
+   * @format int64
+   */
   id?: number;
+  /**
+   * Unique identifier of the employee.
+   * @format int64
+   */
+  employeeId?: number;
+  /** User notes related to salary base. */
+  notes?: string;
+  /**
+   * Salary base rows. Salary base should always have at least one row. Some base rows are created automatically and next can be added.
+   * @minItems 1
+   */
+  rows: SalaryBaseRow[];
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface SalaryBaseRow {
+  /**
+   * Unique identifier of salary base row.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * The row salary type code.
+   * @format int64
+   */
+  salaryTypeCode: number;
+  /**
+   * Custom salary type name.
+   * @minLength 0
+   * @maxLength 255
+   */
+  customName?: string;
+  /**
+   * Quantity of units. Scale: 5.
+   * @min -999999999.99
+   * @max 999999999.99
+   */
+  quantity?: number;
+  /**
+   * Value of one unit. Scale: 5.
+   * @min -999999999.99
+   * @max 999999999.99
+   */
+  unitValue?: number;
+  /**
+   * Payment percent of salary type. Scale: 2.
+   * @min 0
+   * @max 2147483647
+   */
+  paymentPercent?: number;
+  /** Additional information about recovery row of salary base. */
+  recoveryDetails?: RecoveryRowDetails;
+  /** Additional information about car benefit row of salary base. */
+  carBenefitDetails?: CarBenefitRowDetails;
+  /** Is base salary row resulting from employee configuration. */
+  baseSalaryRow?: boolean;
+}
+
+export interface SalaryInfo {
+  /**
+   * Unique identifier of the employee.
+   * @format int64
+   */
+  employeeId?: number;
+  /**
+   * Unique identifier of the person. Used to link employee with person from person register.
+   * @format int64
+   */
+  personId: number;
+  /** Income configuration. */
+  incomeConfiguration: IncomeConfiguration;
+  /** Insurances configuration. */
+  insurancesConfiguration: InsurancesConfiguration;
+  /** International situations configuration. */
+  internationalSituationsConfiguration: InternationalSituationsConfiguration;
+}
+
+export interface SalaryList {
+  /**
+   * Salary list name.
+   * @minLength 0
+   * @maxLength 80
+   */
+  name: string;
+  /**
+   * Holiday credit year.
+   * @format int32
+   */
+  holidayYear?: number;
+  /**
+   * Payment period start.
+   * @format date
+   */
+  paymentPeriodStart: string;
+  /**
+   * Payment period end.
+   * @format date
+   */
+  paymentPeriodEnd: string;
+  /**
+   * Earnings period start.
+   * @format date
+   */
+  earningsPeriodStart?: string;
+  /**
+   * Earnings period end.
+   * @format date
+   */
+  earningsPeriodEnd?: string;
+  /**
+   * Accounting date.
+   * @format date
+   */
+  accountingDate: string;
+  /**
+   * Due date.
+   * @format date
+   */
+  dueDate: string;
+  /**
+   * Payday.
+   * @format date
+   */
+  payday: string;
+  /**
+   * Unique salary list identifier.
+   * @format int64
+   */
+  id?: number;
+  /** Salary slips basic data associated with salary list. */
+  salarySlips?: SalarySlipBasicData[];
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface SalaryListBasicData {
+  /**
+   * Unique salary list identifier.
+   * @format int64
+   */
+  id?: number;
+  /** Salary list name. */
   name?: string;
-  /** @format int32 */
+  /**
+   * Number of salary slips included in this salary list.
+   * @format int32
+   */
   numberOfSlips?: number;
-  /** @format int32 */
+  /**
+   * Number of unfinished salary slips.
+   * @format int32
+   */
   unfinished?: number;
-  /** @format int32 */
+  /**
+   * Number of sent salary slips.
+   * @format int32
+   */
   sent?: number;
-  /** @format int32 */
+  /**
+   * Number of paid salary slips.
+   * @format int32
+   */
   paid?: number;
-  /** @format int32 */
+  /**
+   * Number of reported salary slips.
+   * @format int32
+   */
   reported?: number;
-  /** @format date */
+  /**
+   * Salary list payment period start.
+   * @format date
+   */
   paymentPeriodStart?: string;
-  /** @format date */
+  /**
+   * Salary list payment period end.
+   * @format date
+   */
   paymentPeriodEnd?: string;
-  /** @format date-time */
+  /**
+   * The date when salary list was created.
+   * @format date-time
+   */
   created?: string;
+  /** Name of the user who created salary list. */
   createdBy?: string;
 }
 
 export interface SalaryListSearchResult {
   /** Search results. */
-  results?: SalaryList[];
+  results?: SalaryListBasicData[];
   /** Search result metadata. */
   meta?: SearchResultMetaData;
 }
 
-/** Salary slip within a salary list. */
-export interface SalarySlip {
-  /** @format int32 */
+export interface SalaryPeriod {
+  /**
+   * Salary period ID.
+   * @format int64
+   */
   id?: number;
-  employeeName?: string;
-  /** @format date */
+  /** Salary period name. */
+  name?: string;
+  /**
+   * Salary period payment period start date.
+   * @format date
+   */
+  paymentPeriodStart?: string;
+  /**
+   * Salary period payment period end date.
+   * @format date
+   */
+  paymentPeriodEnd?: string;
+  /**
+   * Holiday credit year.
+   * @format int32
+   */
+  holidayCreditYear?: number;
+  /**
+   * Calendar of workdays.
+   * @format int32
+   */
+  calendarWorkdays?: number;
+  /**
+   * Due date.
+   * @format date
+   */
+  dueDate?: string;
+  /**
+   * Payday.
+   * @format date
+   */
   payday?: string;
-  /** @format int32 */
-  slipNumber?: number;
-  status?: string;
-  paidStatusDetails?: string;
-  slipNotes?: string;
-  salaryChannel?: 'NO_SENDING' | 'MAIL' | 'EMAIL' | 'PAPER' | 'MOBILE' | 'ESALARY';
-  sentStatus?: string;
-  reportStatus?: string;
-  salary?: number;
-  fringeBenefit?: number;
-  salaryForIns?: number;
-  deductionToTaxable?: number;
-  tax?: number;
-  taxableCompensation?: number;
-  taxFreeItems?: number;
-  otherDeductions?: number;
-  netPay?: number;
-  eSalaryStatus?: string;
+  /**
+   * Accounting date.
+   * @format date
+   */
+  accountingDate?: string;
 }
 
-/** Full salary list details. */
-export interface SalaryListDetails {
-  name?: string;
-  /** @format int32 */
-  holidayYear?: number;
-  /** @format date */
-  paymentPeriodStart?: string;
-  /** @format date */
-  paymentPeriodEnd?: string;
-  /** @format date */
-  earningsPeriodStart?: string;
-  /** @format date */
-  earningsPeriodEnd?: string;
-  /** @format date */
-  accountingDate?: string;
-  /** @format date */
-  dueDate?: string;
-  /** @format date */
-  payday?: string;
-  /** @format int32 */
+export interface SalaryPeriodListBasicInfo {
+  /**
+   * Salary period list ID.
+   * @format int64
+   */
   id?: number;
-  salarySlips?: SalarySlip[];
-  /** @format date-time */
+  /** Salary period list name. */
+  name?: string;
+}
+
+export interface SalarySlip {
+  /**
+   * Unique identifier of the salary slip.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Unique identifier of the employee.
+   * @format int64
+   */
+  employeeId?: number;
+  /** Employee name. */
+  employeeName?: string;
+  /** Salary slip status. */
+  status?:
+    | "APPROVED"
+    | "CREATED"
+    | "INVALIDATED"
+    | "IN_CORRECTION"
+    | "PAID"
+    | "PAYMENT_QUEUED"
+    | "REPORTED"
+    | "REPORTED_AND_PAID"
+    | "REPORTED_AND_PAYMENT_QUEUED";
+  /** Salary slip paid status details. */
+  paidStatusDetails?: "MARKED_PAID" | "PAYMENT_SENT_TO_BANK" | "PARTLY_PAID";
+  /**
+   * Unique salary slip number within each company.
+   * @format int64
+   */
+  slipNumber?: number;
+  /**
+   * Salary base note.
+   * @minLength 0
+   * @maxLength 300
+   */
+  salaryBaseNote?: string;
+  /** Incomes Register reporting setting. */
+  incomesRegisterReportingSetting: "DO_NOT_REPORT_DATA_ON_SLIP" | "EARNINGS_REPORTED_ELSEWHERE" | "FORM_BOTH_REPORTS";
+  /** Working time allocation. */
+  workingTimeAllocation?: SalarySlipWorkingTimeAllocation;
+  /**
+   * Salary slip rows. Salary slip should always have at least one row.
+   * @minItems 1
+   */
+  rows: SalarySlipRow[];
+  /** Salary slip settings. */
+  settings: SalarySlipSettings;
+  /** Salary slip adjustments. */
+  adjustments: SalarySlipAdjustments;
+  /**
+   * Slip notes.
+   * @minLength 0
+   * @maxLength 255
+   */
+  slipNotes?: string;
+  /**
+   * Version.
+   * @format date-time
+   */
   version?: string;
 }
 
-/** Search results. */
+export interface SalarySlipAccounting {
+  /**
+   * Name.
+   * @minLength 0
+   * @maxLength 80
+   */
+  name: string;
+  /**
+   * Receipt date.
+   * @format date
+   */
+  receiptDate: string;
+  /**
+   * Accountants notes.
+   * @minLength 0
+   * @maxLength 255
+   */
+  accountantsNotes?: string;
+  /**
+   * Transaction description.
+   * @minLength 0
+   * @maxLength 255
+   */
+  transactionDescription?: string;
+  /** Receipt validity type. */
+  receiptValidity?: "EMPTY" | "IMMEDIATELY" | "OVER_3_YEARS" | "SERVICE_PERIOD";
+  /**
+   * Period start date.
+   * @format date
+   */
+  periodStartDate?: string;
+  /**
+   * Period end date.
+   * @format date
+   */
+  periodEndDate?: string;
+  /**
+   * Transactions. At least one transaction must be provided.
+   * @minItems 1
+   */
+  transactions: SalarySlipTransaction[];
+  /**
+   * Version.
+   * @format date-time
+   */
+  version?: string;
+}
+
+export interface SalarySlipAdjustments {
+  /**
+   * Payday.
+   * @format date
+   */
+  payday: string;
+  /** Employment. */
+  employment?: SalarySlipEmployment;
+  /**
+   * Pension contract ID.
+   * @format int64
+   */
+  pensionContractId?: number;
+  /**
+   * Accident insurance policy ID.
+   * @format int64
+   */
+  accidentInsurancePolicyId?: number;
+}
+
+export interface SalarySlipBasicData {
+  /**
+   * Unique salary slip identifier.
+   * @format int64
+   */
+  id?: number;
+  /** Employee name. */
+  employeeName?: string;
+  /**
+   * Payday.
+   * @format date
+   */
+  payday?: string;
+  /**
+   * Unique salary slip number within each company.
+   * @format int64
+   */
+  slipNumber?: number;
+  /** Salary slip status. */
+  status?:
+    | "APPROVED"
+    | "CREATED"
+    | "INVALIDATED"
+    | "IN_CORRECTION"
+    | "PAID"
+    | "PAYMENT_QUEUED"
+    | "REPORTED"
+    | "REPORTED_AND_PAID"
+    | "REPORTED_AND_PAYMENT_QUEUED";
+  /** Salary slip paid status details. */
+  paidStatusDetails?: "MARKED_PAID" | "PAYMENT_SENT_TO_BANK" | "PARTLY_PAID";
+  /** Slip notes. */
+  slipNotes?: string;
+  /** Salary channel. */
+  salaryChannel?: "NO_SENDING" | "MAIL" | "EMAIL" | "MOBILE" | "ESALARY";
+  /** Sent status. */
+  sentStatus?: "OBSOLETE" | "OK" | "UNDEFINED";
+  /** Earnings reported status. */
+  reportStatus?: "OBSOLETE" | "OK" | "UNDEFINED";
+  /** Sum of salary slip's salaries. */
+  salary?: number;
+  /** Sum of salary slip's fringe benefits. */
+  fringeBenefit?: number;
+  /** Sum of salary slip's salaries for insurance purposes. */
+  salaryForIns?: number;
+  /** Sum of salary slip's deductions to taxable. */
+  deductionToTaxable?: number;
+  /** Sum of salary slip's taxes. */
+  tax?: number;
+  /** Sum of salary slip's taxable compensations. */
+  taxableCompensation?: number;
+  /** Sum of salary slip's tax free items. */
+  taxFreeItems?: number;
+  /** Sum of salary slip's other deductions. */
+  otherDeductions?: number;
+  /** Sum of salary slip's net pay. */
+  netPay?: number;
+  /** E-salary status. */
+  eSalaryStatus?: "SENDING" | "SENT" | "ERROR" | "REPLACED" | "NULL";
+}
+
+export interface SalarySlipCarBenefitRowDetails {
+  /**
+   * Unique identifier of employee salary base car benefit row details.
+   * @format int64
+   */
+  id?: number;
+  /** Age group of the car. */
+  carAgeGroup: "A" | "ABROAD" | "B" | "C";
+  /** Whether benefit is limited. */
+  benefitLimited: boolean;
+  /**
+   * The carbon dioxide emission value (g/km) of the car. Scale: 2.
+   * @min 0
+   * @max 100
+   */
+  emissionValue?: number;
+  /**
+   * Odometer reading.
+   * @format int32
+   * @min 0
+   * @max 999999999
+   */
+  odometerReading?: number;
+}
+
+export interface SalarySlipEmployment {
+  /**
+   * Employment start date.
+   * @format date
+   */
+  startDate?: string;
+  /**
+   * Employment end date.
+   * @format date
+   */
+  endDate?: string;
+  /**
+   * Type. Can be enum value or any string.
+   * @minLength 0
+   * @maxLength 255
+   */
+  type?: "PERMANENT" | "FIXED_TERM" | "TEMPORARY" | "PART_TIME" | "TRAINEE" | "PENSIONER" | "NOT_EMPLOYED";
+  /**
+   * Reason for termination. When employment type is Keva, the reason code must be from Kevas numeric codes.
+   * @minLength 0
+   * @maxLength 255
+   */
+  terminationReason:
+    | "NOT_APPLICABLE"
+    | "EMPLOYEES_RESIGNATION"
+    | "OTHER"
+    | "TERMINATION_GROUNDS"
+    | "FINANCIAL_AND_PRODUCTION_GROUNDS"
+    | "JOINT_AGREEMENT"
+    | "RETIREMENT"
+    | "FIXED_TERM_EMPLOYMENT_TERMINATION";
+  /**
+   * Registration grounds id (Keva).
+   * @minLength 0
+   * @maxLength 80
+   */
+  registrationGroundId?: string;
+  /**
+   * Hours per week. Scale: 2.
+   * @min 0.01
+   * @max 168
+   */
+  hoursPerWeek?: number;
+  /** Employment type. */
+  employmentType?: "FULL_TIME" | "NOT_AVAILABLE" | "PART_TIME";
+  /**
+   * Part-time percent. Required when employment type is set to "PART_TIME". Scale: 2.
+   * @min 0.01
+   * @max 100
+   */
+  partTimePercent?: number;
+}
+
+export interface SalarySlipRecoveryRowDetails {
+  /**
+   * Unique identifier of employee salary base recovery row details.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * Value of overpaid tax. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  netRecoveryTaxValue?: number;
+  /**
+   * Start date of the payment period in which the overpayment occurred.
+   * @format date
+   */
+  paymentPeriodStart: string;
+  /**
+   * End date of the payment period in which the overpayment occurred.
+   * @format date
+   */
+  paymentPeriodEnd: string;
+  /**
+   * Start date of the earnings period in which the overpayment occurred.
+   * @format date
+   */
+  earningsPeriodStart?: string;
+  /**
+   * End date of the earnings period in which the overpayment occurred.
+   * @format date
+   */
+  earningsPeriodEnd?: string;
+  /**
+   * Date when the employee is assumed to receive salary.
+   * @format date
+   */
+  payday?: string;
+  /**
+   * Tax at source value of overpaid tax.
+   * @min 0
+   * @max 999999999.99
+   */
+  taxAtSourceValue?: number;
+}
+
+export interface SalarySlipRow {
+  /**
+   * Unique identifier of salary base row.
+   * @format int64
+   */
+  id?: number;
+  /**
+   * The row salary type code.
+   * @format int64
+   */
+  salaryTypeCode: number;
+  /**
+   * Custom salary type name.
+   * @minLength 0
+   * @maxLength 255
+   */
+  customName?: string;
+  /**
+   * Quantity of units. Scale: 5.
+   * @min -999999999.99
+   * @max 999999999.99
+   */
+  quantity?: number;
+  /**
+   * Value of one unit. Scale: 5.
+   * @min -999999999.99
+   * @max 999999999.99
+   */
+  unitValue?: number;
+  /**
+   * Payment percent of salary type. Scale: 2.
+   * @min 0
+   * @max 2147483647
+   */
+  paymentPercent?: number;
+  /** Additional information about recovery row of salary slip. */
+  recoveryDetails?: SalarySlipRecoveryRowDetails;
+  /** Additional information about car benefit row of salary slip. */
+  carBenefitDetails?: SalarySlipCarBenefitRowDetails;
+  /** Is base salary row resulting from employee configuration. */
+  baseSalaryRow?: boolean;
+  /**
+   * Earnings period start date.
+   * @format date
+   */
+  earningsPeriodStart?: string;
+  /**
+   * Earnings period end date.
+   * @format date
+   */
+  earningsPeriodEnd?: string;
+  /** Show earning period on salary slip export. */
+  showEarningPeriodInExport: boolean;
+  /** Is unjust enrichment row. */
+  unjustEnrichment: boolean;
+  /**
+   * Comment. Information for employee.
+   * @minLength 0
+   * @maxLength 200
+   */
+  comment?: string;
+  /** Additional information about holiday row of salary slip. */
+  holidayRowDetails?: HolidayRowDetails;
+  /** Additional information about working hour reduction row of salary slip. */
+  workingHourReductionRowDetails?: WorkingHourReductionRowDetails;
+  /** System notification. */
+  systemNotification?: string;
+}
+
+export interface SalarySlipSearchResult {
+  /** Search results. */
+  results?: SalarySlipBasicData[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
+export interface SalarySlipSettings {
+  /**
+   * Applied insurance exception types. No obligation to provide exception types.
+   * @uniqueItems true
+   */
+  noObligationExceptionTypes?: (
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_EARNINGS_RELATED_PENSION_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_HEALTH_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_UNEMPLOYMENT_INSURANCE"
+    | "NO_OBLIGATION_TO_PROVIDE_INSURANCE_ACCIDENT_AND_OCCUPATIONAL_DISEASE_INSURANCE"
+  )[];
+  /**
+   * Applied insurance exception types. Not subject to Finnish social security exception types.
+   * @uniqueItems true
+   */
+  notSubjectExceptionTypes?: (
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_EARNINGS_RELATED_PENSION_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_HEALTH_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_UNEMPLOYMENT_INSURANCE"
+    | "NOT_SUBJECT_TO_FINNISH_SOCIAL_SEC_ACCIDENT_AND_OCCUPATIONAL_DISEASE_INSURANCE"
+  )[];
+  /** Voluntary insurance in Finland. Earnings-related pension. */
+  pensionVoluntarilyPaid: boolean;
+  /**
+   * Accounting date.
+   * @format date
+   */
+  accountingDate: string;
+  /**
+   * Due date.
+   * @format date
+   */
+  dueDate: string;
+  /** Salary channel. */
+  salaryChannel: "NO_SENDING" | "MAIL" | "EMAIL" | "MOBILE" | "ESALARY";
+  /**
+   * Additional information.
+   * @minLength 0
+   * @maxLength 255
+   */
+  additionalInformation?: string;
+}
+
+export interface SalarySlipTransaction {
+  /**
+   * Unique identifier of the transaction.
+   * @format int32
+   */
+  id?: number;
+  /** Transaction type. */
+  transactionType: "ENTRY" | "RECONCILIATION_ENTRY" | "REVERSING_ENTRY";
+  /**
+   * Ledger account number for the transaction. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts.
+   * @minLength 1
+   */
+  account: string;
+  /** Transaction accounting value. This value is net. It will be automatically rounded up to scale 2. */
+  accountingValue: number;
+  /**
+   * Transaction description.
+   * @minLength 0
+   * @maxLength 255
+   */
+  description?: string;
+  /**
+   * Transaction balance code. Only available if the use balance sheet setting is enabled.
+   * @minLength 0
+   * @maxLength 255
+   */
+  balanceCode?: string;
+  /** Values of dimension items associated with this transaction. The number of provided dimension items must be within the dimension max count defined by the purchased Procountor license. Provided dimension pairs (dimension id - item id) must be unique within the list provided. */
+  dimensionItemValues?: DimensionItemValue[];
+}
+
+export interface SalarySlipWorkingTimeAllocation {
+  /** Holiday working time allocation. Only for employees which uses holiday module. */
+  holidaysWorkingTime?: HolidaysWorkingTimeAllocation;
+  /** Working hour reduction working time allocation. Only for employees which uses working hour reduction module. */
+  workingHourReductionWorkingDays?: WorkingHourReductionWorkingTimeAllocation;
+}
+
 export interface SalaryType {
   /** Salary type name. */
   name?: string;
@@ -13574,20 +15789,21 @@ export interface SalaryType {
   code?: number;
   /** Salary category. */
   category?:
-    | 'DEDUCTIONS_FROM_NET_PAY'
-    | 'EMPLOYER_PAYMENTS'
-    | 'FRINGE_BENEFITS'
-    | 'INFORMATIVE_ITEMS'
-    | 'OTHER_TAXABLE_EARNINGS'
-    | 'SALARY_FOR_TIME_WORKED'
-    | 'TAX'
-    | 'TAX_FREE_ITEMS';
+    | "SALARY_FOR_TIME_WORKED"
+    | "OTHER_TAXABLE_EARNINGS"
+    | "FRINGE_BENEFITS"
+    | "TAX_FREE_ITEMS"
+    | "TAX"
+    | "DEDUCTIONS_FROM_NET_PAY"
+    | "INFORMATIVE_ITEMS";
   /** Salary type unit. */
-  unit?: 'HOUR' | 'PIECE';
+  unit?: "HOUR" | "PIECE";
   /** Unit value of Salary type. */
   unitValue?: number;
   /** Payment percent of Salary type. */
   paymentPercent?: number;
+  /** Is payment percent editable. */
+  paymentPercentEditable?: boolean;
   /** Affects health insurance. */
   affectsHealthInsurance?: boolean;
   /** Affects pension insurance. */
@@ -13614,7 +15830,6 @@ export interface SalaryTypeSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Salary type name translations. */
 export interface SalaryTypeTranslation {
   /** Language code in ISO 639-1 format. */
   languageCode?: string;
@@ -13622,21 +15837,19 @@ export interface SalaryTypeTranslation {
   translation?: string;
 }
 
-/** Contains rights for sales functionalities. */
 export interface SalesRights {
   /** Access level to sales or group invoices functionality. */
-  salesOrGroupInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  salesOrGroupInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to sales invoice search functionality. */
-  salesInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  salesInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal sales invoices only limitation enabled. */
   personalSalesInvoicesOnly?: boolean;
   /** Access level to customer register functionality. */
-  customerRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  customerRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to product register functionality. */
-  productRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
 }
 
-/** Search result metadata. */
 export interface SearchResultMetaData {
   /**
    * Number of the page.
@@ -13660,10 +15873,9 @@ export interface SearchResultMetaData {
   totalCount?: number;
 }
 
-/** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
 export interface SerialNumber {
   /** Ledger receipt series. */
-  series?: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
+  series?: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
   /**
    * Ledger receipt serial number.
    * @format int32
@@ -13681,279 +15893,283 @@ export interface SessionInfo {
   name?: string;
   /** Country of current company. */
   country?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /** Product version of current company. */
   productVersion?:
-    | 'BACKOFFICE'
-    | 'BACKOFFICE_BASIC'
-    | 'BACKOFFICE_PLUS'
-    | 'BACKOFFICE_PREMIUM'
-    | 'FINAGO_SOLO'
-    | 'FINANCIALS_ALKU'
-    | 'FINANCIALS_BASIC'
-    | 'FINANCIALS_ENTERPRISE'
-    | 'FINANCIALS_GOLD'
-    | 'FINANCIALS_LIGHT'
-    | 'FINANCIALS_MAX'
-    | 'FINANCIALS_PLATINUM'
-    | 'FINANCIALS_PLUS'
-    | 'FINANCIALS_PREMIUM'
-    | 'FINANCIALS_SILVER'
-    | 'FINANCIALS_UNLIMITED'
-    | 'FLEX'
-    | 'SALES_GOLD'
-    | 'SALES_PLATINUM'
-    | 'SALES_SILVER';
+    | "BACKOFFICE"
+    | "BACKOFFICE_BASIC"
+    | "BACKOFFICE_PLUS"
+    | "BACKOFFICE_PREMIUM"
+    | "FINAGO_SOLO"
+    | "FINANCIALS_ALKU"
+    | "FINANCIALS_BASIC"
+    | "FINANCIALS_ENTERPRISE"
+    | "FINANCIALS_GOLD"
+    | "FINANCIALS_LIGHT"
+    | "FINANCIALS_MAX"
+    | "FINANCIALS_PLATINUM"
+    | "FINANCIALS_PLUS"
+    | "FINANCIALS_PREMIUM"
+    | "FINANCIALS_SILVER"
+    | "FINANCIALS_TIER_ONE"
+    | "FINANCIALS_TIER_THREE"
+    | "FINANCIALS_TIER_TWO"
+    | "FINANCIALS_UNLIMITED"
+    | "FLEX"
+    | "SALES_GOLD"
+    | "SALES_PLATINUM"
+    | "SALES_SILVER"
+    | "SME_BETTER";
   /**
    * Current user id.
    * @format int32
@@ -13981,12 +16197,11 @@ export interface Status {
   /** Version of the API */
   version?: string;
   /** Status of the API health. OK - API is fine, DEGRADED - some external services are not working, FAILING - API has started, but not working properly */
-  status?: 'DEGRADED' | 'FAILING' | 'OK';
+  status?: "DEGRADED" | "FAILING" | "OK";
   /** Current Procountor version in use */
   procountorVersion?: string;
 }
 
-/** List of substitutions. */
 export interface Substitution {
   /**
    * Substituted user.
@@ -14017,7 +16232,6 @@ export interface Substitution {
   notes?: string;
 }
 
-/** List of taggable users. */
 export interface TaggableUser {
   /** Generated display name that is used in comments to tag that given user. For the most of the time this will be lower case of firstname + lastname, without spaces. Running number is used to indicate multiple people with identical names. */
   displayName?: string;
@@ -14030,7 +16244,6 @@ export interface TaggableUsers {
   taggableUsers?: TaggableUser[];
 }
 
-/** List of tagged users. */
 export interface TaggedUser {
   /**
    * Tag identifier, given when someone is tagged in comment.
@@ -14048,7 +16261,6 @@ export interface TaggedUser {
   read?: string;
 }
 
-/** Information about tagged users. */
 export interface TaggedUsersInfo {
   /**
    * Number of users tagged in the comment.
@@ -14059,7 +16271,65 @@ export interface TaggedUsersInfo {
   readByAllTaggedUsers?: boolean;
 }
 
-/** List of tracking periods contained in the fiscal year. */
+export interface TaxCard {
+  /**
+   * Unique identifier of employee tax card.
+   * @format int64
+   */
+  id?: number;
+  /** Tax card type. Allowed tax card types: ONE_INCOME_LIMIT, TAX_AT_SOURCE. */
+  type: "A" | "ADDITIONAL_INCOME" | "FREELANCE" | "GRADED_INCOME" | "ONE_INCOME_LIMIT" | "TAX_AT_SOURCE";
+  /** Revised card. */
+  revised: boolean;
+  /** Tax card income type. Allowed tax card income types: 000024-000040, 000042. */
+  incomeType?: string;
+  /**
+   * Valid from.
+   * @format date
+   */
+  validFrom: string;
+  /**
+   * Base percent. Scale: 2.
+   * @min 0
+   * @max 100
+   */
+  basePercent: number;
+  /**
+   * Additional percent. Value must be set to 0 if tax card type is set to TAX_AT_SOURCE. Scale: 2.
+   * @min 0
+   * @max 100
+   */
+  additionalPercent: number;
+  /**
+   * Annual income limit. Value must be set to 0 if tax card type is set to TAX_AT_SOURCE. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  annualIncomeLimit: number;
+  /**
+   * Limit used. Value must be set to 0 if tax card type is set to TAX_AT_SOURCE. Scale: 2.
+   * @min 0
+   * @max 999999999.99
+   */
+  limitUsed?: number;
+  /**
+   * Comments.
+   * @minLength 0
+   * @maxLength 80
+   */
+  comments?: string;
+  /**
+   * Creation timestamp.
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * Version. Not allowed in POST. Required in PUT.
+   * @format date-time
+   */
+  version?: string;
+}
+
 export interface TrackingPeriod {
   /**
    * Unique identifier of the tracking period.
@@ -14077,7 +16347,7 @@ export interface TrackingPeriod {
    */
   endDate?: string;
   /** Status of the tracking period. */
-  status: 'CLOSED' | 'OPEN' | 'PENDING';
+  status: "CLOSED" | "OPEN" | "PENDING";
   /**
    * Time of last edition of tracking period.
    * @format date-time
@@ -14085,7 +16355,6 @@ export interface TrackingPeriod {
   modified?: string;
 }
 
-/** List containing transactions on the receipt. At least one transaction must be provided. */
 export interface Transaction {
   /**
    * Unique identifier for the ledger transaction. Automatically generated by Procountor and present in the object returned.
@@ -14093,15 +16362,18 @@ export interface Transaction {
    */
   id?: number;
   /** Transaction type. Depends on the transaction and the ledger account in question. Type REVERSING_ENTRY is used to indicate the first row of a ledger receipt for a specific logic on the UI. Typically, it represents a transaction for a balance sheet account. Note that ledger receipts with no transactions marked as reversing entries are possible.  Type ENTRY is the general type for transactions. It can be used even on the first rows of ledger receipts. Type RECONCILIATION_ENTRY is used for getting the sum of transactions on a receipt to reconcile (to equal zero). Generally, all ledger receipts should reconcile. Procountor can create reconciliation entries automatically  for ledger receipts when "createReconciliation=true" query parameter is specified.  If VAT is used, a reconciliation row might be necessary due to remainders and rounding.  For both REVERSING_ENTRY and RECONCILIATION_ENTRY transactions, vatStatus cannot be defined and vatPercent must be 0.  Additionally, a ledger can have maximum of one REVERSING_ENTRY and maximum of one RECONCILIATION_ENTRY transaction.  Transactions of these types cannot be removed from a ledger receipt using UI once created. */
-  transactionType: 'ENTRY' | 'RECONCILIATION_ENTRY' | 'REVERSING_ENTRY';
-  /** Ledger account number for the transaction. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts. */
+  transactionType: "ENTRY" | "RECONCILIATION_ENTRY" | "REVERSING_ENTRY";
+  /**
+   * Ledger account number for the transaction. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts.
+   * @minLength 1
+   */
   account: string;
-  /** Transaction accounting value. This value is net. Scale: 2. */
+  /** Transaction accounting value. This value is net. It will be automatically rounded up to scale 2. */
   accountingValue: number;
   /** Transaction VAT percentage. Must be a percentage currently in use for the company. */
   vatPercent: number;
   /** Transaction VAT type. */
-  vatType?: 'PURCHASE' | 'SALES';
+  vatType?: "PURCHASE" | "SALES";
   /**
    * Transaction VAT status. This overrides the VAT status set for the parent ledger receipt. Use here the numeric parts of VAT status codes listed in "VAT defaults" in Procountor. For example, for VAT status code "vat_12", use value 12. The VAT status used must be enabled for the current receipt type (sales/purchase).
    * @format int32
@@ -14149,10 +16421,9 @@ export interface TransactionIdentifier {
   confirmationApp?: string;
 }
 
-/** Transfer notifications. */
 export interface TransferNotification {
   /** Transfer notification language. */
-  lang: 'ENGLISH' | 'FINNISH' | 'SWEDISH' | 'ESTONIAN';
+  lang: "ENGLISH" | "FINNISH" | "SWEDISH" | "ESTONIAN";
   /**
    * Transfer notification message.
    * @minLength 0
@@ -14161,17 +16432,15 @@ export interface TransferNotification {
   notification: string;
 }
 
-/** Contains rights for travel and expenses functionalities. */
 export interface TravelAndExpensesRights {
   /** Access level to travel and expense invoices functionality. */
-  travelAndExpenseInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  travelAndExpenseInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Access level to travel and expense invoice search functionality. */
-  travelAndExpenseInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  travelAndExpenseInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is personal travel and expense invoices only limitation enabled. */
   personalTravelAndExpenseInvoiceOnly?: boolean;
 }
 
-/** Travel information items. A travel invoice may have one or more travel information items containing departure date, return date, destinations and travel purpose. */
 export interface TravelInformationItem {
   /**
    * Travel departure date. Free text.
@@ -14217,257 +16486,257 @@ export interface User {
    * @example "FINLAND"
    */
   countryCode?:
-    | 'AFGHANISTAN'
-    | 'ALAND_ISLANDS'
-    | 'ALBANIA'
-    | 'ALGERIA'
-    | 'AMERICAN_SAMOA'
-    | 'ANDORRA'
-    | 'ANGOLA'
-    | 'ANGUILLA'
-    | 'ANTARCTICA'
-    | 'ANTIGUA_AND_BARBUDA'
-    | 'ARGENTINA'
-    | 'ARMENIA'
-    | 'ARUBA'
-    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
-    | 'AUSTRALIA'
-    | 'AUSTRIA'
-    | 'AZERBAIJAN'
-    | 'BAHAMAS'
-    | 'BAHRAIN'
-    | 'BANGLADESH'
-    | 'BARBADOS'
-    | 'BELARUS'
-    | 'BELGIUM'
-    | 'BELIZE'
-    | 'BENIN'
-    | 'BERMUDA'
-    | 'BHUTAN'
-    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
-    | 'BOSNIA_AND_HERZEGOVINA'
-    | 'BOTSWANA'
-    | 'BOUVET_ISLAND'
-    | 'BRAZIL'
-    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
-    | 'BRITISH_VIRGIN_ISLANDS'
-    | 'BRUNEI_DARUSSALAM'
-    | 'BULGARIA'
-    | 'BURKINA_FASO'
-    | 'BURUNDI'
-    | 'CABO_VERDE'
-    | 'CAMBODIA'
-    | 'CAMEROON'
-    | 'CANADA'
-    | 'CAYMAN_ISLANDS'
-    | 'CENTRAL_AFRICAN_REPUBLIC'
-    | 'CHAD'
-    | 'CHILE'
-    | 'CHINA'
-    | 'CHRISTMAS_ISLAND'
-    | 'COCOS_KEELING_ISLANDS'
-    | 'COLOMBIA'
-    | 'COMOROS'
-    | 'CONGO'
-    | 'COOK_ISLANDS'
-    | 'COSTA_RICA'
-    | 'COTE_D_IVOIRE'
-    | 'CROATIA'
-    | 'CUBA'
-    | 'CURACAO'
-    | 'CYPRUS'
-    | 'CZECH_REPUBLIC'
-    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
-    | 'DENMARK'
-    | 'DJIBOUTI'
-    | 'DOMINICA'
-    | 'DOMINICAN_REPUBLIC'
-    | 'ECUADOR'
-    | 'EGYPT'
-    | 'EL_SALVADOR'
-    | 'EQUATORIAL_GUINEA'
-    | 'ERITREA'
-    | 'ESTONIA'
-    | 'ETHIOPIA'
-    | 'FALKLAND_ISLANDS_MALVINAS'
-    | 'FAROE_ISLANDS'
-    | 'FEDERATED_STATES_OF_MICRONESIA'
-    | 'FIJI'
-    | 'FINLAND'
-    | 'FRANCE'
-    | 'FRENCH_GUIANA'
-    | 'FRENCH_POLYNESIA'
-    | 'FRENCH_SOUTHERN_TERRITORIES'
-    | 'GABON'
-    | 'GAMBIA'
-    | 'GEORGIA'
-    | 'GERMANY'
-    | 'GHANA'
-    | 'GIBRALTAR'
-    | 'GREECE'
-    | 'GREENLAND'
-    | 'GRENADA'
-    | 'GUADELOUPE'
-    | 'GUAM'
-    | 'GUATEMALA'
-    | 'GUERNSEY'
-    | 'GUINEA'
-    | 'GUINEA_BISSAU'
-    | 'GUYANA'
-    | 'HAITI'
-    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
-    | 'HOLY_SEE_VATICAN_CITY_STATE'
-    | 'HONDURAS'
-    | 'HONG_KONG'
-    | 'HUNGARY'
-    | 'ICELAND'
-    | 'INDIA'
-    | 'INDONESIA'
-    | 'IRAQ'
-    | 'IRELAND'
-    | 'ISLAMIC_REPUBLIC_OF_IRAN'
-    | 'ISLE_OF_MAN'
-    | 'ISRAEL'
-    | 'ITALY'
-    | 'JAMAICA'
-    | 'JAPAN'
-    | 'JERSEY'
-    | 'JORDAN'
-    | 'KAZAKHSTAN'
-    | 'KENYA'
-    | 'KIRIBATI'
-    | 'KOSOVO_TEMPORARY'
-    | 'KUWAIT'
-    | 'KYRGYZSTAN'
-    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
-    | 'LATVIA'
-    | 'LEBANON'
-    | 'LESOTHO'
-    | 'LIBERIA'
-    | 'LIBYA'
-    | 'LIECHTENSTEIN'
-    | 'LITHUANIA'
-    | 'LUXEMBOURG'
-    | 'MACAO'
-    | 'MADAGASCAR'
-    | 'MALAWI'
-    | 'MALAYSIA'
-    | 'MALDIVES'
-    | 'MALI'
-    | 'MALTA'
-    | 'MARSHALL_ISLANDS'
-    | 'MARTINIQUE'
-    | 'MAURITANIA'
-    | 'MAURITIUS'
-    | 'MAYOTTE'
-    | 'MEXICO'
-    | 'MONACO'
-    | 'MONGOLIA'
-    | 'MONTENEGRO'
-    | 'MONTSERRAT'
-    | 'MOROCCO'
-    | 'MOZAMBIQUE'
-    | 'MYANMAR'
-    | 'NAMIBIA'
-    | 'NAURU'
-    | 'NEPAL'
-    | 'NETHERLANDS'
-    | 'NEW_CALEDONIA'
-    | 'NEW_ZEALAND'
-    | 'NICARAGUA'
-    | 'NIGER'
-    | 'NIGERIA'
-    | 'NIUE'
-    | 'NORFOLK_ISLAND'
-    | 'NORTHERN_IRELAND_TEMPORARY'
-    | 'NORTHERN_MARIANA_ISLANDS'
-    | 'NORWAY'
-    | 'OMAN'
-    | 'PAKISTAN'
-    | 'PALAU'
-    | 'PANAMA'
-    | 'PAPUA_NEW_GUINEA'
-    | 'PARAGUAY'
-    | 'PERU'
-    | 'PHILIPPINES'
-    | 'PITCAIRN'
-    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
-    | 'POLAND'
-    | 'PORTUGAL'
-    | 'PROVINCE_OF_CHINA_TAIWAN'
-    | 'PUERTO_RICO'
-    | 'QATAR'
-    | 'REPUBLIC_OF_KOREA'
-    | 'REPUBLIC_OF_MOLDOVA'
-    | 'REUNION'
-    | 'ROMANIA'
-    | 'RUSSIAN_FEDERATION'
-    | 'RWANDA'
-    | 'SAINT_BARTHELEMY'
-    | 'SAINT_KITTS_AND_NEVIS'
-    | 'SAINT_LUCIA'
-    | 'SAINT_MARTIN_FRENCH_PART'
-    | 'SAINT_PIERRE_AND_MIQUELON'
-    | 'SAINT_VINCENT_AND_THE_GRENADINES'
-    | 'SAMOA'
-    | 'SAN_MARINO'
-    | 'SAO_TOME_AND_PRINCIPE'
-    | 'SAUDI_ARABIA'
-    | 'SENEGAL'
-    | 'SERBIA'
-    | 'SEYCHELLES'
-    | 'SIERRA_LEONE'
-    | 'SINGAPORE'
-    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
-    | 'SINT_MAARTEN_DUTCH_PART'
-    | 'SLOVAKIA'
-    | 'SLOVENIA'
-    | 'SOLOMON_ISLANDS'
-    | 'SOMALIA'
-    | 'SOUTH_AFRICA'
-    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
-    | 'SOUTH_SUDAN'
-    | 'SPAIN'
-    | 'SRI_LANKA'
-    | 'STATE_OF_PALESTINE'
-    | 'SUDAN'
-    | 'SURINAME'
-    | 'SVALBARD_AND_JAN_MAYEN'
-    | 'SWAZILAND'
-    | 'SWEDEN'
-    | 'SWITZERLAND'
-    | 'SYRIAN_ARAB_REPUBLIC'
-    | 'TAJIKISTAN'
-    | 'THAILAND'
-    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
-    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
-    | 'TIMOR_LESTE'
-    | 'TOGO'
-    | 'TOKELAU'
-    | 'TONGA'
-    | 'TRINIDAD_AND_TOBAGO'
-    | 'TUNISIA'
-    | 'TURKEY'
-    | 'TURKMENISTAN'
-    | 'TURKS_AND_CAICOS_ISLANDS'
-    | 'TUVALU'
-    | 'UGANDA'
-    | 'UKRAINE'
-    | 'UNITED_ARAB_EMIRATES'
-    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
-    | 'UNITED_REPUBLIC_OF_TANZANIA'
-    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
-    | 'UNITED_STATES_OF_AMERICA'
-    | 'URUGUAY'
-    | 'UZBEKISTAN'
-    | 'U_S_VIRGIN_ISLANDS'
-    | 'VANUATU'
-    | 'VIET_NAM'
-    | 'WALLIS_AND_FUTUNA'
-    | 'WESTERN_SAHARA'
-    | 'YEMEN'
-    | 'ZAMBIA'
-    | 'ZIMBABWE';
+    | "AFGHANISTAN"
+    | "ALAND_ISLANDS"
+    | "ALBANIA"
+    | "ALGERIA"
+    | "AMERICAN_SAMOA"
+    | "ANDORRA"
+    | "ANGOLA"
+    | "ANGUILLA"
+    | "ANTARCTICA"
+    | "ANTIGUA_AND_BARBUDA"
+    | "ARGENTINA"
+    | "ARMENIA"
+    | "ARUBA"
+    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
+    | "AUSTRALIA"
+    | "AUSTRIA"
+    | "AZERBAIJAN"
+    | "BAHAMAS"
+    | "BAHRAIN"
+    | "BANGLADESH"
+    | "BARBADOS"
+    | "BELARUS"
+    | "BELGIUM"
+    | "BELIZE"
+    | "BENIN"
+    | "BERMUDA"
+    | "BHUTAN"
+    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
+    | "BOSNIA_AND_HERZEGOVINA"
+    | "BOTSWANA"
+    | "BOUVET_ISLAND"
+    | "BRAZIL"
+    | "BRITISH_INDIAN_OCEAN_TERRITORY"
+    | "BRITISH_VIRGIN_ISLANDS"
+    | "BRUNEI_DARUSSALAM"
+    | "BULGARIA"
+    | "BURKINA_FASO"
+    | "BURUNDI"
+    | "CABO_VERDE"
+    | "CAMBODIA"
+    | "CAMEROON"
+    | "CANADA"
+    | "CAYMAN_ISLANDS"
+    | "CENTRAL_AFRICAN_REPUBLIC"
+    | "CHAD"
+    | "CHILE"
+    | "CHINA"
+    | "CHRISTMAS_ISLAND"
+    | "COCOS_KEELING_ISLANDS"
+    | "COLOMBIA"
+    | "COMOROS"
+    | "CONGO"
+    | "COOK_ISLANDS"
+    | "COSTA_RICA"
+    | "COTE_D_IVOIRE"
+    | "CROATIA"
+    | "CUBA"
+    | "CURACAO"
+    | "CYPRUS"
+    | "CZECH_REPUBLIC"
+    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
+    | "DENMARK"
+    | "DJIBOUTI"
+    | "DOMINICA"
+    | "DOMINICAN_REPUBLIC"
+    | "ECUADOR"
+    | "EGYPT"
+    | "EL_SALVADOR"
+    | "EQUATORIAL_GUINEA"
+    | "ERITREA"
+    | "ESTONIA"
+    | "ETHIOPIA"
+    | "FALKLAND_ISLANDS_MALVINAS"
+    | "FAROE_ISLANDS"
+    | "FEDERATED_STATES_OF_MICRONESIA"
+    | "FIJI"
+    | "FINLAND"
+    | "FRANCE"
+    | "FRENCH_GUIANA"
+    | "FRENCH_POLYNESIA"
+    | "FRENCH_SOUTHERN_TERRITORIES"
+    | "GABON"
+    | "GAMBIA"
+    | "GEORGIA"
+    | "GERMANY"
+    | "GHANA"
+    | "GIBRALTAR"
+    | "GREECE"
+    | "GREENLAND"
+    | "GRENADA"
+    | "GUADELOUPE"
+    | "GUAM"
+    | "GUATEMALA"
+    | "GUERNSEY"
+    | "GUINEA"
+    | "GUINEA_BISSAU"
+    | "GUYANA"
+    | "HAITI"
+    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
+    | "HOLY_SEE_VATICAN_CITY_STATE"
+    | "HONDURAS"
+    | "HONG_KONG"
+    | "HUNGARY"
+    | "ICELAND"
+    | "INDIA"
+    | "INDONESIA"
+    | "IRAQ"
+    | "IRELAND"
+    | "ISLAMIC_REPUBLIC_OF_IRAN"
+    | "ISLE_OF_MAN"
+    | "ISRAEL"
+    | "ITALY"
+    | "JAMAICA"
+    | "JAPAN"
+    | "JERSEY"
+    | "JORDAN"
+    | "KAZAKHSTAN"
+    | "KENYA"
+    | "KIRIBATI"
+    | "KOSOVO_TEMPORARY"
+    | "KUWAIT"
+    | "KYRGYZSTAN"
+    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
+    | "LATVIA"
+    | "LEBANON"
+    | "LESOTHO"
+    | "LIBERIA"
+    | "LIBYA"
+    | "LIECHTENSTEIN"
+    | "LITHUANIA"
+    | "LUXEMBOURG"
+    | "MACAO"
+    | "MADAGASCAR"
+    | "MALAWI"
+    | "MALAYSIA"
+    | "MALDIVES"
+    | "MALI"
+    | "MALTA"
+    | "MARSHALL_ISLANDS"
+    | "MARTINIQUE"
+    | "MAURITANIA"
+    | "MAURITIUS"
+    | "MAYOTTE"
+    | "MEXICO"
+    | "MONACO"
+    | "MONGOLIA"
+    | "MONTENEGRO"
+    | "MONTSERRAT"
+    | "MOROCCO"
+    | "MOZAMBIQUE"
+    | "MYANMAR"
+    | "NAMIBIA"
+    | "NAURU"
+    | "NEPAL"
+    | "NETHERLANDS"
+    | "NEW_CALEDONIA"
+    | "NEW_ZEALAND"
+    | "NICARAGUA"
+    | "NIGER"
+    | "NIGERIA"
+    | "NIUE"
+    | "NORFOLK_ISLAND"
+    | "NORTHERN_IRELAND_TEMPORARY"
+    | "NORTHERN_MARIANA_ISLANDS"
+    | "NORWAY"
+    | "OMAN"
+    | "PAKISTAN"
+    | "PALAU"
+    | "PANAMA"
+    | "PAPUA_NEW_GUINEA"
+    | "PARAGUAY"
+    | "PERU"
+    | "PHILIPPINES"
+    | "PITCAIRN"
+    | "PLURINATIONAL_STATE_OF_BOLIVIA"
+    | "POLAND"
+    | "PORTUGAL"
+    | "PROVINCE_OF_CHINA_TAIWAN"
+    | "PUERTO_RICO"
+    | "QATAR"
+    | "REPUBLIC_OF_KOREA"
+    | "REPUBLIC_OF_MOLDOVA"
+    | "REUNION"
+    | "ROMANIA"
+    | "RUSSIAN_FEDERATION"
+    | "RWANDA"
+    | "SAINT_BARTHELEMY"
+    | "SAINT_KITTS_AND_NEVIS"
+    | "SAINT_LUCIA"
+    | "SAINT_MARTIN_FRENCH_PART"
+    | "SAINT_PIERRE_AND_MIQUELON"
+    | "SAINT_VINCENT_AND_THE_GRENADINES"
+    | "SAMOA"
+    | "SAN_MARINO"
+    | "SAO_TOME_AND_PRINCIPE"
+    | "SAUDI_ARABIA"
+    | "SENEGAL"
+    | "SERBIA"
+    | "SEYCHELLES"
+    | "SIERRA_LEONE"
+    | "SINGAPORE"
+    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
+    | "SINT_MAARTEN_DUTCH_PART"
+    | "SLOVAKIA"
+    | "SLOVENIA"
+    | "SOLOMON_ISLANDS"
+    | "SOMALIA"
+    | "SOUTH_AFRICA"
+    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
+    | "SOUTH_SUDAN"
+    | "SPAIN"
+    | "SRI_LANKA"
+    | "STATE_OF_PALESTINE"
+    | "SUDAN"
+    | "SURINAME"
+    | "SVALBARD_AND_JAN_MAYEN"
+    | "SWAZILAND"
+    | "SWEDEN"
+    | "SWITZERLAND"
+    | "SYRIAN_ARAB_REPUBLIC"
+    | "TAJIKISTAN"
+    | "THAILAND"
+    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
+    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
+    | "TIMOR_LESTE"
+    | "TOGO"
+    | "TOKELAU"
+    | "TONGA"
+    | "TRINIDAD_AND_TOBAGO"
+    | "TUNISIA"
+    | "TURKEY"
+    | "TURKMENISTAN"
+    | "TURKS_AND_CAICOS_ISLANDS"
+    | "TUVALU"
+    | "UGANDA"
+    | "UKRAINE"
+    | "UNITED_ARAB_EMIRATES"
+    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
+    | "UNITED_REPUBLIC_OF_TANZANIA"
+    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
+    | "UNITED_STATES_OF_AMERICA"
+    | "URUGUAY"
+    | "UZBEKISTAN"
+    | "U_S_VIRGIN_ISLANDS"
+    | "VANUATU"
+    | "VIET_NAM"
+    | "WALLIS_AND_FUTUNA"
+    | "WESTERN_SAHARA"
+    | "YEMEN"
+    | "ZAMBIA"
+    | "ZIMBABWE";
   /**
    * Street
    * @minLength 0
@@ -14492,7 +16761,7 @@ export interface User {
    */
   partnerId?: number;
   /** Indicates the login method chosen by the user. */
-  loginMethod?: 'FINAGO_KEY' | 'PASSWORDLIST' | 'PROCOUNTOR_KEY';
+  loginMethod?: "FINAGO_KEY" | "PASSWORDLIST" | "PROCOUNTOR_KEY";
   /**
    * The first name of the user.
    * @minLength 1
@@ -14523,7 +16792,6 @@ export interface User {
   socialSecurityNumber?: string;
 }
 
-/** User rights in environment */
 export interface UserPermissions {
   /** Contains rights for management functionalities. */
   management?: ManagementRights;
@@ -14559,17 +16827,15 @@ export interface UserProfile {
   surname?: string;
 }
 
-/** Contains rights for user functionalities. */
 export interface UserRights {
   /** Access level to edit personal info functionality. */
-  editPersonalInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
+  editPersonalInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
   /** Is limited dimensions limitation enabled. */
   limitedDimensions?: boolean;
   /** Is login limitation enabled. */
   blockSoloLoginToProcountor?: boolean;
 }
 
-/** List of available VATs in different countries. */
 export interface VatCountryInfo {
   /**
    * VAT country name
@@ -14580,7 +16846,6 @@ export interface VatCountryInfo {
   percentages?: VatInfo[];
 }
 
-/** List of VAT percentages */
 export interface VatInfo {
   /**
    * VAT percentage value
@@ -14605,7 +16870,11 @@ export interface VatPercentages {
   vatPercentages?: number[];
 }
 
-/** List of available VAT statuses. */
+export interface VatSettings {
+  unitPricesIncludeVatSales?: boolean;
+  unitPricesIncludeVatPurchase?: boolean;
+}
+
 export interface VatStatusInfo {
   /**
    * VAT status ID
@@ -14620,7 +16889,6 @@ export interface VatStatusInfo {
   purchase?: boolean;
 }
 
-/** List of acceptors. */
 export interface Verifier {
   /** First name of the user. */
   firstname?: string;
@@ -14666,7 +16934,6 @@ export interface VerifierListBasic {
   acceptors?: number[];
 }
 
-/** Search results. */
 export interface Webhook {
   /**
    * Generated webhook UUID.
@@ -14679,20 +16946,23 @@ export interface Webhook {
    */
   url: string;
   /** Webhook's authentication type. */
-  authenticationType: 'HMAC' | 'NONE';
+  authenticationType: "HMAC" | "NONE";
   /** Webhook's authentication meta. */
-  authenticationMeta?: Record<string, object>;
-  /** Collection of subscribed event types. */
+  authenticationMeta?: Record<string, any>;
+  /**
+   * Collection of subscribed event types.
+   * @minItems 1
+   */
   subscriptions: (
-    | 'DIRECTBANKDATATRANSFER_PAYMENT_CREATED'
-    | 'DIRECT_SALARY_PAYMENTS_CANCELED'
-    | 'DIRECT_SALARY_PAYMENTS_CREATED'
-    | 'INVOICE_PAYMENTEVENTS_DELETED'
-    | 'INVOICE_PAYMENT_CREATED'
-    | 'PAYMENT_DELETED'
-    | 'PAYMENT_UPDATED'
-    | 'TRACKING_PERIOD_STATUS_UPDATED'
-    | 'USER_UPDATED'
+    | "DIRECTBANKDATATRANSFER_PAYMENT_CREATED"
+    | "DIRECT_SALARY_PAYMENTS_CANCELED"
+    | "DIRECT_SALARY_PAYMENTS_CREATED"
+    | "INVOICE_PAYMENTEVENTS_DELETED"
+    | "INVOICE_PAYMENT_CREATED"
+    | "PAYMENT_DELETED"
+    | "PAYMENT_UPDATED"
+    | "TRACKING_PERIOD_STATUS_UPDATED"
+    | "USER_UPDATED"
   )[];
 }
 
@@ -14703,7 +16973,6 @@ export interface WebhookSearchResult {
   meta?: SearchResultMetaData;
 }
 
-/** Work hours. */
 export interface WorkHours {
   /**
    * Unique identifier of work hours.
@@ -14721,7 +16990,54 @@ export interface WorkHours {
   version?: string;
 }
 
-/** Yearly figures. Employer payment percentages. */
+export interface WorkingHourReduction {
+  /**
+   * Working hour reduction usage start date.
+   * @format date
+   */
+  startDate?: string;
+  /** Total remaining working hour reduction hours. */
+  totalRemainingWorkingHourReductionHours?: number;
+  /** Total remaining working hour reduction days. */
+  totalRemainingWorkingHourReductionDays?: number;
+}
+
+export interface WorkingHourReductionPayData {
+  /**
+   * Number of working hour reduction days to create working hour reduction row.
+   * @min 0.5
+   */
+  workingHourReductionDays?: number;
+  /**
+   * Number of working hour reduction hours to create working hour reduction row.
+   * @min 0.00001
+   */
+  workingHourReductionHours?: number;
+}
+
+export interface WorkingHourReductionRowDetails {
+  /**
+   * Year.
+   * @format int32
+   */
+  year?: number;
+}
+
+export interface WorkingHourReductionWorkingTimeAllocation {
+  /**
+   * Working days in first year.
+   * @min -500
+   * @max 500
+   */
+  workingDaysInFirstYear: number;
+  /**
+   * Working days in second year. Only if salary slip payment period covers two years.
+   * @min -500
+   * @max 500
+   */
+  workingDaysInSecondYear?: number;
+}
+
 export interface YearlyFigures {
   /**
    * Year.
@@ -14744,12 +17060,12 @@ export interface YearlyFigures {
   healthCareInsurancePercent?: number;
 }
 
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios';
-import axios from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
+import axios from "axios";
 
 export type QueryParamsType = Record<string | number, any>;
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
+export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -14764,32 +17080,34 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'pa
   body?: unknown;
 }
 
-export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>;
+export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
-  securityWorker?: (securityData: SecurityDataType | null) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
+export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
+  securityWorker?: (
+    securityData: SecurityDataType | null,
+  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
   secure?: boolean;
   format?: ResponseType;
 }
 
 export enum ContentType {
-  Json = 'application/json',
-  FormData = 'multipart/form-data',
-  UrlEncoded = 'application/x-www-form-urlencoded',
-  Text = 'text/plain'
+  Json = "application/json",
+  FormData = "multipart/form-data",
+  UrlEncoded = "application/x-www-form-urlencoded",
+  Text = "text/plain",
 }
 
 export class HttpClient<SecurityDataType = unknown> {
   public instance: AxiosInstance;
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
+  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
   private secure?: boolean;
   private format?: ResponseType;
 
   constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || 'https://pts-procountor.pubdev.azure.procountor.com/api'
+      baseURL: axiosConfig.baseURL || "https://pts-api.procountor.com/api",
     });
     this.secure = secure;
     this.format = format;
@@ -14810,13 +17128,13 @@ export class HttpClient<SecurityDataType = unknown> {
       headers: {
         ...((method && this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) || {}),
         ...(params1.headers || {}),
-        ...((params2 && params2.headers) || {})
-      }
+        ...((params2 && params2.headers) || {}),
+      },
     };
   }
 
   protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === 'object' && formItem !== null) {
+    if (typeof formItem === "object" && formItem !== null) {
       return JSON.stringify(formItem);
     } else {
       return `${formItem}`;
@@ -14847,15 +17165,18 @@ export class HttpClient<SecurityDataType = unknown> {
     ...params
   }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === 'boolean' ? secure : this.secure) && this.securityWorker && (await this.securityWorker(this.securityData))) || {};
+      ((typeof secure === "boolean" ? secure : this.secure) &&
+        this.securityWorker &&
+        (await this.securityWorker(this.securityData))) ||
+      {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
 
-    if (type === ContentType.FormData && body && body !== null && typeof body === 'object') {
+    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
       body = this.createFormData(body as Record<string, unknown>);
     }
 
-    if (type === ContentType.Text && body && body !== null && typeof body !== 'string') {
+    if (type === ContentType.Text && body && body !== null && typeof body !== "string") {
       body = JSON.stringify(body);
     }
 
@@ -14863,21 +17184,21 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {})
+        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
       },
       params: query,
       responseType: responseFormat,
       data: body,
-      url: path
+      url: path,
     });
   };
 }
 
 /**
  * @title Procountor API
- * @version 1.0.0
- * @baseUrl https://pts-procountor.pubdev.azure.procountor.com/api
- * @externalDocs https://pts-procountor.pubdev.azure.procountor.com/api/openapi.json
+ * @version 26.04
+ * @baseUrl https://pts-api.procountor.com/api
+ * @externalDocs https://pts-api.procountor.com/api/openapi.json
  *
  * Procountor API documentation
  */
@@ -14899,12 +17220,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateWebhook: (uuid: string, data: Webhook, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/webhooks/${uuid}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -14922,9 +17243,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteWebhook: (uuid: string, params: RequestParams = {}) =>
       this.request<void, ErrorMessages>({
         path: `/webhooks/${uuid}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        ...params
+        ...params,
       }),
 
     /**
@@ -14952,21 +17273,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "INVOICE_PAYMENT_CREATED"
          */
         eventType?: (
-          | 'INVOICE_PAYMENT_CREATED'
-          | 'DIRECTBANKDATATRANSFER_PAYMENT_CREATED'
-          | 'INVOICE_PAYMENTEVENTS_DELETED'
-          | 'PAYMENT_UPDATED'
-          | 'PAYMENT_DELETED'
-          | 'USER_UPDATED'
-          | 'DIRECT_SALARY_PAYMENTS_CREATED'
-          | 'DIRECT_SALARY_PAYMENTS_CANCELED'
+          | "INVOICE_PAYMENT_CREATED"
+          | "DIRECTBANKDATATRANSFER_PAYMENT_CREATED"
+          | "INVOICE_PAYMENTEVENTS_DELETED"
+          | "PAYMENT_UPDATED"
+          | "PAYMENT_DELETED"
+          | "USER_UPDATED"
+          | "DIRECT_SALARY_PAYMENTS_CREATED"
+          | "DIRECT_SALARY_PAYMENTS_CANCELED"
         )[];
         /**
          * Order the results by webhook creation date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreatedDate?: 'ASC' | 'DESC';
+        orderByCreatedDate?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -14983,15 +17304,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<WebhookSearchResult, ErrorMessages>({
         path: `/webhooks`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15009,13 +17330,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addWebhook: (data: Webhook, params: RequestParams = {}) =>
       this.request<CreatedWebhookResponse, ErrorMessages>({
         path: `/webhooks`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   users = {
     /**
@@ -15032,10 +17353,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrentUser: (params: RequestParams = {}) =>
       this.request<User, ErrorMessages>({
         path: `/users`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15053,21 +17374,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateUserInfo: (data: User, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/users`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
-     * @description Confirm to make an action related to the given identifier.
+     * @description Confirm to make an action related to the given identifier. DEPRECATED: As this endpoint is not updating anything but it is used for getting 2-factor authentication action results, then it is replaced by <b>GET /mfatransactionresult/{transactionIdentifier}</b>. This endpoint will be removed in Procountor release version 111.0 (API version 26.03) in March.
      *
      * @tags Users
      * @name Confirm
      * @summary Confirmation of action with the given identifier.
      * @request PUT:/users/{transactionIdentifier}/confirm
+     * @deprecated
      * @secure
      * @response `200` `InfoMessage` Action performed successfully.
      * @response `202` `InfoMessage` Transaction not confirmed yet.
@@ -15080,10 +17402,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/users/${transactionIdentifier}/confirm`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15099,10 +17421,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrentUserRights: (params: RequestParams = {}) =>
       this.request<UserPrivileges, any>({
         path: `/users/rights`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15119,11 +17441,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getUserProfile: (userId: number, params: RequestParams = {}) =>
       this.request<UserProfile, ErrorMessages>({
         path: `/users/profiles/${userId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   referencepayments = {
     /**
@@ -15142,12 +17464,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     allocateAllocationMetadata: (referencePaymentId: number, data: AllocationMetadata, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/referencepayments/${referencePaymentId}/metadata`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15165,10 +17487,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteAllocationMetadata: (referencePaymentId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/referencepayments/${referencePaymentId}/metadata`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15208,7 +17530,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -15230,16 +17552,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         accountNumber?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<ReferencePaymentsSearchResult, ErrorMessages>({
         path: `/referencepayments`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   products = {
     /**
@@ -15264,15 +17586,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         includeLocalizations?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Product, ErrorMessages>({
         path: `/products/${productId}`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15291,12 +17613,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateProduct: (productId: number, data: Product, params: RequestParams = {}) =>
       this.request<Product, ErrorMessages>({
         path: `/products/${productId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15307,18 +17629,67 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Remove a product.
      * @request DELETE:/products/{productId}
      * @secure
-     * @response `204` `DataModel` The product was successfully removed.
+     * @response `204` `object` The product was successfully removed.
      * @response `400` `ErrorMessages` The product with product type TRAVEL cannot be removed.
      * @response `403` `ErrorMessages` Insufficient user rights.
      * @response `404` `ErrorMessages` Product not found.
      */
     removeProductById: (productId: number, params: RequestParams = {}) =>
-      this.request<DataModel, ErrorMessages>({
+      this.request<object, ErrorMessages>({
         path: `/products/${productId}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default dimension for a product with the given product and dimension ID.
+     *
+     * @tags Products
+     * @name GetDefaultDimension
+     * @summary Get default dimension of the product.
+     * @request GET:/products/{productId}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `DefaultDimension` The product default dimension was successfully returned.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No dimension found for given product and dimension id.
+     */
+    getDefaultDimension: (productId: number, dimensionId: number, params: RequestParams = {}) =>
+      this.request<DefaultDimension, ErrorMessages>({
+        path: `/products/${productId}/defaults/dimensions/${dimensionId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates default dimension of the product with the given product and dimension ID.
+     *
+     * @tags Products
+     * @name UpdateDefaultDimension
+     * @summary Update default dimension of the product.
+     * @request PUT:/products/{productId}/defaults/dimensions/{dimensionId}
+     * @secure
+     * @response `200` `DefaultDimension` The product default dimension was successfully updated.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     * @response `404` `ErrorMessages` No dimension found for given product and dimension id.
+     */
+    updateDefaultDimension: (
+      productId: number,
+      dimensionId: number,
+      data: DefaultDimension,
+      params: RequestParams = {},
+    ) =>
+      this.request<DefaultDimension, ErrorMessages>({
+        path: `/products/${productId}/defaults/dimensions/${dimensionId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15336,10 +17707,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getProductGroupByGroupId: (groupId: number, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15358,12 +17729,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateProductGroupName: (groupId: number, data: ProductGroup, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15374,19 +17745,19 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Remove a product group.
      * @request DELETE:/products/groups/{groupId}
      * @secure
-     * @response `204` `DataModel` The product group was successfully removed.
+     * @response `204` `object` The product group was successfully removed.
      * @response `400` `ErrorMessages` The product group with product type TRAVEL cannot be removed.
      * @response `403` `ErrorMessages` Insufficient user rights.
      * @response `404` `ErrorMessages` Product group not found.
      * @response `409` `ErrorMessages` The product group cannot be removed, because it contains related products. Error message alsowill return list of product identifiers that are linked to product group.
      */
     removeProductGroupById: (groupId: number, params: RequestParams = {}) =>
-      this.request<DataModel, ErrorMessages>({
+      this.request<object, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15427,7 +17798,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by product ID
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
+        /**
+         * Order the results by product version
+         * @example "ASC"
+         */
+        orderByVersion?: "ASC" | "DESC";
         /**
          * Id of product group.
          * @example 1
@@ -15437,7 +17813,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Register type of product. If not given, then SALES and PURCHASE returned as default
          * @example "TRAVEL"
          */
-        type?: 'SALES' | 'PURCHASE' | 'TRAVEL';
+        type?: "SALES" | "PURCHASE" | "TRAVEL";
         /**
          * Custom code assigned by the owner of the product. Matched by substring.
          * @maxLength 40
@@ -15467,16 +17843,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example true
          */
         active?: boolean;
+        /**
+         * Start date of the search (product updated date)
+         * @format date-time
+         * @example "2018-08-13T00:00:00"
+         */
+        versionStartDate?: string;
+        /**
+         * End date of the search (product updated date)
+         * @format date-time
+         * @example "2018-08-13T00:00:00"
+         */
+        versionEndDate?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<ProductSearchResult, ErrorMessages>({
         path: `/products`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15494,12 +17882,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addProduct: (data: Product, params: RequestParams = {}) =>
       this.request<Product, ErrorMessages>({
         path: `/products`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15520,17 +17908,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Product type. Endpoint will return product groups for types: SALES and PURCHASE when user will not specify type.
          * @example "SALES"
          */
-        type?: 'SALES' | 'PURCHASE' | 'TRAVEL';
+        type?: "SALES" | "PURCHASE" | "TRAVEL";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<ProductGroups, ErrorMessages>({
         path: `/products/groups`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15548,13 +17936,33 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addProductGroupName: (data: ProductGroup, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns default dimensions for the product with the given ID.
+     *
+     * @tags Products
+     * @name GetDefaultDimensions
+     * @summary Get default dimensions of the product.
+     * @request GET:/products/{productId}/defaults/dimensions
+     * @secure
+     * @response `200` `(DefaultDimensionBasicData)[]` The product default dimensions was successfully returned.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     */
+    getDefaultDimensions: (productId: number, params: RequestParams = {}) =>
+      this.request<DefaultDimensionBasicData[], ErrorMessages>({
+        path: `/products/${productId}/defaults/dimensions`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
   };
   persons = {
     /**
@@ -15572,10 +17980,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonById: (id: number, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15594,12 +18002,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updatePerson: (id: number, data: Person, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15617,17 +18025,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultDimensionById: (id: number, dimensionId: number, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
      * @description Updates default dimension for a person with the given person and dimension ids.
      *
      * @tags Persons
-     * @name UpdateDefaultDimension
+     * @name UpdateDefaultDimension1
      * @summary Update default dimension of a person.
      * @request PUT:/persons/{id}/defaults/dimensions/{dimensionId}
      * @secure
@@ -15636,15 +18044,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No person found for given person id or no dimension found for given person and dimension id.
      */
-    updateDefaultDimension: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
+    updateDefaultDimension1: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15655,7 +18063,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Get the list of persons matching search criteria.
      * @request GET:/persons
      * @secure
-     * @response `200` `(PersonSearchResult)[]` List of persons was successfully returned.
+     * @response `200` `PersonSearchResult` List of persons was successfully returned.
      * @response `403` `ErrorMessages` Insufficient user rights.
      */
     getPersons: (
@@ -15706,17 +18114,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
-      this.request<PersonSearchResult[], ErrorMessages>({
+      this.request<PersonSearchResult, ErrorMessages>({
         path: `/persons`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15734,12 +18142,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     insertPerson: (data: Person, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15757,10 +18165,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultProducts: (id: number, params: RequestParams = {}) =>
       this.request<DefaultProduct[], ErrorMessages>({
         path: `/persons/${id}/defaults/products`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15778,20 +18186,1126 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultDimensionsByPersonId: (id: number, params: RequestParams = {}) =>
       this.request<DefaultDimensionBasicData[], ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
+  };
+  payrolls = {
+    /**
+     * @description Returns salary slip for given salary slip ID. Also accepts multiple comma-separated IDs. Max 200 IDs per request.
+     *
+     * @tags Payrolls
+     * @name GetSalarySlipById
+     * @summary Get a salary slip.
+     * @request GET:/payrolls/salaryslips/{id}
+     * @secure
+     * @response `200` `SalarySlip` The salary slip was successfully returned (single object for one ID, array for multiple IDs).
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary slip not found. For batch requests, returned only if none of the requested IDs are found.
+     */
+    getSalarySlipById: (id: string, params: RequestParams = {}) =>
+      this.request<SalarySlip, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates salary slip and returns it. Only salary slips in state CREATED are supported in this endpoint.
+     *
+     * @tags Payrolls
+     * @name UpdateSalarySlip
+     * @summary Update salary slip.
+     * @request PUT:/payrolls/salaryslips/{id}
+     * @secure
+     * @response `200` `SalarySlip` Salary slip was successfully updated.
+     * @response `400` `ErrorMessages` Salary slip contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` One of the resource: Salary slip, Pension contract, Accident insurance policy, Employment not found.
+     * @response `409` `ErrorMessages` Salary slip data were modified by other client in meantime resulting in a conflict.
+     */
+    updateSalarySlip: (id: number, data: SalarySlip, params: RequestParams = {}) =>
+      this.request<SalarySlip, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Cancels approval of salary slip by id and returns confirmation message. Salary slip approval can be canceled only if it is in APPROVED status.
+     *
+     * @tags Payrolls
+     * @name CancelSlipApproval
+     * @summary Cancel salary slip approval.
+     * @request PUT:/payrolls/salaryslips/{id}/cancelapproval
+     * @secure
+     * @response `200` `InfoMessage` Salary slip approval was successfully canceled.
+     * @response `400` `ErrorMessages` Invalid salary slip.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary slip was not found.
+     */
+    cancelSlipApproval: (id: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}/cancelapproval`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Approves salary slip by id and returns confirmation message. Salary slip can be approved only if it is in CREATED or IN_CORRECTION status.
+     *
+     * @tags Payrolls
+     * @name ApproveSlip
+     * @summary Approve salary slip.
+     * @request PUT:/payrolls/salaryslips/{id}/approve
+     * @secure
+     * @response `200` `InfoMessage` Salary slip was successfully approved.
+     * @response `400` `ErrorMessages` Invalid salary slip.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary slip was not found.
+     */
+    approveSlip: (id: number, params: RequestParams = {}) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}/approve`,
+        method: "PUT",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salary slip accounting for given salary slip ID. Salary slip accounting is available only for at least APPROVED salary slips.
+     *
+     * @tags Payrolls
+     * @name GetSalarySlipAccountingBySalarySlipId
+     * @summary Get salary slip accounting.
+     * @request GET:/payrolls/salaryslips/{id}/accounting
+     * @secure
+     * @response `200` `SalarySlipAccounting` The salary slip accounting was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary slip accounting not found.
+     */
+    getSalarySlipAccountingBySalarySlipId: (id: number, params: RequestParams = {}) =>
+      this.request<SalarySlipAccounting, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}/accounting`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates salary slip accounting and returns it. Use "createReconciliation=true" parameter to generate reconciliation row automatically.
+     *
+     * @tags Payrolls
+     * @name UpdateSalarySlipAccounting
+     * @summary Update salary slip accounting.
+     * @request PUT:/payrolls/salaryslips/{id}/accounting
+     * @secure
+     * @response `200` `SalarySlipAccounting` Salary slip accounting was successfully updated.
+     * @response `400` `ErrorMessages` Salary slip accounting contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary slip accounting not found
+     */
+    updateSalarySlipAccounting: (
+      id: number,
+      data: SalarySlipAccounting,
+      query?: {
+        /**
+         * Enable automatic generation of reconciliation row
+         * @default false
+         */
+        createReconciliation?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalarySlipAccounting, ErrorMessages>({
+        path: `/payrolls/salaryslips/${id}/accounting`,
+        method: "PUT",
+        query: query,
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee salary info for given employee ID.
+     *
+     * @tags Employees
+     * @name GetSalaryInfoByEmployeeId
+     * @summary Get employee salary info.
+     * @request GET:/payrolls/employees/{id}/salaryinfo
+     * @secure
+     * @response `200` `SalaryInfo` The employee salary info was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    getSalaryInfoByEmployeeId: (id: number, params: RequestParams = {}) =>
+      this.request<SalaryInfo, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates an employee salary info and returns it. Automatically updates salary base for employee based on salary info data.
+     *
+     * @tags Employees
+     * @name UpdateSalaryInfo
+     * @summary Update employee salary info.
+     * @request PUT:/payrolls/employees/{id}/salaryinfo
+     * @secure
+     * @response `200` `SalaryInfo` Employee salary info was successfully updated.
+     * @response `400` `ErrorMessages` Salary info contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` One of the resource: Employee, Pension contract, Accident insurance policy not found for given ID.
+     * @response `409` `ErrorMessages` Salary info data were modified by other client in meantime resulting in a conflict.
+     */
+    updateSalaryInfo: (id: number, data: SalaryInfo, params: RequestParams = {}) =>
+      this.request<SalaryInfo, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee tax cards for given employee ID and tax card ID.
+     *
+     * @tags Employees
+     * @name GetTaxCardByIdAndEmployeeId
+     * @summary Get employee tax card.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/taxcards/{taxCardId}
+     * @secure
+     * @response `200` `TaxCard` Tax card was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Tax card not found.
+     */
+    getTaxCardByIdAndEmployeeId: (id: number, taxCardId: number, params: RequestParams = {}) =>
+      this.request<TaxCard, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/taxcards/${taxCardId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates an employee tax card and returns it. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name UpdateTaxCard
+     * @summary Update an employee tax card.
+     * @request PUT:/payrolls/employees/{id}/salaryinfo/taxcards/{taxCardId}
+     * @secure
+     * @response `200` `TaxCard` Tax card was successfully updated.
+     * @response `400` `ErrorMessages` Tax card contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Tax card not found.
+     * @response `409` `ErrorMessages` Tax card data were modified by other client in meantime resulting in a conflict.
+     */
+    updateTaxCard: (id: number, taxCardId: number, data: TaxCard, params: RequestParams = {}) =>
+      this.request<TaxCard, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/taxcards/${taxCardId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Deletes an employee tax card. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name DeleteTaxCard
+     * @summary Delete an employee tax card.
+     * @request DELETE:/payrolls/employees/{id}/salaryinfo/taxcards/{taxCardId}
+     * @secure
+     * @response `204` `void` Tax card was successfully deleted.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Tax card not found.
+     */
+    deleteTaxCard: (id: number, taxCardId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/taxcards/${taxCardId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee labor union membership for given labor union membership ID and employee ID.
+     *
+     * @tags Employees
+     * @name GetLaborUnionMembershipById
+     * @summary Get employee labor union membership.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/laborunionmemberships/{laborUnionMembershipId}
+     * @secure
+     * @response `200` `LaborUnionMembership` Labor union membership was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Labor union membership not found.
+     */
+    getLaborUnionMembershipById: (id: number, laborUnionMembershipId: number, params: RequestParams = {}) =>
+      this.request<LaborUnionMembership, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/laborunionmemberships/${laborUnionMembershipId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates an employee labor union membership and returns it. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name UpdateLaborUnionMembership
+     * @summary Update employee labor union membership.
+     * @request PUT:/payrolls/employees/{id}/salaryinfo/laborunionmemberships/{laborUnionMembershipId}
+     * @secure
+     * @response `200` `LaborUnionMembership` Labor union membership was successfully updated.
+     * @response `400` `ErrorMessages` Labor union membership contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Labor union membership or labor union setting not found for given ID.
+     * @response `409` `ErrorMessages` Labor union membership data were modified by other client in the meantime resulting in a conflict.
+     */
+    updateLaborUnionMembership: (
+      id: number,
+      laborUnionMembershipId: number,
+      data: LaborUnionMembership,
+      params: RequestParams = {},
+    ) =>
+      this.request<LaborUnionMembership, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/laborunionmemberships/${laborUnionMembershipId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Deletes an employee labor union membership. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name DeleteLaborUnionMembership
+     * @summary Delete an employee labor union membership.
+     * @request DELETE:/payrolls/employees/{id}/salaryinfo/laborunionmemberships/{laborUnionMembershipId}
+     * @secure
+     * @response `204` `void` Labor union membership was successfully deleted.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Labor union membership not found.
+     */
+    deleteLaborUnionMembership: (id: number, laborUnionMembershipId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/laborunionmemberships/${laborUnionMembershipId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee employment for given employment ID and employee ID.
+     *
+     * @tags Employees
+     * @name GetEmploymentByIdAndEmployeeId
+     * @summary Get employee employment.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/employments/{employmentId}
+     * @secure
+     * @response `200` `Employment` Employment was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employment not found.
+     */
+    getEmploymentByIdAndEmployeeId: (id: number, employmentId: number, params: RequestParams = {}) =>
+      this.request<Employment, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/employments/${employmentId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates an employee employment and returns it.
+     *
+     * @tags Employees
+     * @name UpdateEmployment
+     * @summary Update an employee employment.
+     * @request PUT:/payrolls/employees/{id}/salaryinfo/employments/{employmentId}
+     * @secure
+     * @response `200` `Employment` Employment was successfully updated.
+     * @response `400` `ErrorMessages` Employment contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employment not found.
+     * @response `409` `ErrorMessages` Employment data were modified by other client in meantime resulting in a conflict.
+     */
+    updateEmployment: (id: number, employmentId: number, data: Employment, params: RequestParams = {}) =>
+      this.request<Employment, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/employments/${employmentId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Deletes an employee employment.
+     *
+     * @tags Employees
+     * @name DeleteEmployment
+     * @summary Delete an employee employment.
+     * @request DELETE:/payrolls/employees/{id}/salaryinfo/employments/{employmentId}
+     * @secure
+     * @response `204` `void` Employment was successfully deleted.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employment not found.
+     */
+    deleteEmployment: (id: number, employmentId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/employments/${employmentId}`,
+        method: "DELETE",
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee salary base for given employee ID.
+     *
+     * @tags Employees
+     * @name GetSalaryBaseByEmployeeId
+     * @summary Get employee salary base.
+     * @request GET:/payrolls/employees/{id}/salarybase
+     * @secure
+     * @response `200` `SalaryBase` The employee salary base was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee salary base not found.
+     */
+    getSalaryBaseByEmployeeId: (id: number, params: RequestParams = {}) =>
+      this.request<SalaryBase, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salarybase`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Updates employee salary base for given employee ID.
+     *
+     * @tags Employees
+     * @name UpdateSalaryBaseByEmployeeId
+     * @summary Update employee salary base.
+     * @request PUT:/payrolls/employees/{id}/salarybase
+     * @secure
+     * @response `200` `SalaryBase` The employee salary base was successfully updated.
+     * @response `400` `ErrorMessages` Salary base contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee salary base not found.
+     * @response `409` `ErrorMessages` Salary base data were modified by other client in meantime resulting in a conflict.
+     */
+    updateSalaryBaseByEmployeeId: (id: number, data: SalaryBase, params: RequestParams = {}) =>
+      this.request<SalaryBase, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salarybase`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salary lists.
+     *
+     * @tags Payrolls
+     * @name GetSalaryLists
+     * @summary Get salary lists matching search criteria.
+     * @request GET:/payrolls/salarylists
+     * @secure
+     * @response `200` `SalaryListSearchResult` Salary lists were successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSalaryLists: (
+      query?: {
+        /**
+         * Payment period start date
+         * @format date
+         * @example "2020-01-01"
+         */
+        paymentPeriodStart?: string;
+        /**
+         * Payment period end date
+         * @format date
+         * @example "2020-12-31"
+         */
+        paymentPeriodEnd?: string;
+        /**
+         * Name of the salary list matched by substring
+         * @example 2020
+         */
+        name?: string;
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by salary list ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalaryListSearchResult, ErrorMessages>({
+        path: `/payrolls/salarylists`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates a new salary list with salary slips and returns it.
+     *
+     * @tags Payrolls
+     * @name InsertSalaryList
+     * @summary Creates a new salary list.
+     * @request POST:/payrolls/salarylists
+     * @secure
+     * @response `200` `SalaryList` Salary list was successfully created.
+     * @response `400` `ErrorMessages` Salary list contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found for given id. No yearly figures found for payday's year.
+     */
+    insertSalaryList: (data: NewSalaryList, params: RequestParams = {}) =>
+      this.request<SalaryList, ErrorMessages>({
+        path: `/payrolls/salarylists`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns all employee tax cards for given employee ID.
+     *
+     * @tags Employees
+     * @name GetTaxCardsForEmployee
+     * @summary Find list of employee tax cards.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/taxcards
+     * @secure
+     * @response `200` `(TaxCard)[]` Tax cards were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    getTaxCardsForEmployee: (id: number, params: RequestParams = {}) =>
+      this.request<TaxCard[], ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/taxcards`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates a new employee tax card and returns it. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name InsertTaxCard
+     * @summary Create a new employee tax card.
+     * @request POST:/payrolls/employees/{id}/salaryinfo/taxcards
+     * @secure
+     * @response `200` `TaxCard` Tax card was successfully created.
+     * @response `400` `ErrorMessages` Tax card contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    insertTaxCard: (id: number, data: TaxCard, params: RequestParams = {}) =>
+      this.request<TaxCard, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/taxcards`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee labor union memberships for given employee ID.
+     *
+     * @tags Employees
+     * @name GetLaborUnionMemberShipByEmployeeId
+     * @summary Get employee labor union memberships.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/laborunionmemberships
+     * @secure
+     * @response `200` `(LaborUnionMembership)[]` Employee labor union memberships were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    getLaborUnionMemberShipByEmployeeId: (id: number, params: RequestParams = {}) =>
+      this.request<LaborUnionMembership[], ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/laborunionmemberships`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates a new labor union membership and returns it. Automatically recreates salary base for employee.
+     *
+     * @tags Employees
+     * @name InsertLaborUnionMembership
+     * @summary Create a new labor union membership.
+     * @request POST:/payrolls/employees/{id}/salaryinfo/laborunionmemberships
+     * @secure
+     * @response `200` `LaborUnionMembership` Labor union membership was successfully created.
+     * @response `400` `ErrorMessages` Labor union membership contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee or labor union setting not found for given ID.
+     */
+    insertLaborUnionMembership: (id: number, data: LaborUnionMembership, params: RequestParams = {}) =>
+      this.request<LaborUnionMembership, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/laborunionmemberships`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee employments for given employee ID.
+     *
+     * @tags Employees
+     * @name GetEmploymentsByEmployeeId
+     * @summary Get employee employments.
+     * @request GET:/payrolls/employees/{id}/salaryinfo/employments
+     * @secure
+     * @response `200` `(Employment)[]` Employments were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    getEmploymentsByEmployeeId: (id: number, params: RequestParams = {}) =>
+      this.request<Employment[], ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/employments`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates a new employment for employee and returns it.
+     *
+     * @tags Employees
+     * @name InsertEmployment
+     * @summary Create a new employment for employee.
+     * @request POST:/payrolls/employees/{id}/salaryinfo/employments
+     * @secure
+     * @response `200` `Employment` Employment was successfully created.
+     * @response `400` `ErrorMessages` Employment contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Employee not found.
+     */
+    insertEmployment: (id: number, data: Employment, params: RequestParams = {}) =>
+      this.request<Employment, ErrorMessages>({
+        path: `/payrolls/employees/${id}/salaryinfo/employments`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Creates a new employee salary info and returns it. Automatically creates salary base for employee based on salary info data.
+     *
+     * @tags Employees
+     * @name InsertSalaryInfo
+     * @summary Create a new employee salary info.
+     * @request POST:/payrolls/employees/salaryinfo
+     * @secure
+     * @response `200` `SalaryInfo` Employee salary info was successfully created.
+     * @response `400` `ErrorMessages` Salary info contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` One of the resource: Person, Pension contract, Accident insurance policy not found for given ID.
+     */
+    insertSalaryInfo: (data: SalaryInfo, params: RequestParams = {}) =>
+      this.request<SalaryInfo, ErrorMessages>({
+        path: `/payrolls/employees/salaryinfo`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Return the Salary Types list.
+     *
+     * @tags Payrolls
+     * @name GetSalaryTypes
+     * @summary Get the list of salary types matching search criteria.
+     * @request GET:/payrolls/salarytypes
+     * @secure
+     * @response `200` `SalaryTypeSearchResult` List of salary types was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSalaryTypes: (
+      query?: {
+        /**
+         * Salary Type name
+         *
+         * Also partial - search matches returned.
+         * @example "Time-rate pay"
+         */
+        name?: string;
+        /**
+         * Salary type code
+         * @example 1000
+         */
+        code?: number;
+        /**
+         * Salary category
+         * @example "TAX"
+         */
+        category?:
+          | "SALARY_FOR_TIME_WORKED"
+          | "OTHER_TAXABLE_EARNINGS"
+          | "FRINGE_BENEFITS"
+          | "TAX_FREE_ITEMS"
+          | "TAX"
+          | "DEDUCTIONS_FROM_NET_PAY"
+          | "INFORMATIVE_ITEMS";
+        /**
+         * Income Type name
+         *
+         * Also partial - search matches returned.
+         * @example "Time-rate pay"
+         */
+        incomeType?: string;
+        /**
+         * Income type code
+         * @example 201
+         */
+        incomeTypeCode?: number;
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by salary type code
+         * @default "ASC"
+         * @example "ASC"
+         */
+        orderByCode?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalaryTypeSearchResult, ErrorMessages>({
+        path: `/payrolls/salarytypes`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salary slips.
+     *
+     * @tags Payrolls
+     * @name GetSalarySlips
+     * @summary Get salary slips matching search criteria.
+     * @request GET:/payrolls/salaryslips
+     * @secure
+     * @response `200` `SalarySlipSearchResult` Salary slips were successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSalarySlips: (
+      query?: {
+        /**
+         * Start date of the search (salary slip's payday)
+         * @format date
+         * @example "2025-01-10"
+         */
+        paydayStartDate?: string;
+        /**
+         * End date of the search (salary slip's payday)
+         * @format date
+         * @example "2025-02-10"
+         */
+        paydayEndDate?: string;
+        /**
+         * Employee name.
+         *
+         * Also partial - search matches returned.
+         * Case insensitive.
+         * @example "teemu"
+         */
+        employeeName?: string;
+        /**
+         * Salary slip numbers. Supports more than one salary slip number
+         * @example 3
+         */
+        slipNumber?: string[];
+        /**
+         * Salary slip statuses. Supports more than one salary slip status
+         * @example "UNFINISHED"
+         */
+        status?: (
+          | "UNFINISHED"
+          | "APPROVED"
+          | "CORRECTION"
+          | "INVALIDATED"
+          | "PAYMENT_QUEUED"
+          | "PAYMENT_SENT_TO_BANK"
+          | "PAID"
+          | "PARTLY_PAID"
+          | "MARKED_PAID"
+          | "EARNINGS_REPORTED"
+        )[];
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by salary slip ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalarySlipSearchResult, ErrorMessages>({
+        path: `/payrolls/salaryslips`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list of basic information about salary period lists for a given holiday credit year.
+     *
+     * @tags Payrolls
+     * @name GetSalaryPeriodLists
+     * @summary Get basic information about salary period lists (id, name) for a given holiday credit year.
+     * @request GET:/payrolls/salaryperiods
+     * @secure
+     * @response `200` `(SalaryPeriodListBasicInfo)[]` Basic information about salary period lists has been successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No salary period lists found.
+     */
+    getSalaryPeriodLists: (
+      query: {
+        /**
+         * Holiday credit year
+         * @format int32
+         * @example 2025
+         */
+        holidayCreditYear: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalaryPeriodListBasicInfo[], ErrorMessages>({
+        path: `/payrolls/salaryperiods`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns a list of salary periods for a given salary period list ID.
+     *
+     * @tags Payrolls
+     * @name GetSalaryPeriods
+     * @summary Get salary periods for a salary period list ID.
+     * @request GET:/payrolls/salaryperiods/{id}
+     * @secure
+     * @response `200` `(SalaryPeriod)[]` Salary periods has been successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` No salary periods found.
+     */
+    getSalaryPeriods: (id: number, params: RequestParams = {}) =>
+      this.request<SalaryPeriod[], ErrorMessages>({
+        path: `/payrolls/salaryperiods/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salary list for given salary list id.
+     *
+     * @tags Payrolls
+     * @name GetSalaryListById
+     * @summary Get salary list.
+     * @request GET:/payrolls/salarylists/{id}
+     * @secure
+     * @response `200` `SalaryList` Salary list was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary list was not found.
+     */
+    getSalaryListById: (id: number, params: RequestParams = {}) =>
+      this.request<SalaryList, ErrorMessages>({
+        path: `/payrolls/salarylists/${id}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns salaries basic info.
+     *
+     * @tags Payrolls
+     * @name GetSalariesBasicInfo
+     * @summary Get salaries basic info.
+     * @request GET:/payrolls/salariesbasicinfo
+     * @secure
+     * @response `200` `SalariesBasicInfo` The salaries basic info was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salaries basic info yearly figures not found.
+     */
+    getSalariesBasicInfo: (
+      query?: {
+        /**
+         * Year from which yearly figures will be returned. If not set returns yearly figures from current year.
+         * @example 2023
+         */
+        year?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<SalariesBasicInfo, ErrorMessages>({
+        path: `/payrolls/salariesbasicinfo`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns basic data of all labor union settings.
+     *
+     * @tags Payrolls
+     * @name GetLaborUnionSettingsBasicData
+     * @summary Find list of labor union settings basic data.
+     * @request GET:/payrolls/laborunionsettings
+     * @secure
+     * @response `200` `(LaborUnionSettingsBasicData)[]` Labor union settings were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getLaborUnionSettingsBasicData: (params: RequestParams = {}) =>
+      this.request<LaborUnionSettingsBasicData[], ErrorMessages>({
+        path: `/payrolls/laborunionsettings`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns the list of employees with information: id, lastname, firstname, ssn, address, personNumber, salaryChannel, automatedTaxCard and active.
+     *
+     * @tags Employees
+     * @name GetEmployee
+     * @summary Get the list of employees matching search criteria.
+     * @request GET:/payrolls/employees
+     * @secure
+     * @response `200` `EmployeeSearchResult` Employees were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getEmployee: (
+      query?: {
+        /**
+         * Person number
+         *
+         * Also partial - search matches returned.
+         * @example "CUST12367Z"
+         */
+        personNumber?: string;
+        /**
+         * Unique identifier of Business Partner Group of type PERSON
+         * @example 123456
+         */
+        personGroupId?: number;
+        /**
+         * Include inactive persons
+         * @default false
+         */
+        includeInactive?: boolean;
+        /**
+         * Salary channel
+         * @example "EMAIL"
+         */
+        salaryChannel?: "NO_SENDING" | "MAIL" | "EMAIL" | "PAPER" | "MOBILE" | "ESALARY";
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @min 1
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @min 0
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by Employee ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<EmployeeSearchResult, ErrorMessages>({
+        path: `/payrolls/employees`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns employee working hour reduction for given employee ID.
+     *
+     * @tags Employees
+     * @name GetEmployeeWorkingHourReduction
+     * @summary Get employee working hour reduction.
+     * @request GET:/payrolls/employees/{id}/workinghourreduction
+     * @secure
+     * @response `200` `WorkingHourReduction` The employee working hour reduction was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or working hour reduction is disabled for the company.
+     * @response `404` `ErrorMessages` Working hour reduction or employee not found.
+     */
+    getEmployeeWorkingHourReduction: (id: number, params: RequestParams = {}) =>
+      this.request<WorkingHourReduction, ErrorMessages>({
+        path: `/payrolls/employees/${id}/workinghourreduction`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns information related to employee holiday pay including per-year breakdown. **Total values returned:** - totalRemainingHolidayDays - Total remaining holiday days across all years - totalRemainingHolidayPay - Total remaining holiday pay across all years - totalRemainingHolidayBonusDays - Total remaining holiday bonus days across all years - totalRemainingAdditionalLeaveDays - Total remaining additional leave days across all years **Yearly breakdown (yearlyRemainings):** Returns holiday saldos per holiday credit year, with the latest year first. A holiday credit year runs from 1.4 to 31.3. Each entry contains: holidayCreditYear, remainingHolidayDays, remainingHolidayPay, remainingHolidayBonusDays, remainingAdditionalLeaveDays.
+     *
+     * @tags Employees
+     * @name GetHolidayPayByEmployeeId
+     * @summary Get employee holiday pay information.
+     * @request GET:/payrolls/employees/{id}/holidaypay
+     * @secure
+     * @response `200` `HolidayPay` Holiday pay information were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or holiday calculation setting disabled for company.
+     * @response `404` `ErrorMessages` Employee or holiday calculation settings not found.
+     */
+    getHolidayPayByEmployeeId: (id: number, params: RequestParams = {}) =>
+      this.request<HolidayPay, ErrorMessages>({
+        path: `/payrolls/employees/${id}/holidaypay`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
   };
   payments = {
     /**
-     * @description Confirm to make an action related to the given identifier.
+     * @description Confirm to make an action related to the given identifier. DEPRECATED: As this endpoint is not updating anything but it is used for getting 2-factor authentication action results, then it is replaced by <b>GET /mfatransactionresult/{transactionIdentifier}</b>
      *
      * @tags Payments
      * @name Confirm1
      * @summary Confirmation of action with the given identifier.
      * @request PUT:/payments/{transactionIdentifier}/confirm
+     * @deprecated
      * @secure
      * @response `200` `PaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct bank transfers</b> (POST /payments/directbanktransfers):   <b>PaymentSummaries</b> <br><b>2. For paying invoices</b> (POST /payments):   <b>InvoicePaymentSummaries</b> <br><b>3. For canceling a payment</b> (PUT /payments/{paymentId}/cancel):   <b>InfoMessage</b> <br><b>4. For deleting a payment</b> (DELETE /payments/{paymentId}):   <b>InfoMessage</b>
      * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
@@ -15804,10 +19318,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm1: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<PaymentsConfirmationResponseModels, ErrorMessages>({
         path: `/payments/${transactionIdentifier}/confirm`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15825,19 +19339,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     cancelPayment: (paymentId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/${paymentId}/cancel`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
-     * @description Confirm to make an action related to the given identifier.
+     * @description Confirm to make an action related to the given identifier. DEPRECATED: As this endpoint is not updating anything but it is used for getting 2-factor authentication action results, then it is replaced by <b>GET /mfatransactionresult/{transactionIdentifier}</b>
      *
      * @tags Payments
      * @name Confirm2
      * @summary Confirmation of action with the given identifier. Supports only Finnish environments.
      * @request PUT:/payments/directsalarypayments/{transactionIdentifier}/confirm
+     * @deprecated
      * @secure
      * @response `200` `DirectSalaryPaymentsConfirmationResponseModels` Action performed successfully.<br> The response model depends on the transaction type that was requested to confirm: <br><b>1. For creating direct salary payments</b> (POST /payments/directsalarypayments): <b>PaymentGroup</b> <br><b>2. For canceling a payment</b> (PUT /payments/directsalarypayments/{paymentlistId}/cancel): <b>InfoMessage</b>
      * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
@@ -15850,10 +19365,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm2: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<DirectSalaryPaymentsConfirmationResponseModels, ErrorMessages>({
         path: `/payments/directsalarypayments/${transactionIdentifier}/confirm`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15871,10 +19386,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     cancelDirectSalaryPayments: (paymentListId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directsalarypayments/${paymentListId}/cancel`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15918,7 +19433,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by payment ID.
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -15935,15 +19450,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaymentSearchResult, ErrorMessages>({
         path: `/payments`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -15962,12 +19477,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     payInvoices: (data: InvoicePaymentList, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16016,7 +19531,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by payment ID.
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16033,15 +19548,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<DirectSalaryPaymentGroupBaseInfoSearchResult, ErrorMessages>({
         path: `/payments/directsalarypayments`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16060,12 +19575,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createDirectSalaryPayments: (data: DirectSalaryPayments, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directsalarypayments`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16084,12 +19599,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createDirectBankTransfers: (data: DirectBankTransferList, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directbanktransfers`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16107,10 +19622,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPaymentRowById: (paymentId: number, params: RequestParams = {}) =>
       this.request<PaymentRowInfo, ErrorMessages>({
         path: `/payments/${paymentId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16128,10 +19643,67 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removePayment: (paymentId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/${paymentId}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns all payment events that match the request criteria. For payment events of a single invoice, you can also use the endpoint `/invoices/{invoiceId}/paymentevents`.
+     *
+     * @tags Payments
+     * @name GetPaymentEvents
+     * @summary Get payment events.
+     * @request GET:/payments/paymentevents
+     * @secure
+     * @response `200` `PaymentSearchResult` The payment events were successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getPaymentEvents: (
+      query: {
+        /**
+         * Unique comma-separated invoice identifier(s). Max 200 ids per request.
+         * @example 123456
+         */
+        invoiceId: number[];
+        /**
+         * Previous payment ID for pagination.
+         * @format int32
+         * @example 123456
+         */
+        previousId?: number;
+        /**
+         * Order the results by payment ID.
+         * @example "ASC"
+         */
+        orderById?: "ASC" | "DESC";
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @max 200
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<PaymentSearchResult, ErrorMessages>({
+        path: `/payments/paymentevents`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16164,12 +19736,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Type of error message.
          * @example "PAYMENT_ERROR"
          */
-        type?: 'PAYMENT_ERROR' | 'NETS_COLLECTION_ERROR';
+        type?: "PAYMENT_ERROR" | "NETS_COLLECTION_ERROR";
         /**
          * Handling status of error message.
          * @example "UNHANDLED"
          */
-        status?: 'ALL' | 'UNHANDLED' | 'HANDLED';
+        status?: "ALL" | "UNHANDLED" | "HANDLED";
         /**
          * Previous error message ID for pagination.
          * @format int32
@@ -16180,7 +19752,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by message ID.
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16197,15 +19769,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaymentErrorMessageSearchResult, ErrorMessages>({
         path: `/payments/errormessages`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16223,11 +19795,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDirectSalaryPaymentsByPaymentListId: (paymentListId: number, params: RequestParams = {}) =>
       this.request<DirectSalaryPaymentGroup, ErrorMessages>({
         path: `/payments/directsalarypayments/${paymentListId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   ledgerreceipts = {
     /**
@@ -16244,10 +19816,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getLedgerReceipt: (receiptId: string, params: RequestParams = {}) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16272,17 +19844,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         createReconciliation?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}`,
-        method: 'PUT',
+        method: "PUT",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16301,10 +19873,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markLedgerReceiptAsUnfinished: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/unfinished`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Supported ledger receipt types are journals, sales invoice ledger receipts, travel invoice ledger receipts, expense invoice ledger receipts and purchase ledger invoice receipts. Existing dimensions will be replaces with the requested. If empty list provided then dimensions will be removed from transaction. Transactions with dimensions data can be replaced by calling PUT /ledgerreceipts endpoint
+     *
+     * @tags Ledger receipts
+     * @name UpdateLedgerReceiptTransactionDimensions
+     * @summary Update a ledger receipt's single transaction dimensions.
+     * @request PUT:/ledgerreceipts/{receiptId}/transactions/{transactionId}/dimensions
+     * @secure
+     * @response `200` `LedgerReceipt` Dimensions were successfully updated for the transaction.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` No access to dimensions.
+     * @response `404` `ErrorMessages` Ledger receipt could not be updated.
+     */
+    updateLedgerReceiptTransactionDimensions: (
+      receiptId: number,
+      transactionId: number,
+      data: DimensionItemValueList,
+      params: RequestParams = {},
+    ) =>
+      this.request<LedgerReceipt, ErrorMessages>({
+        path: `/ledgerreceipts/${receiptId}/transactions/${transactionId}/dimensions`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16323,10 +19924,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markLedgerReceiptAsInvalidated: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/invalidate`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16344,10 +19945,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     approveInvoice: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/approve`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16404,21 +20005,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "JOURNAL"
          */
         types?: (
-          | 'JOURNAL'
-          | 'PURCHASE_INVOICE'
-          | 'SALES_INVOICE'
-          | 'PERIODIC_TAX_RETURN'
-          | 'TRAVEL_INVOICE'
-          | 'BILL_OF_CHARGES'
-          | 'VAT_FORM'
-          | 'SALARY'
-          | 'EMPLOYER_CONTRIBUTION'
-          | 'PURCHASE_ORDER'
-          | 'SALES_ORDER'
-          | 'BANK_STATEMENT_AS_RECEIPT'
-          | 'RECEIPT_FOR_OPENING_ACCOUNTS'
-          | 'REFERENCE_PAYMENT'
-          | 'TRACKING_PERIOD_OPENING_RECEIPT'
+          | "JOURNAL"
+          | "PURCHASE_INVOICE"
+          | "SALES_INVOICE"
+          | "PERIODIC_TAX_RETURN"
+          | "TRAVEL_INVOICE"
+          | "BILL_OF_CHARGES"
+          | "VAT_FORM"
+          | "SALARY"
+          | "EMPLOYER_CONTRIBUTION"
+          | "PURCHASE_ORDER"
+          | "SALES_ORDER"
+          | "BANK_STATEMENT_AS_RECEIPT"
+          | "RECEIPT_FOR_OPENING_ACCOUNTS"
+          | "REFERENCE_PAYMENT"
+          | "TRACKING_PERIOD_OPENING_RECEIPT"
         )[];
         /**
          * Previous Id for pagination
@@ -16431,25 +20032,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Order the results by date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByDate?: 'ASC' | 'DESC';
+        orderByDate?: "ASC" | "DESC";
         /**
          * Order the results by created date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreated?: 'ASC' | 'DESC';
+        orderByCreated?: "ASC" | "DESC";
         /**
          * Order the results by version (updated date)
          * @default "DESC"
          * @example "ASC"
          */
-        orderByVersion?: 'ASC' | 'DESC';
+        orderByVersion?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16471,15 +20072,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         status?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<LedgerReceiptSearchResult, ErrorMessages>({
         path: `/ledgerreceipts`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16504,27 +20105,28 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         createReconciliation?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts`,
-        method: 'POST',
+        method: "POST",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   invoices = {
     /**
-     * @description Confirm to make an action related to the given identifier.
+     * @description Confirm to make an action related to the given identifier. DEPRECATED: As this endpoint is not updating anything but it is used for getting 2-factor authentication action results, then it is replaced by <b>GET /mfatransactionresult/{transactionIdentifier}</b>
      *
      * @tags Invoices
      * @name Confirm3
      * @summary Confirmation of action with the given identifier.
      * @request PUT:/invoices/{transactionIdentifier}/confirm
+     * @deprecated
      * @secure
      * @response `200` `InfoMessage` Action performed successfully.
      * @response `202` `InfoMessage` Transaction not confirmed yet.
@@ -16537,10 +20139,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm3: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${transactionIdentifier}/confirm`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16558,10 +20160,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getInvoice: (invoiceId: string, params: RequestParams = {}) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices/${invoiceId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16580,12 +20182,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateInvoice: (invoiceId: number, data: Invoice, params: RequestParams = {}) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices/${invoiceId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16603,12 +20205,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     verifyInvoice: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/verify`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16627,10 +20229,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markInvoiceAsUnfinished: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/unfinished`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16649,10 +20251,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     send: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/send`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16670,10 +20272,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     sendToCirculation: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/sendToCirculation`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16691,12 +20293,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     rejectInvoice: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/reject`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16719,17 +20321,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Supported only for SALES_INVOICE type. Default is false. When marking the overdue sales invoice as paid, if you want to automatically include a penal expense in the business partner's next sales invoice, then call the endpoint with addPenalExpense=true. Automatic handling of collection and penal costs setting must be enabled prior to this and penal expense product must be already defined. */
         addPenalExpense?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaymentEvent, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/markpaid`,
-        method: 'PUT',
+        method: "PUT",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16747,12 +20349,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addNotesToInvoice: (invoiceId: number, data: InvoiceNotes, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/notes`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16771,10 +20373,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markInvoiceAsInvalidated: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/invalidate`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16787,15 +20389,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      * @response `200` `InfoMessage` Comment marked as read.
      * @response `400` `ErrorMessages` Only tagged user can mark comment as read.
+     * @response `403` `ErrorMessages` No access rights to invoice discussion.
      * @response `404` `ErrorMessages` Comment not found for invoice.
      */
     setCommentReadByUser: (invoiceId: number, commentId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/${commentId}/read`,
-        method: 'PUT',
+        method: "PUT",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16810,15 +20413,27 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` Insufficient user rights or invalid invoice status.
      * @response `404` `ErrorMessages` Invoice not found.
      */
-    approveInvoice1: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
+    approveInvoice1: (
+      invoiceId: number,
+      data: CheckingEvent,
+      query?: {
+        /**
+         * Enable inventory management update
+         * @default false
+         */
+        updateInventory?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/approve`,
-        method: 'PUT',
+        method: "PUT",
+        query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -16841,26 +20456,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "UNFINISHED"
          */
         status?: (
-          | 'EMPTY'
-          | 'UNFINISHED'
-          | 'NOT_SENT'
-          | 'SENT'
-          | 'RECEIVED'
-          | 'PAID'
-          | 'PAYMENT_DENIED'
-          | 'VERIFIED'
-          | 'APPROVED'
-          | 'INVALIDATED'
-          | 'PAYMENT_QUEUED'
-          | 'PARTLY_PAID'
-          | 'PAYMENT_SENT_TO_BANK'
-          | 'MARKED_PAID'
-          | 'STARTED'
-          | 'INVOICED'
-          | 'OVERRIDDEN'
-          | 'DELETED'
-          | 'UNSAVED'
-          | 'PAYMENT_TRANSACTION_REMOVED'
+          | "EMPTY"
+          | "UNFINISHED"
+          | "NOT_SENT"
+          | "SENT"
+          | "RECEIVED"
+          | "PAID"
+          | "PAYMENT_DENIED"
+          | "VERIFIED"
+          | "APPROVED"
+          | "INVALIDATED"
+          | "PAYMENT_QUEUED"
+          | "PARTLY_PAID"
+          | "PAYMENT_SENT_TO_BANK"
+          | "MARKED_PAID"
+          | "STARTED"
+          | "INVOICED"
+          | "OVERRIDDEN"
+          | "DELETED"
+          | "UNSAVED"
+          | "PAYMENT_TRANSACTION_REMOVED"
         )[];
         /**
          * Start date of the search (invoice billing date)
@@ -16899,17 +20514,29 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         versionEndDate?: string;
         /**
+         * Start date of the search (invoice due date)
+         * @format date
+         * @example "2016-08-31"
+         */
+        dueStartDate?: string;
+        /**
+         * End date of the search (invoice due date)
+         * @format date
+         * @example "2016-12-31"
+         */
+        dueEndDate?: string;
+        /**
          * Invoice types. Supports more than one invoice status, separated by comma
          * @example "SALES_INVOICE"
          */
         types?: (
-          | 'PERIODIC_TAX_RETURN'
-          | 'PURCHASE_INVOICE'
-          | 'PURCHASE_ORDER'
-          | 'SALES_INVOICE'
-          | 'SALES_ORDER'
-          | 'TRAVEL_INVOICE'
-          | 'BILL_OF_CHARGES'
+          | "PERIODIC_TAX_RETURN"
+          | "PURCHASE_INVOICE"
+          | "PURCHASE_ORDER"
+          | "SALES_INVOICE"
+          | "SALES_ORDER"
+          | "TRAVEL_INVOICE"
+          | "BILL_OF_CHARGES"
         )[];
         /**
          * Search invoices with given business partner ID
@@ -16935,6 +20562,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         invoiceNumber?: number;
         /**
+         * Search invoices containing a row with the given product ID. Supports multiple values separated by comma. Maximum 200 values.
+         * @example 123456
+         */
+        productId?: number[];
+        /**
+         * Search invoices by searchTerm. Allows searching by counterpartyAddress.name, invoiceNumber and additionalInformation.
+         * @example "Name1"
+         */
+        searchTerm?: string;
+        /**
+         * Search invoices with given isOffer value. Supported only for SALES_ORDER type.
+         * @default false
+         * @example true
+         */
+        isOffer?: boolean;
+        /**
          * Previous invoice ID for pagination
          * @format int32
          * @example 123456
@@ -16945,25 +20588,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Order the results by date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByDate?: 'ASC' | 'DESC';
+        orderByDate?: "ASC" | "DESC";
         /**
          * Order the results by created date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreated?: 'ASC' | 'DESC';
+        orderByCreated?: "ASC" | "DESC";
         /**
          * Order the results by version (updated date)
          * @default "DESC"
          * @example "ASC"
          */
-        orderByVersion?: 'ASC' | 'DESC';
+        orderByVersion?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16983,17 +20626,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice channel
          * @example "EMAIL"
          */
-        invoiceChannel?: ('EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING')[];
+        invoiceChannel?: ("EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING")[];
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<InvoiceSearchResult, ErrorMessages>({
         path: `/invoices`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17015,17 +20658,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Supported only for SALES_INVOICE type. Default is false. If true, automatically adds the collection cost(s), if payment reminders were sent earlier to the business partner and/or penal cost, if the business partner had paid the earlier invoice late. These costs are added only if Automatic handling of collection and penal costs setting is enabled, and collection costs product and penal expense product have been defined. */
         addCollectionPenalCosts?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices`,
-        method: 'POST',
+        method: "POST",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17037,6 +20680,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/invoices/{invoiceId}/comments
      * @secure
      * @response `200` `Comments` The invoice was successfully returned.
+     * @response `403` `ErrorMessages` No access rights to invoice discussion.
      * @response `404` `ErrorMessages` Invoice could not be found.
      */
     getInvoiceComments: (
@@ -17045,15 +20689,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** If true, only those comments that have tagged users and comments have been read by all tagged users are returned. Comments without tagged users aren't returned. If false, only those comments that have tagged users but comments have not been read by all tagged users are returned. Comments without tagged users aren't returned. */
         readByAllTaggedUsers?: boolean;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Comments, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17066,17 +20710,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      * @response `200` `Comment` Invoice was successfully commented.
      * @response `400` `ErrorMessages` Comment was not posted in a valid format.
+     * @response `403` `ErrorMessages` No access rights to invoice discussion.
      * @response `404` `ErrorMessages` Invoice could not be found.
      */
     saveInvoiceComment: (invoiceId: number, data: Comment, params: RequestParams = {}) =>
       this.request<Comment, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17094,10 +20739,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getInvoiceTransactions: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InvoiceTransactions, ErrorMessages>({
         path: `/invoices/${invoiceId}/transactions`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17127,7 +20772,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -17144,15 +20789,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<PaymentEventSearchResult, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17170,10 +20815,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPaymentEventByIdAndInvoiceId: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
       this.request<PaymentEvent, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17192,10 +20837,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removePaymentEvent: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17219,16 +20864,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example 2
          */
         page?: number;
+        /**
+         * Invoice image format.
+         * @default "PNG"
+         * @example "PNG"
+         */
+        format?: "PNG" | "JPG" | "JPEG";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/invoices/${invoiceId}/image`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17241,15 +20892,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @secure
      * @response `200` `CommentWithTaggedUsers` Comment were successfully returned.
      * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` No access rights to invoice discussion.
      * @response `404` `ErrorMessages` Invoice or comment could not be found.
      */
     getCommentById: (invoiceId: number, commentId: number, params: RequestParams = {}) =>
       this.request<CommentWithTaggedUsers, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/${commentId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17261,15 +20913,44 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/invoices/{invoiceId}/comments/taggableusers
      * @secure
      * @response `200` `TaggableUsers` Taggable users were successfully returned.
+     * @response `403` `ErrorMessages` No access rights to invoice discussion.
      * @response `404` `ErrorMessages` Invoice could not be found.
      */
     getTaggeableUsers: (invoiceId: number, params: RequestParams = {}) =>
       this.request<TaggableUsers, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/taggableusers`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns transactions for the requested invoices. Up to 200 invoice IDs can be requested in a single call.
+     *
+     * @tags Invoices
+     * @name GetInvoiceTransactionsBulk
+     * @summary Get invoice transactions for multiple invoices.
+     * @request GET:/invoices/transactions
+     * @secure
+     * @response `200` `InvoiceTransactionsByInvoicesDTO` The invoice transactions were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Invoice or invoice transactions not found.
+     */
+    getInvoiceTransactionsBulk: (
+      query: {
+        /** List of invoice IDs (max 200) as repeated query parameters, e.g., ?invoiceIds=1&invoiceIds=2. */
+        invoiceIds: number[];
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<InvoiceTransactionsByInvoicesDTO, ErrorMessages>({
+        path: `/invoices/transactions`,
+        method: "GET",
+        query: query,
+        secure: true,
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17290,17 +20971,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice type.
          * @example "PURCHASE_INVOICE"
          */
-        types: 'PURCHASE_INVOICE' | 'TRAVEL_INVOICE' | 'BILL_OF_CHARGES';
+        types: "PURCHASE_INVOICE" | "TRAVEL_INVOICE" | "BILL_OF_CHARGES";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<InvoiceIds, ErrorMessages>({
         path: `/invoices/personalverifications`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17321,18 +21002,86 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice type.
          * @example "PURCHASE_INVOICE"
          */
-        types: 'PURCHASE_INVOICE' | 'TRAVEL_INVOICE' | 'BILL_OF_CHARGES';
+        types: "PURCHASE_INVOICE" | "TRAVEL_INVOICE" | "BILL_OF_CHARGES";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<InvoiceIds, ErrorMessages>({
         path: `/invoices/personalapprovals`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
+  };
+  integrations = {
+    /**
+     * @description Returns information on companies wanting to activate the integration. User sending the request must belong to the company that contains API Integrator tool. requestId must be valid. If it has expired, 410 error is returned. It's possible to activate integration for multiple companies using the same requestId.  Information returned in extraInfo depends on the fields marked as required for user consent in the integration specification.
+     *
+     * @tags Integrations
+     * @name GetIntegrationRequest
+     * @summary Returns API integration request information.
+     * @request GET:/integrations/{requestId}
+     * @secure
+     * @response `200` `ApiIntegrationRequestData` The API integration request data was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` API integration request not found or request was made from different environment than specification was made.
+     * @response `410` `ErrorMessages` Integration request has expired.
+     */
+    getIntegrationRequest: (requestId: number, params: RequestParams = {}) =>
+      this.request<ApiIntegrationRequestData, ErrorMessages>({
+        path: `/integrations/${requestId}`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description To approve and/or reject integration activation request. User sending the request must belong to the company that contains API Integrator tool. Request parameter requestId must be valid. If it has expired, 410 error is returned. The number of companyId in request body in approve and reject combined must match the number of companyId returned in GET /integrations/{requestId} response in companiesToIntegrate. Otherwise, 400 is returned. If the request is successful, a technical user with the 'API technical user' role is added to all the approved companies, and an API key for the technical user is generated and returned. If the technical user already belonged to the approved environment (i.e. it was added manually via the 'old' way), its existing API key is returned.
+     *
+     * @tags Integrations
+     * @name UpdateIntegrationRequest
+     * @summary Approves or rejects api integration requests.
+     * @request PUT:/integrations/{requestId}
+     * @secure
+     * @response `200` `ApiIntegrationApproveResult` The API integration request was successfully approved/rejected.
+     * @response `400` `ErrorMessages` Request contains invalid data, for example companies IDs doesn't match to the API integration request definition.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` API integration request not found or request was made from different environment than specification was made.
+     * @response `410` `ErrorMessages` Integration request has expired.
+     */
+    updateIntegrationRequest: (requestId: number, data: ApiIntegrationApproveRequest, params: RequestParams = {}) =>
+      this.request<ApiIntegrationApproveResult, ErrorMessages>({
+        path: `/integrations/${requestId}`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns list of customers who are using the given integration template. Environment has to have API integration tool access, otherwise 403 forbidden is returned. The integrationId have to belong to integration for which current environment is an owner, otherwise 403 forbidden is returned.
+     *
+     * @tags Integrations
+     * @name FetchIntegrationOwnerCustomersInfo
+     * @summary Get list of customers using given integration template for integration owner.
+     * @request GET:/integrations/{integrationId}/customers
+     * @secure
+     * @response `200` `ApiIntegrationCustomer` The API integration customers were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user or company rights.
+     */
+    fetchIntegrationOwnerCustomersInfo: (integrationId: string, params: RequestParams = {}) =>
+      this.request<ApiIntegrationCustomer, ErrorMessages>({
+        path: `/integrations/${integrationId}/customers`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
   };
   fiscalyears = {
     /**
@@ -17348,15 +21097,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `ErrorMessages` Fiscal period not found.
      * @response `409` `ErrorMessages` The request could not be completed due to a conflict with the current state of the resource.
      */
-    updateFiscalYear: (fiscalYearId: number, trackingPeriodId: number, data: TrackingPeriod, params: RequestParams = {}) =>
+    updateFiscalYear: (
+      fiscalYearId: number,
+      trackingPeriodId: number,
+      data: TrackingPeriod,
+      params: RequestParams = {},
+    ) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/fiscalyears/${fiscalYearId}/trackingPeriods/${trackingPeriodId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17372,11 +21126,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getFiscalYears: (params: RequestParams = {}) =>
       this.request<FiscalYears, any>({
         path: `/fiscalyears`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   dimensions = {
     /**
@@ -17388,15 +21142,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/dimensions/{dimensionId}
      * @secure
      * @response `200` `Dimension` Dimensions were successfully returned.
+     * @response `403` `ErrorMessages` No access right to dimensions.
      * @response `404` `ErrorMessages` Dimension not found.
      */
     getDimension: (dimensionId: number, params: RequestParams = {}) =>
       this.request<Dimension, ErrorMessages>({
         path: `/dimensions/${dimensionId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17415,12 +21170,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDimension: (dimensionId: number, data: DimensionName, params: RequestParams = {}) =>
       this.request<DimensionName, ErrorMessages>({
         path: `/dimensions/${dimensionId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17439,12 +21194,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDimensionItem: (dimensionId: number, data: DimensionItem, params: RequestParams = {}) =>
       this.request<DimensionItem, ErrorMessages>({
         path: `/dimensions/${dimensionId}/items`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17463,12 +21218,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addDimensionItem: (dimensionId: number, data: DimensionItem, params: RequestParams = {}) =>
       this.request<DimensionItem, ErrorMessages>({
         path: `/dimensions/${dimensionId}/items`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17480,6 +21235,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/dimensions
      * @secure
      * @response `200` `(Dimension)[]` Dimensions were successfully returned.
+     * @response `403` `ErrorMessages` No access right to dimensions.
      */
     getDimensions: (
       query?: {
@@ -17488,16 +21244,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Name of the dimension item. Supports partial search. */
         codeName?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
-      this.request<Dimension[], any>({
+      this.request<Dimension[], ErrorMessages>({
         path: `/dimensions`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   company = {
     /**
@@ -17515,10 +21271,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInfo: (params: RequestParams = {}) =>
       this.request<Company, ErrorMessages>({
         path: `/company`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17537,12 +21293,32 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateCompanyInfo: (data: Company, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/company`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Returns company's usage settings
+     *
+     * @tags Company
+     * @name GetUsageSettings
+     * @summary Get company's usage settings
+     * @request GET:/company/usagesettings
+     * @secure
+     * @response `200` `CompanyUsageSettings` Company usage settings successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getUsageSettings: (params: RequestParams = {}) =>
+      this.request<CompanyUsageSettings, ErrorMessages>({
+        path: `/company/usagesettings`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17559,10 +21335,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInvoiceTemplates: (params: RequestParams = {}) =>
       this.request<InvoiceTemplate, ErrorMessages>({
         path: `/company/invoicetemplates`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17579,10 +21355,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVerifierList: (params: RequestParams = {}) =>
       this.request<VerifierListBasic[], ErrorMessages>({
         path: `/company/invoicecirculation/verifierlists`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17600,10 +21376,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVerifierList1: (id: number, params: RequestParams = {}) =>
       this.request<VerifierList, ErrorMessages>({
         path: `/company/invoicecirculation/verifierlists/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17620,10 +21396,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInvoiceCirculationSettings: (params: RequestParams = {}) =>
       this.request<CirculationSettings, ErrorMessages>({
         path: `/company/invoicecirculation/settings`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17639,10 +21415,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyCollectionPenalExpensesSettings: (params: RequestParams = {}) =>
       this.request<CollectionsAndPenalExpenses, any>({
         path: `/company/expenses/collectionpenal/settings`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17658,10 +21434,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getEInvoiceAddresses: (params: RequestParams = {}) =>
       this.request<EInvoiceData, any>({
         path: `/company/einvoiceaddresses`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17678,11 +21454,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyDeliveryTerms: (params: RequestParams = {}) =>
       this.request<DeliveryTerms, ErrorMessages>({
         path: `/company/deliveryterms`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   businesspartners = {
     /**
@@ -17700,10 +21476,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getBusinessPartner: (id: string, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17722,12 +21498,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     putBusinessPartner: (id: number, data: BusinessPartner, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17738,7 +21514,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Update a business partner.
      * @request PATCH:/businesspartners/{id}
      * @secure
-     * @response `200` `DataModel` Business partner was successfully updated.
+     * @response `200` `object` Business partner was successfully updated.
      * @response `400` `ErrorMessages` Business partner contains invalid data.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No partner found for given id.
@@ -17750,24 +21526,24 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Business partner last modification time. It is required if not filled in the request body. */
         version?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
-      this.request<DataModel, ErrorMessages>({
+      this.request<object, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: 'PATCH',
+        method: "PATCH",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
      * @description Returns default dimension for a business partner with the given partner and dimension ID.
      *
      * @tags Business partners
-     * @name GetDefaultDimension
+     * @name GetDefaultDimension1
      * @summary Get default dimension of business partner.
      * @request GET:/businesspartners/{id}/defaults/dimensions/{dimensionId}
      * @secure
@@ -17775,20 +21551,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
      */
-    getDefaultDimension: (id: number, dimensionId: number, params: RequestParams = {}) =>
+    getDefaultDimension1: (id: number, dimensionId: number, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
      * @description Updates default dimension for a business partner with the given partner and dimension ID.
      *
      * @tags Business partners
-     * @name UpdateDefaultDimension1
+     * @name UpdateDefaultDimension2
      * @summary Update default dimension of business partner.
      * @request PUT:/businesspartners/{id}/defaults/dimensions/{dimensionId}
      * @secure
@@ -17796,15 +21572,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      * @response `404` `ErrorMessages` No dimension found for given partner and dimension id.
      */
-    updateDefaultDimension1: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
+    updateDefaultDimension2: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17822,10 +21598,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPartnerGroup: (id: number, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17844,12 +21620,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateBusinessPartnerGroup: (id: number, data: BusinessPartnerGroup, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17889,13 +21665,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Type of business partner
          * @example "CUSTOMER"
          */
-        type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
+        type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
         /**
          * Order the results by invoice ID
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Previous invoice ID for pagination
          * @format int32
@@ -17935,15 +21711,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<BusinessPartnerSearchResult, ErrorMessages>({
         path: `/businesspartners`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17961,12 +21737,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     insertBusinessPartner: (data: BusinessPartner, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -17992,7 +21768,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Business partner group type.
          * @example "CUSTOMER"
          */
-        type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
+        type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
         /** Status of business partner group. */
         active?: boolean;
         /**
@@ -18011,15 +21787,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<BusinessPartnerGroupSearchResult, ErrorMessages>({
         path: `/businesspartners/groups`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18037,12 +21813,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createBusinessPartnerGroup: (data: BusinessPartnerGroup, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18060,30 +21836,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultProducts: (id: number, params: RequestParams = {}) =>
       this.request<DefaultProduct[], ErrorMessages>({
         path: `/businesspartners/${id}/defaults/products`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
      * @description Returns default dimensions for a business partner with the given ID.
      *
      * @tags Business partners
-     * @name GetDefaultDimensions
+     * @name GetDefaultDimensions1
      * @summary Get default dimensions of business partner.
      * @request GET:/businesspartners/{id}/defaults/dimensions
      * @secure
      * @response `200` `(DefaultDimensionBasicData)[]` The partner default dimensions was successfully returned.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      */
-    getDefaultDimensions: (id: number, params: RequestParams = {}) =>
+    getDefaultDimensions1: (id: number, params: RequestParams = {}) =>
       this.request<DefaultDimensionBasicData[], ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18101,10 +21877,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultAccounts: (id: number, params: RequestParams = {}) =>
       this.request<BusinessPartnerDefaultAccounts, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/accounts`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18121,11 +21897,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonalDetails: (params: RequestParams = {}) =>
       this.request<PersonalDetails, ErrorMessages>({
         path: `/businesspartners/personaldetails`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   bankstatements = {
     /**
@@ -18137,22 +21913,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/bankstatements/{statementId}/events/{eventId}/products
      * @secure
      * @response `200` `InfoMessage` Product allocated to an event successfully.
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement or request contains invalid data.
      * @response `403` `ErrorMessages` Insufficient user rights.
      * @response `404` `ErrorMessages` Product, event or statement not found.
      */
     allocateProductToEvent: (statementId: number, eventId: number, data: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/products`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
-     * @description This endpoint can be used to remove already allocated product from the event by sending bank statement identifier, event identifier and new product identifier.
+     * @description This endpoint can be used to remove already allocated product from the event by sending bank statement identifier and event identifier.
      *
      * @tags Bank statements
      * @name DeleteProductAllocationFromEvent
@@ -18160,15 +21937,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/bankstatements/{statementId}/events/{eventId}/products
      * @secure
      * @response `204` `void` Product unallocated successfully.
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement
      * @response `403` `ErrorMessages` Insufficient user rights.
      * @response `404` `ErrorMessages` Event or statement not found.
      */
     deleteProductAllocationFromEvent: (statementId: number, eventId: number, params: RequestParams = {}) =>
       this.request<void, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/products`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        ...params
+        ...params,
       }),
 
     /**
@@ -18180,18 +21958,23 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PUT:/bankstatements/{statementId}/events/{eventId}/metadata
      * @secure
      * @response `200` `InfoMessage` Metadata allocated successfully
-     * @response `400` `ErrorMessages` Metadata contains invalid data.
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement or metadata contains invalid data.
      * @response `404` `InfoMessage` Bank statement not found
      */
-    allocateAllocationMetadata1: (statementId: number, eventId: number, data: AllocationMetadata, params: RequestParams = {}) =>
+    allocateAllocationMetadata1: (
+      statementId: number,
+      eventId: number,
+      data: AllocationMetadata,
+      params: RequestParams = {},
+    ) =>
       this.request<InfoMessage, ErrorMessages | InfoMessage>({
         path: `/bankstatements/${statementId}/events/${eventId}/metadata`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18203,15 +21986,71 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/bankstatements/{statementId}/events/{eventId}/metadata
      * @secure
      * @response `204` `DataModel` Metadata deleted successfully
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement
      * @response `404` `ErrorMessages` Bank statement event payment not found
      */
     deleteAllocationMetadata1: (statementId: number, eventId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/metadata`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Using this endpoint you can update already assigned invoice to the bank statement event by sending bank statement identifier, event identifier and new invoice identifier. Supported invoice types: SALES_INVOICE, PURCHASE_INVOICE, TRAVEL_INVOICE, BILL_OF_CHARGES, PERIODIC_TAX_RETURN.
+     *
+     * @tags Bank statements
+     * @name AllocateInvoiceToEvent
+     * @summary Allocate an invoice to a bank statement event.
+     * @request PUT:/bankstatements/{statementId}/events/{eventId}/invoices
+     * @secure
+     * @response `200` `InfoMessage` Invoice allocated to an event successfully.
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement or request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Invoice, event or statement not found.
+     */
+    allocateInvoiceToEvent: (
+      statementId: number,
+      eventId: number,
+      data: number,
+      query?: {
+        /** Supported only for SALES_INVOICE type. Default is false. When allocation the overdue sales invoice to bank statement, if you want to automatically include a penal expense in the business partner's next sales invoice, then call the endpoint with addPenalExpense=true. Automatic handling of collection and penal costs setting must be enabled prior to this and penal expense product must be already defined. */
+        addPenalExpense?: boolean;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<InfoMessage, ErrorMessages>({
+        path: `/bankstatements/${statementId}/events/${eventId}/invoices`,
+        method: "PUT",
+        query: query,
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description This endpoint can be used to remove already allocated invoice from the event by sending bank statement identifier and event identifier. Note that removing the allocation will not remove the payment event from the invoice. The payment transaction needs to be removed manually
+     *
+     * @tags Bank statements
+     * @name DeleteInvoiceAllocationFromEvent
+     * @summary Delete allocation of a invoice from a bank statement event.
+     * @request DELETE:/bankstatements/{statementId}/events/{eventId}/invoices
+     * @secure
+     * @response `204` `void` Invoice unallocated from bank statement event successfully.
+     * @response `400` `ErrorMessages` Bank statement event doesn't belong to the given statement or event is not allocated to any invoice.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Event or statement not found.
+     */
+    deleteInvoiceAllocationFromEvent: (statementId: number, eventId: number, params: RequestParams = {}) =>
+      this.request<void, ErrorMessages>({
+        path: `/bankstatements/${statementId}/events/${eventId}/invoices`,
+        method: "DELETE",
+        secure: true,
+        ...params,
       }),
 
     /**
@@ -18249,13 +22088,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by invoice ID
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Order the results by start date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByStartDate?: 'ASC' | 'DESC';
+        orderByStartDate?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18272,16 +22111,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<BankStatementsSearchResult, ErrorMessages>({
         path: `/bankstatements`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   bankaccounts = {
     /**
@@ -18299,10 +22138,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getBankAccount: (id: number, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts/${id}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18322,12 +22161,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateBankAccount: (id: number, data: CompanyBankAccount, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18355,13 +22194,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by bank account ID
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Order the results by bank account order number
          * @default "ASC"
          * @example "ASC"
          */
-        orderByOrderNo?: 'ASC' | 'DESC';
+        orderByOrderNo?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18378,15 +22217,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<CompanyBankAccountSearchResult, ErrorMessages>({
         path: `/bankaccounts`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18405,13 +22244,57 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createBankAccount: (data: CompanyBankAccount, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
+  };
+  se = {
+    /**
+     * @description Allows to get all factoring contracts for the current company.
+     *
+     * @tags Factoring contracts
+     * @name GetBasicFactoringContracts
+     * @summary Get factoring contract. Support agreements for Swedish environments.
+     * @request GET:/se/factoringcontracts
+     * @secure
+     * @response `200` `BasicFactoringContract` Factoring contract was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights or external financing has not been enabled for your company.
+     */
+    getBasicFactoringContracts: (params: RequestParams = {}) =>
+      this.request<BasicFactoringContract, ErrorMessages>({
+        path: `/se/factoringcontracts`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * @description Allows to add new factoring contract and use it on sales invoices.
+     *
+     * @tags Factoring contracts
+     * @name AddFactoringContract
+     * @summary Add new factoring contract. Supports only Swedish environments.
+     * @request POST:/se/factoringcontracts
+     * @secure
+     * @response `200` `BasicFactoringContract` Factoring contract was successfully created.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
+     */
+    addFactoringContract: (data: BasicFactoringContract, params: RequestParams = {}) =>
+      this.request<BasicFactoringContract, ErrorMessages>({
+        path: `/se/factoringcontracts`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
   };
   reports = {
     /**
@@ -18429,12 +22312,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getLedgerAccountsReport: (data: LedgerAccountsReportRequest, params: RequestParams = {}) =>
       this.request<LedgerAccountsReportResponse, ErrorMessages>({
         path: `/reports/ledgeraccounts`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18452,12 +22335,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getGeneralLedgerReport: (id: number, data: GeneralLedgerReportRequest, params: RequestParams = {}) =>
       this.request<GeneralLedgerReportResponse, ErrorMessages>({
         path: `/reports/generalledger/${id}`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18475,13 +22358,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getAccountingReport: (data: AccountingReportRequest, params: RequestParams = {}) =>
       this.request<AccountingReportResponse, ErrorMessages>({
         path: `/reports/accounting`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   factoringcontracts = {
     /**
@@ -18519,22 +22402,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<FactoringContractSearchResult, ErrorMessages>({
         path: `/factoringcontracts`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
      * @description Allows to add new factoring contract and use it on sales invoices.
      *
      * @tags Factoring contracts
-     * @name AddFactoringContract
+     * @name AddFactoringContract1
      * @summary Add new factoring contract. Supports only Finnish environments.
      * @request POST:/factoringcontracts
      * @secure
@@ -18542,16 +22425,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `400` `ErrorMessages` Request contains invalid data.
      * @response `403` `ErrorMessages` User rights check failed: Insufficient user rights.
      */
-    addFactoringContract: (data: FactoringContract, params: RequestParams = {}) =>
+    addFactoringContract1: (data: FactoringContract, params: RequestParams = {}) =>
       this.request<FactoringContract, ErrorMessages>({
         path: `/factoringcontracts`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   attachments = {
     /**
@@ -18602,30 +22485,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "SALES_INVOICE"
          */
         type?: (
-          | 'SALES_INVOICE'
-          | 'SALES_ORDER'
-          | 'OFFER'
-          | 'PURCHASE_INVOICE'
-          | 'PURCHASE_ORDER'
-          | 'TRAVEL_INVOICE'
-          | 'BILL_OF_CHARGES'
-          | 'JOURNAL'
-          | 'SALARY'
-          | 'PERIODIC_TAX_RETURN'
-          | 'REFERENCE_PAYMENT'
-          | 'BANK_STATEMENT_AS_RECEIPT'
-          | 'VAT_SUMMARY'
-          | 'BANK_STATEMENT_EVENT'
-          | 'SALES_PRODUCT_REGISTER'
-          | 'PURCHASE_PRODUCT_REGISTER'
-          | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
-          | 'SUPPLIER_BUSINESS_PARTNER_REGISTER'
-          | 'PERSON_BUSINESS_PARTNER_REGISTER'
-          | 'EMPLOYEE_INFO'
-          | 'ENVIRONMENT'
-          | 'NETS_COLLECTION'
-          | 'COST_RECEIPT'
-          | 'REFERENCE_PAYMENT_EVENT'
+          | "SALES_INVOICE"
+          | "SALES_ORDER"
+          | "OFFER"
+          | "PURCHASE_INVOICE"
+          | "PURCHASE_ORDER"
+          | "TRAVEL_INVOICE"
+          | "BILL_OF_CHARGES"
+          | "JOURNAL"
+          | "SALARY"
+          | "PERIODIC_TAX_RETURN"
+          | "REFERENCE_PAYMENT"
+          | "BANK_STATEMENT_AS_RECEIPT"
+          | "VAT_SUMMARY"
+          | "BANK_STATEMENT_EVENT"
+          | "SALES_PRODUCT_REGISTER"
+          | "PURCHASE_PRODUCT_REGISTER"
+          | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
+          | "SUPPLIER_BUSINESS_PARTNER_REGISTER"
+          | "PERSON_BUSINESS_PARTNER_REGISTER"
+          | "EMPLOYEE_INFO"
+          | "ENVIRONMENT"
+          | "NETS_COLLECTION"
+          | "COST_RECEIPT"
+          | "REFERENCE_PAYMENT_EVENT"
         )[];
         /**
          * Attachment reference ID
@@ -18637,22 +22520,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by attachment ID
          * @example "ASC"
          */
-        orderById?: 'ASC' | 'DESC';
+        orderById?: "ASC" | "DESC";
         /**
          * Order the results by attachment date
          * @example "ASC"
          */
-        orderByCreatedDate?: 'ASC' | 'DESC';
+        orderByCreatedDate?: "ASC" | "DESC";
         /**
          * Order the results by attachment name
          * @example "ASC"
          */
-        orderByName?: 'ASC' | 'DESC';
+        orderByName?: "ASC" | "DESC";
         /**
          * Order the results by attachment size
          * @example "ASC"
          */
-        orderBySize?: 'ASC' | 'DESC';
+        orderBySize?: "ASC" | "DESC";
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18675,15 +22558,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         previousId?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<AttachmentSearchResult, ErrorMessages>({
         path: `/attachments`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18703,16 +22586,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @format binary */
         file: File;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments`,
-        method: 'POST',
+        method: "POST",
         body: data,
         secure: true,
         type: ContentType.FormData,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18729,9 +22612,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getAttachment: (attachmentId: number, params: RequestParams = {}) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18742,17 +22626,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @summary Delete an attachment.
      * @request DELETE:/attachments/{attachmentId}
      * @secure
-     * @response `204` `DataModel` Attachment was successfully deleted.
+     * @response `204` `object` Attachment was successfully deleted.
      * @response `403` `ErrorMessages` Insufficient user rights or this attachment is not editable.
      * @response `404` `ErrorMessages` Attachment not found.
      */
     deleteAttachment: (attachmentId: number, params: RequestParams = {}) =>
-      this.request<DataModel, ErrorMessages>({
+      this.request<object, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: 'DELETE',
+        method: "DELETE",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18778,20 +22662,39 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         name?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: 'PATCH',
+        method: "PATCH",
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   vats = {
+    /**
+     * @description Returns VAT settings for the current company.
+     *
+     * @tags VATs
+     * @name GetVatSettings
+     * @summary Get VAT settings for the current company.
+     * @request GET:/vats/settings
+     * @secure
+     * @response `200` `VatSettings` The VATs were successfully returned
+     */
+    getVatSettings: (params: RequestParams = {}) =>
+      this.request<VatSettings, any>({
+        path: `/vats/settings`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
     /**
      * @description Returns VAT percentages and vat statuses for the current company.
      *
@@ -18805,10 +22708,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVatStatusesForCompany: (params: RequestParams = {}) =>
       this.request<VatInformation, any>({
         path: `/vats/default`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -18830,16 +22733,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         countryCode: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<VatPercentages, ErrorMessages>({
         path: `/vats/country`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   status = {
     /**
@@ -18855,11 +22758,69 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getStatus: (params: RequestParams = {}) =>
       this.request<Status, any>({
         path: `/status`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
+  };
+  sie = {
+    /**
+     * @description Returns a SIE file for given accounting period start date and export end date.
+     *
+     * @tags SIE file
+     * @name GetSieFile
+     * @summary Get SIE file.
+     * @request GET:/sie/file
+     * @secure
+     * @response `200` `File` SIE file successfully returned.
+     * @response `400` `ErrorMessages` Request contains invalid data.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSieFile: (
+      query: {
+        /**
+         * Start date of accounting period
+         * @format date
+         * @example "2022-01-31"
+         */
+        accountingPeriodStart: string;
+        /**
+         * End date of the export
+         * @format date
+         * @example "2022-01-31"
+         */
+        exportEndDate: string;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<File, ErrorMessages>({
+        path: `/sie/file`,
+        method: "GET",
+        query: query,
+        secure: true,
+        ...params,
+      }),
+
+    /**
+     * @description Returns details about SIE export availability.
+     *
+     * @tags SIE file
+     * @name GetSieAvailability
+     * @summary Get information about SIE export availability.
+     * @request GET:/sie/availability
+     * @secure
+     * @response `200` `SieAvailabilityResponse` SIE export availability information was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSieAvailability: (params: RequestParams = {}) =>
+      this.request<SieAvailabilityResponse, ErrorMessages>({
+        path: `/sie/availability`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
   };
   sessioninfo = {
     /**
@@ -18875,290 +22836,105 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getSessionInfo: (params: RequestParams = {}) =>
       this.request<SessionInfo, any>({
         path: `/sessioninfo`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
-  payrolls = {
+  mfatransactionresult = {
     /**
-     * @description Returns salary lists.
+     * @description Get a result of action related to the given MFA identifier.
      *
-     * @tags Payrolls
-     * @name GetSalaryLists
-     * @summary Get salary lists matching search criteria.
-     * @request GET:/payrolls/salarylists
+     * @tags Multi-Factor Authentication
+     * @name GetMfaTransactionResult
+     * @summary Get a result of action which was performed with multi-factor authentication (MFA), with the given identifier. Supports only Finnish environments.
+     * @request GET:/mfatransactionresult/{transactionIdentifier}
      * @secure
-     * @response `200` `SalaryListSearchResult` Salary lists were successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `200` `MfaTransactionResult` OK
+     * @response `202` `InfoMessage` Transaction not confirmed yet and transaction identifier returned.
+     * @response `403` `ErrorMessages` Transaction not belong to the user, insufficient rights or data in wrong status.
+     * @response `404` `ErrorMessages` Element not found or request contains invalid data.
+     * @response `406` `ErrorMessages` Transaction rejected.
+     * @response `408` `ErrorMessages` Transaction expired.
+     * @response `409` `ErrorMessages` Transaction already processed.
      */
-    getSalaryLists: (
-      query?: {
-        /** @format date @example "2020-01-01" */
-        paymentPeriodStart?: string;
-        /** @format date @example "2020-12-31" */
-        paymentPeriodEnd?: string;
-        /** @example "2020" */
-        name?: string;
-        /**
-         * Page size for the results. Maximum value: 200.
-         * @format int32
-         * @default 50
-         * @example 20
-         */
-        size?: number;
-        /**
-         * Page number for the results
-         * @format int32
-         * @default 0
-         * @example 2
-         */
-        page?: number;
-        /**
-         * Order the results by salary list ID
-         * @default "DESC"
-         * @example "ASC"
-         */
-        orderById?: 'ASC' | 'DESC';
-      },
-      params: RequestParams = {}
-    ) =>
-      this.request<SalaryListSearchResult, ErrorMessages>({
-        path: `/payrolls/salarylists`,
-        method: 'GET',
-        query: query,
+    getMfaTransactionResult: (transactionIdentifier: string, params: RequestParams = {}) =>
+      this.request<MfaTransactionResult, ErrorMessages>({
+        path: `/mfatransactionresult/${transactionIdentifier}`,
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
-
+  };
+  journals = {
     /**
-     * @description Returns salary list for given salary list id.
+     * @description Get journal receipts based on search criteria. Returns a list containing information about journal receipts.
      *
-     * @tags Payrolls
-     * @name GetSalaryList
-     * @summary Get salary list.
-     * @request GET:/payrolls/salarylists/{id}
+     * @tags Journal
+     * @name SearchJournalsByStatuses
+     * @summary Get journal receipts based on search criteria.
+     * @request GET:/journals
      * @secure
-     * @response `200` `SalaryListDetails` Salary list was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Salary list was not found.
-     */
-    getSalaryList: (id: number, params: RequestParams = {}) =>
-      this.request<SalaryListDetails, ErrorMessages>({
-        path: `/payrolls/salarylists/${id}`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params
-      }),
-
-    /**
-     * @description Return the Salary Types list.
-     *
-     * @tags Payrolls
-     * @name GetSalaryTypes
-     * @summary Get the list of salary types matching search criteria.
-     * @request GET:/payrolls/salarytypes
-     * @secure
-     * @response `200` `SalaryTypeSearchResult` List of salary types was successfully returned.
+     * @response `200` `Journal` Journal receipts were successfully found.
+     * @response `400` `ErrorMessages` Request contains invalid data.
      * @response `403` `ErrorMessages` Insufficient user rights.
      */
-    getSalaryTypes: (
+    searchJournalsByStatuses: (
       query?: {
         /**
-         * Salary Type name
-         *
-         * Also partial - search matches returned.
-         * @example "Time-rate pay"
+         * Comma-separated journal receipt statuses
+         * @example "UNFINISHED,INVALIDATED"
          */
-        name?: string;
+        statuses?: "UNFINISHED" | "APPROVED" | "INVALIDATED";
         /**
-         * Salary type code
-         * @example 1000
+         * Start date of the search (journal billing date)
+         * @format date
+         * @example "2016-08-31"
          */
-        code?: number;
+        startDate?: string;
         /**
-         * Salary category
-         * @example "TAX"
+         * End date of the search (journal billing date)
+         * @format date
+         * @example "2016-08-31"
          */
-        category?:
-          | 'SALARY_FOR_TIME_WORKED'
-          | 'OTHER_TAXABLE_EARNINGS'
-          | 'FRINGE_BENEFITS'
-          | 'TAX_FREE_ITEMS'
-          | 'TAX'
-          | 'DEDUCTIONS_FROM_NET_PAY'
-          | 'INFORMATIVE_ITEMS'
-          | 'EMPLOYER_PAYMENTS';
+        endDate?: string;
         /**
-         * Income Type name
-         *
-         * Also partial - search matches returned.
-         * @example "Time-rate pay"
+         * Start date of the search (journal created date)
+         * @format date-time
+         * @example "2016-08-31T00:00:00"
          */
-        incomeType?: string;
+        createdStartDate?: string;
         /**
-         * Income type code
-         * @example 201
+         * End date of the search (journal created date)
+         * @format date-time
+         * @example "2016-12-31T00:00:00"
          */
-        incomeTypeCode?: number;
+        createdEndDate?: string;
         /**
-         * Page size for the results. Maximum value: 200.
-         * @format int32
-         * @min 1
-         * @max 200
-         * @default 50
-         * @example 20
+         * Start date of the search (journal updated date)
+         * @format date-time
+         * @example "2016-08-31T00:00:00"
          */
-        size?: number;
+        versionStartDate?: string;
         /**
-         * Page number for the results
-         * @format int32
-         * @min 0
-         * @default 0
-         * @example 2
+         * End date of the search (journal updated date)
+         * @format date-time
+         * @example "2016-12-31T00:00:00"
          */
-        page?: number;
-        /**
-         * Order the results by salary type code
-         * @default "ASC"
-         * @example "ASC"
-         */
-        orderByCode?: 'ASC' | 'DESC';
+        versionEndDate?: string;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
-      this.request<SalaryTypeSearchResult, ErrorMessages>({
-        path: `/payrolls/salarytypes`,
-        method: 'GET',
+      this.request<Journal, ErrorMessages>({
+        path: `/journals`,
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
-
-    /**
-     * @description Returns salaries basic info.
-     *
-     * @tags Payrolls
-     * @name GetSalariesBasicInfo
-     * @summary Get salaries basic info.
-     * @request GET:/payrolls/salariesbasicinfo
-     * @secure
-     * @response `200` `SalariesBasicInfo` The salaries basic info was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     * @response `404` `ErrorMessages` Salaries basic info yearly figures not found.
-     */
-    getSalariesBasicInfo: (
-      query?: {
-        /**
-         * Year from which yearly figures will be returned. If not set returns yearly figures from current year.
-         * @example 2023
-         */
-        year?: number;
-      },
-      params: RequestParams = {}
-    ) =>
-      this.request<SalariesBasicInfo, ErrorMessages>({
-        path: `/payrolls/salariesbasicinfo`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params
-      }),
-
-    /**
-     * @description Returns basic data of all labor union settings.
-     *
-     * @tags Payrolls
-     * @name GetLaborUnionSettingsBasicData
-     * @summary Find list of labor union settings basic data.
-     * @request GET:/payrolls/laborunionsettings
-     * @secure
-     * @response `200` `(LaborUnionSettingsBasicData)[]` Labor union settings were successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     */
-    getLaborUnionSettingsBasicData: (params: RequestParams = {}) =>
-      this.request<LaborUnionSettingsBasicData[], ErrorMessages>({
-        path: `/payrolls/laborunionsettings`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params
-      }),
-
-    /**
-     * @description Returns the list of employees with information: id, lastname, firstname, ssn, address, personNumber, salaryChannel, automatedTaxCard and active.
-     *
-     * @tags Employees
-     * @name GetEmployee
-     * @summary Get the list of employees matching search criteria.
-     * @request GET:/payrolls/employees
-     * @secure
-     * @response `200` `(EmployeeSearchResult)[]` Employees were successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     */
-    getEmployee: (
-      query?: {
-        /**
-         * Person number
-         *
-         * Also partial - search matches returned.
-         * @example "CUST12367Z"
-         */
-        personNumber?: string;
-        /**
-         * Unique identifier of Business Partner Group of type PERSON
-         * @example 123456
-         */
-        personGroupId?: number;
-        /**
-         * Include inactive persons
-         * @default false
-         */
-        includeInactive?: boolean;
-        /**
-         * Salary channel
-         * @example "EMAIL"
-         */
-        salaryChannel?: 'NO_SENDING' | 'MAIL' | 'EMAIL' | 'PAPER' | 'MOBILE' | 'ESALARY';
-        /**
-         * Page size for the results. Maximum value: 200.
-         * @format int32
-         * @min 1
-         * @max 200
-         * @default 50
-         * @example 20
-         */
-        size?: number;
-        /**
-         * Page number for the results
-         * @format int32
-         * @min 0
-         * @default 0
-         * @example 2
-         */
-        page?: number;
-        /**
-         * Order the results by Employee ID
-         * @default "DESC"
-         * @example "ASC"
-         */
-        orderById?: 'ASC' | 'DESC';
-      },
-      params: RequestParams = {}
-    ) =>
-      this.request<EmployeeSearchResult[], ErrorMessages>({
-        path: `/payrolls/employees`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        format: 'json',
-        ...params
-      })
   };
   currencies = {
     /**
@@ -19174,10 +22950,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrencies: (params: RequestParams = {}) =>
       this.request<Currencies, any>({
         path: `/currencies`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -19199,15 +22975,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         rateType?: number;
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<CurrencyGroupRates, ErrorMessages>({
         path: `/currencies/latest`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -19245,22 +23021,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "CASH_BUYING_RATE"
          */
         rateType:
-          | 'PROCOUNTOR_ACCOUNTING_EXCHANGE_RATE'
-          | 'ACCOUNT_CURRENCY_AVERAGE_RATE'
-          | 'ACCOUNT_CURRENCY_BUYING_RATE'
-          | 'ACCOUNT_CURRENCY_SELLING_RATE'
-          | 'CASH_BUYING_RATE'
-          | 'CASH_CURRENCY_SALE_EXCHANGE_RATE';
+          | "PROCOUNTOR_ACCOUNTING_EXCHANGE_RATE"
+          | "ACCOUNT_CURRENCY_AVERAGE_RATE"
+          | "ACCOUNT_CURRENCY_BUYING_RATE"
+          | "ACCOUNT_CURRENCY_SELLING_RATE"
+          | "CASH_BUYING_RATE"
+          | "CASH_CURRENCY_SALE_EXCHANGE_RATE";
       },
-      params: RequestParams = {}
+      params: RequestParams = {},
     ) =>
       this.request<CurrencyExchangeRate, ErrorMessages>({
         path: `/currencies/exchangerate`,
-        method: 'GET',
+        method: "GET",
         query: query,
         secure: true,
-        format: 'json',
-        ...params
+        format: "json",
+        ...params,
       }),
 
     /**
@@ -19276,11 +23052,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrenciesForCompany: (params: RequestParams = {}) =>
       this.request<CompanyCurrency, any>({
         path: `/currencies/company`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
+        format: "json",
+        ...params,
+      }),
   };
   coa = {
     /**
@@ -19296,68 +23072,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getChartOfAccount: (params: RequestParams = {}) =>
       this.request<LedgerAccounts, any>({
         path: `/coa`,
-        method: 'GET',
+        method: "GET",
         secure: true,
-        format: 'json',
-        ...params
-      })
-  };
-  sie = {
-    /**
-     * @description Returns a SIE file for given accounting period start date and export end date.
-     *
-     * @tags SIE file
-     * @name GetSieFile
-     * @summary Get SIE file.
-     * @request GET:/SIE/file
-     * @secure
-     * @response `200` `File` SIE file successfully returned.
-     * @response `400` `ErrorMessages` Request contains invalid data.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     */
-    getSieFile: (
-      query: {
-        /**
-         * Start date of accounting period
-         * @format date
-         * @example "2022-01-31"
-         */
-        accountingPeriodStart: string;
-        /**
-         * End date of the export
-         * @format date
-         * @example "2022-01-31"
-         */
-        exportEndDate: string;
-      },
-      params: RequestParams = {}
-    ) =>
-      this.request<File, ErrorMessages>({
-        path: `/SIE/file`,
-        method: 'GET',
-        query: query,
-        secure: true,
-        ...params
+        format: "json",
+        ...params,
       }),
-
-    /**
-     * @description Returns details about SIE export availability.
-     *
-     * @tags SIE file
-     * @name GetSieAvailability
-     * @summary Get information about SIE export availability.
-     * @request GET:/SIE/availability
-     * @secure
-     * @response `200` `SieAvailabilityResponse` SIE export availability information was successfully returned.
-     * @response `403` `ErrorMessages` Insufficient user rights.
-     */
-    getSieAvailability: (params: RequestParams = {}) =>
-      this.request<SieAvailabilityResponse, ErrorMessages>({
-        path: `/SIE/availability`,
-        method: 'GET',
-        secure: true,
-        format: 'json',
-        ...params
-      })
   };
 }

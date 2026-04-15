@@ -7,7 +7,7 @@
     "dev": "tsc --watch",
     "test": "npx nodemon test.ts",
     "build": "tsc",
-    "openapi": "npx swagger-typescript-api -p https://pts-procountor.pubdev.azure.procountor.com/api/openapi.json -o ./src -n api.ts -r --axios"
+    "openapi": "npx swagger-typescript-api -p https://pts-api.procountor.com/api/openapi.json -o ./src -n api.ts -r --axios"
   },
   "repository": {
     "type": "git",
