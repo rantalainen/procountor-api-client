@@ -75,21 +75,21 @@ export interface AccountingReportRequest {
    * @example ["APPROVED","SENT","PAID","UNFINISHED"]
    */
   receiptStatus?: (
-    | "APPROVED"
-    | "SENT"
-    | "NOT_SENT"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAID"
-    | "PARTLY_PAID,"
-    | "MARKED_PAID"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_DENIED"
-    | "UNFINISHED"
-    | "VERIFIED"
-    | "RECEIVED"
+    | 'APPROVED'
+    | 'SENT'
+    | 'NOT_SENT'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAID'
+    | 'PARTLY_PAID,'
+    | 'MARKED_PAID'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_DENIED'
+    | 'UNFINISHED'
+    | 'VERIFIED'
+    | 'RECEIVED'
   )[];
   /** Report type. */
-  type: "INCOME_STATEMENT, CASH_FLOW, BALANCE_SHEET";
+  type: 'INCOME_STATEMENT, CASH_FLOW, BALANCE_SHEET';
   /** Accounting report request options. */
   options?: AccountingReportRequestOptions;
 }
@@ -102,238 +102,238 @@ export interface AccountingReportRequestOptions {
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
-    | "SALES_INVOICE"
-    | "PURCHASE_INVOICE"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "JOURNAL"
-    | "SALARY"
-    | "VAT_FORM"
-    | "EMPLOYER_CONTRIBUTION"
-    | "PERIODIC_TAX_RETURN"
-    | "VAT_SUMMARY"
-    | "SALES_ORDER"
-    | "PURCHASE_ORDER"
-    | "REFERENCE_PAYMENT"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | 'SALES_INVOICE'
+    | 'PURCHASE_INVOICE'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'JOURNAL'
+    | 'SALARY'
+    | 'VAT_FORM'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'PERIODIC_TAX_RETURN'
+    | 'VAT_SUMMARY'
+    | 'SALES_ORDER'
+    | 'PURCHASE_ORDER'
+    | 'REFERENCE_PAYMENT'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -353,217 +353,217 @@ export interface AccountingReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Customer company ID that will be used in the accounting report. */
@@ -585,7 +585,7 @@ export interface AccountingReportRow {
    */
   rowId?: number;
   /** Type of the accounting report row. */
-  type?: "BALANCE" | "ROW_FUNCTION";
+  type?: 'BALANCE' | 'ROW_FUNCTION';
   /** Name of the accounting row. */
   name?: string;
   /** Value of the accounting row. */
@@ -620,54 +620,54 @@ export interface AccountingReportTransaction {
   invoiceDate?: string;
   /** Ledger receipt type. */
   type?:
-    | "ACCRUAL"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "BILL_OF_CHARGES"
-    | "EMPLOYER_CONTRIBUTION"
-    | "JOURNAL"
-    | "JOURNAL_BYPASSING_INVOICE_PAGE"
-    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
-    | "OFFER"
-    | "PAYMENT_CORRECTION"
-    | "PERIODIC_TAX_RETURN"
-    | "PURCHASE_INVOICE"
-    | "PURCHASE_ORDER"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
-    | "REFERENCE_PAYMENT"
-    | "SALARY"
-    | "SALES_INVOICE"
-    | "SALES_ORDER"
-    | "TRACKING_PERIOD_OPENING_RECEIPT"
-    | "TRAVEL_INVOICE"
-    | "TRAVEL_PLAN"
-    | "UNKNOWN_RECEIPT_TYPE_F"
-    | "UNKNOWN_RECEIPT_TYPE_G"
-    | "VAT_FORM"
-    | "VAT_SUMMARY";
+    | 'ACCRUAL'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'BILL_OF_CHARGES'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'JOURNAL'
+    | 'JOURNAL_BYPASSING_INVOICE_PAGE'
+    | 'JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE'
+    | 'OFFER'
+    | 'PAYMENT_CORRECTION'
+    | 'PERIODIC_TAX_RETURN'
+    | 'PURCHASE_INVOICE'
+    | 'PURCHASE_ORDER'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | 'REFERENCE_PAYMENT'
+    | 'SALARY'
+    | 'SALES_INVOICE'
+    | 'SALES_ORDER'
+    | 'TRACKING_PERIOD_OPENING_RECEIPT'
+    | 'TRAVEL_INVOICE'
+    | 'TRAVEL_PLAN'
+    | 'UNKNOWN_RECEIPT_TYPE_F'
+    | 'UNKNOWN_RECEIPT_TYPE_G'
+    | 'VAT_FORM'
+    | 'VAT_SUMMARY';
   /** Ledger transaction accounting value. */
   accountingValue?: number;
   /** Receipt status. */
   status?:
-    | "APPROVED"
-    | "DELETED"
-    | "EMPTY"
-    | "INVALIDATED"
-    | "INVOICED"
-    | "MARKED_PAID"
-    | "NOT_SENT"
-    | "OVERRIDDEN"
-    | "PAID"
-    | "PARTLY_PAID"
-    | "PAYMENT_DENIED"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_REMOVED"
-    | "RECEIVED"
-    | "SENT"
-    | "STARTED"
-    | "UNFINISHED"
-    | "UNSAVED"
-    | "VERIFIED";
+    | 'APPROVED'
+    | 'DELETED'
+    | 'EMPTY'
+    | 'INVALIDATED'
+    | 'INVOICED'
+    | 'MARKED_PAID'
+    | 'NOT_SENT'
+    | 'OVERRIDDEN'
+    | 'PAID'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_DENIED'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAYMENT_TRANSACTION_REMOVED'
+    | 'RECEIVED'
+    | 'SENT'
+    | 'STARTED'
+    | 'UNFINISHED'
+    | 'UNSAVED'
+    | 'VERIFIED';
   /** Vat percent. */
   vatPercent?: number;
   /** Vat amount. */
@@ -698,21 +698,21 @@ export interface AccountingReportTransaction {
 /** Contains rights for accounting functionalities. */
 export interface AccountingRights {
   /** Access level to journal receipts functionality. */
-  journalReceipts?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  journalReceipts?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to journal receipt search functionality. */
-  journalReceiptSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  journalReceiptSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal journal receipts only limitation enabled. */
   personalJournalReceiptsOnly?: boolean;
   /** Access level to closing of account tools functionality. */
-  closingOfAccountTools?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  closingOfAccountTools?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is prevent creating/editing invoices limitation enabled. */
   preventCreatingEditingInvoices?: boolean;
   /** Is prevent editing accounting page limitation enabled. */
   preventEditingAccountingPage?: boolean;
   /** Access level to accounting reports functionality. */
-  accountingReports?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  accountingReports?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to archive functionality. */
-  archive?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  archive?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
 }
 
 export interface AllocationMetadata {
@@ -773,21 +773,21 @@ export interface Attachment {
   name: string;
   /** Reference type of the attachment. Indicates what object is the owner of the attachment. Exception: for JOURNAL type ledger receipts, use type INVOICE. */
   referenceType:
-    | "BANKSTATEMENTEVENT"
-    | "COST_RECEIPT"
-    | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
-    | "EMPLOYEE_INFO"
-    | "ENVIRONMENT"
-    | "FINANCIAL_STATEMENT"
-    | "INVOICE"
-    | "INVOICEDRAFT_ITEM"
-    | "LEDGERRECEIPT"
-    | "NETS_COLLECTION"
-    | "PERSON_BUSINESS_PARTNER_REGISTER"
-    | "PURCHASE_PRODUCT_REGISTER"
-    | "REFERENCE_PAYMENT"
-    | "SALES_PRODUCT_REGISTER"
-    | "SUPPLIER_BUSINESS_PARTNER_REGISTER";
+    | 'BANKSTATEMENTEVENT'
+    | 'COST_RECEIPT'
+    | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
+    | 'EMPLOYEE_INFO'
+    | 'ENVIRONMENT'
+    | 'FINANCIAL_STATEMENT'
+    | 'INVOICE'
+    | 'INVOICEDRAFT_ITEM'
+    | 'LEDGERRECEIPT'
+    | 'NETS_COLLECTION'
+    | 'PERSON_BUSINESS_PARTNER_REGISTER'
+    | 'PURCHASE_PRODUCT_REGISTER'
+    | 'REFERENCE_PAYMENT'
+    | 'SALES_PRODUCT_REGISTER'
+    | 'SUPPLIER_BUSINESS_PARTNER_REGISTER';
   /**
    * Unique identifier of the referenced object. Exception: for JOURNAL type ledger receipts, use the value of invoiceId referring to the associated invoice.
    * @format int32
@@ -825,7 +825,7 @@ export interface BankAccount {
 /** Aliases for the bank account if any exists in the given environment. Used on Swedish and Danish environments. */
 export interface BankAccountAlias {
   /** Type of associated account number. */
-  type: "BANKGIRO" | "KREDITOR" | "PLUSGIRO";
+  type: 'BANKGIRO' | 'KREDITOR' | 'PLUSGIRO';
   /** Associated account number. */
   accountNumber: string;
 }
@@ -854,217 +854,217 @@ export interface BankStatement {
    * @example "EUR"
    */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /**
    * Number of deposits during the bank statement period.
    * @format int32
@@ -1189,28 +1189,28 @@ export interface BasicPaymentTransactionData {
   receiverName?: string;
   /** Payment status. */
   status?:
-    | "APPROVED"
-    | "DELETED"
-    | "EMPTY"
-    | "INVALIDATED"
-    | "INVOICED"
-    | "MARKED_PAID"
-    | "NOT_SENT"
-    | "OVERRIDDEN"
-    | "PAID"
-    | "PARTLY_PAID"
-    | "PAYMENT_DENIED"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_REMOVED"
-    | "RECEIVED"
-    | "SENT"
-    | "STARTED"
-    | "UNFINISHED"
-    | "UNSAVED"
-    | "VERIFIED";
+    | 'APPROVED'
+    | 'DELETED'
+    | 'EMPTY'
+    | 'INVALIDATED'
+    | 'INVOICED'
+    | 'MARKED_PAID'
+    | 'NOT_SENT'
+    | 'OVERRIDDEN'
+    | 'PAID'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_DENIED'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAYMENT_TRANSACTION_REMOVED'
+    | 'RECEIVED'
+    | 'SENT'
+    | 'STARTED'
+    | 'UNFINISHED'
+    | 'UNSAVED'
+    | 'VERIFIED';
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
 }
 
 /** Registry info data of the partner. */
@@ -1225,7 +1225,7 @@ export interface BusinessIdentifier {
    * Business Registration Number (BRN) type of current company identifier. (example values: HETU, SSN, FI, NO,...)
    * @example "HETU"
    */
-  brnType?: "ASSN" | "DK" | "FI" | "HETU" | "NO" | "PN" | "SE" | "SSN" | "YHD";
+  brnType?: 'ASSN' | 'DK' | 'FI' | 'HETU' | 'NO' | 'PN' | 'SE' | 'SSN' | 'YHD';
   /**
    * Business Registration Number (BRN) code (Example value: '1234567-8', basically BRN without type prefix).
    * @minLength 0
@@ -1248,7 +1248,7 @@ export interface BusinessPartner {
    */
   name: string;
   /** Type of the partner. */
-  type: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  type: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
   /** Address of the partner. Required for customer */
   address?: BusinessPartnerAddress;
   /** Billing address of the partner. */
@@ -1310,39 +1310,39 @@ export interface BusinessPartnerAdditionalInfo {
   group?: string;
   /** Company ID of the partner. If provided partnerCompanyId will be validated according to the type. */
   parentCompanyIdType?:
-    | ""
-    | "HETU"
-    | "YHD"
-    | "PN"
-    | "NO"
-    | "AT"
-    | "BE"
-    | "BG"
-    | "CY"
-    | "HR"
-    | "CZ"
-    | "DK"
-    | "EE"
-    | "FI"
-    | "FR"
-    | "DE"
-    | "GB"
-    | "EL"
-    | "HU"
-    | "IE"
-    | "IT"
-    | "LV"
-    | "LT"
-    | "LU"
-    | "MT"
-    | "NL"
-    | "PL"
-    | "PT"
-    | "RO"
-    | "SK"
-    | "SI"
-    | "ES"
-    | "SE";
+    | ''
+    | 'HETU'
+    | 'YHD'
+    | 'PN'
+    | 'NO'
+    | 'AT'
+    | 'BE'
+    | 'BG'
+    | 'CY'
+    | 'HR'
+    | 'CZ'
+    | 'DK'
+    | 'EE'
+    | 'FI'
+    | 'FR'
+    | 'DE'
+    | 'GB'
+    | 'EL'
+    | 'HU'
+    | 'IE'
+    | 'IT'
+    | 'LV'
+    | 'LT'
+    | 'LU'
+    | 'MT'
+    | 'NL'
+    | 'PL'
+    | 'PT'
+    | 'RO'
+    | 'SK'
+    | 'SI'
+    | 'ES'
+    | 'SE';
   /**
    * Parent company ID of the partner.
    * @minLength 0
@@ -1401,7 +1401,7 @@ export interface BusinessPartnerAdditionalInfo {
    * Invoice ledger of the partner. If not provided, it will be automatically set to INVOICE_LEDGER.
    * @default "INVOICE_LEDGER"
    */
-  invoiceLedger?: "CLEARING" | "INVOICE_LEDGER";
+  invoiceLedger?: 'CLEARING' | 'INVOICE_LEDGER';
 }
 
 /** Address of the partner. Required for customer */
@@ -1447,257 +1447,257 @@ export interface BusinessPartnerAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -1722,7 +1722,7 @@ export interface BusinessPartnerBasicInfo {
   /** Registry info data of the partner. */
   registryInfo?: BasicRegistryInfo;
   /** Type of the partner. */
-  type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
   /**
    * Business partner version timestamp. Automatically generated by Procountor and updated every time the partner is modified. When using PATCH /businesspartners, it is required to include the latest version timestamp of the partner to the request. This prevents conflicts if the partner is being modified from several sources.It is not required for POST and will be omitted
    * @format date-time
@@ -1773,257 +1773,257 @@ export interface BusinessPartnerBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -2129,257 +2129,257 @@ export interface BusinessPartnerDeliveryAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -2401,7 +2401,7 @@ export interface BusinessPartnerGroup {
    */
   name: string;
   /** Type of the partner group. */
-  type: "CUSTOMER" | "SUPPLIER" | "PERSON";
+  type: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
   /** Is partner group active? NOTE: If the business partner group is in use in the debt collection settings for the Maksuvahti service, then it can't be set to inactive */
   active?: boolean;
 }
@@ -2417,232 +2417,232 @@ export interface BusinessPartnerGroupSearchResult {
 export interface BusinessPartnerPaymentDetails {
   /** Payment method. */
   paymentMethod?:
-    | "BANK_TRANSFER"
-    | "CASH"
-    | "CLEARING"
-    | "CREDIT_CARD_CHARGE"
-    | "DIRECT_DEBIT"
-    | "DIRECT_PAYMENT"
-    | "DKLMPKRE"
-    | "DOMESTIC_PAYMENT_BANKGIRO"
-    | "DOMESTIC_PAYMENT_CREDITOR"
-    | "DOMESTIC_PAYMENT_PLUSGIRO"
-    | "FOREIGN_PAYMENT"
-    | "NETS"
-    | "OTHER";
+    | 'BANK_TRANSFER'
+    | 'CASH'
+    | 'CLEARING'
+    | 'CREDIT_CARD_CHARGE'
+    | 'DIRECT_DEBIT'
+    | 'DIRECT_PAYMENT'
+    | 'DKLMPKRE'
+    | 'DOMESTIC_PAYMENT_BANKGIRO'
+    | 'DOMESTIC_PAYMENT_CREDITOR'
+    | 'DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'FOREIGN_PAYMENT'
+    | 'NETS'
+    | 'OTHER';
   /** Default currency. */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Bank account number. */
   bankAccount?: BankAccount;
   /** Payment term days. */
@@ -2666,19 +2666,19 @@ export interface BusinessPartnerPaymentInfo {
   factoringContractId?: number;
   /** Payment method of the partner. The DKLMPKRE method is deprecated and read only, DOMESTIC_PAYMENT_CREDITOR should be used instead. */
   paymentMethod:
-    | "BANK_TRANSFER"
-    | "DIRECT_DEBIT"
-    | "DIRECT_PAYMENT"
-    | "CLEARING"
-    | "CREDIT_CARD_CHARGE"
-    | "FOREIGN_PAYMENT"
-    | "OTHER"
-    | "CASH"
-    | "DOMESTIC_PAYMENT_PLUSGIRO"
-    | "DOMESTIC_PAYMENT_BANKGIRO"
-    | "DOMESTIC_PAYMENT_CREDITOR"
-    | "DKLMPKRE"
-    | "NETS";
+    | 'BANK_TRANSFER'
+    | 'DIRECT_DEBIT'
+    | 'DIRECT_PAYMENT'
+    | 'CLEARING'
+    | 'CREDIT_CARD_CHARGE'
+    | 'FOREIGN_PAYMENT'
+    | 'OTHER'
+    | 'CASH'
+    | 'DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'DOMESTIC_PAYMENT_BANKGIRO'
+    | 'DOMESTIC_PAYMENT_CREDITOR'
+    | 'DKLMPKRE'
+    | 'NETS';
   /** Bank account ID of the partner. */
   bankAccount?: string;
   /** Payment term days of the partner. */
@@ -2693,217 +2693,217 @@ export interface BusinessPartnerPaymentInfo {
   cashDiscount?: CashDiscount;
   /** Currency of the partner. */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Delivery method of the partner. */
   deliveryMethod?: string;
   /** Clearing code of the bank account. */
@@ -2926,7 +2926,7 @@ export interface CashDiscount {
   /** Up to three cash discount options can be provided. Any additional values enteredwill be ignored. Provided cash discount options will be saved in ascending order by numberOfDays. */
   optionList?: CashDiscountOption[];
   /** The payment term type indicates the start point for payment due date calculation.On Danish environment, may select between two options: FROM_INV_DATE or FROM_END_OF_MONTH.For other environments, the only selectable term type is FROM_INV_DATE,which is also the default value across all environments. */
-  cashDiscountsTermType?: "FROM_END_OF_MONTH" | "FROM_INV_DATE";
+  cashDiscountsTermType?: 'FROM_END_OF_MONTH' | 'FROM_INV_DATE';
 }
 
 /** Up to three cash discount options can be provided. Any additional values enteredwill be ignored. Provided cash discount options will be saved in ascending order by numberOfDays. */
@@ -2961,7 +2961,7 @@ export interface CirculationSettings {
   /** Indicates if approval circulation is enabled for travel and expense invoices. */
   useForTravelAndExpenseInvoices?: boolean;
   /** Represents the amount of time in which circulation notification will be sent. */
-  reminderInterval?: "EVERY_SECOND_DAY" | "EVERY_THIRD_DAY" | "ONCE_A_DAY" | "ONCE_A_WEEK" | "ONLY_ONCE";
+  reminderInterval?: 'EVERY_SECOND_DAY' | 'EVERY_THIRD_DAY' | 'ONCE_A_DAY' | 'ONCE_A_WEEK' | 'ONLY_ONCE';
   /** Indicates whether forced notifications are enabled. */
   forceNotifications?: boolean;
   /** Indicates if determined order is enabled for verification and approval. */
@@ -3077,290 +3077,281 @@ export interface Company {
   name: string;
   /** Country of current company. */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /** Product version of current company. */
   productVersion?:
-    | "BACKOFFICE"
-    | "BACKOFFICE_BASIC"
-    | "BACKOFFICE_PLUS"
-    | "BACKOFFICE_PREMIUM"
-    | "FINAGO_SOLO"
-    | "FINANCIALS_ALKU"
-    | "FINANCIALS_BASIC"
-    | "FINANCIALS_ENTERPRISE"
-    | "FINANCIALS_GOLD"
-    | "FINANCIALS_LIGHT"
-    | "FINANCIALS_MAX"
-    | "FINANCIALS_PLATINUM"
-    | "FINANCIALS_PLUS"
-    | "FINANCIALS_PREMIUM"
-    | "FINANCIALS_SILVER"
-    | "FINANCIALS_UNLIMITED"
-    | "FLEX"
-    | "SALES_GOLD"
-    | "SALES_PLATINUM"
-    | "SALES_SILVER";
+    | 'BACKOFFICE'
+    | 'BACKOFFICE_BASIC'
+    | 'BACKOFFICE_PLUS'
+    | 'BACKOFFICE_PREMIUM'
+    | 'FINAGO_SOLO'
+    | 'FINANCIALS_ALKU'
+    | 'FINANCIALS_BASIC'
+    | 'FINANCIALS_ENTERPRISE'
+    | 'FINANCIALS_GOLD'
+    | 'FINANCIALS_LIGHT'
+    | 'FINANCIALS_MAX'
+    | 'FINANCIALS_PLATINUM'
+    | 'FINANCIALS_PLUS'
+    | 'FINANCIALS_PREMIUM'
+    | 'FINANCIALS_SILVER'
+    | 'FINANCIALS_UNLIMITED'
+    | 'FLEX'
+    | 'SALES_GOLD'
+    | 'SALES_PLATINUM'
+    | 'SALES_SILVER';
   /** Operation type of current company. */
-  operationType?:
-    | "BROKEN"
-    | "CEASED"
-    | "CLOSED"
-    | "DEMONSTRATION"
-    | "EDUCATIONAL"
-    | "ELISA_PURCHASE"
-    | "PRODUCTION"
-    | "SPECIAL"
-    | "TRIAL";
+  operationType?: 'BROKEN' | 'CEASED' | 'CLOSED' | 'DEMONSTRATION' | 'EDUCATIONAL' | 'ELISA_PURCHASE' | 'PRODUCTION' | 'SPECIAL' | 'TRIAL';
   /** Accounting name of current company. */
   accountingOfficeName?: string;
   /**
@@ -3425,257 +3416,257 @@ export interface CompanyAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
 }
 
 export interface CompanyBankAccount {
@@ -3705,223 +3696,223 @@ export interface CompanyBankAccount {
    * @example "EUR"
    */
   currency:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Information if the bank account is used as default bank account for invoice in the given environment. */
   defaultForInvoice: boolean;
   /** Information if the bank account is used as default bank account for payment in the given environment. */
   defaultForPayment: boolean;
   /** Information if the bank account is active or not. If set to INACTIVE then all properties will be set to false */
-  status: "ACTIVE" | "INACTIVE";
+  status: 'ACTIVE' | 'INACTIVE';
   /**
    * Order number. Can be used for display ordering instead of ID.
    * @format int32
@@ -4000,223 +3991,223 @@ export interface CompanyBankAccountBasicInfo {
    * @example "EUR"
    */
   currency:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Information if the bank account is used as default bank account for invoice in the given environment. */
   defaultForInvoice: boolean;
   /** Information if the bank account is used as default bank account for payment in the given environment. */
   defaultForPayment: boolean;
   /** Information if the bank account is active or not. If set to INACTIVE then all properties will be set to false */
-  status: "ACTIVE" | "INACTIVE";
+  status: 'ACTIVE' | 'INACTIVE';
   /**
    * Order number. Can be used for display ordering instead of ID.
    * @format int32
@@ -4266,262 +4257,262 @@ export interface CompanyBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
 }
 
 export interface CompanyCurrency {
   /** Currency of company. */
-  companyCurrency?: "DKK" | "EUR" | "NOK" | "SEK";
+  companyCurrency?: 'DKK' | 'EUR' | 'NOK' | 'SEK';
 }
 
 /** Company settings. These are settings for 3rd party client usage to identify what features are usable for current company (in order to avoid requests that are bound to fail) */
@@ -4579,217 +4570,217 @@ export interface CurrencyExchangeRate {
   queryDay?: string;
   /** Currency of exchange rate. */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /**
    * Day of exchange rate.
    * @format date
@@ -4988,7 +4979,7 @@ export interface DirectBankTransfer {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
+  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -5009,18 +5000,18 @@ export interface DirectBankTransfer {
   recipientBicCode?: string;
   /** Payment method type defining what kind of payment has to be made. */
   paymentMethod:
-    | "DENMARK_DOMESTIC_PAYMENT"
-    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
-    | "DENMARK_FOREIGN_PAYMENT"
-    | "FINNISH_BANK_TRANSFER"
-    | "FINNISH_EXPRESS_PAYMENT"
-    | "FINNISH_FOREIGN_PAYMENT"
-    | "NORWEGIAN_DOMESTIC_PAYMENT"
-    | "NORWEGIAN_FOREIGN_PAYMENT"
-    | "SWEDISH_DOMESTIC_PAYMENT"
-    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
-    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
-    | "SWEDISH_FOREIGN_PAYMENT";
+    | 'DENMARK_DOMESTIC_PAYMENT'
+    | 'DENMARK_DOMESTIC_PAYMENT_CREDITOR'
+    | 'DENMARK_FOREIGN_PAYMENT'
+    | 'FINNISH_BANK_TRANSFER'
+    | 'FINNISH_EXPRESS_PAYMENT'
+    | 'FINNISH_FOREIGN_PAYMENT'
+    | 'NORWEGIAN_DOMESTIC_PAYMENT'
+    | 'NORWEGIAN_FOREIGN_PAYMENT'
+    | 'SWEDISH_DOMESTIC_PAYMENT'
+    | 'SWEDISH_DOMESTIC_PAYMENT_BANKGIRO'
+    | 'SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'SWEDISH_FOREIGN_PAYMENT';
   /** The payer bank account. It has to be predefined in the environment to be able to use the payment. If not set than default bank account for payment is taken. */
   payerBankAccount?: string;
   /**
@@ -5039,220 +5030,220 @@ export interface DirectBankTransfer {
   /** Intermediary bank BIC. */
   intermediaryBankBic?: string;
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
   /** Currency code. */
   currencyCode:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /**
    * Custom identifier of each direct bank transfer with a maximum length of 64. It's externally provided for easierassigning of transactions to payments.
    * @minLength 1
@@ -5285,7 +5276,7 @@ export interface DirectSalaryPayment {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
+  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -5316,7 +5307,7 @@ export interface DirectSalaryPayment {
    * The code of the currency.
    * @example "EUR"
    */
-  currencyCode: "EUR";
+  currencyCode: 'EUR';
   /**
    * Custom id for the payment.
    * @minLength 1
@@ -5339,14 +5330,9 @@ export interface DirectSalaryPaymentGroup {
    */
   created?: string;
   /** Payment status. */
-  status?:
-    | "PAID"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_CANCELLED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+  status?: 'PAID' | 'PAYMENT_QUEUED' | 'PAYMENT_SENT_TO_BANK' | 'PAYMENT_TRANSACTION_CANCELLED' | 'PAYMENT_TRANSACTION_REMOVED';
   /** Payment method. */
-  paymentMethod?: "FINNISH_SALARY_TRANSFER";
+  paymentMethod?: 'FINNISH_SALARY_TRANSFER';
   /**
    * Date of the payment
    * @format date-time
@@ -5377,14 +5363,9 @@ export interface DirectSalaryPaymentGroupBaseInfo {
    */
   created?: string;
   /** Payment status. */
-  status?:
-    | "PAID"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_CANCELLED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+  status?: 'PAID' | 'PAYMENT_QUEUED' | 'PAYMENT_SENT_TO_BANK' | 'PAYMENT_TRANSACTION_CANCELLED' | 'PAYMENT_TRANSACTION_REMOVED';
   /** Payment method. */
-  paymentMethod?: "FINNISH_SALARY_TRANSFER";
+  paymentMethod?: 'FINNISH_SALARY_TRANSFER';
   /**
    * Date of the payment
    * @format date-time
@@ -5413,7 +5394,7 @@ export interface DirectSalaryPayments {
    */
   listName: string;
   /** Name of the payment method. Used for all payments. */
-  paymentMethod: "FINNISH_SALARY_TRANSFER";
+  paymentMethod: 'FINNISH_SALARY_TRANSFER';
   /**
    * Date specifying when the payment transaction has to be performed. Payment date should be grater then current date. Used for all payments.
    * @format date
@@ -5466,21 +5447,21 @@ export interface Document {
   referenceId?: number;
   /** Attachment reference type */
   referenceType?:
-    | "BANKSTATEMENTEVENT"
-    | "COST_RECEIPT"
-    | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
-    | "EMPLOYEE_INFO"
-    | "ENVIRONMENT"
-    | "FINANCIAL_STATEMENT"
-    | "INVOICE"
-    | "INVOICEDRAFT_ITEM"
-    | "LEDGERRECEIPT"
-    | "NETS_COLLECTION"
-    | "PERSON_BUSINESS_PARTNER_REGISTER"
-    | "PURCHASE_PRODUCT_REGISTER"
-    | "REFERENCE_PAYMENT"
-    | "SALES_PRODUCT_REGISTER"
-    | "SUPPLIER_BUSINESS_PARTNER_REGISTER";
+    | 'BANKSTATEMENTEVENT'
+    | 'COST_RECEIPT'
+    | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
+    | 'EMPLOYEE_INFO'
+    | 'ENVIRONMENT'
+    | 'FINANCIAL_STATEMENT'
+    | 'INVOICE'
+    | 'INVOICEDRAFT_ITEM'
+    | 'LEDGERRECEIPT'
+    | 'NETS_COLLECTION'
+    | 'PERSON_BUSINESS_PARTNER_REGISTER'
+    | 'PURCHASE_PRODUCT_REGISTER'
+    | 'REFERENCE_PAYMENT'
+    | 'SALES_PRODUCT_REGISTER'
+    | 'SUPPLIER_BUSINESS_PARTNER_REGISTER';
   /**
    * Attaching time.
    * @format date-time
@@ -5541,7 +5522,7 @@ export interface Employee {
   /** Person number. */
   personNumber?: string;
   /** The channel which is used for delivering Salary Slips for the given Employee. */
-  salaryChannel?: "EMAIL" | "ESALARY" | "MAIL" | "MOBILE" | "NO_SENDING" | "PAPER";
+  salaryChannel?: 'EMAIL' | 'ESALARY' | 'MAIL' | 'MOBILE' | 'NO_SENDING' | 'PAPER';
   /** Automated Tax Card. */
   automatedTaxCard?: boolean;
   /** Status of the Employee. */
@@ -5637,7 +5618,7 @@ export interface FactoringContract {
   /** WS customer number. */
   wsCustomerNumber?: string;
   /** Contract status. */
-  status: "ACTIVE" | "INACTIVE";
+  status: 'ACTIVE' | 'INACTIVE';
 }
 
 export interface FactoringContractSearchResult {
@@ -5717,18 +5698,18 @@ export interface GeneralLedgerReportRequest {
    * @example ["APPROVED","SENT","PAID","UNFINISHED"]
    */
   receiptStatus?: (
-    | "APPROVED"
-    | "SENT"
-    | "NOT_SENT"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAID"
-    | "PARTLY_PAID,"
-    | "MARKED_PAID"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_DENIED"
-    | "UNFINISHED"
-    | "VERIFIED"
-    | "RECEIVED"
+    | 'APPROVED'
+    | 'SENT'
+    | 'NOT_SENT'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAID'
+    | 'PARTLY_PAID,'
+    | 'MARKED_PAID'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_DENIED'
+    | 'UNFINISHED'
+    | 'VERIFIED'
+    | 'RECEIVED'
   )[];
   /** Report request options. */
   options?: GeneralLedgerReportRequestOptions;
@@ -5742,238 +5723,238 @@ export interface GeneralLedgerReportRequestOptions {
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
-    | "SALES_INVOICE"
-    | "PURCHASE_INVOICE"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "JOURNAL"
-    | "SALARY"
-    | "VAT_FORM"
-    | "EMPLOYER_CONTRIBUTION"
-    | "PERIODIC_TAX_RETURN"
-    | "VAT_SUMMARY"
-    | "SALES_ORDER"
-    | "PURCHASE_ORDER"
-    | "REFERENCE_PAYMENT"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | 'SALES_INVOICE'
+    | 'PURCHASE_INVOICE'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'JOURNAL'
+    | 'SALARY'
+    | 'VAT_FORM'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'PERIODIC_TAX_RETURN'
+    | 'VAT_SUMMARY'
+    | 'SALES_ORDER'
+    | 'PURCHASE_ORDER'
+    | 'REFERENCE_PAYMENT'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -5993,217 +5974,217 @@ export interface GeneralLedgerReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Receipt Numbers that will be used in the general ledger report. */
@@ -6230,13 +6211,13 @@ export interface IncomesRegisterConfiguration {
   kevaSuborganisationId?: string;
   /** Payer types. */
   payerTypes?: (
-    | "PUBLIC_SECTOR"
-    | "HOUSEHOLD"
-    | "FOREIGN_GROUP_COMPANY"
-    | "STATE"
-    | "UNINCORPORATED_STATE_ENTERPRISE"
-    | "TEMPORARY_EMPLOYER"
-    | "POOL_OF_HOUSEHOLDS"
+    | 'PUBLIC_SECTOR'
+    | 'HOUSEHOLD'
+    | 'FOREIGN_GROUP_COMPANY'
+    | 'STATE'
+    | 'UNINCORPORATED_STATE_ENTERPRISE'
+    | 'TEMPORARY_EMPLOYER'
+    | 'POOL_OF_HOUSEHOLDS'
   )[];
   /**
    * Version.
@@ -6264,38 +6245,38 @@ export interface Invoice {
   partnerId?: number;
   /** Invoice type. Note that this affects validation requirements. PERIODIC_TAX_RETURN is supported only by GET /invoices endpoint. It's not supported by PUT and POST /invoices endpoints. */
   type:
-    | "SALES_INVOICE"
-    | "SALES_ORDER"
-    | "PURCHASE_INVOICE"
-    | "PURCHASE_ORDER"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "PERIODIC_TAX_RETURN";
+    | 'SALES_INVOICE'
+    | 'SALES_ORDER'
+    | 'PURCHASE_INVOICE'
+    | 'PURCHASE_ORDER'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'PERIODIC_TAX_RETURN';
   /**
    * Invoice status. A new invoice created through the API will have its status set as UNFINISHED. Updating invoice is possible when its status is UNFINISHED. Updating expense claim, purchase, purchase order and travel invoice is possible when the status is UNFINISHED or RECEIVED. PUT /invoices endpoint is not able to change invoice status.
    * @example "UNFINISHED"
    */
   status?:
-    | "EMPTY"
-    | "UNFINISHED"
-    | "NOT_SENT"
-    | "SENT"
-    | "RECEIVED"
-    | "PAID"
-    | "PAYMENT_DENIED"
-    | "VERIFIED"
-    | "APPROVED"
-    | "INVALIDATED"
-    | "PAYMENT_QUEUED"
-    | "PARTLY_PAID"
-    | "PAYMENT_SENT_TO_BANK"
-    | "MARKED_PAID"
-    | "STARTED"
-    | "INVOICED"
-    | "OVERRIDDEN"
-    | "DELETED"
-    | "UNSAVED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+    | 'EMPTY'
+    | 'UNFINISHED'
+    | 'NOT_SENT'
+    | 'SENT'
+    | 'RECEIVED'
+    | 'PAID'
+    | 'PAYMENT_DENIED'
+    | 'VERIFIED'
+    | 'APPROVED'
+    | 'INVALIDATED'
+    | 'PAYMENT_QUEUED'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'MARKED_PAID'
+    | 'STARTED'
+    | 'INVOICED'
+    | 'OVERRIDDEN'
+    | 'DELETED'
+    | 'UNSAVED'
+    | 'PAYMENT_TRANSACTION_REMOVED';
   /**
    * Invoice date. This is synonymous to billing date.
    * @format date
@@ -6359,7 +6340,7 @@ export interface Invoice {
    */
   deliveryEndDate?: string;
   /** Delivery method for the goods. SALES_INVOICE and SALES_ORDER do not support type OTHER. */
-  deliveryMethod?: "MAILING" | "ONLINE" | "COURIER" | "VRCARGO" | "BUS" | "FREIGHT" | "RETRIEVABLE" | "OTHER";
+  deliveryMethod?: 'MAILING' | 'ONLINE' | 'COURIER' | 'VRCARGO' | 'BUS' | 'FREIGHT' | 'RETRIEVABLE' | 'OTHER';
   /**
    * Delivery instructions.
    * @minLength 0
@@ -6367,7 +6348,7 @@ export interface Invoice {
    */
   deliveryInstructions?: string;
   /** Channel of distribution for the invoice. Values EDIFACT and PAPER_INVOICE are not allowed for POST /invoices and PUT /invoices endpoints. */
-  invoiceChannel: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
+  invoiceChannel: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
   /** Invoice operator related information. It is a read-only property shown only for purchase invoices. */
   invoiceOperatorInfo?: InvoiceOperatorInfo;
   /**
@@ -6376,7 +6357,7 @@ export interface Invoice {
    */
   penaltyPercent?: number;
   /** Language of the invoice. Required for sales invoices and sales orders, otherwise ignored. */
-  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
+  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
   /**
    * SALES_INVOICE and SALES_ORDER only. ID of invoice template.
    * @format int32
@@ -6393,257 +6374,257 @@ export interface Invoice {
    * @example "SWEDEN"
    */
   vatCountry?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * ID of the ledger receipt linked to this invoice. A ledger receipt is linked to every invoice for holding its accounting information. For defining ledger accounts, dimensions or VAT status regarding the invoice, modify the ledger receipt. See PUT /ledgerreceipts for more info.
    * @format int32
@@ -6716,38 +6697,38 @@ export interface InvoiceBasicInfo {
    * @example "PURCHASE_INVOICE"
    */
   type?:
-    | "SALES_INVOICE"
-    | "SALES_ORDER"
-    | "PURCHASE_INVOICE"
-    | "PURCHASE_ORDER"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "PERIODIC_TAX_RETURN";
+    | 'SALES_INVOICE'
+    | 'SALES_ORDER'
+    | 'PURCHASE_INVOICE'
+    | 'PURCHASE_ORDER'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'PERIODIC_TAX_RETURN';
   /**
    * Invoice status.
    * @example "UNFINISHED"
    */
   status?:
-    | "EMPTY"
-    | "UNFINISHED"
-    | "NOT_SENT"
-    | "SENT"
-    | "RECEIVED"
-    | "PAID"
-    | "PAYMENT_DENIED"
-    | "VERIFIED"
-    | "APPROVED"
-    | "INVALIDATED"
-    | "PAYMENT_QUEUED"
-    | "PARTLY_PAID"
-    | "PAYMENT_SENT_TO_BANK"
-    | "MARKED_PAID"
-    | "STARTED"
-    | "INVOICED"
-    | "OVERRIDDEN"
-    | "DELETED"
-    | "UNSAVED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+    | 'EMPTY'
+    | 'UNFINISHED'
+    | 'NOT_SENT'
+    | 'SENT'
+    | 'RECEIVED'
+    | 'PAID'
+    | 'PAYMENT_DENIED'
+    | 'VERIFIED'
+    | 'APPROVED'
+    | 'INVALIDATED'
+    | 'PAYMENT_QUEUED'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'MARKED_PAID'
+    | 'STARTED'
+    | 'INVOICED'
+    | 'OVERRIDDEN'
+    | 'DELETED'
+    | 'UNSAVED'
+    | 'PAYMENT_TRANSACTION_REMOVED';
   /**
    * Invoice number generated by Procountor.
    * @format int32
@@ -6756,7 +6737,7 @@ export interface InvoiceBasicInfo {
   /** Invoice number from the biller in an external system. */
   originalInvoiceNumber?: string;
   /** Channel of distribution for the invoice. */
-  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
+  invoiceChannel?: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
   /**
    * Invoice date. This is synonymous to billing date.
    * @format date
@@ -6824,257 +6805,257 @@ export interface InvoiceBillingAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7100,9 +7081,9 @@ export interface InvoiceCheckerInformation {
 /** Contains rights for invoice circulation functionalities. */
 export interface InvoiceCirculationRights {
   /** Access level to verification functionality. */
-  verification?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  verification?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to approval functionality. */
-  approval?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  approval?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal approvals or verifications only limitation enabled. */
   personalApprovalsOrVerificationsOnly?: boolean;
 }
@@ -7150,257 +7131,257 @@ export interface InvoiceCounterpartyAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7452,257 +7433,257 @@ export interface InvoiceDeliveryAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -7748,7 +7729,7 @@ export interface InvoicePayment {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
+  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
   /**
    * Message for the payment, if reference payment is not used.
    * @minLength 0
@@ -7769,18 +7750,18 @@ export interface InvoicePayment {
   recipientBicCode?: string;
   /** Payment method type defining what kind of payment has to be made. */
   paymentMethod:
-    | "DENMARK_DOMESTIC_PAYMENT"
-    | "DENMARK_DOMESTIC_PAYMENT_CREDITOR"
-    | "DENMARK_FOREIGN_PAYMENT"
-    | "FINNISH_BANK_TRANSFER"
-    | "FINNISH_EXPRESS_PAYMENT"
-    | "FINNISH_FOREIGN_PAYMENT"
-    | "NORWEGIAN_DOMESTIC_PAYMENT"
-    | "NORWEGIAN_FOREIGN_PAYMENT"
-    | "SWEDISH_DOMESTIC_PAYMENT"
-    | "SWEDISH_DOMESTIC_PAYMENT_BANKGIRO"
-    | "SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO"
-    | "SWEDISH_FOREIGN_PAYMENT";
+    | 'DENMARK_DOMESTIC_PAYMENT'
+    | 'DENMARK_DOMESTIC_PAYMENT_CREDITOR'
+    | 'DENMARK_FOREIGN_PAYMENT'
+    | 'FINNISH_BANK_TRANSFER'
+    | 'FINNISH_EXPRESS_PAYMENT'
+    | 'FINNISH_FOREIGN_PAYMENT'
+    | 'NORWEGIAN_DOMESTIC_PAYMENT'
+    | 'NORWEGIAN_FOREIGN_PAYMENT'
+    | 'SWEDISH_DOMESTIC_PAYMENT'
+    | 'SWEDISH_DOMESTIC_PAYMENT_BANKGIRO'
+    | 'SWEDISH_DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'SWEDISH_FOREIGN_PAYMENT';
   /** The payer bank account. It has to be predefined in the environment to be able to use the payment. If not set than default bank account for payment is taken. */
   payerBankAccount?: string;
   /**
@@ -7799,7 +7780,7 @@ export interface InvoicePayment {
   /** Intermediary bank BIC. */
   intermediaryBankBic?: string;
   /** If not provided, for Finnish foreign payment it will be automatically set to BOTH_PAY_OWN_FEES. */
-  serviceCharge?: "BOTH_PAY_OWN_FEES" | "PAYER_PAY_BOTH_FEES";
+  serviceCharge?: 'BOTH_PAY_OWN_FEES' | 'PAYER_PAY_BOTH_FEES';
   /**
    * Unique identifier of the invoice.
    * @format int32
@@ -7861,117 +7842,117 @@ export interface InvoiceRow {
   quantity: number;
   /** Product unit. */
   unit:
-    | "CM"
-    | "LOT"
-    | "GRAM"
-    | "HOUR"
-    | "PERSON"
-    | "LINEAR_METER"
-    | "KILOGRAM"
-    | "MONTH"
-    | "KILOMETER"
-    | "PIECE"
-    | "KILOWATT_HOUR"
-    | "LITER"
-    | "BOX"
-    | "METER"
-    | "SQUARE_METER"
-    | "CUBIC_METER"
-    | "SALE_UNIT"
-    | "MINUTE"
-    | "MILLIMETER"
-    | "PARCEL"
-    | "BOTTLE"
-    | "CAN"
-    | "BAG"
-    | "DAY"
-    | "ROLL"
-    | "PAGE"
-    | "SACK"
-    | "SERIES"
-    | "TUBE"
-    | "TON"
-    | "YEAR"
-    | "WEEK"
-    | "FULL_DAY"
-    | "KILOBIT"
-    | "MEGABIT"
-    | "GIGABIT"
-    | "TERABIT"
-    | "SQUARE_CENTIMETRE"
-    | "CENTILITRE"
-    | "CUP"
-    | "DECILITRE"
-    | "GALLON_UK"
-    | "GALLON_US"
-    | "MILLILITRE"
-    | "PINT_UK"
-    | "PINT_US"
-    | "AMPERE"
-    | "AMPERE_HOUR"
-    | "AMPERE_MINUTE"
-    | "KILOAMPERE_HOUR"
-    | "KILOVOLT"
-    | "MILLIVOLT"
-    | "MILLIAMPERE_HOUR"
-    | "FOOT"
-    | "INCH"
-    | "MILE"
-    | "YARD"
-    | "EXAJOULE"
-    | "GIGAJOULE"
-    | "JOULE"
-    | "JOULE_PER_SECOND"
-    | "KILOJOULE"
-    | "MILLIJOULE"
-    | "PETAJOULE"
-    | "TERAJOULE"
-    | "GRAM_PER_CUBIC_METRE"
-    | "GRAM_PER_SQUARE_METRE"
-    | "KILOGRAM_PER_CUBIC_METRE"
-    | "KILOGRAM_PER_SQUARE_METRE"
-    | "MILLIGRAM"
-    | "MILLIGRAM_PER_CUBIC_METRE"
-    | "OUNCE"
-    | "POUND"
-    | "STONE_UK"
-    | "DOZEN"
-    | "DOZEN_PACK"
-    | "EIGHT_PACK"
-    | "FIVE_PACK"
-    | "FOUR_PACK"
-    | "HUNDRED"
-    | "JAR"
-    | "NINE_PACK"
-    | "NUMBER_OF_WORDS"
-    | "PAIR"
-    | "PALLET"
-    | "PLATE"
-    | "SET"
-    | "SEVEN_PACK"
-    | "SIX_PACK"
-    | "TEN_PACK"
-    | "THREE_PACK"
-    | "TWO_PACK"
-    | "WRAP"
-    | "GIGAWATT"
-    | "GIGAWATT_HOUR"
-    | "KILOWATT"
-    | "MEGAWATT_HOUR"
-    | "MILLIWATT"
-    | "TERAWATT"
-    | "TERAWATT_HOUR"
-    | "WATT"
-    | "WATT_HOUR"
-    | "BAR"
-    | "KILOPASCAL"
-    | "PASCAL"
-    | "KILOBYTE"
-    | "MEGABYTE"
-    | "GIGABYTE"
-    | "SECOND"
-    | "HECTARE"
-    | "NO_UNIT";
+    | 'CM'
+    | 'LOT'
+    | 'GRAM'
+    | 'HOUR'
+    | 'PERSON'
+    | 'LINEAR_METER'
+    | 'KILOGRAM'
+    | 'MONTH'
+    | 'KILOMETER'
+    | 'PIECE'
+    | 'KILOWATT_HOUR'
+    | 'LITER'
+    | 'BOX'
+    | 'METER'
+    | 'SQUARE_METER'
+    | 'CUBIC_METER'
+    | 'SALE_UNIT'
+    | 'MINUTE'
+    | 'MILLIMETER'
+    | 'PARCEL'
+    | 'BOTTLE'
+    | 'CAN'
+    | 'BAG'
+    | 'DAY'
+    | 'ROLL'
+    | 'PAGE'
+    | 'SACK'
+    | 'SERIES'
+    | 'TUBE'
+    | 'TON'
+    | 'YEAR'
+    | 'WEEK'
+    | 'FULL_DAY'
+    | 'KILOBIT'
+    | 'MEGABIT'
+    | 'GIGABIT'
+    | 'TERABIT'
+    | 'SQUARE_CENTIMETRE'
+    | 'CENTILITRE'
+    | 'CUP'
+    | 'DECILITRE'
+    | 'GALLON_UK'
+    | 'GALLON_US'
+    | 'MILLILITRE'
+    | 'PINT_UK'
+    | 'PINT_US'
+    | 'AMPERE'
+    | 'AMPERE_HOUR'
+    | 'AMPERE_MINUTE'
+    | 'KILOAMPERE_HOUR'
+    | 'KILOVOLT'
+    | 'MILLIVOLT'
+    | 'MILLIAMPERE_HOUR'
+    | 'FOOT'
+    | 'INCH'
+    | 'MILE'
+    | 'YARD'
+    | 'EXAJOULE'
+    | 'GIGAJOULE'
+    | 'JOULE'
+    | 'JOULE_PER_SECOND'
+    | 'KILOJOULE'
+    | 'MILLIJOULE'
+    | 'PETAJOULE'
+    | 'TERAJOULE'
+    | 'GRAM_PER_CUBIC_METRE'
+    | 'GRAM_PER_SQUARE_METRE'
+    | 'KILOGRAM_PER_CUBIC_METRE'
+    | 'KILOGRAM_PER_SQUARE_METRE'
+    | 'MILLIGRAM'
+    | 'MILLIGRAM_PER_CUBIC_METRE'
+    | 'OUNCE'
+    | 'POUND'
+    | 'STONE_UK'
+    | 'DOZEN'
+    | 'DOZEN_PACK'
+    | 'EIGHT_PACK'
+    | 'FIVE_PACK'
+    | 'FOUR_PACK'
+    | 'HUNDRED'
+    | 'JAR'
+    | 'NINE_PACK'
+    | 'NUMBER_OF_WORDS'
+    | 'PAIR'
+    | 'PALLET'
+    | 'PLATE'
+    | 'SET'
+    | 'SEVEN_PACK'
+    | 'SIX_PACK'
+    | 'TEN_PACK'
+    | 'THREE_PACK'
+    | 'TWO_PACK'
+    | 'WRAP'
+    | 'GIGAWATT'
+    | 'GIGAWATT_HOUR'
+    | 'KILOWATT'
+    | 'MEGAWATT_HOUR'
+    | 'MILLIWATT'
+    | 'TERAWATT'
+    | 'TERAWATT_HOUR'
+    | 'WATT'
+    | 'WATT_HOUR'
+    | 'BAR'
+    | 'KILOPASCAL'
+    | 'PASCAL'
+    | 'KILOBYTE'
+    | 'MEGABYTE'
+    | 'GIGABYTE'
+    | 'SECOND'
+    | 'HECTARE'
+    | 'NO_UNIT';
   /** Product unit price. This value is affected by the "unit prices include VAT" setting on the invoice. */
   unitPrice: number;
   /** Product discount percentage. */
@@ -8048,53 +8029,53 @@ export interface InvoiceTemplate {
 export interface InvoiceTransaction {
   /** Transaction action. */
   action?:
-    | "APPROVAL"
-    | "ALLOCATE_PAYMENT_MANUALLY"
-    | "ALLOCATE_INVOICE_TO_INVOICE"
-    | "ALLOCATE_INVOICE_TO_JOURNAL"
-    | "ALLOCATE_INVOICE_TO_BANK_STATEMENT"
-    | "ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT"
-    | "VERIFICATION"
-    | "DIRECTED_TO_ANOTHER_VERIFIER"
-    | "DIRECTED_TO_ANOTHER_APPROVER"
-    | "COLLECTION_LETTER_DUETTOPRO"
-    | "PAYMENT_REMINDER_EMAIL"
-    | "CONVERTED_TO_INVOICE"
-    | "PAYMENT_REMINDER"
-    | "PAYMENT_WARNING"
-    | "PAYMENT_REMINDER_DUETTOFORTE"
-    | "CANCEL_PAYMENT_TRANSACTION"
-    | "RETURNED_PREVIOUS"
-    | "PAYMENT_REMINDER_MAIL"
-    | "COLLECTION_LETTER_SVEA"
-    | "COLLECTION_LETTER_SVEA_SHORT"
-    | "PAYMENT_REMINDER_SVEA"
-    | "PAYMENT_REMINDER_SVEA_SHORT"
-    | "DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION"
-    | "DELETED_PAYMENT_TRANSACTION"
-    | "UNFINISHED"
-    | "RESTORED_UNFINISHED"
-    | "DENY_PAYMENT"
-    | "SENT_FOR_PAYMENT"
-    | "MARKED_PAID"
-    | "RECEIVED_VIA_AUTOMATIC_TRANSFER"
-    | "RECEIVED_AS_EINVOICE"
-    | "RECEIVED_AS_SCANNED_INVOICE"
-    | "TARGETING_REMOVED"
-    | "SEND_TO_CIRCULATION"
-    | "SEND"
-    | "PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT"
-    | "SENDING_CANCELLED"
-    | "SEPA_PAYMENT_ERROR"
-    | "PAYMENT_ERROR_HANDLED"
-    | "COLLECTION_LETTER_ROPO"
-    | "PAYMENT_REMINDER_ROPO"
-    | "INVOICE_FACTORING_DELETED"
-    | "SENDING_ERROR_RECEIVED"
-    | "SENDING_ERROR_EMAIL_NOTIFICATION"
-    | "SENDING_ERROR_HANDLED"
-    | "SENDING_ERROR_MARK_AS_HANDLED"
-    | "SENDING_ERROR_REVERTED_TO_NOT_SENT";
+    | 'APPROVAL'
+    | 'ALLOCATE_PAYMENT_MANUALLY'
+    | 'ALLOCATE_INVOICE_TO_INVOICE'
+    | 'ALLOCATE_INVOICE_TO_JOURNAL'
+    | 'ALLOCATE_INVOICE_TO_BANK_STATEMENT'
+    | 'ALLOCATE_INVOICE_TO_REFERENCE_PAYMENT'
+    | 'VERIFICATION'
+    | 'DIRECTED_TO_ANOTHER_VERIFIER'
+    | 'DIRECTED_TO_ANOTHER_APPROVER'
+    | 'COLLECTION_LETTER_DUETTOPRO'
+    | 'PAYMENT_REMINDER_EMAIL'
+    | 'CONVERTED_TO_INVOICE'
+    | 'PAYMENT_REMINDER'
+    | 'PAYMENT_WARNING'
+    | 'PAYMENT_REMINDER_DUETTOFORTE'
+    | 'CANCEL_PAYMENT_TRANSACTION'
+    | 'RETURNED_PREVIOUS'
+    | 'PAYMENT_REMINDER_MAIL'
+    | 'COLLECTION_LETTER_SVEA'
+    | 'COLLECTION_LETTER_SVEA_SHORT'
+    | 'PAYMENT_REMINDER_SVEA'
+    | 'PAYMENT_REMINDER_SVEA_SHORT'
+    | 'DELETED_PAID_ELSEWHERE_PAYMENT_TRANSACTION'
+    | 'DELETED_PAYMENT_TRANSACTION'
+    | 'UNFINISHED'
+    | 'RESTORED_UNFINISHED'
+    | 'DENY_PAYMENT'
+    | 'SENT_FOR_PAYMENT'
+    | 'MARKED_PAID'
+    | 'RECEIVED_VIA_AUTOMATIC_TRANSFER'
+    | 'RECEIVED_AS_EINVOICE'
+    | 'RECEIVED_AS_SCANNED_INVOICE'
+    | 'TARGETING_REMOVED'
+    | 'SEND_TO_CIRCULATION'
+    | 'SEND'
+    | 'PRODUCT_INFORMATION_UPDATED_INTO_INVENTORY_MANAGEMENT'
+    | 'SENDING_CANCELLED'
+    | 'SEPA_PAYMENT_ERROR'
+    | 'PAYMENT_ERROR_HANDLED'
+    | 'COLLECTION_LETTER_ROPO'
+    | 'PAYMENT_REMINDER_ROPO'
+    | 'INVOICE_FACTORING_DELETED'
+    | 'SENDING_ERROR_RECEIVED'
+    | 'SENDING_ERROR_EMAIL_NOTIFICATION'
+    | 'SENDING_ERROR_HANDLED'
+    | 'SENDING_ERROR_MARK_AS_HANDLED'
+    | 'SENDING_ERROR_REVERTED_TO_NOT_SENT';
   /** Transaction name. */
   name?: string;
   /**
@@ -8122,11 +8103,11 @@ export interface InvoicingInfo {
   /** OVT of the partner. */
   ovt?: string;
   /** Invoice channel of the partner. */
-  invoiceChannel?: "EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING";
+  invoiceChannel?: 'EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING';
   /** Contact person of the partner. */
   contactPerson?: string;
   /** Language of the partner. */
-  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
+  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
   /** Email of the partner. */
   email?: string;
   /** Does the customer deny Procountors sending of payment reminders as e-invoice */
@@ -8212,18 +8193,18 @@ export interface LedgerAccountsReportRequest {
    * @example ["APPROVED","SENT","PAID","UNFINISHED"]
    */
   receiptStatus?: (
-    | "APPROVED"
-    | "SENT"
-    | "NOT_SENT"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAID"
-    | "PARTLY_PAID,"
-    | "MARKED_PAID"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_DENIED"
-    | "UNFINISHED"
-    | "VERIFIED"
-    | "RECEIVED"
+    | 'APPROVED'
+    | 'SENT'
+    | 'NOT_SENT'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAID'
+    | 'PARTLY_PAID,'
+    | 'MARKED_PAID'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_DENIED'
+    | 'UNFINISHED'
+    | 'VERIFIED'
+    | 'RECEIVED'
   )[];
   /** Report request options. */
   options?: LedgerAccountsReportRequestOptions;
@@ -8237,238 +8218,238 @@ export interface LedgerAccountsReportRequestOptions {
    * @example ["SALES_INVOICE","PURCHASE_INVOICE","TRAVEL_INVOICE"]
    */
   receiptType?: (
-    | "SALES_INVOICE"
-    | "PURCHASE_INVOICE"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "JOURNAL"
-    | "SALARY"
-    | "VAT_FORM"
-    | "EMPLOYER_CONTRIBUTION"
-    | "PERIODIC_TAX_RETURN"
-    | "VAT_SUMMARY"
-    | "SALES_ORDER"
-    | "PURCHASE_ORDER"
-    | "REFERENCE_PAYMENT"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
+    | 'SALES_INVOICE'
+    | 'PURCHASE_INVOICE'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'JOURNAL'
+    | 'SALARY'
+    | 'VAT_FORM'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'PERIODIC_TAX_RETURN'
+    | 'VAT_SUMMARY'
+    | 'SALES_ORDER'
+    | 'PURCHASE_ORDER'
+    | 'REFERENCE_PAYMENT'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
   )[];
   /**
    * Currency for the receipt in ISO 4217 format.
    * @example "EUR"
    */
   receiptCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Receipt name that will be used in the report. */
   receiptName?: string;
   /**
@@ -8488,217 +8469,217 @@ export interface LedgerAccountsReportRequestOptions {
    * @default "EUR"
    */
   transactionCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Language that will be used in the report. */
   reportLanguage?: string;
   /** Customer company ID that will be used in the report. */
@@ -8728,44 +8709,44 @@ export interface LedgerReceipt {
   id?: number;
   /** Ledger receipt type. Use JOURNAL for creating ledger receipts (vouchers) containing ledger transactions without linkage to pre-existing resources. Other types are automatically generated by Procountor for holding accounting information for e.g. invoices. Types allowed for POST = JOURNAL. Types allowed for PUT = JOURNAL, SALES_INVOICE, PURCHASE_INVOICE, TRAVEL_INVOICE, BILL_OF_CHARGES Types allowed for GET listed below */
   type:
-    | "JOURNAL"
-    | "PURCHASE_INVOICE"
-    | "SALES_INVOICE"
-    | "PERIODIC_TAX_RETURN"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "VAT_FORM"
-    | "SALARY"
-    | "EMPLOYER_CONTRIBUTION"
-    | "PURCHASE_ORDER"
-    | "SALES_ORDER"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
-    | "REFERENCE_PAYMENT"
-    | "TRACKING_PERIOD_OPENING_RECEIPT"
-    | "VAT_SUMMARY";
+    | 'JOURNAL'
+    | 'PURCHASE_INVOICE'
+    | 'SALES_INVOICE'
+    | 'PERIODIC_TAX_RETURN'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'VAT_FORM'
+    | 'SALARY'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'PURCHASE_ORDER'
+    | 'SALES_ORDER'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | 'REFERENCE_PAYMENT'
+    | 'TRACKING_PERIOD_OPENING_RECEIPT'
+    | 'VAT_SUMMARY';
   /** Ledger receipt status. Status of a ledger receipt equals the status of the linked invoice. All ledger receipts are initially created with status UNFINISHED. For journals, possible statuses are UNFINISHED, APPROVED and INVALIDATED. Ledger receipt statuses cannot be directly modified through the API. */
   status?:
-    | "APPROVED"
-    | "DELETED"
-    | "EMPTY"
-    | "INVALIDATED"
-    | "INVOICED"
-    | "MARKED_PAID"
-    | "NOT_SENT"
-    | "OVERRIDDEN"
-    | "PAID"
-    | "PARTLY_PAID"
-    | "PAYMENT_DENIED"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_REMOVED"
-    | "RECEIVED"
-    | "SENT"
-    | "STARTED"
-    | "UNFINISHED"
-    | "UNSAVED"
-    | "VERIFIED";
+    | 'APPROVED'
+    | 'DELETED'
+    | 'EMPTY'
+    | 'INVALIDATED'
+    | 'INVOICED'
+    | 'MARKED_PAID'
+    | 'NOT_SENT'
+    | 'OVERRIDDEN'
+    | 'PAID'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_DENIED'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAYMENT_TRANSACTION_REMOVED'
+    | 'RECEIVED'
+    | 'SENT'
+    | 'STARTED'
+    | 'UNFINISHED'
+    | 'UNSAVED'
+    | 'VERIFIED';
   /**
    * Ledger receipt name.
    * @minLength 0
@@ -8778,7 +8759,7 @@ export interface LedgerReceipt {
    */
   receiptDate: string;
   /** Ledger receipt VAT type. */
-  vatType: "PURCHASE" | "SALES";
+  vatType: 'PURCHASE' | 'SALES';
   /**
    * Ledger receipt VAT status. This can be overridden on transaction level. Use here the numeric parts of VAT status codes listed in "VAT defaults" in Procountor. For example, for VAT status code "vat_12", use value 12. The VAT status used must be enabled for the current receipt type (sales/purchase).
    * @format int32
@@ -8789,257 +8770,257 @@ export interface LedgerReceipt {
    * @example "SWEDEN"
    */
   vatProcessing?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * ID of the linked invoice. For sales and purchase invoice ledger receipts, this refers to the invoice the receipt holds accounting data for. For journal receipts, an invoice is automatically generated to store certain data fields. Use this ID in POST /attachments endpoint.
    * @format int32
@@ -9074,7 +9055,7 @@ export interface LedgerReceipt {
    */
   transactionDescription?: string;
   /** Receipt validity time. */
-  receiptValidity?: "EMPTY" | "IMMEDIATELY" | "OVER_3_YEARS" | "SERVICE_PERIOD";
+  receiptValidity?: 'EMPTY' | 'IMMEDIATELY' | 'OVER_3_YEARS' | 'SERVICE_PERIOD';
   /**
    * Start date of the receipt period. If set, must precede the end date of the period.
    * @format date
@@ -9096,12 +9077,12 @@ export interface LedgerReceipt {
   version?: string;
   /** Accounting depreciation method for the receipt. */
   depreciation?:
-    | "EMPTY"
-    | "REDUCING_BALANCE_25_PERCENT"
-    | "REDUCING_BALANCE_4_PERCENT"
-    | "REDUCING_BALANCE_7_PERCENT"
-    | "STRAIGHT_LINE_DEPRECIATION_3_YEARS"
-    | "STRAIGHT_LINE_DEPRECIATION_5_YEARS";
+    | 'EMPTY'
+    | 'REDUCING_BALANCE_25_PERCENT'
+    | 'REDUCING_BALANCE_4_PERCENT'
+    | 'REDUCING_BALANCE_7_PERCENT'
+    | 'STRAIGHT_LINE_DEPRECIATION_3_YEARS'
+    | 'STRAIGHT_LINE_DEPRECIATION_5_YEARS';
   /**
    * VAT date to be used if payment based VAT is enabled
    * @format date
@@ -9122,44 +9103,44 @@ export interface LedgerReceiptBasicInfo {
   id?: number;
   /** Ledger receipt type. */
   type?:
-    | "JOURNAL"
-    | "PURCHASE_INVOICE"
-    | "SALES_INVOICE"
-    | "PERIODIC_TAX_RETURN"
-    | "TRAVEL_INVOICE"
-    | "BILL_OF_CHARGES"
-    | "VAT_FORM"
-    | "SALARY"
-    | "EMPLOYER_CONTRIBUTION"
-    | "PURCHASE_ORDER"
-    | "SALES_ORDER"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
-    | "REFERENCE_PAYMENT"
-    | "TRACKING_PERIOD_OPENING_RECEIPT"
-    | "VAT_SUMMARY";
+    | 'JOURNAL'
+    | 'PURCHASE_INVOICE'
+    | 'SALES_INVOICE'
+    | 'PERIODIC_TAX_RETURN'
+    | 'TRAVEL_INVOICE'
+    | 'BILL_OF_CHARGES'
+    | 'VAT_FORM'
+    | 'SALARY'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'PURCHASE_ORDER'
+    | 'SALES_ORDER'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | 'REFERENCE_PAYMENT'
+    | 'TRACKING_PERIOD_OPENING_RECEIPT'
+    | 'VAT_SUMMARY';
   /** Ledger receipt status. */
   status?:
-    | "EMPTY"
-    | "UNFINISHED"
-    | "NOT_SENT"
-    | "SENT"
-    | "RECEIVED"
-    | "PAID"
-    | "PAYMENT_DENIED"
-    | "VERIFIED"
-    | "APPROVED"
-    | "INVALIDATED"
-    | "PAYMENT_QUEUED"
-    | "PARTLY_PAID"
-    | "PAYMENT_SENT_TO_BANK"
-    | "MARKED_PAID"
-    | "STARTED"
-    | "INVOICED"
-    | "OVERRIDDEN"
-    | "DELETED"
-    | "UNSAVED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+    | 'EMPTY'
+    | 'UNFINISHED'
+    | 'NOT_SENT'
+    | 'SENT'
+    | 'RECEIVED'
+    | 'PAID'
+    | 'PAYMENT_DENIED'
+    | 'VERIFIED'
+    | 'APPROVED'
+    | 'INVALIDATED'
+    | 'PAYMENT_QUEUED'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'MARKED_PAID'
+    | 'STARTED'
+    | 'INVOICED'
+    | 'OVERRIDDEN'
+    | 'DELETED'
+    | 'UNSAVED'
+    | 'PAYMENT_TRANSACTION_REMOVED';
   /** Ledger receipt name. */
   name?: string;
   /**
@@ -9201,27 +9182,27 @@ export interface LedgerReceiptSearchResult {
 /** Contains rights for management functionalities. */
 export interface ManagementRights {
   /** Access level to basic company info functionality. */
-  basicCompanyInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  basicCompanyInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to basic accounting info functionality. */
-  basicAccountingInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  basicAccountingInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to chart of accounts and default reports functionality. */
-  chartOfAccountsAndDefaultReports?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  chartOfAccountsAndDefaultReports?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to users and user rights functionality. */
-  usersAndUserRights?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  usersAndUserRights?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to company user management functionality. */
-  companyUserManagement?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  companyUserManagement?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to set up a company functionality. */
-  setUpACompany?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  setUpACompany?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to import data functionality. */
-  importData?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  importData?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to notifications functionality. */
-  notifications?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  notifications?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to incomes register certificate functionality. */
-  incomesRegisterCertificate?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  incomesRegisterCertificate?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to group letter functionality. */
-  groupLetter?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  groupLetter?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to audit log functionality. */
-  auditLog?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  auditLog?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
 }
 
 export interface MarkInvoiceAsPaid {
@@ -9237,217 +9218,217 @@ export interface MarkInvoiceAsPaid {
    * @example "USD"
    */
   currency:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /**
    * Payment description. Used only in sales invoices.
    * @minLength 0
@@ -9456,15 +9437,15 @@ export interface MarkInvoiceAsPaid {
   description?: string;
   /** Payment method type. Used only in sales invoices. */
   paymentMethodType?:
-    | "ADJUSTMENT"
-    | "BANK_STATEMENT"
-    | "CASH"
-    | "CHARGE_CARD"
-    | "CORRECTION"
-    | "CREDIT_LOSS"
-    | "CREDIT_NOTE"
-    | "EXTERNAL_BANK_TRANSFER"
-    | "SET_OFF";
+    | 'ADJUSTMENT'
+    | 'BANK_STATEMENT'
+    | 'CASH'
+    | 'CHARGE_CARD'
+    | 'CORRECTION'
+    | 'CREDIT_LOSS'
+    | 'CREDIT_NOTE'
+    | 'EXTERNAL_BANK_TRANSFER'
+    | 'SET_OFF';
 }
 
 /** List of the payment IDs */
@@ -9491,15 +9472,9 @@ export interface PaymentErrorMessage {
    */
   createdDate?: string;
   /** Type of error. */
-  type?:
-    | "ANY_ERROR"
-    | "PAYMENT_ERROR"
-    | "FINVOICE_SEND_ERROR"
-    | "FINVOICE_RECEIVE_ERROR"
-    | "TYEL_ERROR"
-    | "NETS_COLLECTION_ERROR";
+  type?: 'ANY_ERROR' | 'PAYMENT_ERROR' | 'FINVOICE_SEND_ERROR' | 'FINVOICE_RECEIVE_ERROR' | 'TYEL_ERROR' | 'NETS_COLLECTION_ERROR';
   /** Status of error handling. */
-  status?: "ALL" | "HANDLED" | "UNHANDLED";
+  status?: 'ALL' | 'HANDLED' | 'UNHANDLED';
   /** Error code of error. */
   errorCode?: string;
   /**
@@ -9509,38 +9484,38 @@ export interface PaymentErrorMessage {
   referenceId?: number;
   /** Type of payment object related to the error message. NOTE: BANK_TRANSFER type was replaced by DIRECT_BANK_TRANSFER. */
   referenceType?:
-    | "DIRECT_BANK_TRANSFER"
-    | "DIRECT_SALARY_PAYMENT"
-    | "DIRECT_SALARY_PAYMENT_LIST"
-    | "INVOICE"
-    | "NETS_COLLECTION"
-    | "PAYMENTS_ANNOUNCEMENT";
+    | 'DIRECT_BANK_TRANSFER'
+    | 'DIRECT_SALARY_PAYMENT'
+    | 'DIRECT_SALARY_PAYMENT_LIST'
+    | 'INVOICE'
+    | 'NETS_COLLECTION'
+    | 'PAYMENTS_ANNOUNCEMENT';
   /** Detailed type of receipt related to the error message, sent only for invoices. */
   invoiceType?:
-    | "VAT_FORM"
-    | "PAYMENT_CORRECTION"
-    | "TRACKING_PERIOD_OPENING_RECEIPT"
-    | "PERIODIC_TAX_RETURN"
-    | "UNKNOWN_RECEIPT_TYPE_F"
-    | "UNKNOWN_RECEIPT_TYPE_G"
-    | "ACCRUAL"
-    | "BILL_OF_CHARGES"
-    | "SALES_INVOICE"
-    | "JOURNAL"
-    | "JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE"
-    | "JOURNAL_BYPASSING_INVOICE_PAGE"
-    | "PURCHASE_INVOICE"
-    | "RECEIPT_FOR_OPENING_ACCOUNTS"
-    | "SALARY"
-    | "REFERENCE_PAYMENT"
-    | "EMPLOYER_CONTRIBUTION"
-    | "TRAVEL_INVOICE"
-    | "TRAVEL_PLAN"
-    | "BANK_STATEMENT_AS_RECEIPT"
-    | "PURCHASE_ORDER"
-    | "VAT_SUMMARY"
-    | "SALES_ORDER"
-    | "OFFER";
+    | 'VAT_FORM'
+    | 'PAYMENT_CORRECTION'
+    | 'TRACKING_PERIOD_OPENING_RECEIPT'
+    | 'PERIODIC_TAX_RETURN'
+    | 'UNKNOWN_RECEIPT_TYPE_F'
+    | 'UNKNOWN_RECEIPT_TYPE_G'
+    | 'ACCRUAL'
+    | 'BILL_OF_CHARGES'
+    | 'SALES_INVOICE'
+    | 'JOURNAL'
+    | 'JOURNAL_MOVING_STRAIGHT_TO_ACCOUNTING_PAGE'
+    | 'JOURNAL_BYPASSING_INVOICE_PAGE'
+    | 'PURCHASE_INVOICE'
+    | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+    | 'SALARY'
+    | 'REFERENCE_PAYMENT'
+    | 'EMPLOYER_CONTRIBUTION'
+    | 'TRAVEL_INVOICE'
+    | 'TRAVEL_PLAN'
+    | 'BANK_STATEMENT_AS_RECEIPT'
+    | 'PURCHASE_ORDER'
+    | 'VAT_SUMMARY'
+    | 'SALES_ORDER'
+    | 'OFFER';
   /** Information about error handling. Can be empty if message is not handled yet. */
   errorHandlingInfo?: ErrorHandlingInfo;
 }
@@ -9565,29 +9540,29 @@ export interface PaymentEvent {
   invoiceId?: number;
   /** Type of payment. */
   type?:
-    | "ADJUSTMENT"
-    | "BANKSTATEMENT"
-    | "BANKSTATEMENT_TO_INVOICE"
-    | "BANKSTATEMENT_TO_JOURNAL"
-    | "BANKTRANSFERELSEWHERE"
-    | "CASH"
-    | "CASHDISCOUNT"
-    | "CHARGECARD"
-    | "COMPENSATIONINVOICE"
-    | "CORRECTION"
-    | "CREDITLOSS"
-    | "ELSEWHERE"
-    | "INVOICE_TO_INVOICE"
-    | "INVOICE_TO_JOURNAL"
-    | "JOURNAL_TO_INVOICE"
-    | "JOURNAL_TO_JOURNAL"
-    | "NETS_DK_INVOICE"
-    | "OTHERPAYMENTMETHOD"
-    | "REFERENCEPAYMENT"
-    | "REFERENCEPAYMENT_TO_INVOICE"
-    | "REFERENCEPAYMENT_TO_JOURNAL"
-    | "SETOFF"
-    | "TRANSACTION_FOCUSED";
+    | 'ADJUSTMENT'
+    | 'BANKSTATEMENT'
+    | 'BANKSTATEMENT_TO_INVOICE'
+    | 'BANKSTATEMENT_TO_JOURNAL'
+    | 'BANKTRANSFERELSEWHERE'
+    | 'CASH'
+    | 'CASHDISCOUNT'
+    | 'CHARGECARD'
+    | 'COMPENSATIONINVOICE'
+    | 'CORRECTION'
+    | 'CREDITLOSS'
+    | 'ELSEWHERE'
+    | 'INVOICE_TO_INVOICE'
+    | 'INVOICE_TO_JOURNAL'
+    | 'JOURNAL_TO_INVOICE'
+    | 'JOURNAL_TO_JOURNAL'
+    | 'NETS_DK_INVOICE'
+    | 'OTHERPAYMENTMETHOD'
+    | 'REFERENCEPAYMENT'
+    | 'REFERENCEPAYMENT_TO_INVOICE'
+    | 'REFERENCEPAYMENT_TO_JOURNAL'
+    | 'SETOFF'
+    | 'TRANSACTION_FOCUSED';
   /**
    * Date when the payment transaction has to be performed.
    * @format date
@@ -9595,26 +9570,26 @@ export interface PaymentEvent {
   paymentDate?: string;
   /** Status of payment. */
   status?:
-    | "EMPTY"
-    | "UNFINISHED"
-    | "NOT_SENT"
-    | "SENT"
-    | "RECEIVED"
-    | "PAID"
-    | "PAYMENT_DENIED"
-    | "VERIFIED"
-    | "APPROVED"
-    | "INVALIDATED"
-    | "PAYMENT_QUEUED"
-    | "PARTLY_PAID"
-    | "PAYMENT_SENT_TO_BANK"
-    | "MARKED_PAID"
-    | "STARTED"
-    | "INVOICED"
-    | "OVERRIDDEN"
-    | "DELETED"
-    | "UNSAVED"
-    | "PAYMENT_TRANSACTION_REMOVED";
+    | 'EMPTY'
+    | 'UNFINISHED'
+    | 'NOT_SENT'
+    | 'SENT'
+    | 'RECEIVED'
+    | 'PAID'
+    | 'PAYMENT_DENIED'
+    | 'VERIFIED'
+    | 'APPROVED'
+    | 'INVALIDATED'
+    | 'PAYMENT_QUEUED'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'MARKED_PAID'
+    | 'STARTED'
+    | 'INVOICED'
+    | 'OVERRIDDEN'
+    | 'DELETED'
+    | 'UNSAVED'
+    | 'PAYMENT_TRANSACTION_REMOVED';
   /** Payment amount in accounting currency. */
   amount?: number;
   /**
@@ -9622,217 +9597,217 @@ export interface PaymentEvent {
    * @example "EUR"
    */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Payment description. Used only in sales invoices. */
   description?: string;
   /** Payment amount in paid currency. */
@@ -9842,217 +9817,217 @@ export interface PaymentEvent {
    * @example "SEK"
    */
   paidCurrency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
 }
 
 export interface PaymentEventSearchResult {
@@ -10066,234 +10041,234 @@ export interface PaymentEventSearchResult {
 export interface PaymentInfo {
   /** Payment method. Methods other than BANK_TRANSFER, CASH, CLEARING may require fields not supported by the API. The DIRECT_DEBIT method is not supported by POST /invoices and PUT /invoices endpoints. The DKLMPKRE method is deprecated and read only, DOMESTIC_PAYMENT_CREDITOR should be used instead. */
   paymentMethod:
-    | "BANK_TRANSFER"
-    | "DIRECT_PAYMENT"
-    | "CLEARING"
-    | "CREDIT_CARD_CHARGE"
-    | "FOREIGN_PAYMENT"
-    | "OTHER"
-    | "CASH"
-    | "DOMESTIC_PAYMENT_PLUSGIRO"
-    | "DOMESTIC_PAYMENT_BANKGIRO"
-    | "DOMESTIC_PAYMENT_CREDITOR"
-    | "DKLMPKRE"
-    | "NETS";
+    | 'BANK_TRANSFER'
+    | 'DIRECT_PAYMENT'
+    | 'CLEARING'
+    | 'CREDIT_CARD_CHARGE'
+    | 'FOREIGN_PAYMENT'
+    | 'OTHER'
+    | 'CASH'
+    | 'DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'DOMESTIC_PAYMENT_BANKGIRO'
+    | 'DOMESTIC_PAYMENT_CREDITOR'
+    | 'DKLMPKRE'
+    | 'NETS';
   /**
    * Currency of the payment in ISO 4217 format.
    * @example "EUR"
    */
   currency:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Bank account number. */
   bankAccount?: BankAccount;
   /**
@@ -10320,7 +10295,7 @@ export interface PaymentInfo {
    */
   bankReferenceCode?: string;
   /** Reference code generation type. If type not allowed for a user country will be given, then 400 is returned */
-  bankReferenceCodeType?: "RF" | "FI" | "OCR" | "KID" | "GIK01" | "GIK04" | "GIK15" | "FIK71" | "FIK73" | "FIK75";
+  bankReferenceCodeType?: 'RF' | 'FI' | 'OCR' | 'KID' | 'GIK01' | 'GIK04' | 'GIK15' | 'FIK71' | 'FIK73' | 'FIK75';
   /**
    * Receiver bank's clearing code for foreign payments.
    * @minLength 0
@@ -10372,257 +10347,257 @@ export interface PaymentIntermediaryBankNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -10674,257 +10649,257 @@ export interface PaymentReceiverBankNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -10976,257 +10951,257 @@ export interface PaymentRecipientNameAndAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -11238,17 +11213,17 @@ export interface PaymentRecipientNameAndAddress {
 /** Contains rights for payment transactions functionalities. */
 export interface PaymentRights {
   /** Access level to payment functionality. */
-  payment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  payment?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to salary payments functionality. */
-  salaryPayments?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  salaryPayments?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to mark as paid functionality. */
-  markAsPaid?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  markAsPaid?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to direct bank transfer functionality. */
-  directBankTransfer?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  directBankTransfer?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to bank statement and reference payment functionality. */
-  bankStatementAndReferencePayment?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  bankStatementAndReferencePayment?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to payment allocation functionality. */
-  paymentAllocation?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  paymentAllocation?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
 }
 
 export interface PaymentRowInfo {
@@ -11273,217 +11248,217 @@ export interface PaymentRowInfo {
   receiverName?: string;
   /** Currency of payment. */
   currency?:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Payer bank account. */
   payerAccount?: string;
   /** Payer BIC (Bank Identifier Code) code. */
@@ -11501,26 +11476,26 @@ export interface PaymentRowInfo {
    * @example "SENT"
    */
   status?:
-    | "APPROVED"
-    | "DELETED"
-    | "EMPTY"
-    | "INVALIDATED"
-    | "INVOICED"
-    | "MARKED_PAID"
-    | "NOT_SENT"
-    | "OVERRIDDEN"
-    | "PAID"
-    | "PARTLY_PAID"
-    | "PAYMENT_DENIED"
-    | "PAYMENT_QUEUED"
-    | "PAYMENT_SENT_TO_BANK"
-    | "PAYMENT_TRANSACTION_REMOVED"
-    | "RECEIVED"
-    | "SENT"
-    | "STARTED"
-    | "UNFINISHED"
-    | "UNSAVED"
-    | "VERIFIED";
+    | 'APPROVED'
+    | 'DELETED'
+    | 'EMPTY'
+    | 'INVALIDATED'
+    | 'INVOICED'
+    | 'MARKED_PAID'
+    | 'NOT_SENT'
+    | 'OVERRIDDEN'
+    | 'PAID'
+    | 'PARTLY_PAID'
+    | 'PAYMENT_DENIED'
+    | 'PAYMENT_QUEUED'
+    | 'PAYMENT_SENT_TO_BANK'
+    | 'PAYMENT_TRANSACTION_REMOVED'
+    | 'RECEIVED'
+    | 'SENT'
+    | 'STARTED'
+    | 'UNFINISHED'
+    | 'UNSAVED'
+    | 'VERIFIED';
 }
 
 export interface PaymentSearchResult {
@@ -11663,257 +11638,257 @@ export interface PersonAddress {
    * @example "SWEDEN"
    */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Subdivision of the city
    * @minLength 0
@@ -11944,254 +11919,254 @@ export interface PersonBasicAddress {
   city?: string;
   /** Country code. */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
 }
 
 /** Search results. */
@@ -12233,38 +12208,38 @@ export interface PersonBasicInvoicingInfo {
    * @maxLength 20
    */
   identifierType?:
-    | "FI"
-    | "HETU"
-    | "YHD"
-    | "NO"
-    | "AT"
-    | "BE"
-    | "BG"
-    | "CY"
-    | "HR"
-    | "CZ"
-    | "DK"
-    | "EE"
-    | "FR"
-    | "DE"
-    | "GB"
-    | "EL"
-    | "HU"
-    | "IE"
-    | "IT"
-    | "LV"
-    | "LT"
-    | "LU"
-    | "MT"
-    | "NL"
-    | "PL"
-    | "PT"
-    | "RO"
-    | "SK"
-    | "SI"
-    | "ES"
-    | "SE"
-    | "XI";
+    | 'FI'
+    | 'HETU'
+    | 'YHD'
+    | 'NO'
+    | 'AT'
+    | 'BE'
+    | 'BG'
+    | 'CY'
+    | 'HR'
+    | 'CZ'
+    | 'DK'
+    | 'EE'
+    | 'FR'
+    | 'DE'
+    | 'GB'
+    | 'EL'
+    | 'HU'
+    | 'IE'
+    | 'IT'
+    | 'LV'
+    | 'LT'
+    | 'LU'
+    | 'MT'
+    | 'NL'
+    | 'PL'
+    | 'PT'
+    | 'RO'
+    | 'SK'
+    | 'SI'
+    | 'ES'
+    | 'SE'
+    | 'XI';
 }
 
 /** Register information. */
@@ -12295,254 +12270,254 @@ export interface PersonFullAddress {
   city?: string;
   /** Country code. */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Specifier. Not allowed for Swedish environment.
    * @minLength 0
@@ -12583,38 +12558,38 @@ export interface PersonInvoicingInfo {
    * @maxLength 20
    */
   identifierType?:
-    | "FI"
-    | "HETU"
-    | "YHD"
-    | "NO"
-    | "AT"
-    | "BE"
-    | "BG"
-    | "CY"
-    | "HR"
-    | "CZ"
-    | "DK"
-    | "EE"
-    | "FR"
-    | "DE"
-    | "GB"
-    | "EL"
-    | "HU"
-    | "IE"
-    | "IT"
-    | "LV"
-    | "LT"
-    | "LU"
-    | "MT"
-    | "NL"
-    | "PL"
-    | "PT"
-    | "RO"
-    | "SK"
-    | "SI"
-    | "ES"
-    | "SE"
-    | "XI";
+    | 'FI'
+    | 'HETU'
+    | 'YHD'
+    | 'NO'
+    | 'AT'
+    | 'BE'
+    | 'BG'
+    | 'CY'
+    | 'HR'
+    | 'CZ'
+    | 'DK'
+    | 'EE'
+    | 'FR'
+    | 'DE'
+    | 'GB'
+    | 'EL'
+    | 'HU'
+    | 'IE'
+    | 'IT'
+    | 'LV'
+    | 'LT'
+    | 'LU'
+    | 'MT'
+    | 'NL'
+    | 'PL'
+    | 'PT'
+    | 'RO'
+    | 'SK'
+    | 'SI'
+    | 'ES'
+    | 'SE'
+    | 'XI';
   /**
    * Date of birth. Not allowed for Swedish environment.
    * @format date
@@ -12622,9 +12597,9 @@ export interface PersonInvoicingInfo {
    */
   dateOfBirth?: string;
   /** Language. */
-  language: "ENGLISH" | "FINNISH" | "SWEDISH";
+  language: 'ENGLISH' | 'FINNISH' | 'SWEDISH';
   /** Gender. */
-  gender: "FEMALE" | "MALE" | "NOT_APPLICABLE";
+  gender: 'FEMALE' | 'MALE' | 'NOT_APPLICABLE';
   /**
    * Identifier of person's home country.
    * @minLength 0
@@ -12637,19 +12612,19 @@ export interface PersonInvoicingInfo {
 export interface PersonPaymentInfo {
   /** Type of payment method. */
   paymentMethod:
-    | "BANK_TRANSFER"
-    | "DIRECT_DEBIT"
-    | "DIRECT_PAYMENT"
-    | "CLEARING"
-    | "CREDIT_CARD_CHARGE"
-    | "FOREIGN_PAYMENT"
-    | "OTHER"
-    | "CASH"
-    | "DOMESTIC_PAYMENT_PLUSGIRO"
-    | "DOMESTIC_PAYMENT_BANKGIRO"
-    | "DOMESTIC_PAYMENT_CREDITOR"
-    | "DKLMPKRE"
-    | "NETS";
+    | 'BANK_TRANSFER'
+    | 'DIRECT_DEBIT'
+    | 'DIRECT_PAYMENT'
+    | 'CLEARING'
+    | 'CREDIT_CARD_CHARGE'
+    | 'FOREIGN_PAYMENT'
+    | 'OTHER'
+    | 'CASH'
+    | 'DOMESTIC_PAYMENT_PLUSGIRO'
+    | 'DOMESTIC_PAYMENT_BANKGIRO'
+    | 'DOMESTIC_PAYMENT_CREDITOR'
+    | 'DKLMPKRE'
+    | 'NETS';
   /**
    * Clearing code.
    * @minLength 0
@@ -12776,7 +12751,7 @@ export interface PersonalDetails {
   /** Last name of the person. */
   lastName?: string;
   /** Language of the person. */
-  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
+  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
   /** Address of the person. Value may be empty. */
   address?: PersonAddress;
   /** Payment information for the person. */
@@ -12796,7 +12771,7 @@ export interface Product {
    * Product type: to which kind of invoices the product can be assigned.
    * @example "TRAVEL"
    */
-  type: "PURCHASE" | "SALES" | "TRAVEL";
+  type: 'PURCHASE' | 'SALES' | 'TRAVEL';
   /**
    * Product name.
    * @minLength 0
@@ -12811,117 +12786,117 @@ export interface Product {
   code?: string;
   /** Product unit. */
   unit?:
-    | "AMPERE"
-    | "AMPERE_HOUR"
-    | "AMPERE_MINUTE"
-    | "BAG"
-    | "BAR"
-    | "BOTTLE"
-    | "BOX"
-    | "CAN"
-    | "CENTILITRE"
-    | "CM"
-    | "CUBIC_METER"
-    | "CUP"
-    | "DAY"
-    | "DECILITRE"
-    | "DOZEN"
-    | "DOZEN_PACK"
-    | "EIGHT_PACK"
-    | "EXAJOULE"
-    | "FIVE_PACK"
-    | "FOOT"
-    | "FOUR_PACK"
-    | "FULL_DAY"
-    | "GALLON_UK"
-    | "GALLON_US"
-    | "GIGABIT"
-    | "GIGABYTE"
-    | "GIGAJOULE"
-    | "GIGAWATT"
-    | "GIGAWATT_HOUR"
-    | "GRAM"
-    | "GRAM_PER_CUBIC_METRE"
-    | "GRAM_PER_SQUARE_METRE"
-    | "HECTARE"
-    | "HOUR"
-    | "HUNDRED"
-    | "INCH"
-    | "JAR"
-    | "JOULE"
-    | "JOULE_PER_SECOND"
-    | "KILOAMPERE_HOUR"
-    | "KILOBIT"
-    | "KILOBYTE"
-    | "KILOGRAM"
-    | "KILOGRAM_PER_CUBIC_METRE"
-    | "KILOGRAM_PER_SQUARE_METRE"
-    | "KILOJOULE"
-    | "KILOMETER"
-    | "KILOPASCAL"
-    | "KILOVOLT"
-    | "KILOWATT"
-    | "KILOWATT_HOUR"
-    | "LINEAR_METER"
-    | "LITER"
-    | "LOT"
-    | "MEGABIT"
-    | "MEGABYTE"
-    | "MEGAWATT_HOUR"
-    | "METER"
-    | "MILE"
-    | "MILLIAMPERE_HOUR"
-    | "MILLIGRAM"
-    | "MILLIGRAM_PER_CUBIC_METRE"
-    | "MILLIJOULE"
-    | "MILLILITRE"
-    | "MILLIMETER"
-    | "MILLIVOLT"
-    | "MILLIWATT"
-    | "MINUTE"
-    | "MONTH"
-    | "NINE_PACK"
-    | "NO_UNIT"
-    | "NUMBER_OF_WORDS"
-    | "OUNCE"
-    | "PAGE"
-    | "PAIR"
-    | "PALLET"
-    | "PARCEL"
-    | "PASCAL"
-    | "PERSON"
-    | "PETAJOULE"
-    | "PIECE"
-    | "PINT_UK"
-    | "PINT_US"
-    | "PLATE"
-    | "POUND"
-    | "ROLL"
-    | "SACK"
-    | "SALE_UNIT"
-    | "SECOND"
-    | "SERIES"
-    | "SET"
-    | "SEVEN_PACK"
-    | "SIX_PACK"
-    | "SQUARE_CENTIMETRE"
-    | "SQUARE_METER"
-    | "STONE_UK"
-    | "TEN_PACK"
-    | "TERABIT"
-    | "TERAJOULE"
-    | "TERAWATT"
-    | "TERAWATT_HOUR"
-    | "THREE_PACK"
-    | "TON"
-    | "TUBE"
-    | "TWO_PACK"
-    | "WATT"
-    | "WATT_HOUR"
-    | "WEEK"
-    | "WRAP"
-    | "YARD"
-    | "YEAR";
+    | 'AMPERE'
+    | 'AMPERE_HOUR'
+    | 'AMPERE_MINUTE'
+    | 'BAG'
+    | 'BAR'
+    | 'BOTTLE'
+    | 'BOX'
+    | 'CAN'
+    | 'CENTILITRE'
+    | 'CM'
+    | 'CUBIC_METER'
+    | 'CUP'
+    | 'DAY'
+    | 'DECILITRE'
+    | 'DOZEN'
+    | 'DOZEN_PACK'
+    | 'EIGHT_PACK'
+    | 'EXAJOULE'
+    | 'FIVE_PACK'
+    | 'FOOT'
+    | 'FOUR_PACK'
+    | 'FULL_DAY'
+    | 'GALLON_UK'
+    | 'GALLON_US'
+    | 'GIGABIT'
+    | 'GIGABYTE'
+    | 'GIGAJOULE'
+    | 'GIGAWATT'
+    | 'GIGAWATT_HOUR'
+    | 'GRAM'
+    | 'GRAM_PER_CUBIC_METRE'
+    | 'GRAM_PER_SQUARE_METRE'
+    | 'HECTARE'
+    | 'HOUR'
+    | 'HUNDRED'
+    | 'INCH'
+    | 'JAR'
+    | 'JOULE'
+    | 'JOULE_PER_SECOND'
+    | 'KILOAMPERE_HOUR'
+    | 'KILOBIT'
+    | 'KILOBYTE'
+    | 'KILOGRAM'
+    | 'KILOGRAM_PER_CUBIC_METRE'
+    | 'KILOGRAM_PER_SQUARE_METRE'
+    | 'KILOJOULE'
+    | 'KILOMETER'
+    | 'KILOPASCAL'
+    | 'KILOVOLT'
+    | 'KILOWATT'
+    | 'KILOWATT_HOUR'
+    | 'LINEAR_METER'
+    | 'LITER'
+    | 'LOT'
+    | 'MEGABIT'
+    | 'MEGABYTE'
+    | 'MEGAWATT_HOUR'
+    | 'METER'
+    | 'MILE'
+    | 'MILLIAMPERE_HOUR'
+    | 'MILLIGRAM'
+    | 'MILLIGRAM_PER_CUBIC_METRE'
+    | 'MILLIJOULE'
+    | 'MILLILITRE'
+    | 'MILLIMETER'
+    | 'MILLIVOLT'
+    | 'MILLIWATT'
+    | 'MINUTE'
+    | 'MONTH'
+    | 'NINE_PACK'
+    | 'NO_UNIT'
+    | 'NUMBER_OF_WORDS'
+    | 'OUNCE'
+    | 'PAGE'
+    | 'PAIR'
+    | 'PALLET'
+    | 'PARCEL'
+    | 'PASCAL'
+    | 'PERSON'
+    | 'PETAJOULE'
+    | 'PIECE'
+    | 'PINT_UK'
+    | 'PINT_US'
+    | 'PLATE'
+    | 'POUND'
+    | 'ROLL'
+    | 'SACK'
+    | 'SALE_UNIT'
+    | 'SECOND'
+    | 'SERIES'
+    | 'SET'
+    | 'SEVEN_PACK'
+    | 'SIX_PACK'
+    | 'SQUARE_CENTIMETRE'
+    | 'SQUARE_METER'
+    | 'STONE_UK'
+    | 'TEN_PACK'
+    | 'TERABIT'
+    | 'TERAJOULE'
+    | 'TERAWATT'
+    | 'TERAWATT_HOUR'
+    | 'THREE_PACK'
+    | 'TON'
+    | 'TUBE'
+    | 'TWO_PACK'
+    | 'WATT'
+    | 'WATT_HOUR'
+    | 'WEEK'
+    | 'WRAP'
+    | 'YARD'
+    | 'YEAR';
   /**
    * Product discount percentage.
    * @min 0
@@ -12948,217 +12923,217 @@ export interface Product {
    * @example "EUR"
    */
   currency:
-    | "AED"
-    | "AFN"
-    | "ALL"
-    | "AMD"
-    | "ANG"
-    | "AOA"
-    | "ARS"
-    | "ATS"
-    | "AUD"
-    | "AWG"
-    | "AZN"
-    | "BAM"
-    | "BBD"
-    | "BDT"
-    | "BEF"
-    | "BGN"
-    | "BHD"
-    | "BIF"
-    | "BMD"
-    | "BND"
-    | "BOB"
-    | "BOV"
-    | "BRL"
-    | "BSD"
-    | "BTN"
-    | "BWP"
-    | "BYN"
-    | "BZD"
-    | "CAD"
-    | "CDF"
-    | "CHE"
-    | "CHF"
-    | "CHW"
-    | "CLF"
-    | "CLP"
-    | "CNH"
-    | "CNT"
-    | "CNY"
-    | "COP"
-    | "COU"
-    | "CRC"
-    | "CUC"
-    | "CUP"
-    | "CVE"
-    | "CYP"
-    | "CZK"
-    | "DEM"
-    | "DJF"
-    | "DKK"
-    | "DOP"
-    | "DZD"
-    | "EEK"
-    | "EGP"
-    | "ERN"
-    | "ESP"
-    | "ETB"
-    | "EUR"
-    | "FIM"
-    | "FJD"
-    | "FKP"
-    | "FRF"
-    | "GBP"
-    | "GEL"
-    | "GGP"
-    | "GHS"
-    | "GIP"
-    | "GMD"
-    | "GNF"
-    | "GRD"
-    | "GTQ"
-    | "GYD"
-    | "HKD"
-    | "HNL"
-    | "HRK"
-    | "HTG"
-    | "HUF"
-    | "IDR"
-    | "IEP"
-    | "ILS"
-    | "IMP"
-    | "INR"
-    | "IQD"
-    | "IRR"
-    | "ISK"
-    | "ITL"
-    | "JEP"
-    | "JMD"
-    | "JOD"
-    | "JPY"
-    | "KES"
-    | "KGS"
-    | "KHR"
-    | "KID"
-    | "KMF"
-    | "KPW"
-    | "KRW"
-    | "KWD"
-    | "KYD"
-    | "KZT"
-    | "LAK"
-    | "LBP"
-    | "LKR"
-    | "LRD"
-    | "LSL"
-    | "LTL"
-    | "LUF"
-    | "LVL"
-    | "LYD"
-    | "MAD"
-    | "MDL"
-    | "MGA"
-    | "MKD"
-    | "MMK"
-    | "MNT"
-    | "MOP"
-    | "MRO"
-    | "MTL"
-    | "MUR"
-    | "MVR"
-    | "MWK"
-    | "MXN"
-    | "MXV"
-    | "MYR"
-    | "MZN"
-    | "NAD"
-    | "NGN"
-    | "NIO"
-    | "NIS"
-    | "NLG"
-    | "NOK"
-    | "NPR"
-    | "NTD"
-    | "NZD"
-    | "OMR"
-    | "PAB"
-    | "PEN"
-    | "PGK"
-    | "PHP"
-    | "PKR"
-    | "PLN"
-    | "PRB"
-    | "PTE"
-    | "PYG"
-    | "QAR"
-    | "RMB"
-    | "RON"
-    | "RSD"
-    | "RUB"
-    | "RWF"
-    | "SAR"
-    | "SBD"
-    | "SCR"
-    | "SDG"
-    | "SEK"
-    | "SGD"
-    | "SHP"
-    | "SIT"
-    | "SKK"
-    | "SLL"
-    | "SLS"
-    | "SOS"
-    | "SRD"
-    | "SSP"
-    | "STN"
-    | "SVC"
-    | "SYP"
-    | "SZL"
-    | "THB"
-    | "TJS"
-    | "TMT"
-    | "TND"
-    | "TOP"
-    | "TRY"
-    | "TTD"
-    | "TVD"
-    | "TWD"
-    | "TZS"
-    | "UAH"
-    | "UGX"
-    | "USD"
-    | "USN"
-    | "UYI"
-    | "UYU"
-    | "UYW"
-    | "UZS"
-    | "VES"
-    | "VND"
-    | "VUV"
-    | "WST"
-    | "XAF"
-    | "XAG"
-    | "XAU"
-    | "XBA"
-    | "XBB"
-    | "XBC"
-    | "XBD"
-    | "XCD"
-    | "XDR"
-    | "XOF"
-    | "XPD"
-    | "XPF"
-    | "XPT"
-    | "XSU"
-    | "XTS"
-    | "XUA"
-    | "XXX"
-    | "YER"
-    | "ZAR"
-    | "ZMW"
-    | "ZWB"
-    | "ZWL";
+    | 'AED'
+    | 'AFN'
+    | 'ALL'
+    | 'AMD'
+    | 'ANG'
+    | 'AOA'
+    | 'ARS'
+    | 'ATS'
+    | 'AUD'
+    | 'AWG'
+    | 'AZN'
+    | 'BAM'
+    | 'BBD'
+    | 'BDT'
+    | 'BEF'
+    | 'BGN'
+    | 'BHD'
+    | 'BIF'
+    | 'BMD'
+    | 'BND'
+    | 'BOB'
+    | 'BOV'
+    | 'BRL'
+    | 'BSD'
+    | 'BTN'
+    | 'BWP'
+    | 'BYN'
+    | 'BZD'
+    | 'CAD'
+    | 'CDF'
+    | 'CHE'
+    | 'CHF'
+    | 'CHW'
+    | 'CLF'
+    | 'CLP'
+    | 'CNH'
+    | 'CNT'
+    | 'CNY'
+    | 'COP'
+    | 'COU'
+    | 'CRC'
+    | 'CUC'
+    | 'CUP'
+    | 'CVE'
+    | 'CYP'
+    | 'CZK'
+    | 'DEM'
+    | 'DJF'
+    | 'DKK'
+    | 'DOP'
+    | 'DZD'
+    | 'EEK'
+    | 'EGP'
+    | 'ERN'
+    | 'ESP'
+    | 'ETB'
+    | 'EUR'
+    | 'FIM'
+    | 'FJD'
+    | 'FKP'
+    | 'FRF'
+    | 'GBP'
+    | 'GEL'
+    | 'GGP'
+    | 'GHS'
+    | 'GIP'
+    | 'GMD'
+    | 'GNF'
+    | 'GRD'
+    | 'GTQ'
+    | 'GYD'
+    | 'HKD'
+    | 'HNL'
+    | 'HRK'
+    | 'HTG'
+    | 'HUF'
+    | 'IDR'
+    | 'IEP'
+    | 'ILS'
+    | 'IMP'
+    | 'INR'
+    | 'IQD'
+    | 'IRR'
+    | 'ISK'
+    | 'ITL'
+    | 'JEP'
+    | 'JMD'
+    | 'JOD'
+    | 'JPY'
+    | 'KES'
+    | 'KGS'
+    | 'KHR'
+    | 'KID'
+    | 'KMF'
+    | 'KPW'
+    | 'KRW'
+    | 'KWD'
+    | 'KYD'
+    | 'KZT'
+    | 'LAK'
+    | 'LBP'
+    | 'LKR'
+    | 'LRD'
+    | 'LSL'
+    | 'LTL'
+    | 'LUF'
+    | 'LVL'
+    | 'LYD'
+    | 'MAD'
+    | 'MDL'
+    | 'MGA'
+    | 'MKD'
+    | 'MMK'
+    | 'MNT'
+    | 'MOP'
+    | 'MRO'
+    | 'MTL'
+    | 'MUR'
+    | 'MVR'
+    | 'MWK'
+    | 'MXN'
+    | 'MXV'
+    | 'MYR'
+    | 'MZN'
+    | 'NAD'
+    | 'NGN'
+    | 'NIO'
+    | 'NIS'
+    | 'NLG'
+    | 'NOK'
+    | 'NPR'
+    | 'NTD'
+    | 'NZD'
+    | 'OMR'
+    | 'PAB'
+    | 'PEN'
+    | 'PGK'
+    | 'PHP'
+    | 'PKR'
+    | 'PLN'
+    | 'PRB'
+    | 'PTE'
+    | 'PYG'
+    | 'QAR'
+    | 'RMB'
+    | 'RON'
+    | 'RSD'
+    | 'RUB'
+    | 'RWF'
+    | 'SAR'
+    | 'SBD'
+    | 'SCR'
+    | 'SDG'
+    | 'SEK'
+    | 'SGD'
+    | 'SHP'
+    | 'SIT'
+    | 'SKK'
+    | 'SLL'
+    | 'SLS'
+    | 'SOS'
+    | 'SRD'
+    | 'SSP'
+    | 'STN'
+    | 'SVC'
+    | 'SYP'
+    | 'SZL'
+    | 'THB'
+    | 'TJS'
+    | 'TMT'
+    | 'TND'
+    | 'TOP'
+    | 'TRY'
+    | 'TTD'
+    | 'TVD'
+    | 'TWD'
+    | 'TZS'
+    | 'UAH'
+    | 'UGX'
+    | 'USD'
+    | 'USN'
+    | 'UYI'
+    | 'UYU'
+    | 'UYW'
+    | 'UZS'
+    | 'VES'
+    | 'VND'
+    | 'VUV'
+    | 'WST'
+    | 'XAF'
+    | 'XAG'
+    | 'XAU'
+    | 'XBA'
+    | 'XBB'
+    | 'XBC'
+    | 'XBD'
+    | 'XCD'
+    | 'XDR'
+    | 'XOF'
+    | 'XPD'
+    | 'XPF'
+    | 'XPT'
+    | 'XSU'
+    | 'XTS'
+    | 'XUA'
+    | 'XXX'
+    | 'YER'
+    | 'ZAR'
+    | 'ZMW'
+    | 'ZWB'
+    | 'ZWL';
   /** Product name localizations. */
   productLocalizations?: ProductLocalization[];
   /**
@@ -13197,117 +13172,117 @@ export interface ProductBasicInfo {
   currency?: string;
   /** Unit type of product. */
   unit?:
-    | "AMPERE"
-    | "AMPERE_HOUR"
-    | "AMPERE_MINUTE"
-    | "BAG"
-    | "BAR"
-    | "BOTTLE"
-    | "BOX"
-    | "CAN"
-    | "CENTILITRE"
-    | "CM"
-    | "CUBIC_METER"
-    | "CUP"
-    | "DAY"
-    | "DECILITRE"
-    | "DOZEN"
-    | "DOZEN_PACK"
-    | "EIGHT_PACK"
-    | "EXAJOULE"
-    | "FIVE_PACK"
-    | "FOOT"
-    | "FOUR_PACK"
-    | "FULL_DAY"
-    | "GALLON_UK"
-    | "GALLON_US"
-    | "GIGABIT"
-    | "GIGABYTE"
-    | "GIGAJOULE"
-    | "GIGAWATT"
-    | "GIGAWATT_HOUR"
-    | "GRAM"
-    | "GRAM_PER_CUBIC_METRE"
-    | "GRAM_PER_SQUARE_METRE"
-    | "HECTARE"
-    | "HOUR"
-    | "HUNDRED"
-    | "INCH"
-    | "JAR"
-    | "JOULE"
-    | "JOULE_PER_SECOND"
-    | "KILOAMPERE_HOUR"
-    | "KILOBIT"
-    | "KILOBYTE"
-    | "KILOGRAM"
-    | "KILOGRAM_PER_CUBIC_METRE"
-    | "KILOGRAM_PER_SQUARE_METRE"
-    | "KILOJOULE"
-    | "KILOMETER"
-    | "KILOPASCAL"
-    | "KILOVOLT"
-    | "KILOWATT"
-    | "KILOWATT_HOUR"
-    | "LINEAR_METER"
-    | "LITER"
-    | "LOT"
-    | "MEGABIT"
-    | "MEGABYTE"
-    | "MEGAWATT_HOUR"
-    | "METER"
-    | "MILE"
-    | "MILLIAMPERE_HOUR"
-    | "MILLIGRAM"
-    | "MILLIGRAM_PER_CUBIC_METRE"
-    | "MILLIJOULE"
-    | "MILLILITRE"
-    | "MILLIMETER"
-    | "MILLIVOLT"
-    | "MILLIWATT"
-    | "MINUTE"
-    | "MONTH"
-    | "NINE_PACK"
-    | "NO_UNIT"
-    | "NUMBER_OF_WORDS"
-    | "OUNCE"
-    | "PAGE"
-    | "PAIR"
-    | "PALLET"
-    | "PARCEL"
-    | "PASCAL"
-    | "PERSON"
-    | "PETAJOULE"
-    | "PIECE"
-    | "PINT_UK"
-    | "PINT_US"
-    | "PLATE"
-    | "POUND"
-    | "ROLL"
-    | "SACK"
-    | "SALE_UNIT"
-    | "SECOND"
-    | "SERIES"
-    | "SET"
-    | "SEVEN_PACK"
-    | "SIX_PACK"
-    | "SQUARE_CENTIMETRE"
-    | "SQUARE_METER"
-    | "STONE_UK"
-    | "TEN_PACK"
-    | "TERABIT"
-    | "TERAJOULE"
-    | "TERAWATT"
-    | "TERAWATT_HOUR"
-    | "THREE_PACK"
-    | "TON"
-    | "TUBE"
-    | "TWO_PACK"
-    | "WATT"
-    | "WATT_HOUR"
-    | "WEEK"
-    | "WRAP"
-    | "YARD"
-    | "YEAR";
+    | 'AMPERE'
+    | 'AMPERE_HOUR'
+    | 'AMPERE_MINUTE'
+    | 'BAG'
+    | 'BAR'
+    | 'BOTTLE'
+    | 'BOX'
+    | 'CAN'
+    | 'CENTILITRE'
+    | 'CM'
+    | 'CUBIC_METER'
+    | 'CUP'
+    | 'DAY'
+    | 'DECILITRE'
+    | 'DOZEN'
+    | 'DOZEN_PACK'
+    | 'EIGHT_PACK'
+    | 'EXAJOULE'
+    | 'FIVE_PACK'
+    | 'FOOT'
+    | 'FOUR_PACK'
+    | 'FULL_DAY'
+    | 'GALLON_UK'
+    | 'GALLON_US'
+    | 'GIGABIT'
+    | 'GIGABYTE'
+    | 'GIGAJOULE'
+    | 'GIGAWATT'
+    | 'GIGAWATT_HOUR'
+    | 'GRAM'
+    | 'GRAM_PER_CUBIC_METRE'
+    | 'GRAM_PER_SQUARE_METRE'
+    | 'HECTARE'
+    | 'HOUR'
+    | 'HUNDRED'
+    | 'INCH'
+    | 'JAR'
+    | 'JOULE'
+    | 'JOULE_PER_SECOND'
+    | 'KILOAMPERE_HOUR'
+    | 'KILOBIT'
+    | 'KILOBYTE'
+    | 'KILOGRAM'
+    | 'KILOGRAM_PER_CUBIC_METRE'
+    | 'KILOGRAM_PER_SQUARE_METRE'
+    | 'KILOJOULE'
+    | 'KILOMETER'
+    | 'KILOPASCAL'
+    | 'KILOVOLT'
+    | 'KILOWATT'
+    | 'KILOWATT_HOUR'
+    | 'LINEAR_METER'
+    | 'LITER'
+    | 'LOT'
+    | 'MEGABIT'
+    | 'MEGABYTE'
+    | 'MEGAWATT_HOUR'
+    | 'METER'
+    | 'MILE'
+    | 'MILLIAMPERE_HOUR'
+    | 'MILLIGRAM'
+    | 'MILLIGRAM_PER_CUBIC_METRE'
+    | 'MILLIJOULE'
+    | 'MILLILITRE'
+    | 'MILLIMETER'
+    | 'MILLIVOLT'
+    | 'MILLIWATT'
+    | 'MINUTE'
+    | 'MONTH'
+    | 'NINE_PACK'
+    | 'NO_UNIT'
+    | 'NUMBER_OF_WORDS'
+    | 'OUNCE'
+    | 'PAGE'
+    | 'PAIR'
+    | 'PALLET'
+    | 'PARCEL'
+    | 'PASCAL'
+    | 'PERSON'
+    | 'PETAJOULE'
+    | 'PIECE'
+    | 'PINT_UK'
+    | 'PINT_US'
+    | 'PLATE'
+    | 'POUND'
+    | 'ROLL'
+    | 'SACK'
+    | 'SALE_UNIT'
+    | 'SECOND'
+    | 'SERIES'
+    | 'SET'
+    | 'SEVEN_PACK'
+    | 'SIX_PACK'
+    | 'SQUARE_CENTIMETRE'
+    | 'SQUARE_METER'
+    | 'STONE_UK'
+    | 'TEN_PACK'
+    | 'TERABIT'
+    | 'TERAJOULE'
+    | 'TERAWATT'
+    | 'TERAWATT_HOUR'
+    | 'THREE_PACK'
+    | 'TON'
+    | 'TUBE'
+    | 'TWO_PACK'
+    | 'WATT'
+    | 'WATT_HOUR'
+    | 'WEEK'
+    | 'WRAP'
+    | 'YARD'
+    | 'YEAR';
 }
 
 export interface ProductGroup {
@@ -13326,7 +13301,7 @@ export interface ProductGroup {
    * Product type.
    * @example "TRAVEL"
    */
-  type?: "PURCHASE" | "SALES" | "TRAVEL";
+  type?: 'PURCHASE' | 'SALES' | 'TRAVEL';
 }
 
 export interface ProductGroups {
@@ -13337,7 +13312,7 @@ export interface ProductGroups {
 /** Product name localizations. */
 export interface ProductLocalization {
   /** Product language */
-  language?: "DANISH" | "ENGLISH" | "ESTONIAN" | "FINNISH" | "NORWEGIAN" | "SWEDISH";
+  language?: 'DANISH' | 'ENGLISH' | 'ESTONIAN' | 'FINNISH' | 'NORWEGIAN' | 'SWEDISH';
   /**
    * Product name
    * @minLength 0
@@ -13372,17 +13347,17 @@ export interface ProductValidityPeriod {
 /** Contains rights for purchases functionalities. */
 export interface PurchasesRights {
   /** Access level to purchase invoices functionality. */
-  purchaseInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  purchaseInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to purchase invoice search functionality. */
-  purchaseInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  purchaseInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal purchase invoices only limitation enabled. */
   personalPurchaseInvoicesOnly?: boolean;
   /** Access level to supplier register functionality. */
-  supplierRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  supplierRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to product register functionality. */
-  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  productRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to fixed assets register functionality. */
-  fixedAssetsRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  fixedAssetsRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
 }
 
 /** Search results. */
@@ -13493,15 +13468,99 @@ export interface SalariesBasicInfo {
 /** Contains rights for salaries functionalities. */
 export interface SalariesRights {
   /** Access level to payroll functionality. */
-  payroll?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  payroll?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal salaries only limitation enabled. */
   personalSalariesOnly?: boolean;
   /** Access level to person register functionality. */
-  personRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  personRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to working time tracking functionality. */
-  workingTimeTracking?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  workingTimeTracking?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal work hour tracking only limitation enabled. */
   personalWorkHourTrackingOnly?: boolean;
+}
+
+/** Search results. */
+export interface SalaryList {
+  /** @format int32 */
+  id?: number;
+  name?: string;
+  /** @format int32 */
+  numberOfSlips?: number;
+  /** @format int32 */
+  unfinished?: number;
+  /** @format int32 */
+  sent?: number;
+  /** @format int32 */
+  paid?: number;
+  /** @format int32 */
+  reported?: number;
+  /** @format date */
+  paymentPeriodStart?: string;
+  /** @format date */
+  paymentPeriodEnd?: string;
+  /** @format date-time */
+  created?: string;
+  createdBy?: string;
+}
+
+export interface SalaryListSearchResult {
+  /** Search results. */
+  results?: SalaryList[];
+  /** Search result metadata. */
+  meta?: SearchResultMetaData;
+}
+
+/** Salary slip within a salary list. */
+export interface SalarySlip {
+  /** @format int32 */
+  id?: number;
+  employeeName?: string;
+  /** @format date */
+  payday?: string;
+  /** @format int32 */
+  slipNumber?: number;
+  status?: string;
+  paidStatusDetails?: string;
+  slipNotes?: string;
+  salaryChannel?: 'NO_SENDING' | 'MAIL' | 'EMAIL' | 'PAPER' | 'MOBILE' | 'ESALARY';
+  sentStatus?: string;
+  reportStatus?: string;
+  salary?: number;
+  fringeBenefit?: number;
+  salaryForIns?: number;
+  deductionToTaxable?: number;
+  tax?: number;
+  taxableCompensation?: number;
+  taxFreeItems?: number;
+  otherDeductions?: number;
+  netPay?: number;
+  eSalaryStatus?: string;
+}
+
+/** Full salary list details. */
+export interface SalaryListDetails {
+  name?: string;
+  /** @format int32 */
+  holidayYear?: number;
+  /** @format date */
+  paymentPeriodStart?: string;
+  /** @format date */
+  paymentPeriodEnd?: string;
+  /** @format date */
+  earningsPeriodStart?: string;
+  /** @format date */
+  earningsPeriodEnd?: string;
+  /** @format date */
+  accountingDate?: string;
+  /** @format date */
+  dueDate?: string;
+  /** @format date */
+  payday?: string;
+  /** @format int32 */
+  id?: number;
+  salarySlips?: SalarySlip[];
+  /** @format date-time */
+  version?: string;
 }
 
 /** Search results. */
@@ -13515,16 +13574,16 @@ export interface SalaryType {
   code?: number;
   /** Salary category. */
   category?:
-    | "DEDUCTIONS_FROM_NET_PAY"
-    | "EMPLOYER_PAYMENTS"
-    | "FRINGE_BENEFITS"
-    | "INFORMATIVE_ITEMS"
-    | "OTHER_TAXABLE_EARNINGS"
-    | "SALARY_FOR_TIME_WORKED"
-    | "TAX"
-    | "TAX_FREE_ITEMS";
+    | 'DEDUCTIONS_FROM_NET_PAY'
+    | 'EMPLOYER_PAYMENTS'
+    | 'FRINGE_BENEFITS'
+    | 'INFORMATIVE_ITEMS'
+    | 'OTHER_TAXABLE_EARNINGS'
+    | 'SALARY_FOR_TIME_WORKED'
+    | 'TAX'
+    | 'TAX_FREE_ITEMS';
   /** Salary type unit. */
-  unit?: "HOUR" | "PIECE";
+  unit?: 'HOUR' | 'PIECE';
   /** Unit value of Salary type. */
   unitValue?: number;
   /** Payment percent of Salary type. */
@@ -13566,15 +13625,15 @@ export interface SalaryTypeTranslation {
 /** Contains rights for sales functionalities. */
 export interface SalesRights {
   /** Access level to sales or group invoices functionality. */
-  salesOrGroupInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  salesOrGroupInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to sales invoice search functionality. */
-  salesInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  salesInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal sales invoices only limitation enabled. */
   personalSalesInvoicesOnly?: boolean;
   /** Access level to customer register functionality. */
-  customerRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  customerRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to product register functionality. */
-  productRegister?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  productRegister?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
 }
 
 /** Search result metadata. */
@@ -13604,7 +13663,7 @@ export interface SearchResultMetaData {
 /** Ledger receipt serial number. This field is optional and can only appear for Swedish and Danish environments. */
 export interface SerialNumber {
   /** Ledger receipt series. */
-  series?: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+  series?: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H';
   /**
    * Ledger receipt serial number.
    * @format int32
@@ -13622,279 +13681,279 @@ export interface SessionInfo {
   name?: string;
   /** Country of current company. */
   country?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /** Product version of current company. */
   productVersion?:
-    | "BACKOFFICE"
-    | "BACKOFFICE_BASIC"
-    | "BACKOFFICE_PLUS"
-    | "BACKOFFICE_PREMIUM"
-    | "FINAGO_SOLO"
-    | "FINANCIALS_ALKU"
-    | "FINANCIALS_BASIC"
-    | "FINANCIALS_ENTERPRISE"
-    | "FINANCIALS_GOLD"
-    | "FINANCIALS_LIGHT"
-    | "FINANCIALS_MAX"
-    | "FINANCIALS_PLATINUM"
-    | "FINANCIALS_PLUS"
-    | "FINANCIALS_PREMIUM"
-    | "FINANCIALS_SILVER"
-    | "FINANCIALS_UNLIMITED"
-    | "FLEX"
-    | "SALES_GOLD"
-    | "SALES_PLATINUM"
-    | "SALES_SILVER";
+    | 'BACKOFFICE'
+    | 'BACKOFFICE_BASIC'
+    | 'BACKOFFICE_PLUS'
+    | 'BACKOFFICE_PREMIUM'
+    | 'FINAGO_SOLO'
+    | 'FINANCIALS_ALKU'
+    | 'FINANCIALS_BASIC'
+    | 'FINANCIALS_ENTERPRISE'
+    | 'FINANCIALS_GOLD'
+    | 'FINANCIALS_LIGHT'
+    | 'FINANCIALS_MAX'
+    | 'FINANCIALS_PLATINUM'
+    | 'FINANCIALS_PLUS'
+    | 'FINANCIALS_PREMIUM'
+    | 'FINANCIALS_SILVER'
+    | 'FINANCIALS_UNLIMITED'
+    | 'FLEX'
+    | 'SALES_GOLD'
+    | 'SALES_PLATINUM'
+    | 'SALES_SILVER';
   /**
    * Current user id.
    * @format int32
@@ -13922,7 +13981,7 @@ export interface Status {
   /** Version of the API */
   version?: string;
   /** Status of the API health. OK - API is fine, DEGRADED - some external services are not working, FAILING - API has started, but not working properly */
-  status?: "DEGRADED" | "FAILING" | "OK";
+  status?: 'DEGRADED' | 'FAILING' | 'OK';
   /** Current Procountor version in use */
   procountorVersion?: string;
 }
@@ -14018,7 +14077,7 @@ export interface TrackingPeriod {
    */
   endDate?: string;
   /** Status of the tracking period. */
-  status: "CLOSED" | "OPEN" | "PENDING";
+  status: 'CLOSED' | 'OPEN' | 'PENDING';
   /**
    * Time of last edition of tracking period.
    * @format date-time
@@ -14034,7 +14093,7 @@ export interface Transaction {
    */
   id?: number;
   /** Transaction type. Depends on the transaction and the ledger account in question. Type REVERSING_ENTRY is used to indicate the first row of a ledger receipt for a specific logic on the UI. Typically, it represents a transaction for a balance sheet account. Note that ledger receipts with no transactions marked as reversing entries are possible.  Type ENTRY is the general type for transactions. It can be used even on the first rows of ledger receipts. Type RECONCILIATION_ENTRY is used for getting the sum of transactions on a receipt to reconcile (to equal zero). Generally, all ledger receipts should reconcile. Procountor can create reconciliation entries automatically  for ledger receipts when "createReconciliation=true" query parameter is specified.  If VAT is used, a reconciliation row might be necessary due to remainders and rounding.  For both REVERSING_ENTRY and RECONCILIATION_ENTRY transactions, vatStatus cannot be defined and vatPercent must be 0.  Additionally, a ledger can have maximum of one REVERSING_ENTRY and maximum of one RECONCILIATION_ENTRY transaction.  Transactions of these types cannot be removed from a ledger receipt using UI once created. */
-  transactionType: "ENTRY" | "RECONCILIATION_ENTRY" | "REVERSING_ENTRY";
+  transactionType: 'ENTRY' | 'RECONCILIATION_ENTRY' | 'REVERSING_ENTRY';
   /** Ledger account number for the transaction. Must be valid for the current Procountor environment. Use GET /coa to obtain the chart of accounts. */
   account: string;
   /** Transaction accounting value. This value is net. Scale: 2. */
@@ -14042,7 +14101,7 @@ export interface Transaction {
   /** Transaction VAT percentage. Must be a percentage currently in use for the company. */
   vatPercent: number;
   /** Transaction VAT type. */
-  vatType?: "PURCHASE" | "SALES";
+  vatType?: 'PURCHASE' | 'SALES';
   /**
    * Transaction VAT status. This overrides the VAT status set for the parent ledger receipt. Use here the numeric parts of VAT status codes listed in "VAT defaults" in Procountor. For example, for VAT status code "vat_12", use value 12. The VAT status used must be enabled for the current receipt type (sales/purchase).
    * @format int32
@@ -14093,7 +14152,7 @@ export interface TransactionIdentifier {
 /** Transfer notifications. */
 export interface TransferNotification {
   /** Transfer notification language. */
-  lang: "ENGLISH" | "FINNISH" | "SWEDISH" | "ESTONIAN";
+  lang: 'ENGLISH' | 'FINNISH' | 'SWEDISH' | 'ESTONIAN';
   /**
    * Transfer notification message.
    * @minLength 0
@@ -14105,9 +14164,9 @@ export interface TransferNotification {
 /** Contains rights for travel and expenses functionalities. */
 export interface TravelAndExpensesRights {
   /** Access level to travel and expense invoices functionality. */
-  travelAndExpenseInvoices?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  travelAndExpenseInvoices?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Access level to travel and expense invoice search functionality. */
-  travelAndExpenseInvoiceSearch?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  travelAndExpenseInvoiceSearch?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is personal travel and expense invoices only limitation enabled. */
   personalTravelAndExpenseInvoiceOnly?: boolean;
 }
@@ -14158,257 +14217,257 @@ export interface User {
    * @example "FINLAND"
    */
   countryCode?:
-    | "AFGHANISTAN"
-    | "ALAND_ISLANDS"
-    | "ALBANIA"
-    | "ALGERIA"
-    | "AMERICAN_SAMOA"
-    | "ANDORRA"
-    | "ANGOLA"
-    | "ANGUILLA"
-    | "ANTARCTICA"
-    | "ANTIGUA_AND_BARBUDA"
-    | "ARGENTINA"
-    | "ARMENIA"
-    | "ARUBA"
-    | "ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA"
-    | "AUSTRALIA"
-    | "AUSTRIA"
-    | "AZERBAIJAN"
-    | "BAHAMAS"
-    | "BAHRAIN"
-    | "BANGLADESH"
-    | "BARBADOS"
-    | "BELARUS"
-    | "BELGIUM"
-    | "BELIZE"
-    | "BENIN"
-    | "BERMUDA"
-    | "BHUTAN"
-    | "BOLIVARIAN_REPUBLIC_OF_VENEZUELA"
-    | "BOSNIA_AND_HERZEGOVINA"
-    | "BOTSWANA"
-    | "BOUVET_ISLAND"
-    | "BRAZIL"
-    | "BRITISH_INDIAN_OCEAN_TERRITORY"
-    | "BRITISH_VIRGIN_ISLANDS"
-    | "BRUNEI_DARUSSALAM"
-    | "BULGARIA"
-    | "BURKINA_FASO"
-    | "BURUNDI"
-    | "CABO_VERDE"
-    | "CAMBODIA"
-    | "CAMEROON"
-    | "CANADA"
-    | "CAYMAN_ISLANDS"
-    | "CENTRAL_AFRICAN_REPUBLIC"
-    | "CHAD"
-    | "CHILE"
-    | "CHINA"
-    | "CHRISTMAS_ISLAND"
-    | "COCOS_KEELING_ISLANDS"
-    | "COLOMBIA"
-    | "COMOROS"
-    | "CONGO"
-    | "COOK_ISLANDS"
-    | "COSTA_RICA"
-    | "COTE_D_IVOIRE"
-    | "CROATIA"
-    | "CUBA"
-    | "CURACAO"
-    | "CYPRUS"
-    | "CZECH_REPUBLIC"
-    | "DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA"
-    | "DENMARK"
-    | "DJIBOUTI"
-    | "DOMINICA"
-    | "DOMINICAN_REPUBLIC"
-    | "ECUADOR"
-    | "EGYPT"
-    | "EL_SALVADOR"
-    | "EQUATORIAL_GUINEA"
-    | "ERITREA"
-    | "ESTONIA"
-    | "ETHIOPIA"
-    | "FALKLAND_ISLANDS_MALVINAS"
-    | "FAROE_ISLANDS"
-    | "FEDERATED_STATES_OF_MICRONESIA"
-    | "FIJI"
-    | "FINLAND"
-    | "FRANCE"
-    | "FRENCH_GUIANA"
-    | "FRENCH_POLYNESIA"
-    | "FRENCH_SOUTHERN_TERRITORIES"
-    | "GABON"
-    | "GAMBIA"
-    | "GEORGIA"
-    | "GERMANY"
-    | "GHANA"
-    | "GIBRALTAR"
-    | "GREECE"
-    | "GREENLAND"
-    | "GRENADA"
-    | "GUADELOUPE"
-    | "GUAM"
-    | "GUATEMALA"
-    | "GUERNSEY"
-    | "GUINEA"
-    | "GUINEA_BISSAU"
-    | "GUYANA"
-    | "HAITI"
-    | "HEARD_ISLAND_AND_MCDONALD_ISLANDS"
-    | "HOLY_SEE_VATICAN_CITY_STATE"
-    | "HONDURAS"
-    | "HONG_KONG"
-    | "HUNGARY"
-    | "ICELAND"
-    | "INDIA"
-    | "INDONESIA"
-    | "IRAQ"
-    | "IRELAND"
-    | "ISLAMIC_REPUBLIC_OF_IRAN"
-    | "ISLE_OF_MAN"
-    | "ISRAEL"
-    | "ITALY"
-    | "JAMAICA"
-    | "JAPAN"
-    | "JERSEY"
-    | "JORDAN"
-    | "KAZAKHSTAN"
-    | "KENYA"
-    | "KIRIBATI"
-    | "KOSOVO_TEMPORARY"
-    | "KUWAIT"
-    | "KYRGYZSTAN"
-    | "LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC"
-    | "LATVIA"
-    | "LEBANON"
-    | "LESOTHO"
-    | "LIBERIA"
-    | "LIBYA"
-    | "LIECHTENSTEIN"
-    | "LITHUANIA"
-    | "LUXEMBOURG"
-    | "MACAO"
-    | "MADAGASCAR"
-    | "MALAWI"
-    | "MALAYSIA"
-    | "MALDIVES"
-    | "MALI"
-    | "MALTA"
-    | "MARSHALL_ISLANDS"
-    | "MARTINIQUE"
-    | "MAURITANIA"
-    | "MAURITIUS"
-    | "MAYOTTE"
-    | "MEXICO"
-    | "MONACO"
-    | "MONGOLIA"
-    | "MONTENEGRO"
-    | "MONTSERRAT"
-    | "MOROCCO"
-    | "MOZAMBIQUE"
-    | "MYANMAR"
-    | "NAMIBIA"
-    | "NAURU"
-    | "NEPAL"
-    | "NETHERLANDS"
-    | "NEW_CALEDONIA"
-    | "NEW_ZEALAND"
-    | "NICARAGUA"
-    | "NIGER"
-    | "NIGERIA"
-    | "NIUE"
-    | "NORFOLK_ISLAND"
-    | "NORTHERN_IRELAND_TEMPORARY"
-    | "NORTHERN_MARIANA_ISLANDS"
-    | "NORWAY"
-    | "OMAN"
-    | "PAKISTAN"
-    | "PALAU"
-    | "PANAMA"
-    | "PAPUA_NEW_GUINEA"
-    | "PARAGUAY"
-    | "PERU"
-    | "PHILIPPINES"
-    | "PITCAIRN"
-    | "PLURINATIONAL_STATE_OF_BOLIVIA"
-    | "POLAND"
-    | "PORTUGAL"
-    | "PROVINCE_OF_CHINA_TAIWAN"
-    | "PUERTO_RICO"
-    | "QATAR"
-    | "REPUBLIC_OF_KOREA"
-    | "REPUBLIC_OF_MOLDOVA"
-    | "REUNION"
-    | "ROMANIA"
-    | "RUSSIAN_FEDERATION"
-    | "RWANDA"
-    | "SAINT_BARTHELEMY"
-    | "SAINT_KITTS_AND_NEVIS"
-    | "SAINT_LUCIA"
-    | "SAINT_MARTIN_FRENCH_PART"
-    | "SAINT_PIERRE_AND_MIQUELON"
-    | "SAINT_VINCENT_AND_THE_GRENADINES"
-    | "SAMOA"
-    | "SAN_MARINO"
-    | "SAO_TOME_AND_PRINCIPE"
-    | "SAUDI_ARABIA"
-    | "SENEGAL"
-    | "SERBIA"
-    | "SEYCHELLES"
-    | "SIERRA_LEONE"
-    | "SINGAPORE"
-    | "SINT_EUSTATIUS_AND_SABA_BONAIRE"
-    | "SINT_MAARTEN_DUTCH_PART"
-    | "SLOVAKIA"
-    | "SLOVENIA"
-    | "SOLOMON_ISLANDS"
-    | "SOMALIA"
-    | "SOUTH_AFRICA"
-    | "SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS"
-    | "SOUTH_SUDAN"
-    | "SPAIN"
-    | "SRI_LANKA"
-    | "STATE_OF_PALESTINE"
-    | "SUDAN"
-    | "SURINAME"
-    | "SVALBARD_AND_JAN_MAYEN"
-    | "SWAZILAND"
-    | "SWEDEN"
-    | "SWITZERLAND"
-    | "SYRIAN_ARAB_REPUBLIC"
-    | "TAJIKISTAN"
-    | "THAILAND"
-    | "THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO"
-    | "THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA"
-    | "TIMOR_LESTE"
-    | "TOGO"
-    | "TOKELAU"
-    | "TONGA"
-    | "TRINIDAD_AND_TOBAGO"
-    | "TUNISIA"
-    | "TURKEY"
-    | "TURKMENISTAN"
-    | "TURKS_AND_CAICOS_ISLANDS"
-    | "TUVALU"
-    | "UGANDA"
-    | "UKRAINE"
-    | "UNITED_ARAB_EMIRATES"
-    | "UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND"
-    | "UNITED_REPUBLIC_OF_TANZANIA"
-    | "UNITED_STATES_MINOR_OUTLYING_ISLANDS"
-    | "UNITED_STATES_OF_AMERICA"
-    | "URUGUAY"
-    | "UZBEKISTAN"
-    | "U_S_VIRGIN_ISLANDS"
-    | "VANUATU"
-    | "VIET_NAM"
-    | "WALLIS_AND_FUTUNA"
-    | "WESTERN_SAHARA"
-    | "YEMEN"
-    | "ZAMBIA"
-    | "ZIMBABWE";
+    | 'AFGHANISTAN'
+    | 'ALAND_ISLANDS'
+    | 'ALBANIA'
+    | 'ALGERIA'
+    | 'AMERICAN_SAMOA'
+    | 'ANDORRA'
+    | 'ANGOLA'
+    | 'ANGUILLA'
+    | 'ANTARCTICA'
+    | 'ANTIGUA_AND_BARBUDA'
+    | 'ARGENTINA'
+    | 'ARMENIA'
+    | 'ARUBA'
+    | 'ASCENSION_AND_TRISTAN_DA_CUNHA_SAINT_HELENA'
+    | 'AUSTRALIA'
+    | 'AUSTRIA'
+    | 'AZERBAIJAN'
+    | 'BAHAMAS'
+    | 'BAHRAIN'
+    | 'BANGLADESH'
+    | 'BARBADOS'
+    | 'BELARUS'
+    | 'BELGIUM'
+    | 'BELIZE'
+    | 'BENIN'
+    | 'BERMUDA'
+    | 'BHUTAN'
+    | 'BOLIVARIAN_REPUBLIC_OF_VENEZUELA'
+    | 'BOSNIA_AND_HERZEGOVINA'
+    | 'BOTSWANA'
+    | 'BOUVET_ISLAND'
+    | 'BRAZIL'
+    | 'BRITISH_INDIAN_OCEAN_TERRITORY'
+    | 'BRITISH_VIRGIN_ISLANDS'
+    | 'BRUNEI_DARUSSALAM'
+    | 'BULGARIA'
+    | 'BURKINA_FASO'
+    | 'BURUNDI'
+    | 'CABO_VERDE'
+    | 'CAMBODIA'
+    | 'CAMEROON'
+    | 'CANADA'
+    | 'CAYMAN_ISLANDS'
+    | 'CENTRAL_AFRICAN_REPUBLIC'
+    | 'CHAD'
+    | 'CHILE'
+    | 'CHINA'
+    | 'CHRISTMAS_ISLAND'
+    | 'COCOS_KEELING_ISLANDS'
+    | 'COLOMBIA'
+    | 'COMOROS'
+    | 'CONGO'
+    | 'COOK_ISLANDS'
+    | 'COSTA_RICA'
+    | 'COTE_D_IVOIRE'
+    | 'CROATIA'
+    | 'CUBA'
+    | 'CURACAO'
+    | 'CYPRUS'
+    | 'CZECH_REPUBLIC'
+    | 'DEMOCRATIC_PEOPLE_S_REPUBLIC_OF_KOREA'
+    | 'DENMARK'
+    | 'DJIBOUTI'
+    | 'DOMINICA'
+    | 'DOMINICAN_REPUBLIC'
+    | 'ECUADOR'
+    | 'EGYPT'
+    | 'EL_SALVADOR'
+    | 'EQUATORIAL_GUINEA'
+    | 'ERITREA'
+    | 'ESTONIA'
+    | 'ETHIOPIA'
+    | 'FALKLAND_ISLANDS_MALVINAS'
+    | 'FAROE_ISLANDS'
+    | 'FEDERATED_STATES_OF_MICRONESIA'
+    | 'FIJI'
+    | 'FINLAND'
+    | 'FRANCE'
+    | 'FRENCH_GUIANA'
+    | 'FRENCH_POLYNESIA'
+    | 'FRENCH_SOUTHERN_TERRITORIES'
+    | 'GABON'
+    | 'GAMBIA'
+    | 'GEORGIA'
+    | 'GERMANY'
+    | 'GHANA'
+    | 'GIBRALTAR'
+    | 'GREECE'
+    | 'GREENLAND'
+    | 'GRENADA'
+    | 'GUADELOUPE'
+    | 'GUAM'
+    | 'GUATEMALA'
+    | 'GUERNSEY'
+    | 'GUINEA'
+    | 'GUINEA_BISSAU'
+    | 'GUYANA'
+    | 'HAITI'
+    | 'HEARD_ISLAND_AND_MCDONALD_ISLANDS'
+    | 'HOLY_SEE_VATICAN_CITY_STATE'
+    | 'HONDURAS'
+    | 'HONG_KONG'
+    | 'HUNGARY'
+    | 'ICELAND'
+    | 'INDIA'
+    | 'INDONESIA'
+    | 'IRAQ'
+    | 'IRELAND'
+    | 'ISLAMIC_REPUBLIC_OF_IRAN'
+    | 'ISLE_OF_MAN'
+    | 'ISRAEL'
+    | 'ITALY'
+    | 'JAMAICA'
+    | 'JAPAN'
+    | 'JERSEY'
+    | 'JORDAN'
+    | 'KAZAKHSTAN'
+    | 'KENYA'
+    | 'KIRIBATI'
+    | 'KOSOVO_TEMPORARY'
+    | 'KUWAIT'
+    | 'KYRGYZSTAN'
+    | 'LAO_PEOPLE_S_DEMOCRATIC_REPUBLIC'
+    | 'LATVIA'
+    | 'LEBANON'
+    | 'LESOTHO'
+    | 'LIBERIA'
+    | 'LIBYA'
+    | 'LIECHTENSTEIN'
+    | 'LITHUANIA'
+    | 'LUXEMBOURG'
+    | 'MACAO'
+    | 'MADAGASCAR'
+    | 'MALAWI'
+    | 'MALAYSIA'
+    | 'MALDIVES'
+    | 'MALI'
+    | 'MALTA'
+    | 'MARSHALL_ISLANDS'
+    | 'MARTINIQUE'
+    | 'MAURITANIA'
+    | 'MAURITIUS'
+    | 'MAYOTTE'
+    | 'MEXICO'
+    | 'MONACO'
+    | 'MONGOLIA'
+    | 'MONTENEGRO'
+    | 'MONTSERRAT'
+    | 'MOROCCO'
+    | 'MOZAMBIQUE'
+    | 'MYANMAR'
+    | 'NAMIBIA'
+    | 'NAURU'
+    | 'NEPAL'
+    | 'NETHERLANDS'
+    | 'NEW_CALEDONIA'
+    | 'NEW_ZEALAND'
+    | 'NICARAGUA'
+    | 'NIGER'
+    | 'NIGERIA'
+    | 'NIUE'
+    | 'NORFOLK_ISLAND'
+    | 'NORTHERN_IRELAND_TEMPORARY'
+    | 'NORTHERN_MARIANA_ISLANDS'
+    | 'NORWAY'
+    | 'OMAN'
+    | 'PAKISTAN'
+    | 'PALAU'
+    | 'PANAMA'
+    | 'PAPUA_NEW_GUINEA'
+    | 'PARAGUAY'
+    | 'PERU'
+    | 'PHILIPPINES'
+    | 'PITCAIRN'
+    | 'PLURINATIONAL_STATE_OF_BOLIVIA'
+    | 'POLAND'
+    | 'PORTUGAL'
+    | 'PROVINCE_OF_CHINA_TAIWAN'
+    | 'PUERTO_RICO'
+    | 'QATAR'
+    | 'REPUBLIC_OF_KOREA'
+    | 'REPUBLIC_OF_MOLDOVA'
+    | 'REUNION'
+    | 'ROMANIA'
+    | 'RUSSIAN_FEDERATION'
+    | 'RWANDA'
+    | 'SAINT_BARTHELEMY'
+    | 'SAINT_KITTS_AND_NEVIS'
+    | 'SAINT_LUCIA'
+    | 'SAINT_MARTIN_FRENCH_PART'
+    | 'SAINT_PIERRE_AND_MIQUELON'
+    | 'SAINT_VINCENT_AND_THE_GRENADINES'
+    | 'SAMOA'
+    | 'SAN_MARINO'
+    | 'SAO_TOME_AND_PRINCIPE'
+    | 'SAUDI_ARABIA'
+    | 'SENEGAL'
+    | 'SERBIA'
+    | 'SEYCHELLES'
+    | 'SIERRA_LEONE'
+    | 'SINGAPORE'
+    | 'SINT_EUSTATIUS_AND_SABA_BONAIRE'
+    | 'SINT_MAARTEN_DUTCH_PART'
+    | 'SLOVAKIA'
+    | 'SLOVENIA'
+    | 'SOLOMON_ISLANDS'
+    | 'SOMALIA'
+    | 'SOUTH_AFRICA'
+    | 'SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS'
+    | 'SOUTH_SUDAN'
+    | 'SPAIN'
+    | 'SRI_LANKA'
+    | 'STATE_OF_PALESTINE'
+    | 'SUDAN'
+    | 'SURINAME'
+    | 'SVALBARD_AND_JAN_MAYEN'
+    | 'SWAZILAND'
+    | 'SWEDEN'
+    | 'SWITZERLAND'
+    | 'SYRIAN_ARAB_REPUBLIC'
+    | 'TAJIKISTAN'
+    | 'THAILAND'
+    | 'THE_DEMOCRATIC_REPUBLIC_OF_THE_CONGO'
+    | 'THE_FORMER_YUGOSLAV_REPUBLIC_OF_MACEDONIA'
+    | 'TIMOR_LESTE'
+    | 'TOGO'
+    | 'TOKELAU'
+    | 'TONGA'
+    | 'TRINIDAD_AND_TOBAGO'
+    | 'TUNISIA'
+    | 'TURKEY'
+    | 'TURKMENISTAN'
+    | 'TURKS_AND_CAICOS_ISLANDS'
+    | 'TUVALU'
+    | 'UGANDA'
+    | 'UKRAINE'
+    | 'UNITED_ARAB_EMIRATES'
+    | 'UNITED_KINGDOM_OF_GREAT_BRITAIN_AND_NORTHERN_IRELAND'
+    | 'UNITED_REPUBLIC_OF_TANZANIA'
+    | 'UNITED_STATES_MINOR_OUTLYING_ISLANDS'
+    | 'UNITED_STATES_OF_AMERICA'
+    | 'URUGUAY'
+    | 'UZBEKISTAN'
+    | 'U_S_VIRGIN_ISLANDS'
+    | 'VANUATU'
+    | 'VIET_NAM'
+    | 'WALLIS_AND_FUTUNA'
+    | 'WESTERN_SAHARA'
+    | 'YEMEN'
+    | 'ZAMBIA'
+    | 'ZIMBABWE';
   /**
    * Street
    * @minLength 0
@@ -14433,7 +14492,7 @@ export interface User {
    */
   partnerId?: number;
   /** Indicates the login method chosen by the user. */
-  loginMethod?: "FINAGO_KEY" | "PASSWORDLIST" | "PROCOUNTOR_KEY";
+  loginMethod?: 'FINAGO_KEY' | 'PASSWORDLIST' | 'PROCOUNTOR_KEY';
   /**
    * The first name of the user.
    * @minLength 1
@@ -14503,7 +14562,7 @@ export interface UserProfile {
 /** Contains rights for user functionalities. */
 export interface UserRights {
   /** Access level to edit personal info functionality. */
-  editPersonalInfo?: "ALL_RIGHTS" | "NOT_ENABLED" | "NO_ACCESS" | "VIEWING_RIGHTS";
+  editPersonalInfo?: 'ALL_RIGHTS' | 'NOT_ENABLED' | 'NO_ACCESS' | 'VIEWING_RIGHTS';
   /** Is limited dimensions limitation enabled. */
   limitedDimensions?: boolean;
   /** Is login limitation enabled. */
@@ -14620,20 +14679,20 @@ export interface Webhook {
    */
   url: string;
   /** Webhook's authentication type. */
-  authenticationType: "HMAC" | "NONE";
+  authenticationType: 'HMAC' | 'NONE';
   /** Webhook's authentication meta. */
   authenticationMeta?: Record<string, object>;
   /** Collection of subscribed event types. */
   subscriptions: (
-    | "DIRECTBANKDATATRANSFER_PAYMENT_CREATED"
-    | "DIRECT_SALARY_PAYMENTS_CANCELED"
-    | "DIRECT_SALARY_PAYMENTS_CREATED"
-    | "INVOICE_PAYMENTEVENTS_DELETED"
-    | "INVOICE_PAYMENT_CREATED"
-    | "PAYMENT_DELETED"
-    | "PAYMENT_UPDATED"
-    | "TRACKING_PERIOD_STATUS_UPDATED"
-    | "USER_UPDATED"
+    | 'DIRECTBANKDATATRANSFER_PAYMENT_CREATED'
+    | 'DIRECT_SALARY_PAYMENTS_CANCELED'
+    | 'DIRECT_SALARY_PAYMENTS_CREATED'
+    | 'INVOICE_PAYMENTEVENTS_DELETED'
+    | 'INVOICE_PAYMENT_CREATED'
+    | 'PAYMENT_DELETED'
+    | 'PAYMENT_UPDATED'
+    | 'TRACKING_PERIOD_STATUS_UPDATED'
+    | 'USER_UPDATED'
   )[];
 }
 
@@ -14685,12 +14744,12 @@ export interface YearlyFigures {
   healthCareInsurancePercent?: number;
 }
 
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from "axios";
-import axios from "axios";
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios';
+import axios from 'axios';
 
 export type QueryParamsType = Record<string | number, any>;
 
-export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "params" | "url" | "responseType"> {
+export interface FullRequestParams extends Omit<AxiosRequestConfig, 'data' | 'params' | 'url' | 'responseType'> {
   /** set parameter to `true` for call `securityWorker` for this request */
   secure?: boolean;
   /** request path */
@@ -14705,34 +14764,32 @@ export interface FullRequestParams extends Omit<AxiosRequestConfig, "data" | "pa
   body?: unknown;
 }
 
-export type RequestParams = Omit<FullRequestParams, "body" | "method" | "query" | "path">;
+export type RequestParams = Omit<FullRequestParams, 'body' | 'method' | 'query' | 'path'>;
 
-export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, "data" | "cancelToken"> {
-  securityWorker?: (
-    securityData: SecurityDataType | null,
-  ) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
+export interface ApiConfig<SecurityDataType = unknown> extends Omit<AxiosRequestConfig, 'data' | 'cancelToken'> {
+  securityWorker?: (securityData: SecurityDataType | null) => Promise<AxiosRequestConfig | void> | AxiosRequestConfig | void;
   secure?: boolean;
   format?: ResponseType;
 }
 
 export enum ContentType {
-  Json = "application/json",
-  FormData = "multipart/form-data",
-  UrlEncoded = "application/x-www-form-urlencoded",
-  Text = "text/plain",
+  Json = 'application/json',
+  FormData = 'multipart/form-data',
+  UrlEncoded = 'application/x-www-form-urlencoded',
+  Text = 'text/plain'
 }
 
 export class HttpClient<SecurityDataType = unknown> {
   public instance: AxiosInstance;
   private securityData: SecurityDataType | null = null;
-  private securityWorker?: ApiConfig<SecurityDataType>["securityWorker"];
+  private securityWorker?: ApiConfig<SecurityDataType>['securityWorker'];
   private secure?: boolean;
   private format?: ResponseType;
 
   constructor({ securityWorker, secure, format, ...axiosConfig }: ApiConfig<SecurityDataType> = {}) {
     this.instance = axios.create({
       ...axiosConfig,
-      baseURL: axiosConfig.baseURL || "https://pts-procountor.pubdev.azure.procountor.com/api",
+      baseURL: axiosConfig.baseURL || 'https://pts-procountor.pubdev.azure.procountor.com/api'
     });
     this.secure = secure;
     this.format = format;
@@ -14753,13 +14810,13 @@ export class HttpClient<SecurityDataType = unknown> {
       headers: {
         ...((method && this.instance.defaults.headers[method.toLowerCase() as keyof HeadersDefaults]) || {}),
         ...(params1.headers || {}),
-        ...((params2 && params2.headers) || {}),
-      },
+        ...((params2 && params2.headers) || {})
+      }
     };
   }
 
   protected stringifyFormItem(formItem: unknown) {
-    if (typeof formItem === "object" && formItem !== null) {
+    if (typeof formItem === 'object' && formItem !== null) {
       return JSON.stringify(formItem);
     } else {
       return `${formItem}`;
@@ -14790,18 +14847,15 @@ export class HttpClient<SecurityDataType = unknown> {
     ...params
   }: FullRequestParams): Promise<AxiosResponse<T>> => {
     const secureParams =
-      ((typeof secure === "boolean" ? secure : this.secure) &&
-        this.securityWorker &&
-        (await this.securityWorker(this.securityData))) ||
-      {};
+      ((typeof secure === 'boolean' ? secure : this.secure) && this.securityWorker && (await this.securityWorker(this.securityData))) || {};
     const requestParams = this.mergeRequestParams(params, secureParams);
     const responseFormat = format || this.format || undefined;
 
-    if (type === ContentType.FormData && body && body !== null && typeof body === "object") {
+    if (type === ContentType.FormData && body && body !== null && typeof body === 'object') {
       body = this.createFormData(body as Record<string, unknown>);
     }
 
-    if (type === ContentType.Text && body && body !== null && typeof body !== "string") {
+    if (type === ContentType.Text && body && body !== null && typeof body !== 'string') {
       body = JSON.stringify(body);
     }
 
@@ -14809,12 +14863,12 @@ export class HttpClient<SecurityDataType = unknown> {
       ...requestParams,
       headers: {
         ...(requestParams.headers || {}),
-        ...(type && type !== ContentType.FormData ? { "Content-Type": type } : {}),
+        ...(type && type !== ContentType.FormData ? { 'Content-Type': type } : {})
       },
       params: query,
       responseType: responseFormat,
       data: body,
-      url: path,
+      url: path
     });
   };
 }
@@ -14845,12 +14899,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateWebhook: (uuid: string, data: Webhook, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/webhooks/${uuid}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -14868,9 +14922,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteWebhook: (uuid: string, params: RequestParams = {}) =>
       this.request<void, ErrorMessages>({
         path: `/webhooks/${uuid}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        ...params,
+        ...params
       }),
 
     /**
@@ -14898,21 +14952,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "INVOICE_PAYMENT_CREATED"
          */
         eventType?: (
-          | "INVOICE_PAYMENT_CREATED"
-          | "DIRECTBANKDATATRANSFER_PAYMENT_CREATED"
-          | "INVOICE_PAYMENTEVENTS_DELETED"
-          | "PAYMENT_UPDATED"
-          | "PAYMENT_DELETED"
-          | "USER_UPDATED"
-          | "DIRECT_SALARY_PAYMENTS_CREATED"
-          | "DIRECT_SALARY_PAYMENTS_CANCELED"
+          | 'INVOICE_PAYMENT_CREATED'
+          | 'DIRECTBANKDATATRANSFER_PAYMENT_CREATED'
+          | 'INVOICE_PAYMENTEVENTS_DELETED'
+          | 'PAYMENT_UPDATED'
+          | 'PAYMENT_DELETED'
+          | 'USER_UPDATED'
+          | 'DIRECT_SALARY_PAYMENTS_CREATED'
+          | 'DIRECT_SALARY_PAYMENTS_CANCELED'
         )[];
         /**
          * Order the results by webhook creation date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreatedDate?: "ASC" | "DESC";
+        orderByCreatedDate?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -14929,15 +14983,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<WebhookSearchResult, ErrorMessages>({
         path: `/webhooks`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -14955,13 +15009,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addWebhook: (data: Webhook, params: RequestParams = {}) =>
       this.request<CreatedWebhookResponse, ErrorMessages>({
         path: `/webhooks`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   users = {
     /**
@@ -14978,10 +15032,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrentUser: (params: RequestParams = {}) =>
       this.request<User, ErrorMessages>({
         path: `/users`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -14999,12 +15053,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateUserInfo: (data: User, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/users`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15026,10 +15080,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/users/${transactionIdentifier}/confirm`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15045,10 +15099,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrentUserRights: (params: RequestParams = {}) =>
       this.request<UserPrivileges, any>({
         path: `/users/rights`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15065,11 +15119,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getUserProfile: (userId: number, params: RequestParams = {}) =>
       this.request<UserProfile, ErrorMessages>({
         path: `/users/profiles/${userId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   referencepayments = {
     /**
@@ -15088,12 +15142,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     allocateAllocationMetadata: (referencePaymentId: number, data: AllocationMetadata, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/referencepayments/${referencePaymentId}/metadata`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15111,10 +15165,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteAllocationMetadata: (referencePaymentId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/referencepayments/${referencePaymentId}/metadata`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15154,7 +15208,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -15176,16 +15230,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         accountNumber?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ReferencePaymentsSearchResult, ErrorMessages>({
         path: `/referencepayments`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   products = {
     /**
@@ -15210,15 +15264,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         includeLocalizations?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Product, ErrorMessages>({
         path: `/products/${productId}`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15237,12 +15291,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateProduct: (productId: number, data: Product, params: RequestParams = {}) =>
       this.request<Product, ErrorMessages>({
         path: `/products/${productId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15261,10 +15315,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removeProductById: (productId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/products/${productId}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15282,10 +15336,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getProductGroupByGroupId: (groupId: number, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15304,12 +15358,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateProductGroupName: (groupId: number, data: ProductGroup, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15329,10 +15383,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removeProductGroupById: (groupId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/products/groups/${groupId}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15373,7 +15427,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by product ID
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Id of product group.
          * @example 1
@@ -15383,7 +15437,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Register type of product. If not given, then SALES and PURCHASE returned as default
          * @example "TRAVEL"
          */
-        type?: "SALES" | "PURCHASE" | "TRAVEL";
+        type?: 'SALES' | 'PURCHASE' | 'TRAVEL';
         /**
          * Custom code assigned by the owner of the product. Matched by substring.
          * @maxLength 40
@@ -15414,15 +15468,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         active?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ProductSearchResult, ErrorMessages>({
         path: `/products`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15440,12 +15494,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addProduct: (data: Product, params: RequestParams = {}) =>
       this.request<Product, ErrorMessages>({
         path: `/products`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15466,17 +15520,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Product type. Endpoint will return product groups for types: SALES and PURCHASE when user will not specify type.
          * @example "SALES"
          */
-        type?: "SALES" | "PURCHASE" | "TRAVEL";
+        type?: 'SALES' | 'PURCHASE' | 'TRAVEL';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<ProductGroups, ErrorMessages>({
         path: `/products/groups`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15494,13 +15548,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addProductGroupName: (data: ProductGroup, params: RequestParams = {}) =>
       this.request<ProductGroup, ErrorMessages>({
         path: `/products/groups`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   persons = {
     /**
@@ -15518,10 +15572,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonById: (id: number, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15540,12 +15594,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updatePerson: (id: number, data: Person, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15563,10 +15617,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultDimensionById: (id: number, dimensionId: number, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15585,12 +15639,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDefaultDimension: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions/${dimensionId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15652,17 +15706,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PersonSearchResult[], ErrorMessages>({
         path: `/persons`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15680,12 +15734,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     insertPerson: (data: Person, params: RequestParams = {}) =>
       this.request<Person, ErrorMessages>({
         path: `/persons`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15703,10 +15757,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultProducts: (id: number, params: RequestParams = {}) =>
       this.request<DefaultProduct[], ErrorMessages>({
         path: `/persons/${id}/defaults/products`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15724,11 +15778,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonDefaultDimensionsByPersonId: (id: number, params: RequestParams = {}) =>
       this.request<DefaultDimensionBasicData[], ErrorMessages>({
         path: `/persons/${id}/defaults/dimensions`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   payments = {
     /**
@@ -15750,10 +15804,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm1: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<PaymentsConfirmationResponseModels, ErrorMessages>({
         path: `/payments/${transactionIdentifier}/confirm`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15771,10 +15825,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     cancelPayment: (paymentId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/${paymentId}/cancel`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15796,10 +15850,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm2: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<DirectSalaryPaymentsConfirmationResponseModels, ErrorMessages>({
         path: `/payments/directsalarypayments/${transactionIdentifier}/confirm`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15817,10 +15871,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     cancelDirectSalaryPayments: (paymentListId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directsalarypayments/${paymentListId}/cancel`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15864,7 +15918,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by payment ID.
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -15881,15 +15935,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaymentSearchResult, ErrorMessages>({
         path: `/payments`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15908,12 +15962,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     payInvoices: (data: InvoicePaymentList, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -15962,7 +16016,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by payment ID.
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -15979,15 +16033,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<DirectSalaryPaymentGroupBaseInfoSearchResult, ErrorMessages>({
         path: `/payments/directsalarypayments`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16006,12 +16060,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createDirectSalaryPayments: (data: DirectSalaryPayments, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directsalarypayments`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16030,12 +16084,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createDirectBankTransfers: (data: DirectBankTransferList, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/directbanktransfers`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16053,10 +16107,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPaymentRowById: (paymentId: number, params: RequestParams = {}) =>
       this.request<PaymentRowInfo, ErrorMessages>({
         path: `/payments/${paymentId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16074,10 +16128,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removePayment: (paymentId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/payments/${paymentId}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16110,12 +16164,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Type of error message.
          * @example "PAYMENT_ERROR"
          */
-        type?: "PAYMENT_ERROR" | "NETS_COLLECTION_ERROR";
+        type?: 'PAYMENT_ERROR' | 'NETS_COLLECTION_ERROR';
         /**
          * Handling status of error message.
          * @example "UNHANDLED"
          */
-        status?: "ALL" | "UNHANDLED" | "HANDLED";
+        status?: 'ALL' | 'UNHANDLED' | 'HANDLED';
         /**
          * Previous error message ID for pagination.
          * @format int32
@@ -16126,7 +16180,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by message ID.
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16143,15 +16197,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaymentErrorMessageSearchResult, ErrorMessages>({
         path: `/payments/errormessages`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16169,11 +16223,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDirectSalaryPaymentsByPaymentListId: (paymentListId: number, params: RequestParams = {}) =>
       this.request<DirectSalaryPaymentGroup, ErrorMessages>({
         path: `/payments/directsalarypayments/${paymentListId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   ledgerreceipts = {
     /**
@@ -16190,10 +16244,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getLedgerReceipt: (receiptId: string, params: RequestParams = {}) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16218,17 +16272,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         createReconciliation?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}`,
-        method: "PUT",
+        method: 'PUT',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16247,10 +16301,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markLedgerReceiptAsUnfinished: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/unfinished`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16269,10 +16323,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markLedgerReceiptAsInvalidated: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/invalidate`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16290,10 +16344,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     approveInvoice: (receiptId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/ledgerreceipts/${receiptId}/approve`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16350,21 +16404,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "JOURNAL"
          */
         types?: (
-          | "JOURNAL"
-          | "PURCHASE_INVOICE"
-          | "SALES_INVOICE"
-          | "PERIODIC_TAX_RETURN"
-          | "TRAVEL_INVOICE"
-          | "BILL_OF_CHARGES"
-          | "VAT_FORM"
-          | "SALARY"
-          | "EMPLOYER_CONTRIBUTION"
-          | "PURCHASE_ORDER"
-          | "SALES_ORDER"
-          | "BANK_STATEMENT_AS_RECEIPT"
-          | "RECEIPT_FOR_OPENING_ACCOUNTS"
-          | "REFERENCE_PAYMENT"
-          | "TRACKING_PERIOD_OPENING_RECEIPT"
+          | 'JOURNAL'
+          | 'PURCHASE_INVOICE'
+          | 'SALES_INVOICE'
+          | 'PERIODIC_TAX_RETURN'
+          | 'TRAVEL_INVOICE'
+          | 'BILL_OF_CHARGES'
+          | 'VAT_FORM'
+          | 'SALARY'
+          | 'EMPLOYER_CONTRIBUTION'
+          | 'PURCHASE_ORDER'
+          | 'SALES_ORDER'
+          | 'BANK_STATEMENT_AS_RECEIPT'
+          | 'RECEIPT_FOR_OPENING_ACCOUNTS'
+          | 'REFERENCE_PAYMENT'
+          | 'TRACKING_PERIOD_OPENING_RECEIPT'
         )[];
         /**
          * Previous Id for pagination
@@ -16377,25 +16431,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Order the results by date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByDate?: "ASC" | "DESC";
+        orderByDate?: 'ASC' | 'DESC';
         /**
          * Order the results by created date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreated?: "ASC" | "DESC";
+        orderByCreated?: 'ASC' | 'DESC';
         /**
          * Order the results by version (updated date)
          * @default "DESC"
          * @example "ASC"
          */
-        orderByVersion?: "ASC" | "DESC";
+        orderByVersion?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16417,15 +16471,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         status?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<LedgerReceiptSearchResult, ErrorMessages>({
         path: `/ledgerreceipts`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16450,18 +16504,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         createReconciliation?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<LedgerReceipt, ErrorMessages>({
         path: `/ledgerreceipts`,
-        method: "POST",
+        method: 'POST',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   invoices = {
     /**
@@ -16483,10 +16537,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     confirm3: (transactionIdentifier: string, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${transactionIdentifier}/confirm`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16504,10 +16558,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getInvoice: (invoiceId: string, params: RequestParams = {}) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices/${invoiceId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16526,12 +16580,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateInvoice: (invoiceId: number, data: Invoice, params: RequestParams = {}) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices/${invoiceId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16549,12 +16603,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     verifyInvoice: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/verify`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16573,10 +16627,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markInvoiceAsUnfinished: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/unfinished`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16595,10 +16649,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     send: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/send`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16616,10 +16670,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     sendToCirculation: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/sendToCirculation`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16637,12 +16691,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     rejectInvoice: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/reject`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16665,17 +16719,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Supported only for SALES_INVOICE type. Default is false. When marking the overdue sales invoice as paid, if you want to automatically include a penal expense in the business partner's next sales invoice, then call the endpoint with addPenalExpense=true. Automatic handling of collection and penal costs setting must be enabled prior to this and penal expense product must be already defined. */
         addPenalExpense?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaymentEvent, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/markpaid`,
-        method: "PUT",
+        method: 'PUT',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16693,12 +16747,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addNotesToInvoice: (invoiceId: number, data: InvoiceNotes, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/notes`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16717,10 +16771,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     markInvoiceAsInvalidated: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/invalidate`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16738,10 +16792,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     setCommentReadByUser: (invoiceId: number, commentId: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/${commentId}/read`,
-        method: "PUT",
+        method: 'PUT',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16759,12 +16813,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     approveInvoice1: (invoiceId: number, data: CheckingEvent, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/invoices/${invoiceId}/approve`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16787,26 +16841,26 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "UNFINISHED"
          */
         status?: (
-          | "EMPTY"
-          | "UNFINISHED"
-          | "NOT_SENT"
-          | "SENT"
-          | "RECEIVED"
-          | "PAID"
-          | "PAYMENT_DENIED"
-          | "VERIFIED"
-          | "APPROVED"
-          | "INVALIDATED"
-          | "PAYMENT_QUEUED"
-          | "PARTLY_PAID"
-          | "PAYMENT_SENT_TO_BANK"
-          | "MARKED_PAID"
-          | "STARTED"
-          | "INVOICED"
-          | "OVERRIDDEN"
-          | "DELETED"
-          | "UNSAVED"
-          | "PAYMENT_TRANSACTION_REMOVED"
+          | 'EMPTY'
+          | 'UNFINISHED'
+          | 'NOT_SENT'
+          | 'SENT'
+          | 'RECEIVED'
+          | 'PAID'
+          | 'PAYMENT_DENIED'
+          | 'VERIFIED'
+          | 'APPROVED'
+          | 'INVALIDATED'
+          | 'PAYMENT_QUEUED'
+          | 'PARTLY_PAID'
+          | 'PAYMENT_SENT_TO_BANK'
+          | 'MARKED_PAID'
+          | 'STARTED'
+          | 'INVOICED'
+          | 'OVERRIDDEN'
+          | 'DELETED'
+          | 'UNSAVED'
+          | 'PAYMENT_TRANSACTION_REMOVED'
         )[];
         /**
          * Start date of the search (invoice billing date)
@@ -16849,13 +16903,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "SALES_INVOICE"
          */
         types?: (
-          | "PERIODIC_TAX_RETURN"
-          | "PURCHASE_INVOICE"
-          | "PURCHASE_ORDER"
-          | "SALES_INVOICE"
-          | "SALES_ORDER"
-          | "TRAVEL_INVOICE"
-          | "BILL_OF_CHARGES"
+          | 'PERIODIC_TAX_RETURN'
+          | 'PURCHASE_INVOICE'
+          | 'PURCHASE_ORDER'
+          | 'SALES_INVOICE'
+          | 'SALES_ORDER'
+          | 'TRAVEL_INVOICE'
+          | 'BILL_OF_CHARGES'
         )[];
         /**
          * Search invoices with given business partner ID
@@ -16891,25 +16945,25 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Order the results by date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByDate?: "ASC" | "DESC";
+        orderByDate?: 'ASC' | 'DESC';
         /**
          * Order the results by created date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByCreated?: "ASC" | "DESC";
+        orderByCreated?: 'ASC' | 'DESC';
         /**
          * Order the results by version (updated date)
          * @default "DESC"
          * @example "ASC"
          */
-        orderByVersion?: "ASC" | "DESC";
+        orderByVersion?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -16929,17 +16983,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice channel
          * @example "EMAIL"
          */
-        invoiceChannel?: ("EMAIL" | "MAIL" | "ELECTRONIC_INVOICE" | "EDIFACT" | "PAPER_INVOICE" | "NO_SENDING")[];
+        invoiceChannel?: ('EMAIL' | 'MAIL' | 'ELECTRONIC_INVOICE' | 'EDIFACT' | 'PAPER_INVOICE' | 'NO_SENDING')[];
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<InvoiceSearchResult, ErrorMessages>({
         path: `/invoices`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16961,17 +17015,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Supported only for SALES_INVOICE type. Default is false. If true, automatically adds the collection cost(s), if payment reminders were sent earlier to the business partner and/or penal cost, if the business partner had paid the earlier invoice late. These costs are added only if Automatic handling of collection and penal costs setting is enabled, and collection costs product and penal expense product have been defined. */
         addCollectionPenalCosts?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Invoice, ErrorMessages>({
         path: `/invoices`,
-        method: "POST",
+        method: 'POST',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -16991,15 +17045,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** If true, only those comments that have tagged users and comments have been read by all tagged users are returned. Comments without tagged users aren't returned. If false, only those comments that have tagged users but comments have not been read by all tagged users are returned. Comments without tagged users aren't returned. */
         readByAllTaggedUsers?: boolean;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Comments, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17017,12 +17071,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     saveInvoiceComment: (invoiceId: number, data: Comment, params: RequestParams = {}) =>
       this.request<Comment, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17040,10 +17094,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getInvoiceTransactions: (invoiceId: number, params: RequestParams = {}) =>
       this.request<InvoiceTransactions, ErrorMessages>({
         path: `/invoices/${invoiceId}/transactions`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17073,7 +17127,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -17090,15 +17144,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<PaymentEventSearchResult, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17116,10 +17170,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPaymentEventByIdAndInvoiceId: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
       this.request<PaymentEvent, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17138,10 +17192,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     removePaymentEvent: (invoiceId: number, paymentEventId: number, params: RequestParams = {}) =>
       this.request<TransactionIdentifier, ErrorMessages>({
         path: `/invoices/${invoiceId}/paymentevents/${paymentEventId}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17166,15 +17220,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/invoices/${invoiceId}/image`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17192,10 +17246,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCommentById: (invoiceId: number, commentId: number, params: RequestParams = {}) =>
       this.request<CommentWithTaggedUsers, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/${commentId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17212,10 +17266,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getTaggeableUsers: (invoiceId: number, params: RequestParams = {}) =>
       this.request<TaggableUsers, ErrorMessages>({
         path: `/invoices/${invoiceId}/comments/taggableusers`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17236,17 +17290,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice type.
          * @example "PURCHASE_INVOICE"
          */
-        types: "PURCHASE_INVOICE" | "TRAVEL_INVOICE" | "BILL_OF_CHARGES";
+        types: 'PURCHASE_INVOICE' | 'TRAVEL_INVOICE' | 'BILL_OF_CHARGES';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<InvoiceIds, ErrorMessages>({
         path: `/invoices/personalverifications`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17267,18 +17321,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Invoice type.
          * @example "PURCHASE_INVOICE"
          */
-        types: "PURCHASE_INVOICE" | "TRAVEL_INVOICE" | "BILL_OF_CHARGES";
+        types: 'PURCHASE_INVOICE' | 'TRAVEL_INVOICE' | 'BILL_OF_CHARGES';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<InvoiceIds, ErrorMessages>({
         path: `/invoices/personalapprovals`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   fiscalyears = {
     /**
@@ -17294,20 +17348,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `404` `ErrorMessages` Fiscal period not found.
      * @response `409` `ErrorMessages` The request could not be completed due to a conflict with the current state of the resource.
      */
-    updateFiscalYear: (
-      fiscalYearId: number,
-      trackingPeriodId: number,
-      data: TrackingPeriod,
-      params: RequestParams = {},
-    ) =>
+    updateFiscalYear: (fiscalYearId: number, trackingPeriodId: number, data: TrackingPeriod, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/fiscalyears/${fiscalYearId}/trackingPeriods/${trackingPeriodId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17323,11 +17372,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getFiscalYears: (params: RequestParams = {}) =>
       this.request<FiscalYears, any>({
         path: `/fiscalyears`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   dimensions = {
     /**
@@ -17344,10 +17393,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDimension: (dimensionId: number, params: RequestParams = {}) =>
       this.request<Dimension, ErrorMessages>({
         path: `/dimensions/${dimensionId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17366,12 +17415,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDimension: (dimensionId: number, data: DimensionName, params: RequestParams = {}) =>
       this.request<DimensionName, ErrorMessages>({
         path: `/dimensions/${dimensionId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17390,12 +17439,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDimensionItem: (dimensionId: number, data: DimensionItem, params: RequestParams = {}) =>
       this.request<DimensionItem, ErrorMessages>({
         path: `/dimensions/${dimensionId}/items`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17414,12 +17463,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addDimensionItem: (dimensionId: number, data: DimensionItem, params: RequestParams = {}) =>
       this.request<DimensionItem, ErrorMessages>({
         path: `/dimensions/${dimensionId}/items`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17439,16 +17488,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Name of the dimension item. Supports partial search. */
         codeName?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Dimension[], any>({
         path: `/dimensions`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   company = {
     /**
@@ -17466,10 +17515,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInfo: (params: RequestParams = {}) =>
       this.request<Company, ErrorMessages>({
         path: `/company`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17488,12 +17537,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateCompanyInfo: (data: Company, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/company`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17510,10 +17559,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInvoiceTemplates: (params: RequestParams = {}) =>
       this.request<InvoiceTemplate, ErrorMessages>({
         path: `/company/invoicetemplates`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17530,10 +17579,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVerifierList: (params: RequestParams = {}) =>
       this.request<VerifierListBasic[], ErrorMessages>({
         path: `/company/invoicecirculation/verifierlists`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17551,10 +17600,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVerifierList1: (id: number, params: RequestParams = {}) =>
       this.request<VerifierList, ErrorMessages>({
         path: `/company/invoicecirculation/verifierlists/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17571,10 +17620,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyInvoiceCirculationSettings: (params: RequestParams = {}) =>
       this.request<CirculationSettings, ErrorMessages>({
         path: `/company/invoicecirculation/settings`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17590,10 +17639,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyCollectionPenalExpensesSettings: (params: RequestParams = {}) =>
       this.request<CollectionsAndPenalExpenses, any>({
         path: `/company/expenses/collectionpenal/settings`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17609,10 +17658,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getEInvoiceAddresses: (params: RequestParams = {}) =>
       this.request<EInvoiceData, any>({
         path: `/company/einvoiceaddresses`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17629,11 +17678,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCompanyDeliveryTerms: (params: RequestParams = {}) =>
       this.request<DeliveryTerms, ErrorMessages>({
         path: `/company/deliveryterms`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   businesspartners = {
     /**
@@ -17651,10 +17700,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getBusinessPartner: (id: string, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17673,12 +17722,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     putBusinessPartner: (id: number, data: BusinessPartner, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17701,17 +17750,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** Business partner last modification time. It is required if not filled in the request body. */
         version?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<DataModel, ErrorMessages>({
         path: `/businesspartners/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17729,10 +17778,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultDimension: (id: number, dimensionId: number, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17750,12 +17799,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateDefaultDimension1: (id: number, dimensionId: number, data: DefaultDimension, params: RequestParams = {}) =>
       this.request<DefaultDimension, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions/${dimensionId}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17773,10 +17822,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPartnerGroup: (id: number, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17795,12 +17844,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateBusinessPartnerGroup: (id: number, data: BusinessPartnerGroup, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17840,13 +17889,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Type of business partner
          * @example "CUSTOMER"
          */
-        type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
+        type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
         /**
          * Order the results by invoice ID
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Previous invoice ID for pagination
          * @format int32
@@ -17886,15 +17935,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<BusinessPartnerSearchResult, ErrorMessages>({
         path: `/businesspartners`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17912,12 +17961,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     insertBusinessPartner: (data: BusinessPartner, params: RequestParams = {}) =>
       this.request<BusinessPartner, ErrorMessages>({
         path: `/businesspartners`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17943,7 +17992,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Business partner group type.
          * @example "CUSTOMER"
          */
-        type?: "CUSTOMER" | "SUPPLIER" | "PERSON";
+        type?: 'CUSTOMER' | 'SUPPLIER' | 'PERSON';
         /** Status of business partner group. */
         active?: boolean;
         /**
@@ -17962,15 +18011,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<BusinessPartnerGroupSearchResult, ErrorMessages>({
         path: `/businesspartners/groups`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -17988,12 +18037,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createBusinessPartnerGroup: (data: BusinessPartnerGroup, params: RequestParams = {}) =>
       this.request<BusinessPartnerGroup, ErrorMessages>({
         path: `/businesspartners/groups`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18011,10 +18060,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultProducts: (id: number, params: RequestParams = {}) =>
       this.request<DefaultProduct[], ErrorMessages>({
         path: `/businesspartners/${id}/defaults/products`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18031,10 +18080,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultDimensions: (id: number, params: RequestParams = {}) =>
       this.request<DefaultDimensionBasicData[], ErrorMessages>({
         path: `/businesspartners/${id}/defaults/dimensions`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18052,10 +18101,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getDefaultAccounts: (id: number, params: RequestParams = {}) =>
       this.request<BusinessPartnerDefaultAccounts, ErrorMessages>({
         path: `/businesspartners/${id}/defaults/accounts`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18072,11 +18121,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getPersonalDetails: (params: RequestParams = {}) =>
       this.request<PersonalDetails, ErrorMessages>({
         path: `/businesspartners/personaldetails`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   bankstatements = {
     /**
@@ -18094,12 +18143,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     allocateProductToEvent: (statementId: number, eventId: number, data: number, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/products`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18117,9 +18166,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteProductAllocationFromEvent: (statementId: number, eventId: number, params: RequestParams = {}) =>
       this.request<void, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/products`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        ...params,
+        ...params
       }),
 
     /**
@@ -18134,20 +18183,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @response `400` `ErrorMessages` Metadata contains invalid data.
      * @response `404` `InfoMessage` Bank statement not found
      */
-    allocateAllocationMetadata1: (
-      statementId: number,
-      eventId: number,
-      data: AllocationMetadata,
-      params: RequestParams = {},
-    ) =>
+    allocateAllocationMetadata1: (statementId: number, eventId: number, data: AllocationMetadata, params: RequestParams = {}) =>
       this.request<InfoMessage, ErrorMessages | InfoMessage>({
         path: `/bankstatements/${statementId}/events/${eventId}/metadata`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18164,10 +18208,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteAllocationMetadata1: (statementId: number, eventId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/bankstatements/${statementId}/events/${eventId}/metadata`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18205,13 +18249,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by invoice ID
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Order the results by start date
          * @default "DESC"
          * @example "ASC"
          */
-        orderByStartDate?: "ASC" | "DESC";
+        orderByStartDate?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18228,16 +18272,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<BankStatementsSearchResult, ErrorMessages>({
         path: `/bankstatements`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   bankaccounts = {
     /**
@@ -18255,10 +18299,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getBankAccount: (id: number, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts/${id}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18278,12 +18322,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     updateBankAccount: (id: number, data: CompanyBankAccount, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18311,13 +18355,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by bank account ID
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Order the results by bank account order number
          * @default "ASC"
          * @example "ASC"
          */
-        orderByOrderNo?: "ASC" | "DESC";
+        orderByOrderNo?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18334,15 +18378,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<CompanyBankAccountSearchResult, ErrorMessages>({
         path: `/bankaccounts`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18361,13 +18405,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     createBankAccount: (data: CompanyBankAccount, params: RequestParams = {}) =>
       this.request<CompanyBankAccount, ErrorMessages>({
         path: `/bankaccounts`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   reports = {
     /**
@@ -18385,12 +18429,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getLedgerAccountsReport: (data: LedgerAccountsReportRequest, params: RequestParams = {}) =>
       this.request<LedgerAccountsReportResponse, ErrorMessages>({
         path: `/reports/ledgeraccounts`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18408,12 +18452,12 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getGeneralLedgerReport: (id: number, data: GeneralLedgerReportRequest, params: RequestParams = {}) =>
       this.request<GeneralLedgerReportResponse, ErrorMessages>({
         path: `/reports/generalledger/${id}`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18431,13 +18475,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getAccountingReport: (data: AccountingReportRequest, params: RequestParams = {}) =>
       this.request<AccountingReportResponse, ErrorMessages>({
         path: `/reports/accounting`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   factoringcontracts = {
     /**
@@ -18475,15 +18519,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         page?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<FactoringContractSearchResult, ErrorMessages>({
         path: `/factoringcontracts`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18501,13 +18545,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     addFactoringContract: (data: FactoringContract, params: RequestParams = {}) =>
       this.request<FactoringContract, ErrorMessages>({
         path: `/factoringcontracts`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   attachments = {
     /**
@@ -18558,30 +18602,30 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "SALES_INVOICE"
          */
         type?: (
-          | "SALES_INVOICE"
-          | "SALES_ORDER"
-          | "OFFER"
-          | "PURCHASE_INVOICE"
-          | "PURCHASE_ORDER"
-          | "TRAVEL_INVOICE"
-          | "BILL_OF_CHARGES"
-          | "JOURNAL"
-          | "SALARY"
-          | "PERIODIC_TAX_RETURN"
-          | "REFERENCE_PAYMENT"
-          | "BANK_STATEMENT_AS_RECEIPT"
-          | "VAT_SUMMARY"
-          | "BANK_STATEMENT_EVENT"
-          | "SALES_PRODUCT_REGISTER"
-          | "PURCHASE_PRODUCT_REGISTER"
-          | "CUSTOMER_BUSINESS_PARTNER_REGISTER"
-          | "SUPPLIER_BUSINESS_PARTNER_REGISTER"
-          | "PERSON_BUSINESS_PARTNER_REGISTER"
-          | "EMPLOYEE_INFO"
-          | "ENVIRONMENT"
-          | "NETS_COLLECTION"
-          | "COST_RECEIPT"
-          | "REFERENCE_PAYMENT_EVENT"
+          | 'SALES_INVOICE'
+          | 'SALES_ORDER'
+          | 'OFFER'
+          | 'PURCHASE_INVOICE'
+          | 'PURCHASE_ORDER'
+          | 'TRAVEL_INVOICE'
+          | 'BILL_OF_CHARGES'
+          | 'JOURNAL'
+          | 'SALARY'
+          | 'PERIODIC_TAX_RETURN'
+          | 'REFERENCE_PAYMENT'
+          | 'BANK_STATEMENT_AS_RECEIPT'
+          | 'VAT_SUMMARY'
+          | 'BANK_STATEMENT_EVENT'
+          | 'SALES_PRODUCT_REGISTER'
+          | 'PURCHASE_PRODUCT_REGISTER'
+          | 'CUSTOMER_BUSINESS_PARTNER_REGISTER'
+          | 'SUPPLIER_BUSINESS_PARTNER_REGISTER'
+          | 'PERSON_BUSINESS_PARTNER_REGISTER'
+          | 'EMPLOYEE_INFO'
+          | 'ENVIRONMENT'
+          | 'NETS_COLLECTION'
+          | 'COST_RECEIPT'
+          | 'REFERENCE_PAYMENT_EVENT'
         )[];
         /**
          * Attachment reference ID
@@ -18593,22 +18637,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Order the results by attachment ID
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
         /**
          * Order the results by attachment date
          * @example "ASC"
          */
-        orderByCreatedDate?: "ASC" | "DESC";
+        orderByCreatedDate?: 'ASC' | 'DESC';
         /**
          * Order the results by attachment name
          * @example "ASC"
          */
-        orderByName?: "ASC" | "DESC";
+        orderByName?: 'ASC' | 'DESC';
         /**
          * Order the results by attachment size
          * @example "ASC"
          */
-        orderBySize?: "ASC" | "DESC";
+        orderBySize?: 'ASC' | 'DESC';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -18631,15 +18675,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         previousId?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<AttachmentSearchResult, ErrorMessages>({
         path: `/attachments`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18659,16 +18703,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         /** @format binary */
         file: File;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments`,
-        method: "POST",
+        method: 'POST',
         body: data,
         secure: true,
         type: ContentType.FormData,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18685,9 +18729,9 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getAttachment: (attachmentId: number, params: RequestParams = {}) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        ...params,
+        ...params
       }),
 
     /**
@@ -18705,10 +18749,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     deleteAttachment: (attachmentId: number, params: RequestParams = {}) =>
       this.request<DataModel, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: "DELETE",
+        method: 'DELETE',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18734,18 +18778,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         name?: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<Attachment, ErrorMessages>({
         path: `/attachments/${attachmentId}`,
-        method: "PATCH",
+        method: 'PATCH',
         query: query,
         body: data,
         secure: true,
         type: ContentType.Json,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   vats = {
     /**
@@ -18761,10 +18805,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getVatStatusesForCompany: (params: RequestParams = {}) =>
       this.request<VatInformation, any>({
         path: `/vats/default`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18786,16 +18830,16 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         countryCode: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<VatPercentages, ErrorMessages>({
         path: `/vats/country`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   status = {
     /**
@@ -18811,11 +18855,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getStatus: (params: RequestParams = {}) =>
       this.request<Status, any>({
         path: `/status`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   sessioninfo = {
     /**
@@ -18831,13 +18875,85 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getSessionInfo: (params: RequestParams = {}) =>
       this.request<SessionInfo, any>({
         path: `/sessioninfo`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   payrolls = {
+    /**
+     * @description Returns salary lists.
+     *
+     * @tags Payrolls
+     * @name GetSalaryLists
+     * @summary Get salary lists matching search criteria.
+     * @request GET:/payrolls/salarylists
+     * @secure
+     * @response `200` `SalaryListSearchResult` Salary lists were successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     */
+    getSalaryLists: (
+      query?: {
+        /** @format date @example "2020-01-01" */
+        paymentPeriodStart?: string;
+        /** @format date @example "2020-12-31" */
+        paymentPeriodEnd?: string;
+        /** @example "2020" */
+        name?: string;
+        /**
+         * Page size for the results. Maximum value: 200.
+         * @format int32
+         * @default 50
+         * @example 20
+         */
+        size?: number;
+        /**
+         * Page number for the results
+         * @format int32
+         * @default 0
+         * @example 2
+         */
+        page?: number;
+        /**
+         * Order the results by salary list ID
+         * @default "DESC"
+         * @example "ASC"
+         */
+        orderById?: 'ASC' | 'DESC';
+      },
+      params: RequestParams = {}
+    ) =>
+      this.request<SalaryListSearchResult, ErrorMessages>({
+        path: `/payrolls/salarylists`,
+        method: 'GET',
+        query: query,
+        secure: true,
+        format: 'json',
+        ...params
+      }),
+
+    /**
+     * @description Returns salary list for given salary list id.
+     *
+     * @tags Payrolls
+     * @name GetSalaryList
+     * @summary Get salary list.
+     * @request GET:/payrolls/salarylists/{id}
+     * @secure
+     * @response `200` `SalaryListDetails` Salary list was successfully returned.
+     * @response `403` `ErrorMessages` Insufficient user rights.
+     * @response `404` `ErrorMessages` Salary list was not found.
+     */
+    getSalaryList: (id: number, params: RequestParams = {}) =>
+      this.request<SalaryListDetails, ErrorMessages>({
+        path: `/payrolls/salarylists/${id}`,
+        method: 'GET',
+        secure: true,
+        format: 'json',
+        ...params
+      }),
+
     /**
      * @description Return the Salary Types list.
      *
@@ -18868,14 +18984,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "TAX"
          */
         category?:
-          | "SALARY_FOR_TIME_WORKED"
-          | "OTHER_TAXABLE_EARNINGS"
-          | "FRINGE_BENEFITS"
-          | "TAX_FREE_ITEMS"
-          | "TAX"
-          | "DEDUCTIONS_FROM_NET_PAY"
-          | "INFORMATIVE_ITEMS"
-          | "EMPLOYER_PAYMENTS";
+          | 'SALARY_FOR_TIME_WORKED'
+          | 'OTHER_TAXABLE_EARNINGS'
+          | 'FRINGE_BENEFITS'
+          | 'TAX_FREE_ITEMS'
+          | 'TAX'
+          | 'DEDUCTIONS_FROM_NET_PAY'
+          | 'INFORMATIVE_ITEMS'
+          | 'EMPLOYER_PAYMENTS';
         /**
          * Income Type name
          *
@@ -18910,17 +19026,17 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "ASC"
          * @example "ASC"
          */
-        orderByCode?: "ASC" | "DESC";
+        orderByCode?: 'ASC' | 'DESC';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<SalaryTypeSearchResult, ErrorMessages>({
         path: `/payrolls/salarytypes`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18943,15 +19059,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         year?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<SalariesBasicInfo, ErrorMessages>({
         path: `/payrolls/salariesbasicinfo`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -18968,10 +19084,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getLaborUnionSettingsBasicData: (params: RequestParams = {}) =>
       this.request<LaborUnionSettingsBasicData[], ErrorMessages>({
         path: `/payrolls/laborunionsettings`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -19008,7 +19124,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * Salary channel
          * @example "EMAIL"
          */
-        salaryChannel?: "NO_SENDING" | "MAIL" | "EMAIL" | "PAPER" | "MOBILE" | "ESALARY";
+        salaryChannel?: 'NO_SENDING' | 'MAIL' | 'EMAIL' | 'PAPER' | 'MOBILE' | 'ESALARY';
         /**
          * Page size for the results. Maximum value: 200.
          * @format int32
@@ -19031,18 +19147,18 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @default "DESC"
          * @example "ASC"
          */
-        orderById?: "ASC" | "DESC";
+        orderById?: 'ASC' | 'DESC';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<EmployeeSearchResult[], ErrorMessages>({
         path: `/payrolls/employees`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   currencies = {
     /**
@@ -19058,10 +19174,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrencies: (params: RequestParams = {}) =>
       this.request<Currencies, any>({
         path: `/currencies`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -19083,15 +19199,15 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         rateType?: number;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<CurrencyGroupRates, ErrorMessages>({
         path: `/currencies/latest`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -19129,22 +19245,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @example "CASH_BUYING_RATE"
          */
         rateType:
-          | "PROCOUNTOR_ACCOUNTING_EXCHANGE_RATE"
-          | "ACCOUNT_CURRENCY_AVERAGE_RATE"
-          | "ACCOUNT_CURRENCY_BUYING_RATE"
-          | "ACCOUNT_CURRENCY_SELLING_RATE"
-          | "CASH_BUYING_RATE"
-          | "CASH_CURRENCY_SALE_EXCHANGE_RATE";
+          | 'PROCOUNTOR_ACCOUNTING_EXCHANGE_RATE'
+          | 'ACCOUNT_CURRENCY_AVERAGE_RATE'
+          | 'ACCOUNT_CURRENCY_BUYING_RATE'
+          | 'ACCOUNT_CURRENCY_SELLING_RATE'
+          | 'CASH_BUYING_RATE'
+          | 'CASH_CURRENCY_SALE_EXCHANGE_RATE';
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<CurrencyExchangeRate, ErrorMessages>({
         path: `/currencies/exchangerate`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        format: "json",
-        ...params,
+        format: 'json',
+        ...params
       }),
 
     /**
@@ -19160,11 +19276,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getCurrenciesForCompany: (params: RequestParams = {}) =>
       this.request<CompanyCurrency, any>({
         path: `/currencies/company`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   coa = {
     /**
@@ -19180,11 +19296,11 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getChartOfAccount: (params: RequestParams = {}) =>
       this.request<LedgerAccounts, any>({
         path: `/coa`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
   sie = {
     /**
@@ -19214,14 +19330,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          */
         exportEndDate: string;
       },
-      params: RequestParams = {},
+      params: RequestParams = {}
     ) =>
       this.request<File, ErrorMessages>({
         path: `/SIE/file`,
-        method: "GET",
+        method: 'GET',
         query: query,
         secure: true,
-        ...params,
+        ...params
       }),
 
     /**
@@ -19238,10 +19354,10 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     getSieAvailability: (params: RequestParams = {}) =>
       this.request<SieAvailabilityResponse, ErrorMessages>({
         path: `/SIE/availability`,
-        method: "GET",
+        method: 'GET',
         secure: true,
-        format: "json",
-        ...params,
-      }),
+        format: 'json',
+        ...params
+      })
   };
 }
