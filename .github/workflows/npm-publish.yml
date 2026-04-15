@@ -26,7 +26,7 @@ jobs:
       - run: npm run build
       - name: Publish NPM
         if: '!github.event.release.prerelease'
-        run: npm publish
+        run: npm publish --access public
       - name: Publish NPM (beta)
         if: 'github.event.release.prerelease'
-        run: npm publish --tag beta
+        run: npm publish --access public --tag beta
